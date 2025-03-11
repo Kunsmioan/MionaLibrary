@@ -13,7 +13,7 @@ public partial class User
 
     public string FullName { get; set; } = null!;
 
-    public DateOnly Birthday { get; set; }
+    public DateTime? Birthday { get; set; }
 
     public string Role { get; set; } = null!;
 

@@ -118,11 +118,11 @@ namespace MionaLibrary
         }
         private void CreateAccount_Click(object sender, RoutedEventArgs e)
         {
-            // Open Register Page
-            //RegisterDemo register = new RegisterDemo();  // Ensure Register.xaml exists
-            //register.Show();
+             //Open Register Page
+            Register register = new Register();  // Ensure Register.xaml exists
+            register.Show();
 
-            // Close the Login Page (Optional)
+            //Close the Login Page(Optional)
             this.Close();
         }
 

@@ -8,15 +8,16 @@ using MionaLibrary_DAL.Entity;
 
 namespace MionaLibrary_DAL.Repository
 {
-    public class LoginRepo
+    public class RegisterRepo
     {
         private LibraryManagerContext? _context;
-
-        public User? getOne(string username, string password)
+        public void Add(User user)
         {
-            _context = new();
-            User? user = _context.Users.Where(u => u.Username == username && u.Password == password).FirstOrDefault();
-            return user;
+                _context = new LibraryManagerContext(); // Initialize context
+
+                _context.Users.Add(user); // Add user to the database
+                _context.SaveChanges(); // Save changes to the database
+
         }
     }
 }
