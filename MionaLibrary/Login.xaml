@@ -35,7 +35,7 @@
             <Grid HorizontalAlignment="Center" Height="50">
                 <!-- Define columns: one for the password and one for the button -->
                 <!-- PasswordBox -->
-                <PasswordBox Name="txtPassword" Height="35" Width="286" Padding="5" PasswordChar="•" 
+                <PasswordBox Name="pbPassword" Height="35" Width="286" Padding="5" PasswordChar="•" 
                              BorderBrush="Gray" Grid.Column="0" KeyDown="PasswordBox_KeyDown" 
                              PasswordChanged="txtPassword_PasswordChanged"/>
 

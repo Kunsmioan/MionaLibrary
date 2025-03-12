@@ -30,7 +30,7 @@ namespace MionaLibrary
         }
         private void Login_Click(object sender, RoutedEventArgs e)
         {
-            if (string.IsNullOrEmpty(txtUsername.Text) || string.IsNullOrEmpty(txtPassword.Password))
+            if (string.IsNullOrEmpty(txtUsername.Text) || string.IsNullOrEmpty(pbPassword.Password))
             {
                 MessageBox.Show("Username or password must not be empty!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
@@ -38,7 +38,7 @@ namespace MionaLibrary
             {
                 _loginServices = new();
                 // Authenticate the user
-                User? userCheck = _loginServices.Authen(txtUsername.Text, txtPassword.Password);
+                User? userCheck = _loginServices.Authen(txtUsername.Text, pbPassword.Password);
 
                 // Check if the user is found and valid
                 if (userCheck == null)
@@ -95,17 +95,17 @@ namespace MionaLibrary
         private void TogglePasswordVisibility(object sender, RoutedEventArgs e)
         {
             // Toggle the visibility of the password between PasswordBox and TextBox
-            if (txtPassword.Visibility == Visibility.Visible)
+            if (pbPassword.Visibility == Visibility.Visible)
             {
-                txtPassword.Visibility = Visibility.Collapsed;
+                pbPassword.Visibility = Visibility.Collapsed;
                 txtPasswordVisible.Visibility = Visibility.Visible;
-                txtPasswordVisible.Text = txtPassword.Password;  // Copy password content
+                txtPasswordVisible.Text = pbPassword.Password;  // Copy password content
             }
             else
             {
-                txtPassword.Visibility = Visibility.Visible;
+                pbPassword.Visibility = Visibility.Visible;
                 txtPasswordVisible.Visibility = Visibility.Collapsed;
-                txtPassword.Password = txtPasswordVisible.Text;  // Copy content from visible TextBox back
+                pbPassword.Password = txtPasswordVisible.Text;  // Copy content from visible TextBox back
             }
 
             // Toggle the visibility of the icons
@@ -114,7 +114,7 @@ namespace MionaLibrary
         }
         private void txtPassword_PasswordChanged(object sender, RoutedEventArgs e)
         {
-            txtPasswordVisible.Text = txtPassword.Password;
+            txtPasswordVisible.Text = pbPassword.Password;
         }
         private void CreateAccount_Click(object sender, RoutedEventArgs e)
         {
