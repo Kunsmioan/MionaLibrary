@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Microsoft.Data.SqlClient;
 using MionaLibrary_DAL.Entity;
 using MionaLibrary_DAL.Repository;
 using MionaLibrary_Services.Services;
@@ -85,53 +86,53 @@ namespace MionaLibrary
         }
         private void ReturnToLogin(object sender, RoutedEventArgs e)
         {
-            MainWindow mv = new MainWindow();
+            Login mv = new();
             mv.Show();
             this.Close();
         }
         private void Register_Click(object sender, RoutedEventArgs e)
         {
-                if (!checkNotEmpty()) return;
+            if (!checkInput()) return;
 
-                // Ensure date is selected and valid
-                if (dpDOB.SelectedDate == null || dpDOB.SelectedDate > DateTime.Now)
-                {
-                    MessageBox.Show("Please select a valid date of birth (it cannot be in the future).", "Alert", MessageBoxButton.OK, MessageBoxImage.Warning);
-                    return;
-                }
+            // Ensure date is selected and valid
+            if (dpDOB.SelectedDate == null || dpDOB.SelectedDate > DateTime.Now)
+            {
+                MessageBox.Show("Please select a valid date of birth (it cannot be in the future).", "Alert", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
 
-                // Check if password and confirm password match
-                if (!CheckPasswordsMatch()) return;
+            // Check if password and confirm password match
+            if (!CheckPasswordsMatch()) return;
 
-                // Create the User object
-                User user = new User
-                {
-                    Username = txtUsername.Text,
-                    FullName = txtFirstName.Text + " " + txtLastName.Text,
-                    Birthday = dpDOB.SelectedDate.Value,
-                    Gender = GetSelectedGender(),
-                    Password = pbPassword.Password,
-                    Role = "User",
-                    Phone = txtPhone.Text,
-                };
+            // Create the User object
+            User user = new User
+            {
+                Username = (txtUsername.Text),
+                FullName = InputValidator.legitName(txtFirstName.Text) + " " + InputValidator.legitName(txtLastName.Text),
+                Birthday = dpDOB.SelectedDate.Value,
+                Gender = GetSelectedGender(),
+                Password = pbPassword.Password,
+                Role = "User",
+                Phone = txtPhone.Text,
+            };
 
-                // Try to register the user
-                try
-                {
-                    // Ensure _userServices is initialized before use
-                    _userServices = new UserServices();
+            // Try to register the user
+            try
+            {
+                // Ensure _userServices is initialized before use
+                _userServices = new UserServices();
 
-                    // Call the register service to register the user
-                    _userServices.Add(user);
+                // Call the register service to register the user
+                _userServices.Add(user);
 
-                    MessageBox.Show("Registration successful! Please log in to continue.", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
-                    ReturnToLogin(sender, e);
-                }
-                catch (InvalidOperationException ex)
-                {
-                    // Log and display detailed error
-                    MessageBox.Show($"Registration failed: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
+                MessageBox.Show("Registration successful! Please log in to continue.", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                ReturnToLogin(sender, e);
+            }
+            catch (InvalidOperationException ex)
+            {
+                // Log and display detailed error
+                MessageBox.Show($"Registration failed: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         // Helper function to check if passwords match
@@ -146,40 +147,41 @@ namespace MionaLibrary
         }
 
         // Helper function to check if all required fields are filled
-        private bool checkNotEmpty()
+        private bool checkInput()
         {
-            if (!InputValidator.TextBoxIsNotEmpty(txtFirstName))
+            try
             {
-                MessageBox.Show("Please enter first name!", "Alert", MessageBoxButton.OK, MessageBoxImage.Warning);
+                var messages = new List<(bool condition, string message)>
+        {
+            (!InputValidator.TextBoxesIsNotEmpty(txtFirstName), "Please enter first name!"),
+            (!InputValidator.TextBoxesIsNotEmpty(txtLastName), "Please enter last name!"),
+            (!InputValidator.TextBoxesIsNotEmpty(txtUsername), "Please enter username!"),
+            (!InputValidator.TextBoxesIsNotEmpty(txtRePasswordVisible, txtPasswordVisible), "Please enter password!"),
+            (!InputValidator.PWIsNotEmpty(pbPassword, pbConfirmPassword), "Password must not be empty!"),
+            (!InputValidator.validName(txtFirstName.Text, txtLastName.Text), "Name contains invalid characters!"),
+            (!InputValidator.textBoxsLength(txtFirstName, txtLastName, txtUsername), "Text fields must be 5-50 characters!"),
+            (!InputValidator.pwBoxsLength(pbPassword, pbConfirmPassword), "Password must be 5-255 characters!")
+        };
+
+                foreach (var (condition, message) in messages)
+                {
+                    if (condition)
+                    {
+                        MessageBox.Show(message, "Alert", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        return false;
+                    }
+                }
+
+                return true;
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show($"An error occurred during input validation:\n{ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
             }
-
-            if (!InputValidator.TextBoxIsNotEmpty(txtLastName))
-            {
-                MessageBox.Show("Please enter last name!", "Alert", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return false;
-            }
-
-            if (!InputValidator.TextBoxIsNotEmpty(txtUsername))
-            {
-                MessageBox.Show("Please enter username!", "Alert", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return false;
-            }
-
-            if (!InputValidator.TextBoxesIsNotEmpty(txtRePasswordVisible, txtPasswordVisible))
-            {
-                MessageBox.Show("Please enter password!", "Alert", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return false;
-            }
-
-            if (!InputValidator.PWIsNotEmpty(pbPassword, pbConfirmPassword))
-            {
-                MessageBox.Show("Password must not be empty!", "Alert", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return false;
-            }
-
-            return true;
         }
+
+
 
         // Helper function to get the selected gender
         private string GetSelectedGender()
@@ -199,6 +201,6 @@ namespace MionaLibrary
         }
 
         // Helper function to get the password
-        
+
     }
 }
