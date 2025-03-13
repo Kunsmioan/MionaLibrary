@@ -9,11 +9,19 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Images\user.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="FontAwesome.WPF" Version="4.7.0.9" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\MionaLibrary_Services\MionaLibrary_Services.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Images\user.png" />
   </ItemGroup>
 
 </Project>

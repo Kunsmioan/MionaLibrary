@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using MionaLibrary_DAL.Entity;
+using MionaLibrary.UserControls;
 
 namespace MionaLibrary
 {
@@ -53,12 +54,9 @@ namespace MionaLibrary
         private void Profile_Click(object sender, RoutedEventArgs e)
         {
             // Add the functionality for the Profile button click, if needed
-            MessageBox.Show($"Welcome, {reader?.Username}!", "Profile", MessageBoxButton.OK, MessageBoxImage.Information);
-        }
-
-        private void Logout_Click(object sender, RoutedEventArgs e)
-        {
-
+            ProfileControl profileControl = new();
+            MainContent.Content = profileControl; 
+            profileControl.SetUser(reader);
         }
 
         private void Books_Click(object sender, RoutedEventArgs e)
@@ -74,6 +72,15 @@ namespace MionaLibrary
         private void Favorites_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+        
+        private void Logout_Click(object sender, RoutedEventArgs e)
+        {
+            if (MessageBox.Show("Press OK to exit!", "Alert", MessageBoxButton.OKCancel, MessageBoxImage.Information) == MessageBoxResult.OK)
+            {
+                new Login().Show();  // Tạo đối tượng Login và mở
+                this.Close();  // Đóng cửa sổ hiện tại
+            }
         }
     }
 }
