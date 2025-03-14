@@ -6,11 +6,11 @@
         xmlns:fa="http://schemas.fontawesome.io/icons/"
         xmlns:local="clr-namespace:MionaLibrary"
         mc:Ignorable="d"
-        Title="ReaderWindow" Height="450" Width="700" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+        Title="ReaderWindow" Height="600" Width="900" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <Grid >
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="100"/>
-            <ColumnDefinition Width="600"/>
+            <ColumnDefinition Width="180"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
         <Border Background="#FF3D3D3D" Grid.Column="0">
@@ -24,64 +24,118 @@
 
                 <!-- Các nút chính -->
                 <StackPanel Grid.Row="0">
-                    <Button Content="Home" HorizontalAlignment="Stretch" Height="50" Foreground="White" 
-                            BorderThickness="0" Click="Home_Click" FontSize="14" Style="{StaticResource ButtonStyle}">
+                    <Button Content="Home" HorizontalAlignment="Stretch" Height="50" Foreground="White" Width="auto"
+                            BorderThickness="0" Click="Home_Click" Style="{StaticResource ButtonStyle}">
                         <Button.Template>
                             <ControlTemplate TargetType="Button">
                                 <Grid Background="{TemplateBinding Background}">
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="40"/>
+                                        <ColumnDefinition Width="35"/>
                                         <ColumnDefinition/>
                                     </Grid.ColumnDefinitions>
-                                    <fa:ImageAwesome Icon="Home" Foreground="White" Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                    <TextBlock Text="{TemplateBinding Content}" Foreground="White" Grid.Column="1" VerticalAlignment="Center"/>
+                                    <fa:ImageAwesome Icon="Home" Foreground="White" Width="15" Height="15" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    <TextBlock Text="{TemplateBinding Content}" Foreground="White" Grid.Column="1" VerticalAlignment="Center" FontSize="18"/>
                                 </Grid>
                             </ControlTemplate>
                         </Button.Template>
                     </Button>
 
-                    <Button Content="Book" HorizontalAlignment="Stretch" Height="50" Foreground="White" 
-                            BorderThickness="0" Click="Home_Click" FontSize="14" Style="{StaticResource ButtonStyle}">
+                    <!-- Nút "Book" -->
+                    <Button x:Name="BookButton" Content="Book" HorizontalAlignment="Stretch" Height="50" Foreground="White" Width="auto"
+                            BorderThickness="0" Style="{StaticResource ButtonStyle}" Click="Books_Click">
                         <Button.Template>
                             <ControlTemplate TargetType="Button">
                                 <Grid Background="{TemplateBinding Background}">
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="40"/>
+                                        <ColumnDefinition Width="35"/>
                                         <ColumnDefinition/>
+                                        <ColumnDefinition Width="40"/>
                                     </Grid.ColumnDefinitions>
-                                    <fa:ImageAwesome Icon="Book" Foreground="White" Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                    <TextBlock Text="{TemplateBinding Content}" Foreground="White" Grid.Column="1" VerticalAlignment="Center"/>
+                                    <fa:ImageAwesome Icon="Book" Foreground="White" Width="15" Height="15" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    <Grid x:Name="BookList" Grid.Column="2">
+                                        <fa:ImageAwesome x:Name="AngleRightIcon" Icon="AngleRight" Foreground="White" Width="10" Height="10" 
+                                                         HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Visible"/>
+                                        <fa:ImageAwesome x:Name="AngleDownIcon" Icon="AngleDown" Foreground="White" Width="10" Height="10" 
+                                                         HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Collapsed"/>
+                                    </Grid>
+                                    <TextBlock Text="Book" Foreground="White" Grid.Column="1" VerticalAlignment="Center" FontSize="18"/>
+
                                 </Grid>
+
+
                             </ControlTemplate>
                         </Button.Template>
                     </Button>
-                    <Button Content="Liked" HorizontalAlignment="Stretch" Height="50" Foreground="White" BorderThickness="0"
-        Click="Home_Click" FontSize="14" Style="{StaticResource ButtonStyle}">
+
+                    <!-- Danh sách tùy chọn (ẩn ban đầu) -->
+                    <Grid x:Name="BookOptions" Visibility="Collapsed" Background="White">
+                        <StackPanel HorizontalAlignment="Left">
+                            <!-- Nút "Request to borrow a book" -->
+                            <Button Height="35" Click="BorrowedBooks_Click" Margin="0,1,0,0" Style="{StaticResource ButtonStyleList}" Width="180">
+                                <Button.Template>
+                                    <ControlTemplate TargetType="Button">
+                                        <Grid Background="{TemplateBinding Background}">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="45"/>
+                                                <ColumnDefinition />
+                                            </Grid.ColumnDefinitions>
+                                            <!-- Text -->
+                                            <TextBlock Text="Borrow book" Foreground="#FF3D3D3D" Grid.Column="1" 
+                                   VerticalAlignment="Center" FontSize="14" HorizontalAlignment="Left"/>
+                                        </Grid>
+                                    </ControlTemplate>
+                                </Button.Template>
+                            </Button>
+
+                            <!-- Nút "Book loan history" -->
+                            <Button Height="35" Click="PlaceOrder_Click" Margin="0,1,0,0" Style="{StaticResource ButtonStyleList}" Width="180">
+                                <Button.Template>
+                                    <ControlTemplate TargetType="Button">
+                                        <Grid Background="{TemplateBinding Background}">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="45"/>
+                                                <ColumnDefinition/>
+                                            </Grid.ColumnDefinitions>
+                                            <TextBlock Text="Book loan history" Foreground="#FF3D3D3D" Grid.Column="1" 
+                                   VerticalAlignment="Center" FontSize="14" HorizontalAlignment="Left"/>
+                                        </Grid>
+                                    </ControlTemplate>
+                                </Button.Template>
+                            </Button>
+
+                            <!-- Nút "Book borrowing history" -->
+                            <Button Height="35" Click="HistoryLoan_Click" Margin="0,1,0,0" Style="{StaticResource ButtonStyleList}"
+                                    Width="180">
+                                <Button.Template>
+                                    <ControlTemplate TargetType="Button">
+                                        <Grid Background="{TemplateBinding Background}">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="45"/>
+                                                <ColumnDefinition/>
+                                            </Grid.ColumnDefinitions>
+                                            <!-- Text -->
+                                            <TextBlock Text="Book borrow history" Foreground="#FF3D3D3D" Grid.Column="1" 
+                                   VerticalAlignment="Center" FontSize="14" HorizontalAlignment="Left"/>
+                                        </Grid>
+                                    </ControlTemplate>
+                                </Button.Template>
+                            </Button>
+                        </StackPanel>
+                    </Grid>
+
+                    <!-- Nút "Profile" -->
+                    <Button x:Name="ProfileButton" Content="Profile" HorizontalAlignment="Stretch" Height="50" Width="180"
+                        Foreground="White" BorderThickness="0" Click="Profile_Click" Style="{StaticResource ButtonStyle}">
                         <Button.Template>
                             <ControlTemplate TargetType="Button">
                                 <Grid Background="{TemplateBinding Background}">
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="40"/>
+                                        <ColumnDefinition Width="35"/>
                                         <ColumnDefinition/>
                                     </Grid.ColumnDefinitions>
-                                    <fa:ImageAwesome Icon="Heart" Foreground="White" Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                    <TextBlock Text="{TemplateBinding Content}" Foreground="White" Grid.Column="1" VerticalAlignment="Center"/>
-                                </Grid>
-                            </ControlTemplate>
-                        </Button.Template>
-                    </Button>
-                    <Button  x:Name="ProfileButton" Content="Profile" HorizontalAlignment="Stretch" Height="50"  
-                             Foreground="White" BorderThickness="0" Click="Profile_Click" FontSize="14" Style="{StaticResource ButtonStyle}">
-                        <Button.Template>
-                            <ControlTemplate TargetType="Button">
-                                <Grid  Background="{TemplateBinding Background}">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="40"/>
-                                        <ColumnDefinition/>
-                                    </Grid.ColumnDefinitions>
-                                    <fa:ImageAwesome Icon="User" Foreground="White" Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                    <TextBlock Text="{TemplateBinding Content}" Foreground="White" Grid.Column="1" VerticalAlignment="Center" />
-                                    
+                                    <fa:ImageAwesome Icon="User" Foreground="White" Width="15" Height="15" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    <TextBlock Text="{TemplateBinding Content}" Foreground="White" Grid.Column="1" VerticalAlignment="Center" FontSize="18"/>
+
                                 </Grid>
                             </ControlTemplate>
                         </Button.Template>
@@ -89,8 +143,8 @@
                 </StackPanel>
 
                 <!-- Logout button ở dưới cùng -->
-                <Button Content="Log out" Click="Logout_Click" HorizontalAlignment="Left" Width="100" Height="50" Foreground="White" 
-                        BorderThickness="0" Grid.Row="1" Margin="0,10,0,10" FontSize="14" Style="{StaticResource ButtonStyle}">
+                <Button Content="Log out" Click="Logout_Click" HorizontalAlignment="Center" Height="50" Foreground="White" 
+                        BorderThickness="0" Grid.Row="1" Margin="0,10,0,10" FontSize="14" Style="{StaticResource ButtonStyle}" Width="180">
                     <Button.Template>
                         <ControlTemplate TargetType="Button">
                             <Grid  Background="{TemplateBinding Background}">
@@ -99,14 +153,14 @@
                                     <ColumnDefinition/>
                                 </Grid.ColumnDefinitions>
                                 <fa:ImageAwesome Icon="SignOut" Foreground="White" Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                <TextBlock Text="{TemplateBinding Content}" Foreground="White" Grid.Column="1" VerticalAlignment="Center"/>
+                                <TextBlock Text="{TemplateBinding Content}" Foreground="White" Grid.Column="1" VerticalAlignment="Center" FontSize="16"/>
                             </Grid>
                         </ControlTemplate>
                     </Button.Template>
                 </Button>
             </Grid>
         </Border>
-        
-    <ContentControl x:Name="MainContent" Grid.Column="1"/>
+
+        <ContentControl x:Name="MainContent" Grid.Column="1" HorizontalAlignment="Left"/>
     </Grid>
 </Window>

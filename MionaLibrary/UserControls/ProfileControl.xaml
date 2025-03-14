@@ -6,42 +6,63 @@
              xmlns:fa="http://schemas.fontawesome.io/icons/"
              xmlns:local="clr-namespace:MionaLibrary.UserControls"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="600">
+             d:DesignHeight="600" d:DesignWidth="700">
 
     <Grid Background="white">
         <Grid.RowDefinitions>
             <RowDefinition Height="100"/>
             <RowDefinition/>
+            <RowDefinition Height="100"/>
         </Grid.RowDefinitions>
         <Image Source="/Images/user.png" Margin="247,10,247,10" RenderTransformOrigin="-0.086,0.51"/>
 
         <!-- Các điều khiển nhập liệu cho profile -->
-        <StackPanel Margin="10" Grid.Row="1">
-            <StackPanel Orientation="Horizontal" Margin="10,0,0,0" Height="40" HorizontalAlignment="Center">
-                <TextBlock Text="Username:" FontWeight="Bold" Width="80" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="12"/>
-                <TextBox x:Name="tbUsername" Width="300" IsReadOnly="True" Padding="2"/>
+        <Grid Grid.Row="1">
+            <!-- Định nghĩa 2 cột -->
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <!-- Cột trái -->
+                <ColumnDefinition Width="*"/>
+                <!-- Cột phải -->
+            </Grid.ColumnDefinitions>
+
+            <!-- Cột 1: Username, Full Name, Birthday -->
+            <StackPanel Orientation="Vertical" Grid.Column="0" Margin="40,10,0,10">
+                <StackPanel Orientation="Vertical" Height="61" HorizontalAlignment="Center">
+                    <TextBlock Text="Username:" FontWeight="Bold" FontSize="12" 
+                       HorizontalAlignment="Left" Margin="5,5,0,0"/>
+                    <TextBox x:Name="tbUsername" Width="211" IsReadOnly="True" Padding="2"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Vertical" Height="61" HorizontalAlignment="Center">
+                    <TextBlock Text="Full Name:" FontWeight="Bold" FontSize="12" 
+                       HorizontalAlignment="Left" Margin="5,5,0,0"/>
+                    <TextBox x:Name="tbfullName" Width="211" IsReadOnly="True" Padding="2"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Vertical" Height="61" HorizontalAlignment="Center">
+                    <TextBlock Text="Birthday:" FontWeight="Bold" FontSize="12" 
+                       HorizontalAlignment="Left" Margin="5,5,0,0"/>
+                    <TextBox x:Name="tbBirthday" Width="211" IsReadOnly="True" Padding="2"/>
+                </StackPanel>
             </StackPanel>
 
-            <StackPanel Orientation="Horizontal" Margin="10,0,0,0" Height="40" HorizontalAlignment="Center">
-                <TextBlock Text="Full Name:" FontWeight="Bold" Width="80" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="12"/>
-                <TextBox x:Name="tbfullName" Width="300" IsReadOnly="True" Padding="2"/>
-            </StackPanel>
+            <!-- Cột 2: Gender, Phone -->
+            <StackPanel Orientation="Vertical" Grid.Column="1" Margin="0,10,40,10">
+                <StackPanel Orientation="Vertical" Height="61" HorizontalAlignment="Center">
+                    <TextBlock Text="Gender:" FontWeight="Bold" FontSize="12" 
+                       HorizontalAlignment="Left" Margin="5,5,0,0"/>
+                    <TextBox x:Name="tbGender" Width="211" IsReadOnly="True" Padding="2"/>
+                </StackPanel>
 
-            <StackPanel Orientation="Horizontal" Margin="10,0,0,0" Height="40" HorizontalAlignment="Center">
-                <TextBlock Text="Birthday:" FontWeight="Bold" Width="80" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="12"/>
-                <TextBox x:Name="tbBirthday" Width="300" IsReadOnly="True" Padding="2"/>
+                <StackPanel Orientation="Vertical" Height="61" HorizontalAlignment="Center">
+                    <TextBlock Text="Phone:" FontWeight="Bold" FontSize="12" 
+                       HorizontalAlignment="Left" Margin="5,5,0,0"/>
+                    <TextBox x:Name="tbPhone" Width="211" IsReadOnly="True" Padding="2"/>
+                </StackPanel>
             </StackPanel>
-
-            <StackPanel Orientation="Horizontal" Margin="10,0,0,0" Height="40" HorizontalAlignment="Center">
-                <TextBlock Text="Gender:" FontWeight="Bold" Width="80" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="12"/>
-                <TextBox x:Name="tbGender"  Width="300" IsReadOnly="True" Padding="2"/>
-            </StackPanel>
-
-            <StackPanel Orientation="Horizontal" Margin="10,0,0,0" Height="40" HorizontalAlignment="Center" VerticalAlignment="Center">
-                <TextBlock Text="Phone:" FontWeight="Bold" Width="80" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="12"/>
-                <TextBox x:Name="tbPhone" Width="300" IsReadOnly="True" Padding="2"/>
-            </StackPanel>
-
-        </StackPanel>
+        </Grid>
+        
+        
     </Grid>
 </UserControl>

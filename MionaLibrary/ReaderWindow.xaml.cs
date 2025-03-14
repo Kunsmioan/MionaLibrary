@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using MionaLibrary_DAL.Entity;
 using MionaLibrary.UserControls;
+using MionaLibrary.BookControls;
 
 namespace MionaLibrary
 {
@@ -58,10 +59,34 @@ namespace MionaLibrary
             MainContent.Content = profileControl; 
             profileControl.SetUser(reader);
         }
+        private void Search_Click(object sender, RoutedEventArgs e)
+        {
+
+        } 
 
         private void Books_Click(object sender, RoutedEventArgs e)
         {
+            var template = BookButton.Template;
 
+            // Tìm các biểu tượng trong ControlTemplate
+            var angleRightIcon = template.FindName("AngleRightIcon", BookButton) as FontAwesome.WPF.ImageAwesome;
+            var angleDownIcon = template.FindName("AngleDownIcon", BookButton) as FontAwesome.WPF.ImageAwesome;
+
+            // Kiểm tra trạng thái hiện tại của BookOptions
+            if (BookOptions.Visibility == Visibility.Collapsed)
+            {
+                // Hiển thị BookOptions và chuyển sang biểu tượng AngleDown
+                BookOptions.Visibility = Visibility.Visible;
+                angleRightIcon.Visibility = Visibility.Collapsed;
+                angleDownIcon.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                // Ẩn BookOptions và chuyển về biểu tượng AngleRight
+                BookOptions.Visibility = Visibility.Collapsed;
+                angleRightIcon.Visibility = Visibility.Visible;
+                angleDownIcon.Visibility = Visibility.Collapsed;
+            }
         }
 
         private void Home_Click(object sender, RoutedEventArgs e)
@@ -74,6 +99,24 @@ namespace MionaLibrary
 
         }
         
+
+        private void PlaceOrder_Click(object sender, RoutedEventArgs e)
+        {
+            PlaceOrder placeOrder = new();
+            MainContent.Content = placeOrder;
+        }
+
+        private void BorrowedBooks_Click(object sender, RoutedEventArgs e)
+        {
+            BorrowBook borrowBook = new();
+            MainContent.Content = borrowBook;
+        }
+
+        private void HistoryLoan_Click(object sender, RoutedEventArgs e)
+        {
+            HistoryLoan historyLoan = new();
+            MainContent.Content = historyLoan;
+        }
         private void Logout_Click(object sender, RoutedEventArgs e)
         {
             if (MessageBox.Show("Press OK to exit!", "Alert", MessageBoxButton.OKCancel, MessageBoxImage.Information) == MessageBoxResult.OK)
