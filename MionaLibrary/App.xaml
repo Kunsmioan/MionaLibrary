@@ -2,7 +2,7 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:MionaLibrary"
-             StartupUri="ReaderWindow.xaml">
+             StartupUri="Login.xaml">
     <Application.Resources>
         <Style TargetType="TextBox">
             <Setter Property="BorderBrush" Value="Gray"/>
@@ -41,7 +41,7 @@
                         <Border Background="{TemplateBinding Background}" 
                         BorderBrush="{TemplateBinding BorderBrush}" 
                         BorderThickness="{TemplateBinding BorderThickness}" 
-                        CornerRadius="5">
+                        CornerRadius="3">
                             <ScrollViewer Margin="2" x:Name="PART_ContentHost"/>
                         </Border>
                     </ControlTemplate>
@@ -70,8 +70,8 @@
 
 
         <Style x:Key="ButtonStyleList" TargetType="Button">
-            <Setter Property="Background" Value="AliceBlue"/> 
-            <Setter Property="Foreground" Value="#FF3D3D3D"/> 
+            <Setter Property="Background" Value="AliceBlue"/>
+            <Setter Property="Foreground" Value="#FF3D3D3D"/>
             <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="Height" Value="50"/>
             <Setter Property="Width" Value="100"/>
@@ -89,23 +89,22 @@
         </Style>
 
         <Style x:Key="ButtonStyleSingle" TargetType="Button">
-                <Setter Property="Width" Value="150"/>
-                <Setter Property="Height" Value="40"/>
-                <Setter Property="FontSize" Value="14"/>
-                <Setter Property="Margin" Value="10"/>
-                <Setter Property="Template">
-                    <Setter.Value>
-                        <ControlTemplate TargetType="Button">
-                            <Border Background="{TemplateBinding Background}" 
-                                CornerRadius="5" 
-                                BorderThickness="1" 
-                                BorderBrush="#FFCCCCCC">
-                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                            </Border>
-                        </ControlTemplate>
-                    </Setter.Value>
-                </Setter>
-            </Style>
+            <Setter Property="Width" Value="150"/>
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Margin" Value="10"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#FFB3B3B3"/>
+                    <Setter Property="Width" Value="auto"/>
+                    <Setter Property="Height" Value="60"/>
+                    <Setter Property="Cursor" Value="Hand"/>
+                </Trigger>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter Property="Background" Value="#FF777777"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
 
         <local:TextToVisibilityConverter x:Key="TextToVisibilityConverter"/>
 

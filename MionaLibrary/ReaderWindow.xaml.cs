@@ -59,10 +59,6 @@ namespace MionaLibrary
             MainContent.Content = profileControl; 
             profileControl.SetUser(reader);
         }
-        private void Search_Click(object sender, RoutedEventArgs e)
-        {
-
-        } 
 
         private void Books_Click(object sender, RoutedEventArgs e)
         {
@@ -124,6 +120,16 @@ namespace MionaLibrary
                 new Login().Show();  // Tạo đối tượng Login và mở
                 this.Close();  // Đóng cửa sổ hiện tại
             }
+        }
+
+        private void Help_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Notification_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

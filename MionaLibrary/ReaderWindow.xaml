@@ -59,10 +59,7 @@
                                                          HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Collapsed"/>
                                     </Grid>
                                     <TextBlock Text="Book" Foreground="White" Grid.Column="1" VerticalAlignment="Center" FontSize="18"/>
-
                                 </Grid>
-
-
                             </ControlTemplate>
                         </Button.Template>
                     </Button>
@@ -139,10 +136,10 @@
                             </ControlTemplate>
                         </Button.Template>
                     </Button>
-                    <Button Content="Notifications" HorizontalAlignment="Stretch" Height="50" Foreground="White" Width="auto"
+                    <Button Content="Notifications" Height="50" Foreground="White" Width="auto"
         BorderThickness="0" Click="Notification_Click" Style="{StaticResource ButtonStyle}">
                         <Button.Template>
-                            <ControlTemplate TargetType="Button">
+                            <ControlTemplate TargetType="{x:Type Button}">
                                 <Grid Background="{TemplateBinding Background}">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="35"/>

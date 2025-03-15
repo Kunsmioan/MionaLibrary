@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using MionaLibrary_DAL.Entity;
+using MionaLibrary_Services.Services;
 
 namespace MionaLibrary.UserControls
 {
@@ -22,6 +23,7 @@ namespace MionaLibrary.UserControls
     public partial class ProfileControl : UserControl
     {
         User? reader;
+        UserServices _userServices;
         public ProfileControl()
         {
             InitializeComponent();
@@ -60,7 +62,47 @@ namespace MionaLibrary.UserControls
 
         private void btnDeleteAccount_Click(object sender, RoutedEventArgs e)
         {
+            // Show a confirmation dialog
+            var confirmResult = MessageBox.Show("Do you want to delete your account?", "Alert",
+                                                MessageBoxButton.OKCancel, MessageBoxImage.Warning);
 
+            if (confirmResult == MessageBoxResult.OK)
+            {
+                // Prompt the user to enter their password
+                var passwordDialog = new PasswordInputDialog(); // Custom dialog for password input
+                if (passwordDialog.ShowDialog() == true) // Show the dialog and check if "OK" was clicked
+                {
+                    string enteredPassword = passwordDialog.Password; // Get the entered password
+
+                    // Verify the entered password (replace "storedPassword" with the actual stored password)
+                    string storedPassword = reader.Password; // Example: Replace with your secure password retrieval logic
+                    if (enteredPassword == storedPassword)
+                    {
+                        // Password matches, proceed with account deletion
+                        _userServices = new();
+                        _userServices.Remove(reader);
+                        MessageBox.Show("Account deleted successfully.", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                        // Close the current window (parent window of this UserControl)
+
+                        // Open the Login Window
+                        Login loginWindow = new();
+                        loginWindow.Show();
+                        Window parentWindow = Window.GetWindow(this); // Get the parent window of the UserControl
+                        parentWindow.Close();
+                    }
+                    else
+                    {
+                        // Password does not match
+                        MessageBox.Show("Incorrect password. Account deletion canceled.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                }
+                else
+                {
+                    // User canceled the password input dialog
+                    MessageBox.Show("Account deletion canceled.", "Canceled", MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
+            }
         }
 
         private void btnEditProfile_Click(object sender, RoutedEventArgs e)
