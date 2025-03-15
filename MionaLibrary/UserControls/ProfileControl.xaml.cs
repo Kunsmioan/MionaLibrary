@@ -47,7 +47,7 @@ namespace MionaLibrary.UserControls
             }
             else
             {
-                MessageBox.Show("User data is missing!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                //MessageBox.Show("User data is missing!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -56,6 +56,16 @@ namespace MionaLibrary.UserControls
             reader = user;
             LoadProfileData();
             // You can refresh the UI or bind data here
+        }
+
+        private void btnDeleteAccount_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnEditProfile_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

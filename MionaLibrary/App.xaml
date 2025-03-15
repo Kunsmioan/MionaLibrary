@@ -88,6 +88,25 @@
             </Style.Triggers>
         </Style>
 
+        <Style x:Key="ButtonStyleSingle" TargetType="Button">
+                <Setter Property="Width" Value="150"/>
+                <Setter Property="Height" Value="40"/>
+                <Setter Property="FontSize" Value="14"/>
+                <Setter Property="Margin" Value="10"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Border Background="{TemplateBinding Background}" 
+                                CornerRadius="5" 
+                                BorderThickness="1" 
+                                BorderBrush="#FFCCCCCC">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
         <local:TextToVisibilityConverter x:Key="TextToVisibilityConverter"/>
 
     </Application.Resources>
