@@ -107,7 +107,32 @@ namespace MionaLibrary.UserControls
 
         private void btnEditProfile_Click(object sender, RoutedEventArgs e)
         {
+            // Ensure the reader object is not null
+            if (reader == null)
+            {
+                MessageBox.Show("No user data available to edit.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
 
+            // Create an instance of the UpdateProfileControl
+            UpdateProfileControl updateProfileControl = new UpdateProfileControl();
+
+            // Pass the user data to the UpdateProfileControl
+            updateProfileControl.SetReader(reader);
+
+            // Get the parent window hosting this UserControl
+            Window parentWindow = Window.GetWindow(this);
+
+            // Check if the parent window is of type ReaderWindow
+            if (parentWindow is ReaderWindow readerWindow)
+            {
+                // Replace the current content with the UpdateProfileControl
+                readerWindow.MainContent.Content = updateProfileControl; // Assuming MainContent is a ContentControl in ReaderWindow
+            }
+            else
+            {
+                MessageBox.Show("Unable to locate the parent window or container.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
     }
 }
