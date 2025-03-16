@@ -1,6 +1,4 @@
-﻿
-use master
-drop database LibraryManager
+
 
 create database LibraryManager
 -- Bảng Users (Người dùng)
@@ -10,7 +8,8 @@ CREATE TABLE [dbo].[Users] (
     [Id]       INT            IDENTITY (1, 1) NOT NULL,
     [Username] NVARCHAR (50)  NOT NULL UNIQUE,
     [Password] NVARCHAR (255) NOT NULL,
-    [FullName] NVARCHAR (100) NOT NULL,
+    [FirstName] NVARCHAR (100) NOT NULL,
+	[LastName] NVARCHAR (100) NOT NULL,
     [Birthday] DATE           NOT NULL,
     [Role]     NVARCHAR (20)  NOT NULL CHECK ([Role] IN ('Manager', 'User')),
     [Gender]   NVARCHAR (20)  NOT NULL,
@@ -89,31 +88,25 @@ CREATE TABLE LoanHistory (
 
 DELETE FROM [dbo].[Users];
 
-INSERT INTO [dbo].[Users]
-           ([Username]
-           ,[Password]
-           ,[FullName]
-           ,[Birthday]
-           ,[Role]
-           ,[Gender]
-           ,[Phone])
-     VALUES   ('Nguyen15', 'Nguyen2000', 'Nguyễn Hoa', '2000-05-15', 'User', 'male', '1234567890'),
-           ('Tran20', 'Tran2001', 'Trần Mai', '2001-06-20', 'Manager', 'female', '0987654321'),
-           ('Le12', 'Le2002', 'Lê Minh', '2002-04-12', 'User', 'male', '0912345678'),
-           ('Nguyen07', 'Nguyen2003', 'Nguyễn Lan', '2003-07-22', 'User', 'female', '0922334455'),
-           ('Pham15', 'Pham2000', 'Phạm Quyên', '2000-09-15', 'User', 'female', '0912345679'),
-           ('Nguyen11', 'Nguyen2004', 'Nguyễn Tuấn', '2004-11-30', 'User', 'male', '0933344556'),
-           ('Nguyen10', 'Nguyen2005', 'Nguyễn Sơn', '2005-12-10', 'User', 'male', '0944455667'),
-           ('Hoang25', 'Hoang2006', 'Hoàng Ngọc', '2006-01-25', 'User', 'female', '0955566778'),
-           ('Pham14', 'Pham2000', 'Phạm Trang', '2000-02-14', 'User', 'female', '0966677889'),
-           ('Truong11', 'Truong2002', 'Trương Linh', '2002-03-11', 'Manager', 'female', '0977788990'),
-           ('Nguyen18', 'Nguyen2000', 'Nguyễn Bình', '2000-04-18', 'User', 'male', '0988899001'),
-           ('Le28', 'Le2001', 'Lê Chiến', '2001-05-28', 'User', 'male', '0999000112'),
-           ('Nguyen30', 'Nguyen2003', 'Nguyễn Hà', '2003-06-30', 'User', 'female', '0911122334'),
-           ('Tran14', 'Tran2002', 'Trần Thùy', '2002-07-14', 'User', 'female', '0922233445'),
-           ('Le25', 'Le2004', 'Lê Hồng', '2004-08-25', 'User', 'male', '0933344556'),
-           ('Nguyen20', 'Nguyen2005', 'Nguyễn Thanh', '2005-09-20', 'User', 'male', '0944455667'),
-           ('Hoang15', 'Hoang2006', 'Hoàng Tuấn', '2006-10-15', 'User', 'female', '0955566778'),
-           ('Tran18', 'Tran2002', 'Trần Linh', '2002-11-18', 'User', 'female', '0966677889'),
-           ('Nguyen12', 'Nguyen2001', 'Nguyễn Mai', '2001-12-12', 'User', 'male', '0977788990'),
-           ('Nguyen22', 'Nguyen2000', 'Nguyễn Vinh', '2000-01-22', 'User', 'male', '0988899001');
+INSERT INTO [dbo].[Users] ([Username], [Password], [FirstName], [LastName], [Birthday], [Role], [Gender], [Phone])
+VALUES 
+    ('john_doe', 'password123', 'John', 'Doe', '1990-05-15', 'User', 'Male', '123-456-7890'),
+    ('jane_smith', 'securepass', 'Jane', 'Smith', '1985-08-22', 'User', 'Female', '987-654-3210'),
+    ('alice_jones', 'alicepass', 'Alice', 'Jones', '1995-03-10', 'User', 'Female', NULL),
+    ('bob_brown', 'bobspass', 'Bob', 'Brown', '1980-11-25', 'User', 'Male', '555-555-5555'),
+    ('charlie_wilson', 'charlie123', 'Charlie', 'Wilson', '1975-07-04', 'User', 'Male', '444-444-4444'),
+    ('emily_davis', 'emilypass', 'Emily', 'Davis', '1992-09-18', 'User', 'Female', NULL),
+    ('michael_miller', 'mikepass', 'Michael', 'Miller', '1988-12-30', 'User', 'Male', '333-333-3333'),
+    ('sarah_johnson', 'sarahpass', 'Sarah', 'Johnson', '1998-02-14', 'User', 'Female', '222-222-2222'),
+    ('david_wilson', 'davidpass', 'David', 'Wilson', '1970-06-01', 'User', 'Male', NULL),
+    ('laura_taylor', 'laurapass', 'Laura', 'Taylor', '1982-04-12', 'Manager', 'Female', '111-111-1111'),
+    ('steven_anderson', 'stevenpass', 'Steven', 'Anderson', '1993-07-20', 'User', 'Male', '666-666-6666'),
+    ('olivia_thomas', 'oliviapass', 'Olivia', 'Thomas', '1987-01-05', 'User', 'Female', NULL),
+    ('james_jackson', 'jamespass', 'James', 'Jackson', '1977-03-17', 'User', 'Male', '777-777-7777'),
+    ('ava_white', 'avapass', 'Ava', 'White', '1996-11-28', 'User', 'Female', '888-888-8888'),
+    ('noah_harris', 'noahpass', 'Noah', 'Harris', '1984-05-09', 'User', 'Male', NULL),
+    ('mia_clark', 'miapass', 'Mia', 'Clark', '1991-08-23', 'User', 'Female', '999-999-9999'),
+    ('liam_lewis', 'liampass', 'Liam', 'Lewis', '1979-10-14', 'User', 'Male', '123-123-1234'),
+    ('amelia_young', 'ameliapass', 'Amelia', 'Young', '1994-02-02', 'User', 'Female', NULL),
+    ('ethan_king', 'ethanpass', 'Ethan', 'King', '1986-06-19', 'User', 'Male', '432-432-4321'),
+    ('isabella_wright', 'isabellapass', 'Isabella', 'Wright', '1997-04-11', 'User', 'Female', '543-543-5432');
