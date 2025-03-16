@@ -108,7 +108,8 @@ namespace MionaLibrary
             User user = new User
             {
                 Username = (txtUsername.Text),
-                FullName = InputValidator.legitName(txtFirstName.Text) + " " + InputValidator.legitName(txtLastName.Text),
+                FirstName = InputValidator.legitName(txtFirstName.Text),
+                LastName = InputValidator.legitName(txtLastName.Text),
                 Birthday = dpDOB.SelectedDate.Value,
                 Gender = GetSelectedGender(),
                 Password = pbPassword.Password,

@@ -35,7 +35,7 @@ namespace MionaLibrary.UserControls
             {
                 // Ensure that reader is not null before setting the content
                 tbUsername.Text = reader.Username.ToString();
-                tbfullName.Text = reader.FullName.ToString();
+                tbfullName.Text = reader.FirstName.ToString() + " "+ reader.LastName.ToString();
                 if (reader.Birthday.HasValue)
                 {
                     tbBirthday.Text = reader.Birthday.Value.ToString("dd/MM/yyyy");
@@ -133,6 +133,11 @@ namespace MionaLibrary.UserControls
             {
                 MessageBox.Show("Unable to locate the parent window or container.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+        }
+
+        private void btnUpdatePassword_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

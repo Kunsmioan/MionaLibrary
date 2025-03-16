@@ -36,7 +36,7 @@ namespace MionaLibrary
             if (reader != null)
             {
                 // Ensure that reader is not null before setting the content
-                ProfileButton.Content = reader.Username.ToString();
+                ProfileButton.Content = reader.FirstName.ToString();
 
             }
             else

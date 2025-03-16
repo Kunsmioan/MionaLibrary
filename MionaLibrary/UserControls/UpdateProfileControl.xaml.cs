@@ -40,8 +40,8 @@ namespace MionaLibrary.UserControls
             if (reader != null)
             {
                 txtUsername.Text = reader.Username;
-                txtFirstName.Text = reader.FullName;
-                txtLastName.Text = reader.FullName;
+                txtFirstName.Text = reader.FirstName;
+                txtLastName.Text = reader.LastName;
                 txtUsername.Text = reader.Username;
                 dpDOB.SelectedDate = reader.Birthday;
                 txtPhone.Text = reader.Phone;
@@ -50,78 +50,6 @@ namespace MionaLibrary.UserControls
             {
                 MessageBox.Show("User data is missing!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-        }
-
-        private void pbOldPassword_PasswordChanged(object sender, RoutedEventArgs e)
-        {
-            txtOldPasswordVisible.Text = pbOldPassword.Password; // Lưu giá trị mật khẩu mới
-        }
-
-        private void ToggleOldPasswordVisibility(object sender, RoutedEventArgs e)
-        {
-            if (pbOldPassword.Visibility == Visibility.Visible)
-            {
-                pbOldPassword.Visibility = Visibility.Collapsed;
-                txtOldPasswordVisible.Visibility = Visibility.Visible;
-                txtOldPasswordVisible.Text = pbOldPassword.Password;  // Copy password content
-            }
-            else
-            {
-                pbOldPassword.Visibility = Visibility.Visible;
-                txtOldPasswordVisible.Visibility = Visibility.Collapsed;
-                pbOldPassword.Password = txtOldPasswordVisible.Text;  // Copy content from visible TextBox back
-            }
-
-            EyeSlashIconP.Visibility = EyeSlashIconP.Visibility == Visibility.Visible ? Visibility.Collapsed : Visibility.Visible;
-            EyeIconP.Visibility = EyeIconP.Visibility == Visibility.Visible ? Visibility.Collapsed : Visibility.Visible;
-        }
-
-        private void pbNewPassword_PasswordChanged(object sender, RoutedEventArgs e)
-        {
-            txtNewPasswordVisible.Text = pbNewPassword.Password; // Lưu giá trị mật khẩu mới
-        }
-
-        private void ToggleNewPasswordVisibility(object sender, RoutedEventArgs e)
-        {
-            if (txtNewPasswordVisible.Visibility == Visibility.Visible)
-            {
-                pbNewPassword.Visibility = Visibility.Visible;
-                txtNewPasswordVisible.Visibility = Visibility.Collapsed;
-                pbNewPassword.Password = txtNewPasswordVisible.Text;  // Đồng bộ lại mật khẩu
-            }
-            else
-            {
-                pbNewPassword.Visibility = Visibility.Collapsed;
-                txtNewPasswordVisible.Visibility = Visibility.Visible;
-                txtNewPasswordVisible.Text = pbNewPassword.Password;  // Đồng bộ lại mật khẩu
-            }
-
-            EyeSlashIconNew.Visibility = EyeSlashIconNew.Visibility == Visibility.Visible ? Visibility.Collapsed : Visibility.Visible;
-            EyeIconNew.Visibility = EyeIconNew.Visibility == Visibility.Visible ? Visibility.Collapsed : Visibility.Visible;
-        }
-
-        private void pbConfirmPassword_PasswordChanged(object sender, RoutedEventArgs e)
-        {
-            txtRePasswordVisible.Text = pbConfirmPassword.Password;
-        }
-
-        private void ToggleRePasswordVisibility(object sender, RoutedEventArgs e)
-        {
-            if (txtRePasswordVisible.Visibility == Visibility.Visible)
-            {
-                pbConfirmPassword.Visibility = Visibility.Visible;
-                txtRePasswordVisible.Visibility = Visibility.Collapsed;
-                pbConfirmPassword.Password = txtRePasswordVisible.Text;  // Đồng bộ lại mật khẩu
-            }
-            else
-            {
-                pbConfirmPassword.Visibility = Visibility.Collapsed;
-                txtRePasswordVisible.Visibility = Visibility.Visible;
-                txtRePasswordVisible.Text = pbConfirmPassword.Password;  // Đồng bộ lại mật khẩu
-            }
-
-            EyeSlashIconRP.Visibility = EyeSlashIconRP.Visibility == Visibility.Visible ? Visibility.Collapsed : Visibility.Visible;
-            EyeIconRP.Visibility = EyeIconRP.Visibility == Visibility.Visible ? Visibility.Collapsed : Visibility.Visible;
         }
 
         private void PasswordBox_KeyDown(object sender, KeyEventArgs e)
@@ -133,15 +61,7 @@ namespace MionaLibrary.UserControls
             }
         }
 
-        private bool CheckPasswordsMatch()
-        {
-            if (pbNewPassword.Password != pbConfirmPassword.Password || txtNewPasswordVisible.Text != txtRePasswordVisible.Text)
-            {
-                MessageBox.Show("Passwords do not match!", "Alert", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return false;
-            }
-            return true;
-        }
+
 
         // Helper function to check if all required fields are filled
         private bool checkInput()
@@ -153,11 +73,8 @@ namespace MionaLibrary.UserControls
             (!InputValidator.TextBoxesIsNotEmpty(txtFirstName), "Please enter first name!"),
             (!InputValidator.TextBoxesIsNotEmpty(txtLastName), "Please enter last name!"),
             (!InputValidator.TextBoxesIsNotEmpty(txtUsername), "Please enter username!"),
-            (!InputValidator.TextBoxesIsNotEmpty(txtRePasswordVisible, txtNewPasswordVisible), "Please enter password!"),
-            (!InputValidator.PWIsNotEmpty(pbNewPassword, pbConfirmPassword), "Password must not be empty!"),
             (!InputValidator.validName(txtFirstName.Text, txtLastName.Text), "Name contains invalid characters!"),
             (!InputValidator.textBoxsLength(txtFirstName, txtLastName, txtUsername), "Text fields must be 5-50 characters!"),
-            (!InputValidator.pwBoxsLength(pbNewPassword, pbConfirmPassword), "Password must be 5-255 characters!")
         };
 
                 foreach (var (condition, message) in messages)
@@ -209,19 +126,17 @@ namespace MionaLibrary.UserControls
             }
 
             // Check if password and confirm password match
-            if (!CheckPasswordsMatch()) return;
 
             // Create the User object
-            User user = new User
-            {
-                Username = (txtUsername.Text),
-                FullName = InputValidator.legitName(txtFirstName.Text) + " " + InputValidator.legitName(txtLastName.Text),
-                Birthday = dpDOB.SelectedDate.Value,
-                Gender = GetSelectedGender(),
-                Password = pbNewPassword.Password,
-                Role = "User",
-                Phone = txtPhone.Text,
-            };
+
+            reader.Username = (txtUsername.Text);
+            reader.FirstName = InputValidator.legitName(txtFirstName.Text);
+            reader.LastName = InputValidator.legitName(txtLastName.Text);
+            reader.Birthday = dpDOB.SelectedDate.Value;
+            reader.Password = reader.Password;
+            reader.Gender = GetSelectedGender();
+            reader.Role = "User";
+            reader.Phone = txtPhone.Text;
 
             // Try to register the user
             try
@@ -230,7 +145,7 @@ namespace MionaLibrary.UserControls
                 _userServices = new UserServices();
 
                 // Call the register service to register the user
-                _userServices.Update(user);
+                _userServices.Update(reader);
 
                 MessageBox.Show("Update successful!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
                 //ReturnToLogin(sender, e);

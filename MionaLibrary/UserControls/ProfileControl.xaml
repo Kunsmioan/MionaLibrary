@@ -55,7 +55,9 @@
                 </StackPanel>
             </StackPanel>
 
-            <StackPanel Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,252,0,0">
+            <StackPanel Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,200,0,0" Height="212">
+                <Button x:Name="btnUpdatePassword" Content="Change password" Width="150" Height="40" FontSize="14"  Margin="5"  Style="{StaticResource ButtonStyleSingle}"
+                Click="btnUpdatePassword_Click"/>
                 <Button x:Name="btnEditProfile" Content="Edit Profile" Width="150" Height="40" FontSize="14"  Margin="5"  Style="{StaticResource ButtonStyleSingle}"
                 Click="btnEditProfile_Click"/>
                 <Button x:Name="btnDeleteAccount" Content="Delete Account" Width="150" Height="40" Style="{StaticResource ButtonStyleSingle}"

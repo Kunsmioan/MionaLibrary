@@ -48,8 +48,8 @@
                 <fa:ImageAwesome Icon="Calendar" Width="12" Foreground="Gray" Margin="1,5,0,0"/>
             </StackPanel>
 
-            <StackPanel Orientation="Horizontal" Margin="5, 0,10,10">
-                <DatePicker Name="dpDOB" Margin="5,5,5,5" Width="360"/>
+            <StackPanel Orientation="Horizontal" Margin="5, 0,10,10" Width="auto">
+                <DatePicker Name="dpDOB" Margin="5,5,5,5" Width="345"/>
             </StackPanel>
 
 

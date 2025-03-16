@@ -35,9 +35,9 @@ public partial class LibraryManagerContext : DbContext
     {
         modelBuilder.Entity<Book>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Books__3214EC07D2561E29");
+            entity.HasKey(e => e.Id).HasName("PK__Books__3214EC077D216280");
 
-            entity.HasIndex(e => e.Isbn, "UQ__Books__447D36EA16E5C903").IsUnique();
+            entity.HasIndex(e => e.Isbn, "UQ__Books__447D36EA386CBB97").IsUnique();
 
             entity.Property(e => e.Author).HasMaxLength(100);
             entity.Property(e => e.Description).HasColumnType("text");
@@ -54,7 +54,7 @@ public partial class LibraryManagerContext : DbContext
 
         modelBuilder.Entity<BookLog>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__BookLogs__3214EC0736B5E19B");
+            entity.HasKey(e => e.Id).HasName("PK__BookLogs__3214EC0711C6E999");
 
             entity.Property(e => e.Action).HasMaxLength(50);
             entity.Property(e => e.ActionDate)
@@ -64,7 +64,7 @@ public partial class LibraryManagerContext : DbContext
 
         modelBuilder.Entity<BookReservation>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__BookRese__3214EC07901DB344");
+            entity.HasKey(e => e.Id).HasName("PK__BookRese__3214EC077F9DCB32");
 
             entity.Property(e => e.ReserveDate).HasDefaultValueSql("(getdate())");
             entity.Property(e => e.Status).HasMaxLength(20);
@@ -80,7 +80,7 @@ public partial class LibraryManagerContext : DbContext
 
         modelBuilder.Entity<Loan>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Loans__3214EC07E5998B00");
+            entity.HasKey(e => e.Id).HasName("PK__Loans__3214EC07D114C465");
 
             entity.Property(e => e.BorrowDate).HasDefaultValueSql("(getdate())");
             entity.Property(e => e.Status).HasMaxLength(20);
@@ -96,7 +96,7 @@ public partial class LibraryManagerContext : DbContext
 
         modelBuilder.Entity<LoanHistory>(entity =>
         {
-            entity.HasKey(e => e.HistoryId).HasName("PK__LoanHist__4D7B4ADDC9DFCD47");
+            entity.HasKey(e => e.HistoryId).HasName("PK__LoanHist__4D7B4ADD12768503");
 
             entity.ToTable("LoanHistory");
 
@@ -121,12 +121,13 @@ public partial class LibraryManagerContext : DbContext
 
         modelBuilder.Entity<User>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Users__3214EC072CFA3067");
+            entity.HasKey(e => e.Id).HasName("PK__Users__3214EC07AFBDFDA9");
 
-            entity.HasIndex(e => e.Username, "UQ__Users__536C85E407AD71A2").IsUnique();
+            entity.HasIndex(e => e.Username, "UQ__Users__536C85E49D5F8E01").IsUnique();
 
-            entity.Property(e => e.FullName).HasMaxLength(100);
+            entity.Property(e => e.FirstName).HasMaxLength(100);
             entity.Property(e => e.Gender).HasMaxLength(20);
+            entity.Property(e => e.LastName).HasMaxLength(100);
             entity.Property(e => e.Password).HasMaxLength(255);
             entity.Property(e => e.Phone)
                 .HasMaxLength(50)
