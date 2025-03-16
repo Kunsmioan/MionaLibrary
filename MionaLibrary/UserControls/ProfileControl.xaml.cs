@@ -135,9 +135,33 @@ namespace MionaLibrary.UserControls
             }
         }
 
-        private void btnUpdatePassword_Click(object sender, RoutedEventArgs e)
+        private void btnChangePassword_Click(object sender, RoutedEventArgs e)
         {
+            if (reader == null)
+            {
+                MessageBox.Show("No user data available to edit.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
 
+            // Create an instance of the UpdateProfileControl
+            ChangePassword changePassword = new();
+
+            // Pass the user data to the UpdateProfileControl
+            changePassword.SetReader(reader);
+
+            // Get the parent window hosting this UserControl
+            Window parentWindow = Window.GetWindow(this);
+
+            // Check if the parent window is of type ReaderWindow
+            if (parentWindow is ReaderWindow readerWindow)
+            {
+                // Replace the current content with the UpdateProfileControl
+                readerWindow.MainContent.Content = changePassword; // Assuming MainContent is a ContentControl in ReaderWindow
+            }
+            else
+            {
+                MessageBox.Show("Unable to locate the parent window or container.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
     }
 }
