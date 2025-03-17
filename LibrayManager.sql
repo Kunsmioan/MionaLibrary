@@ -110,3 +110,67 @@ VALUES
     ('amelia_young', 'ameliapass', 'Amelia', 'Young', '1994-02-02', 'User', 'Female', NULL),
     ('ethan_king', 'ethanpass', 'Ethan', 'King', '1986-06-19', 'User', 'Male', '432-432-4321'),
     ('isabella_wright', 'isabellapass', 'Isabella', 'Wright', '1997-04-11', 'User', 'Female', '543-543-5432');
+
+
+INSERT INTO [dbo].[Books] ([Title], [Author], [PublishYear], [ISBN], [Genre], [Language], [Description], [ImagePath], [Page], [Quantity], [IsAvailable])
+VALUES 
+-- Book 1
+('The Night Circus', 'Erin Morgenstern', 2011, '978-0307744166', 'Fantasy', 'English', 'A magical competition between two young illusionists.', 'images/night-circus.jpg', 387, 5, 1),
+-- Book 2
+('The Shadow of the Wind', 'Carlos Ruiz Zafón', 2001, '978-0143117355', 'Mystery', 'French', 'A boy discovers a mysterious book that changes his life.', 'images/shadow-wind.jpg', 487, 3, 0),
+-- Book 3
+('The Little Prince', 'Antoine de Saint-Exupéry', 1943, '978-0156012195', 'Fiction', 'Vietnamese', 'A philosophical tale about friendship and love.', 'images/little-prince.jpg', 96, 8, 1),
+-- Book 4
+('The Alchemist', 'Paulo Coelho', 1988, '978-0061122415', 'Fiction', 'English', 'A shepherd embarks on a journey of self-discovery.', 'images/alchemist.jpg', 163, 7, 1),
+-- Book 5
+('The Kite Runner', 'Khaled Hosseini', 2003, '978-1594631931', 'Historical Fiction', 'French', 'A story of friendship, betrayal, and redemption.', 'images/kite-runner.jpg', 371, 2, 0),
+-- Book 6
+('Life of Pi', 'Yann Martel', 2001, '978-0151008112', 'Adventure', 'Vietnamese', 'A boy survives 227 days at sea with a Bengal tiger.', 'images/life-pi.jpg', 319, 10, 1),
+-- Book 7
+('The Book Thief', 'Markus Zusak', 2005, '978-0375842207', 'Historical Fiction', 'English', 'A girl steals books during World War II.', 'images/book-thief.jpg', 552, 4, 1),
+-- Book 8
+('The Road', 'Cormac McCarthy', 2006, '978-0307387899', 'Post-Apocalyptic', 'French', 'A father and son struggle to survive in a desolate world.', 'images/road.jpg', 287, 6, 0),
+-- Book 9
+('Sapiens: A Brief History of Humankind', 'Yuval Noah Harari', 2011, '978-0062316097', 'Non-Fiction', 'Vietnamese', 'An exploration of human history and evolution.', 'images/sapiens.jpg', 443, 9, 1),
+-- Book 10
+('The Hunger Games', 'Suzanne Collins', 2008, '978-0439023481', 'Science Fiction', 'English', 'A dystopian society forces children to fight to the death.', 'images/hunger-games.jpg', 374, 5, 1),
+-- Book 11
+('The Da Vinci Code', 'Dan Brown', 2003, '978-0385504201', 'Mystery', 'French', 'A symbologist uncovers a centuries-old secret.', 'images/davinci-code.jpg', 454, 3, 0),
+-- Book 12
+('The Help', 'Kathryn Stockett', 2009, '978-0399155345', 'Historical Fiction', 'Vietnamese', 'The lives of African-American maids in the 1960s South.', 'images/help.jpg', 451, 7, 1),
+-- Book 13
+('The Girl with the Dragon Tattoo', 'Stieg Larsson', 2005, '978-0307949486', 'Mystery', 'English', 'A journalist and hacker investigate a decades-old disappearance.', 'images/dragon-tattoo.jpg', 465, 6, 1),
+-- Book 14
+('The Secret Garden', 'Frances Hodgson Burnett', 1911, '978-0064401889', 'Fiction', 'French', 'A young girl discovers a hidden garden.', 'images/secret-garden.jpg', 368, 4, 0),
+-- Book 15
+('The Chronicles of Narnia', 'C.S. Lewis', 1950, '978-0064471046', 'Fantasy', 'Vietnamese', 'Children enter a magical land through a wardrobe.', 'images/narnia.jpg', 767, 8, 1),
+-- Book 16
+('The Catcher in the Rye', 'J.D. Salinger', 1951, '978-0316769488', 'Fiction', 'English', 'A teenager struggles with growing up.', 'images/catcher-rye.jpg', 277, 5, 1),
+-- Book 17
+('The Old Man and the Sea', 'Ernest Hemingway', 1952, '978-0684801223', 'Fiction', 'French', 'An old fisherman battles a giant marlin.', 'images/old-man-sea.jpg', 127, 2, 0),
+-- Book 18
+('The Hobbit', 'J.R.R. Tolkien', 1937, '978-0547928227', 'Fantasy', 'Vietnamese', 'A hobbit embarks on an epic quest.', 'images/hobbit.jpg', 310, 9, 1),
+-- Book 19
+('The Adventures of Sherlock Holmes', 'Arthur Conan Doyle', 1892, '978-0486223013', 'Mystery', 'English', 'Detective Sherlock Holmes solves crimes.', 'images/sherlock-holmes.jpg', 307, 6, 1),
+-- Book 20
+('The Picture of Dorian Gray', 'Oscar Wilde', 1890, '978-0141439563', 'Fiction', 'French', 'A man sells his soul for eternal youth.', 'images/dorian-gray.jpg', 254, 3, 0),
+-- Book 21
+('The Grapes of Wrath', 'John Steinbeck', 1939, '978-0143039433', 'Historical Fiction', 'Vietnamese', 'A family flees the Dust Bowl during the Great Depression.', 'images/grapes-wrath.jpg', 464, 7, 1),
+-- Book 22
+('The Fellowship of the Ring', 'J.R.R. Tolkien', 1954, '978-0618346257', 'Fantasy', 'English', 'A fellowship sets out to destroy a powerful ring.', 'images/fellowship-ring.jpg', 423, 8, 1),
+-- Book 23
+('The Count of Monte Cristo', 'Alexandre Dumas', 1844, '978-0140439308', 'Adventure', 'French', 'A man seeks revenge after being wrongfully imprisoned.', 'images/monte-cristo.jpg', 1276, 4, 0),
+-- Book 24
+('The Bell Jar', 'Sylvia Plath', 1963, '978-0061148507', 'Fiction', 'Vietnamese', 'A woman struggles with mental illness.', 'images/bell-jar.jpg', 288, 5, 1),
+-- Book 25
+('The Martian', 'Andy Weir', 2011, '978-0804139021', 'Science Fiction', 'English', 'An astronaut fights to survive on Mars.', 'images/martian.jpg', 369, 6, 1),
+-- Book 26
+('The Handmaid''s Tale', 'Margaret Atwood', 1985, '978-0385490818', 'Science Fiction', 'French', 'A woman lives in a totalitarian society.', 'images/handmaids-tale.jpg', 311, 3, 0),
+-- Book 27
+('The Stand', 'Stephen King', 1978, '978-0307947307', 'Post-Apocalyptic', 'Vietnamese', 'A deadly virus wipes out most of humanity.', 'images/stand.jpg', 1153, 10, 1),
+-- Book 28
+('The Shining', 'Stephen King', 1977, '978-0385121675', 'Horror', 'English', 'A family is haunted by supernatural forces.', 'images/shining.jpg', 447, 4, 1),
+-- Book 29
+('The Metamorphosis', 'Franz Kafka', 1915, '978-0486299964', 'Fiction', 'French', 'A man wakes up transformed into a giant insect.', 'images/metamorphosis.jpg', 82, 2, 0),
+-- Book 30
+('The Time Machine', 'H.G. Wells', 1895, '978-0486284726', 'Science Fiction', 'Vietnamese', 'A scientist travels through time to the distant future.', 'images/time-machine.jpg', 118, 7, 1);
