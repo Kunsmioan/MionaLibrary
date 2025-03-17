@@ -56,8 +56,14 @@ namespace MionaLibrary
         {
             // Add the functionality for the Profile button click, if needed
             ProfileControl profileControl = new();
-            MainContent.Content = profileControl; 
+            MainContent.Content = profileControl;
             profileControl.SetUser(reader);
+        }
+
+
+        private void Home_Click(object sender, RoutedEventArgs e)
+        {
+           
         }
 
         private void Books_Click(object sender, RoutedEventArgs e)
@@ -85,16 +91,11 @@ namespace MionaLibrary
             }
         }
 
-        private void Home_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         private void Favorites_Click(object sender, RoutedEventArgs e)
         {
 
         }
-        
+
 
         private void PlaceOrder_Click(object sender, RoutedEventArgs e)
         {
@@ -124,7 +125,8 @@ namespace MionaLibrary
 
         private void Help_Click(object sender, RoutedEventArgs e)
         {
-
+            HelpControl helpControl = new();
+            MainContent.Content = helpControl;
         }
 
         private void Notification_Click(object sender, RoutedEventArgs e)
