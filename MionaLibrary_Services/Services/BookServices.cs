@@ -11,7 +11,7 @@ namespace MionaLibrary_Services.Services
     
     public class BookServices
     {
-        private BookRepo _repo;
+        private BookRepo? _repo;
 
         public void AddBook(Book book)
         {
@@ -31,10 +31,10 @@ namespace MionaLibrary_Services.Services
             _repo.DeleteBook(book);
         }   
 
-        public List<Book> GetAllBook()
+        public List<Book> GetAllBooks()
         {
             _repo = new();
-            List<Book> books = _repo.GetAllBook();
+            List<Book> books = _repo.GetAllBooks();
             return books;
         }
     }

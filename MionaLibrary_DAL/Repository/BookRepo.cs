@@ -11,7 +11,7 @@ namespace MionaLibrary_DAL.Repository
 
     public class BookRepo
     {
-       private LibraryManagerContext _context;
+       private LibraryManagerContext? _context;
 
        public void AddBook(Book book)
         {
@@ -31,7 +31,8 @@ namespace MionaLibrary_DAL.Repository
             _context.SaveChanges();
         }
 
-        public List<Book> GetAllBook() { 
+        public List<Book> GetAllBooks() {
+            _context = new();
             List<Book> books = _context.Books.ToList();
             return books;
         }

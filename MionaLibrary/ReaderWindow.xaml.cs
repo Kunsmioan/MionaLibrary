@@ -63,7 +63,8 @@ namespace MionaLibrary
 
         private void Home_Click(object sender, RoutedEventArgs e)
         {
-           
+           HomeControl homeControl = new();
+            MainContent.Content = homeControl;
         }
 
         private void Books_Click(object sender, RoutedEventArgs e)
