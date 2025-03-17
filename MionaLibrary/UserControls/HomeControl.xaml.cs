@@ -74,5 +74,12 @@ namespace MionaLibrary.UserControls
         {
 
         }
+
+      
+
+        private void SearchTypeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }

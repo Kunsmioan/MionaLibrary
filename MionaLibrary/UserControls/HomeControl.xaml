@@ -15,14 +15,23 @@
 
         </Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal" Grid.Row="0">
-            <Grid>
+            <Grid Margin="20,0,0,0">
                 <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
 
-                <Grid Width="500" Height="50" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="20,20,5,20"
-                      Grid.Column="0">
+                <ComboBox x:Name="SearchTypeComboBox" Grid.Column="0" Width="120" Height="40" VerticalAlignment="Center" HorizontalAlignment="Center"
+              SelectionChanged="SearchTypeComboBox_SelectionChanged"  FontSize="16" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="5">
+                    <ComboBoxItem Content="Title" IsSelected="True"/>
+                    <ComboBoxItem Content="Author"/>
+                    <ComboBoxItem Content="Genre"/>
+                    <ComboBoxItem Content="Language"/>
+                </ComboBox>
+
+                <Grid Width="480" Height="50" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,20,5,20"
+                      Grid.Column="1">
                     <!-- TextBox for User Input -->
                     <TextBox x:Name="SearchTextBox" 
              Background="Transparent" BorderBrush="Gray" BorderThickness="1"
@@ -31,7 +40,7 @@
                     <!-- Placeholder Text -->
                     <TextBlock x:Name="PlaceholderText" Text="Enter search term..." 
                Foreground="Gray" VerticalAlignment="Center" HorizontalAlignment="Left" 
-               Margin="15,0,0,0" IsHitTestVisible="False" Height="20" Width="138" FontSize="14">
+               Margin="10,0,0,0" IsHitTestVisible="False" Height="20" Width="138" FontSize="14">
                         <TextBlock.Style>
                             <Style TargetType="TextBlock">
                                 <Setter Property="Visibility" Value="Visible"/>
@@ -49,7 +58,7 @@
                 </Grid>
 
                 <!-- Search Button -->
-                <Border Background="#FFD2CFCF" Width="40" Height="40" CornerRadius="5" Grid.Column="1">
+                <Border Background="#FFD2CFCF" Width="40" Height="40" CornerRadius="5" Grid.Column="2">
                     <Button Width="40" Height="40" HorizontalAlignment="Center" VerticalAlignment="Center" 
             Background="Transparent" BorderThickness="0" Click="SearchButton_Click">
                         <!-- Search Icon -->
@@ -62,7 +71,6 @@
         </StackPanel>
 
         <Grid Margin="10" Grid.Row="1">
-            <!-- Search Input Section -->
             <!-- Search Results Section with DataGrid -->
             <DataGrid x:Name="SearchResultsDataGrid" AutoGenerateColumns="False" Loaded="LoadData" Margin="10,0,10,10">
                 <DataGrid.Columns>
