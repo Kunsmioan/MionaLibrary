@@ -193,6 +193,6 @@
             </Grid>
         </Border>
 
-        <ContentControl x:Name="MainContent" Grid.Column="1" HorizontalAlignment="Left"/>
+        <ContentControl x:Name="MainContent" Grid.Column="1"/>
     </Grid>
 </Window>

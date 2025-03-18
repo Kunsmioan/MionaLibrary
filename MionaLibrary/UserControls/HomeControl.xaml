@@ -12,6 +12,7 @@
             <RowDefinition Height="80"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="10"/>
+            <RowDefinition Height="10"/>
 
         </Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal" Grid.Row="0">
@@ -22,8 +23,8 @@
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
 
-                <ComboBox x:Name="SearchTypeComboBox" Grid.Column="0" Width="120" Height="40" VerticalAlignment="Center" HorizontalAlignment="Center"
-              SelectionChanged="SearchTypeComboBox_SelectionChanged"  FontSize="16" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="5">
+                <ComboBox x:Name="SearchTypeComboBox" Grid.Column="0" Width="120" Height="35" VerticalAlignment="Center" HorizontalAlignment="Center" 
+                 FontSize="14" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="5" KeyDown="SearchTextBox_KeyDown">
                     <ComboBoxItem Content="Title" IsSelected="True"/>
                     <ComboBoxItem Content="Author"/>
                     <ComboBoxItem Content="Genre"/>
@@ -35,7 +36,7 @@
                     <!-- TextBox for User Input -->
                     <TextBox x:Name="SearchTextBox" 
              Background="Transparent" BorderBrush="Gray" BorderThickness="1"
-             TextChanged="SearchTextBox_TextChanged" Margin="0,5,5,5"/>
+             TextChanged="SearchTextBox_TextChanged" Margin="0,5,5,5" KeyDown="SearchTextBox_KeyDown"/>
 
                     <!-- Placeholder Text -->
                     <TextBlock x:Name="PlaceholderText" Text="Enter search term..." 
@@ -60,7 +61,7 @@
                 <!-- Search Button -->
                 <Border Background="#FFD2CFCF" Width="40" Height="40" CornerRadius="5" Grid.Column="2">
                     <Button Width="40" Height="40" HorizontalAlignment="Center" VerticalAlignment="Center" 
-            Background="Transparent" BorderThickness="0" Click="SearchButton_Click">
+            Background="Transparent" BorderThickness="0" Click="SearchButton_Click" >
                         <!-- Search Icon -->
                         <fa:ImageAwesome Icon="Search" Width="30" Foreground="Gray" Height="30"/>
                     </Button>
@@ -72,16 +73,38 @@
 
         <Grid Margin="10" Grid.Row="1">
             <!-- Search Results Section with DataGrid -->
-            <DataGrid x:Name="SearchResultsDataGrid" AutoGenerateColumns="False" Loaded="LoadData" Margin="10,0,10,10">
+            <DataGrid x:Name="SearchResultsDataGrid" 
+              AutoGenerateColumns="False" 
+              Loaded="LoadData" 
+              Margin="10,0,10,10"
+              SelectionMode="Single" 
+              SelectionUnit="Cell"
+              IsReadOnly="True">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="40" />
-                    <DataGridTextColumn Header="Title" Binding="{Binding Title}" Width="2*" />
-                    <DataGridTextColumn Header="Author" Binding="{Binding Author}" Width="*" />
-                    <DataGridTextColumn Header="Language" Binding="{Binding Language}" Width="100" />
+                    <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="40" IsReadOnly="True"/>
+
+                    <!-- Title as Button -->
+                    <DataGridTemplateColumn Header="Title" Width="2*">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Content="{Binding Title}" 
+                                Background="Transparent" 
+                                BorderThickness="0" 
+                                Foreground="Blue" 
+                                Cursor="Hand" 
+                                Click="TitleButton_Click" HorizontalAlignment="Left" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                    <DataGridTextColumn Header="Author" Binding="{Binding Author}" Width="*" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Language" Binding="{Binding Language}" Width="100" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Genre" Binding="{Binding Genre}" Width="100" IsReadOnly="True"/>
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>
 
+        
     </Grid>
 
 </UserControl>

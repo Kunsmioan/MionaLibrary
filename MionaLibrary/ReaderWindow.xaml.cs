@@ -28,6 +28,7 @@ namespace MionaLibrary
         public ReaderWindow()
         {
             InitializeComponent();
+            MainContent.Content = new HomeControl();
         }
 
         // Method to load data and update UI elements

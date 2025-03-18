@@ -1,0 +1,42 @@
+﻿<UserControl x:Class="MionaLibrary.BookControls.BookDetailsControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MionaLibrary.BookControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="600">
+    <Grid>
+        
+        
+        <StackPanel Margin="20">
+            <Label Content="Book Details" FontSize="24" FontWeight="Bold" Margin="0,10,0,0"/>
+            <!-- Title -->
+            <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                <TextBlock Text="Book title:" FontSize="16" FontWeight="Bold" Width="100" />
+                <TextBlock x:Name="TitleTextBlock" FontSize="16" Width="100" Margin="10,0,0,0" />
+            </StackPanel>
+
+            <!-- Author -->
+            <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                <TextBlock Text="Author:" FontSize="16" FontWeight="Bold" Width="100" />
+                <TextBlock x:Name="AuthorTextBlock" FontSize="16" Width="100" Margin="10,0,0,0" />
+            </StackPanel>
+
+            <!-- Language -->
+            <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                <TextBlock Text="Language:" FontSize="16" FontWeight="Bold" Width="100" />
+                <TextBlock x:Name="LanguageTextBlock" FontSize="16" Width="100" Margin="10,0,0,0" />
+            </StackPanel>
+
+            <!-- Genre -->
+            <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                <TextBlock Text="Genre:" FontSize="16" FontWeight="Bold" Width="100" />
+                <TextBlock x:Name="GenreTextBlock" FontSize="16" Width="100" Margin="10,0,0,0" />
+            </StackPanel>
+
+            <!-- Các hành động khác, ví dụ: nút "Mượn sách" -->
+            <Button Content="Mượn sách" Width="100" Height="30" Margin="0,10,0,0" Click="BorrowBook_Click" />
+        </StackPanel>
+    </Grid>
+</UserControl>

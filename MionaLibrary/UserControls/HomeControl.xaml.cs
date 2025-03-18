@@ -16,6 +16,7 @@ using System.Windows.Shapes;
 using Microsoft.Data.SqlClient;
 using MionaLibrary_DAL.Entity;
 using MionaLibrary_Services.Services;
+using MionaLibrary.BookControls;
 
 namespace MionaLibrary.UserControls
 {
@@ -25,6 +26,7 @@ namespace MionaLibrary.UserControls
     public partial class HomeControl : UserControl
     {
         BookServices? _bookServices;
+        public event EventHandler<Book> NavigateToBookDetails;
 
         public HomeControl()
         {
@@ -45,8 +47,6 @@ namespace MionaLibrary.UserControls
 
                 // Fetch all books from the database
                 List<Book> books = _bookServices.GetAllBooks();
-
-                // Show the count of books fetched
 
                 // Bind the books to the DataGrid
                 SearchResultsDataGrid.ItemsSource = books;
@@ -72,14 +72,61 @@ namespace MionaLibrary.UserControls
 
         private void SearchButton_Click(object sender, RoutedEventArgs e)
         {
+            // Lấy loại tìm kiếm từ ComboBox
+            var selectedSearchType = (SearchTypeComboBox.SelectedItem as ComboBoxItem)?.Content.ToString();
 
+            // Lấy từ khóa tìm kiếm từ TextBox
+            var searchTerm = SearchTextBox.Text.Trim();
+
+            // Kiểm tra đầu vào
+            if (string.IsNullOrEmpty(selectedSearchType) || string.IsNullOrWhiteSpace(searchTerm))
+            {
+                SearchResultsDataGrid.ItemsSource = _bookServices.GetAllBooks();
+            }
+
+            // Thực hiện tìm kiếm
+            var filteredBooks = PerformSearch(selectedSearchType, searchTerm);
+
+            // Hiển thị kết quả trong DataGrid
+            SearchResultsDataGrid.ItemsSource = filteredBooks;
         }
 
-      
-
-        private void SearchTypeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private List<Book> PerformSearch(string searchType, string searchTerm)
         {
+            // Lọc dữ liệu dựa trên loại tìm kiếm
+            return _bookServices.GetAllBooksByFilter(searchType, searchTerm);
+        }
 
+        private void SearchTextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                // Thực hiện tìm kiếm
+                SearchButton_Click(sender, e);
+            }
+        }
+
+        private void TitleButton_Click(object sender, RoutedEventArgs e)
+        {
+            // Lấy đối tượng sách từ DataContext của nút
+            if ((sender as Button)?.DataContext is Book selectedBook)
+            {
+                // Tạo BookDetailsControl và gán dữ liệu sách
+                var bookDetailsControl = new BookDetailsControl();
+                bookDetailsControl.SetBookSelected(selectedBook);
+
+                // Lấy cửa sổ cha
+                Window parentWindow = Window.GetWindow(this);
+                if (parentWindow is ReaderWindow rw)
+                {
+                    // Thay thế nội dung hiện tại bằng BookDetailsControl
+                    rw.MainContent.Content = bookDetailsControl;
+                }
+                else
+                {
+                    MessageBox.Show("Không tìm thấy cửa sổ ReaderWindow.", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
         }
     }
 }
