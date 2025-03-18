@@ -33,10 +33,13 @@ namespace MionaLibrary.BookControls
             {
                 // Gán dữ liệu từ cơ sở dữ liệu vào các TextBlock
                 TitleTextBlock.Text = bookSelected.Title;
-
                 AuthorTextBlock.Text = bookSelected.Author;
                 LanguageTextBlock.Text = bookSelected.Language;
                 GenreTextBlock.Text = bookSelected.Genre;
+                DescriptionTextBlock.Text = bookSelected.Description;
+                PublishYearTextBlock.Text = bookSelected.PublishYear.ToString();
+                ISBNTextBlock.Text = bookSelected.Isbn;
+                PageTextBlock.Text = bookSelected.Page.ToString();
             }
         }
 
