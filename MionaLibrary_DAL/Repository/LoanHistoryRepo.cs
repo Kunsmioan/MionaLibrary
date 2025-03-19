@@ -11,7 +11,7 @@ namespace MionaLibrary_DAL.Repository
 
     public class LoanHistoryRepo
     {
-        LibraryManagerContext _context;
+        LibraryManagerContext? _context;
 
         public void AddLoanHistory(LoanHistory loanHistory)
         {

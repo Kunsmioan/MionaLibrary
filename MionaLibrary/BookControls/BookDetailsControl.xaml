@@ -18,6 +18,10 @@
         <Border BorderBrush="Black" BorderThickness="1" Grid.Column="1" Margin="5,0,0,0" >
             <StackPanel Margin="20,15,20,20" Grid.Column="1">
                 <TextBlock Text="Book Details" FontSize="24" FontWeight="Bold" Margin="0,0,0,10" />
+                <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                    <TextBlock Text="User's name:" FontSize="16" FontWeight="Bold" Width="100" />
+                    <TextBlock x:Name="name" FontSize="24" FontWeight="Bold" Margin="0,0,0,10" Width="200"/>
+                </StackPanel>
                 <!-- Title -->
                 <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
                     <TextBlock Text="Book title:" FontSize="16" FontWeight="Bold" Width="100" />
@@ -81,6 +85,7 @@
                         Height="40" 
                         IsEnabled="False" 
                         Click="BorrowBook_Click" Margin="30"/>
+                
             </StackPanel>
         </Border>
     </Grid>

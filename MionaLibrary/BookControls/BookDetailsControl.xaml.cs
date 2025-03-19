@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using MionaLibrary_DAL.Entity;
+using MionaLibrary_Services.Services;
 
 namespace MionaLibrary.BookControls
 {
@@ -22,7 +23,9 @@ namespace MionaLibrary.BookControls
     public partial class BookDetailsControl : UserControl
     {
         Book? bookSelected;
-        Loan
+        LoanHistoryServices _loanHistoryServices;
+        LoanHistory loanHistory;
+        User? reader;
         public BookDetailsControl()
         {
             InitializeComponent();
@@ -30,6 +33,12 @@ namespace MionaLibrary.BookControls
         public void SetBookSelected(Book book)
         {
             bookSelected = book;
+            loadData();
+        }
+
+        public void SetUser(User user)
+        {
+            reader = user;
             loadData();
         }
         private void loadData()
@@ -58,20 +67,74 @@ namespace MionaLibrary.BookControls
                     BorrowBook.IsEnabled = false; // Vô hiệu hóa nút BorrowBook
                 }
             }
+            if (reader != null)
+            {
+                string fullName = $"{reader.FirstName} {reader.LastName}".Trim();
+                if (!string.IsNullOrEmpty(fullName))
+                {
+                    name.Text = fullName; // Gán tên người dùng vào TextBlock
+                }
+                else
+                {
+                    name.Text = "Unknown User"; // Trường hợp tên không hợp lệ
+                }
+            }
+            else
+            {
+                name.Text = "No User Selected"; // Trường hợp reader là null
+            }
         }
 
         private void BorrowBook_Click(object sender, RoutedEventArgs e)
         {
+            // Kiểm tra xem sách có được chọn và có sẵn không
             if (bookSelected != null && bookSelected.IsAvailable)
             {
-                // Thực hiện logic mượn sách (ví dụ: cập nhật cơ sở dữ liệu)
-                MessageBox.Show($"You have successfully borrowed the book: {bookSelected.Title}");
+                // Hiển thị hộp thoại xác nhận
+                MessageBoxResult result = MessageBox.Show(
+                    $"Are you sure you want to borrow the book: {bookSelected.Title}?",
+                    "Confirm Borrow",
+                    MessageBoxButton.YesNo,
+                    MessageBoxImage.Question);
 
-                // Cập nhật trạng thái sách thành không có sẵn
-                bookSelected.IsAvailable = false;
+                // Nếu người dùng chọn "Yes"
+                if (result == MessageBoxResult.Yes)
+                {
+                    if (reader != null)
+                    {
+                        loanHistory = new LoanHistory
+                        {
+                            BookId = bookSelected.Id,
+                            UserId = reader.Id, // 
+                            LoanDate = DateTime.Now,
+                            DueDate = DateTime.Now.AddDays(7), // Số ngày mượn sách: 7 ngày
+                            ReturnDate = DateTime.Now.AddDays(5),
+                            OverdueDays = 0
+                        };
+                        _loanHistoryServices = new();
+                        _loanHistoryServices.AddLoanHistory(loanHistory);
 
-                // Cập nhật lại giao diện
-                loadData();
+
+                        // Thực hiện logic mượn sách (ví dụ: cập nhật cơ sở dữ liệu)
+                        MessageBox.Show($"You have successfully borrowed the book: {bookSelected.Title}");
+
+                        // Cập nhật trạng thái sách thành không có sẵn
+                        bookSelected.IsAvailable = false;
+
+                        // Cập nhật lại giao diện
+                        loadData();
+                    }
+                }
+                else
+                {
+                    // Người dùng chọn "No", không làm gì cả
+                    MessageBox.Show("Borrowing canceled.");
+                }
+            }
+            else
+            {
+                // Nếu sách không có sẵn, hiển thị thông báo lỗi
+                MessageBox.Show("This book is not available for borrowing.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
     }

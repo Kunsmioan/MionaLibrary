@@ -25,12 +25,23 @@ namespace MionaLibrary.UserControls
     /// </summary>
     public partial class HomeControl : UserControl
     {
+        User? reader;
         BookServices? _bookServices;
-        public event EventHandler<Book> NavigateToBookDetails;
 
         public HomeControl()
         {
             InitializeComponent();
+
+        }
+        public void SetUser(User user)
+        {
+            if (user == null)
+            {
+                MessageBox.Show("The provided user is null. Please check your data.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            reader = user;
         }
 
         private void LoadData(object sender, RoutedEventArgs e)
@@ -108,17 +119,26 @@ namespace MionaLibrary.UserControls
 
         private void TitleButton_Click(object sender, RoutedEventArgs e)
         {
+
             // Lấy đối tượng sách từ DataContext của nút
             if ((sender as Button)?.DataContext is Book selectedBook)
             {
-                // Tạo BookDetailsControl và gán dữ liệu sách
-                var bookDetailsControl = new BookDetailsControl();
-                bookDetailsControl.SetBookSelected(selectedBook);
-
                 // Lấy cửa sổ cha
                 Window parentWindow = Window.GetWindow(this);
                 if (parentWindow is ReaderWindow rw)
-                {
+                { 
+                    User? reader = rw.GetReader();
+                    if (reader == null)
+                    {
+                        MessageBox.Show("No user is selected. Please select a user first.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        return;
+                    }
+                    var bookDetailsControl = new BookDetailsControl();
+                    bookDetailsControl.SetBookSelected(selectedBook);
+                    
+                    bookDetailsControl.SetUser(reader);
+
+                    
                     // Thay thế nội dung hiện tại bằng BookDetailsControl
                     rw.MainContent.Content = bookDetailsControl;
                 }
@@ -126,6 +146,10 @@ namespace MionaLibrary.UserControls
                 {
                     MessageBox.Show("Không tìm thấy cửa sổ ReaderWindow.", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
+            }
+            else
+            {
+                MessageBox.Show("Không thể lấy thông tin sách từ nút.", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
     }

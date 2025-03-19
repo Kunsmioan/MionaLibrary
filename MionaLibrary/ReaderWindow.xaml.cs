@@ -31,6 +31,12 @@ namespace MionaLibrary
             MainContent.Content = new HomeControl();
         }
 
+        // Phương thức để lấy reader từ ReaderWindow
+        public User? GetReader()
+        {
+            return reader;
+        }
+
         // Method to load data and update UI elements
         private void loadData()
         {
@@ -64,7 +70,17 @@ namespace MionaLibrary
 
         private void Home_Click(object sender, RoutedEventArgs e)
         {
-           HomeControl homeControl = new();
+            if (reader == null)
+            {
+                MessageBox.Show("No user is selected. Please select a user first.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            // Tạo HomeControl và gán reader
+            HomeControl homeControl = new();
+            homeControl.SetUser(reader);
+
+            // Thay thế nội dung chính bằng HomeControl
             MainContent.Content = homeControl;
         }
 

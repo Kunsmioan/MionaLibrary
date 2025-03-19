@@ -10,7 +10,7 @@ namespace MionaLibrary_Services.Services
 {
     public class LoanHistoryServices
     {
-        LoanHistoryRepo _loanHistoryRepo;
+        LoanHistoryRepo? _loanHistoryRepo;
         public void AddLoanHistory(LoanHistory loanHistory)
         {
             _loanHistoryRepo = new();
