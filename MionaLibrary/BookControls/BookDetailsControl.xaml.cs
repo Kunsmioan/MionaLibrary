@@ -22,11 +22,16 @@ namespace MionaLibrary.BookControls
     public partial class BookDetailsControl : UserControl
     {
         Book? bookSelected;
+        Loan
         public BookDetailsControl()
         {
             InitializeComponent();
         }
-
+        public void SetBookSelected(Book book)
+        {
+            bookSelected = book;
+            loadData();
+        }
         private void loadData()
         {
             if (bookSelected != null)
@@ -40,18 +45,34 @@ namespace MionaLibrary.BookControls
                 PublishYearTextBlock.Text = bookSelected.PublishYear.ToString();
                 ISBNTextBlock.Text = bookSelected.Isbn;
                 PageTextBlock.Text = bookSelected.Page.ToString();
+                if (bookSelected.IsAvailable)
+                {
+                    AvailableTextBlock.Text = "Yes";
+                    AvailableTextBlock.Foreground = Brushes.Green; // Màu xanh lá
+                    BorrowBook.IsEnabled = true; // Cho phép nhấn nút BorrowBook
+                }
+                else
+                {
+                    AvailableTextBlock.Text = "No";
+                    AvailableTextBlock.Foreground = Brushes.Red; // Màu đỏ
+                    BorrowBook.IsEnabled = false; // Vô hiệu hóa nút BorrowBook
+                }
             }
-        }
-
-        public void SetBookSelected(Book book)
-        {
-            bookSelected = book;
-            loadData();
         }
 
         private void BorrowBook_Click(object sender, RoutedEventArgs e)
         {
+            if (bookSelected != null && bookSelected.IsAvailable)
+            {
+                // Thực hiện logic mượn sách (ví dụ: cập nhật cơ sở dữ liệu)
+                MessageBox.Show($"You have successfully borrowed the book: {bookSelected.Title}");
 
+                // Cập nhật trạng thái sách thành không có sẵn
+                bookSelected.IsAvailable = false;
+
+                // Cập nhật lại giao diện
+                loadData();
+            }
         }
     }
 }
