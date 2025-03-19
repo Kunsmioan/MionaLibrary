@@ -68,21 +68,6 @@
                     <Grid x:Name="BookOptions" Visibility="Collapsed" Background="White">
                         <StackPanel HorizontalAlignment="Left">
                             <!-- Nút "Request to borrow a book" -->
-                            <Button Height="35" Click="BorrowedBooks_Click" Margin="0,1,0,0" Style="{StaticResource ButtonStyleList}" Width="180">
-                                <Button.Template>
-                                    <ControlTemplate TargetType="Button">
-                                        <Grid Background="{TemplateBinding Background}">
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="45"/>
-                                                <ColumnDefinition />
-                                            </Grid.ColumnDefinitions>
-                                            <!-- Text -->
-                                            <TextBlock Text="Borrow book" Foreground="#FF3D3D3D" Grid.Column="1" 
-                                   VerticalAlignment="Center" FontSize="14" HorizontalAlignment="Left"/>
-                                        </Grid>
-                                    </ControlTemplate>
-                                </Button.Template>
-                            </Button>
 
                             <!-- Nút "Book loan history" -->
                             <Button Height="35" Click="PlaceOrder_Click" Margin="0,1,0,0" Style="{StaticResource ButtonStyleList}" Width="180">

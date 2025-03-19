@@ -23,7 +23,7 @@ namespace MionaLibrary.UserControls
     public partial class ProfileControl : UserControl
     {
         User? reader;
-        UserServices _userServices;
+        UserServices? _userServices;
         public ProfileControl()
         {
             InitializeComponent();

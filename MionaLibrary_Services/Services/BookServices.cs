@@ -12,7 +12,7 @@ namespace MionaLibrary_Services.Services
     
     public class BookServices
     {
-        private BookRepo _repo;
+       BookRepo? _repo;
 
         public void AddBook(Book book)
         {

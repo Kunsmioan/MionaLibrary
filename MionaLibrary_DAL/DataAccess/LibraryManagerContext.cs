@@ -37,6 +37,8 @@ public partial class LibraryManagerContext : DbContext
         {
             entity.HasKey(e => e.Id).HasName("PK__Books__3214EC077D216280");
 
+            entity.ToTable(tb => tb.HasTrigger("trg_UpdateIsAvailable"));
+
             entity.HasIndex(e => e.Isbn, "UQ__Books__447D36EA386CBB97").IsUnique();
 
             entity.Property(e => e.Author).HasMaxLength(100);

@@ -8,31 +8,34 @@ using MionaLibrary_DAL.Entity;
 
 namespace MionaLibrary_DAL.Repository
 {
-
     public class BookRepo
     {
-       private LibraryManagerContext _context;
+       LibraryManagerContext? _context;
 
        public void AddBook(Book book)
         {
+            _context = new();
             _context.Books.Add(book);
             _context.SaveChanges();
         }
 
         public void UpdateBook(Book book)
         {
+            _context = new();
             _context.Books.Update(book);
             _context.SaveChanges();
         }
 
         public void DeleteBook(Book book)
         {
+            _context = new();
             _context.Books.Remove(book);
             _context.SaveChanges();
         }
 
-        public Book GetBookById(int id)
+        public Book? GetBookById(int id)
         {
+            _context = new();
             return _context.Books.FirstOrDefault(b => b.Id == id);
         }   
 
@@ -44,8 +47,9 @@ namespace MionaLibrary_DAL.Repository
 
         public List<Book> GetAllBooksByFilter(string searchType, string searchTerm)
         {
+            _context = new();
             if (string.IsNullOrEmpty(searchTerm))
-            {
+            {_context = new();
                 return _context.Books.ToList(); // Trả về tất cả nếu không có từ khóa
             }
 

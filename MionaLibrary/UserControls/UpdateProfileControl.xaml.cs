@@ -138,7 +138,6 @@ namespace MionaLibrary.UserControls
             reader.Role = "User";
             reader.Phone = txtPhone.Text;
 
-            // Try to register the user
             try
             {
                 // Ensure _userServices is initialized before use

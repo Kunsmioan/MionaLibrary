@@ -23,6 +23,7 @@ namespace MionaLibrary.BookControls
     public partial class BookDetailsControl : UserControl
     {
         Book? bookSelected;
+        BookServices? _bookServices;
         LoanHistoryServices _loanHistoryServices;
         LoanHistory loanHistory;
         User? reader;
@@ -67,22 +68,6 @@ namespace MionaLibrary.BookControls
                     BorrowBook.IsEnabled = false; // Vô hiệu hóa nút BorrowBook
                 }
             }
-            if (reader != null)
-            {
-                string fullName = $"{reader.FirstName} {reader.LastName}".Trim();
-                if (!string.IsNullOrEmpty(fullName))
-                {
-                    name.Text = fullName; // Gán tên người dùng vào TextBlock
-                }
-                else
-                {
-                    name.Text = "Unknown User"; // Trường hợp tên không hợp lệ
-                }
-            }
-            else
-            {
-                name.Text = "No User Selected"; // Trường hợp reader là null
-            }
         }
 
         private void BorrowBook_Click(object sender, RoutedEventArgs e)
@@ -114,12 +99,28 @@ namespace MionaLibrary.BookControls
                         _loanHistoryServices = new();
                         _loanHistoryServices.AddLoanHistory(loanHistory);
 
+                        if (bookSelected.Quantity > 0)
+                        {
+                            bookSelected.Quantity = bookSelected.Quantity - 1;
+                            
 
+                            if (bookSelected.Quantity == 0)
+                            {
+                                bookSelected.IsAvailable = false;
+                            }
+                            _bookServices = new();
+                            _bookServices.UpdateBook(bookSelected);
+                        }
+                        else
+                        {
+                            // Handle the case where the quantity is already zero
+                            throw new InvalidOperationException("Cannot reduce the quantity of a book that is already at zero.");
+                        }
                         // Thực hiện logic mượn sách (ví dụ: cập nhật cơ sở dữ liệu)
                         MessageBox.Show($"You have successfully borrowed the book: {bookSelected.Title}");
 
-                        // Cập nhật trạng thái sách thành không có sẵn
-                        bookSelected.IsAvailable = false;
+                        // Cập nhật trạng thái sách thành không có sẵn (chưa cần)
+                        //bookSelected.IsAvailable = false;
 
                         // Cập nhật lại giao diện
                         loadData();
