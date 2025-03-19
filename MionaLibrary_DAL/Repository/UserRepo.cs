@@ -29,6 +29,12 @@ namespace MionaLibrary_DAL.Repository
             _context.Users.Update(user);
             _context.SaveChanges();
         }
+
+        public User? GetById(int id)
+        {
+            _context = new();
+            return _context.Users.FirstOrDefault(b => b.Id == id);
+        }
         public List<User> GetAll()
         {
             {
