@@ -35,12 +35,6 @@ namespace MionaLibrary.UserControls
         }
         public void SetUser(User user)
         {
-            if (user == null)
-            {
-                MessageBox.Show("The provided user is null. Please check your data.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return;
-            }
-
             reader = user;
         }
 
@@ -128,11 +122,11 @@ namespace MionaLibrary.UserControls
                 if (parentWindow is ReaderWindow rw)
                 { 
                     User? reader = rw.GetReader();
-                    if (reader == null)
-                    {
-                        MessageBox.Show("No user is selected. Please select a user first.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
-                        return;
-                    }
+                    //if (reader == null)
+                    //{
+                    //    MessageBox.Show("No user is selected. Please select a user first.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    //    return;
+                    //}
                     var bookDetailsControl = new BookDetailsControl();
                     bookDetailsControl.SetBookSelected(selectedBook);
                     

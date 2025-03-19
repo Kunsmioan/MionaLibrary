@@ -55,6 +55,18 @@ namespace MionaLibrary.BookControls
                 PublishYearTextBlock.Text = bookSelected.PublishYear.ToString();
                 ISBNTextBlock.Text = bookSelected.Isbn;
                 PageTextBlock.Text = bookSelected.Page.ToString();
+
+                // Load image path
+                if (!string.IsNullOrEmpty(bookSelected.ImagePath))
+                {
+                    BookImage.Source = new BitmapImage(new Uri(bookSelected.ImagePath, UriKind.Relative));
+                }
+                else
+                {
+                    // Show a default image if ImagePath is empty
+                    //BookImage.Source = new BitmapImage(new Uri("\BookImage\defaultBook.png", UriKind.Relative));
+                }
+
                 if (bookSelected.IsAvailable)
                 {
                     AvailableTextBlock.Text = "Yes";
@@ -125,11 +137,6 @@ namespace MionaLibrary.BookControls
                         // Cập nhật lại giao diện
                         loadData();
                     }
-                }
-                else
-                {
-                    // Người dùng chọn "No", không làm gì cả
-                    MessageBox.Show("Borrowing canceled.");
                 }
             }
             else

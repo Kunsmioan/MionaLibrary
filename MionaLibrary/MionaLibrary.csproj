@@ -9,7 +9,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="BookImage\defaultBook.png" />
     <None Remove="Images\book.png" />
+    <None Remove="Images\The_Night_Circus.jpg" />
     <None Remove="Images\user.png" />
   </ItemGroup>
 
@@ -22,7 +24,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="BookImage\defaultBook.png" />
     <Resource Include="Images\book.png" />
+    <Resource Include="BookImage\The_Night_Circus.jpg" />
     <Resource Include="Images\user.png" />
   </ItemGroup>
 
