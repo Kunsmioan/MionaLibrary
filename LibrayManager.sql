@@ -86,6 +86,22 @@ CREATE TABLE LoanHistory (
     FOREIGN KEY (BookID) REFERENCES Books(Id)
 );
 
+
+CREATE TRIGGER trg_UpdateIsAvailable
+ON [dbo].[Books]
+AFTER INSERT, UPDATE
+AS
+BEGIN
+    -- Cập nhật IsAvailable dựa trên Quantity
+    UPDATE b
+    SET b.IsAvailable = CASE 
+                            WHEN i.Quantity >= 1 THEN 1 
+                            ELSE 0 
+                        END
+    FROM [dbo].[Books] b
+    INNER JOIN inserted i ON b.Id = i.Id;
+END;
+
 DELETE FROM [dbo].[Users];
 
 INSERT INTO [dbo].[Users] ([Username], [Password], [FirstName], [LastName], [Birthday], [Role], [Gender], [Phone])
