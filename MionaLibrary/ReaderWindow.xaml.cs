@@ -109,29 +109,24 @@ namespace MionaLibrary
             }
         }
 
-        private void Favorites_Click(object sender, RoutedEventArgs e)
+        private void BookOnLoan_Click(object sender, RoutedEventArgs e)
         {
-
-        }
-
-
-        private void PlaceOrder_Click(object sender, RoutedEventArgs e)
-        {
-            PlaceOrder placeOrder = new();
+            BookOnLoan placeOrder = new();
             MainContent.Content = placeOrder;
         }
 
-        private void BorrowedBooks_Click(object sender, RoutedEventArgs e)
+        private void BookBorowingLoan_Click(object sender, RoutedEventArgs e)
         {
-            BorrowBook borrowBook = new();
+            BookBorrowingLoan borrowBook = new();
             MainContent.Content = borrowBook;
         }
 
-        private void HistoryLoan_Click(object sender, RoutedEventArgs e)
-        {
-            HistoryLoan historyLoan = new();
-            MainContent.Content = historyLoan;
-        }
+        //private void HistoryLoan_Click(object sender, RoutedEventArgs e)
+        //{
+        //    HistoryLoan historyLoan = new();
+        //    MainContent.Content = historyLoan;
+        //}
+
         private void Logout_Click(object sender, RoutedEventArgs e)
         {
             if (MessageBox.Show("Press OK to exit!", "Alert", MessageBoxButton.OKCancel, MessageBoxImage.Information) == MessageBoxResult.OK)

@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace MionaLibrary.BookControls
 {
     /// <summary>
-    /// Interaction logic for BorrowBook.xaml
+    /// Interaction logic for BookOnLoan.xaml
     /// </summary>
-    public partial class BorrowBook : UserControl
+    public partial class BookOnLoan : UserControl
     {
-        public BorrowBook()
+        public BookOnLoan()
         {
             InitializeComponent();
         }
