@@ -86,8 +86,8 @@
                             </Button>
 
                             <!-- Nút "Book borrowing history" -->
-                            <Button Height="35" Click="BookBorowingLoan_Click" Margin="0,1,0,0" Style="{StaticResource ButtonStyleList}"
-                                    Width="180">
+                            <Button Height="35" Click="BookBorowingLoan_Click" Margin="0,1,0,5" Style="{StaticResource ButtonStyleList}"
+                                    Width="180"  >
                                 <Button.Template>
                                     <ControlTemplate TargetType="Button">
                                         <Grid Background="{TemplateBinding Background}">
@@ -97,7 +97,7 @@
                                             </Grid.ColumnDefinitions>
                                             <!-- Text -->
                                             <TextBlock Text="Book borrowing history" Foreground="#FF3D3D3D" Grid.Column="1" 
-                                   VerticalAlignment="Center" FontSize="14" HorizontalAlignment="Left"/>
+                                   VerticalAlignment="Center" FontSize="14" HorizontalAlignment="Left" TextWrapping="Wrap" />
                                         </Grid>
                                     </ControlTemplate>
                                 </Button.Template>

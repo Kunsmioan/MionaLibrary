@@ -30,4 +30,19 @@
     <Resource Include="Images\user.png" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Update="ManagerControls\HelpControl.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="ManagerControls\HomeControl.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="ManagerControls\ProfileControl.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="ManagerControls\UpdateProfileControl.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+
 </Project>

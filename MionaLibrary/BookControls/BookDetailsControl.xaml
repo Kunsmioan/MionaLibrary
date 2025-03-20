@@ -74,6 +74,7 @@
                 </StackPanel>
 
                 <!-- Các hành động khác, ví dụ: nút "Mượn sách" -->
+                <!--
                 <Button x:Name="BorrowBook" 
                         Content="Borrow Book" 
                         FontSize="16" 
@@ -81,7 +82,7 @@
                         Height="40" 
                         IsEnabled="False" 
                         Click="BorrowBook_Click" Margin="30" HorizontalAlignment="Right"/>
-                
+                -->
             </StackPanel>
         </Border>
     </Grid>

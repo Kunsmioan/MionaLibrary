@@ -62,6 +62,7 @@ namespace MionaLibrary
                     else if (role == "Manager")
                     {
                         ManagerWindow managerWindow = new ManagerWindow();
+                        managerWindow.SetManager(userCheck);
                         managerWindow.Show();
                         this.Close();
                     }
