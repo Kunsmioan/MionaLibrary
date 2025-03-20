@@ -138,7 +138,7 @@ namespace MionaLibrary.ManagerControls
                 }
                 else if (parentWindow is ManagerWindow mw)
                 {
-                    User? reader = mw.GetManager();
+                    User? manager = mw.GetManager();
                     //if (reader == null)
                     //{
                     //    MessageBox.Show("No user is selected. Please select a user first.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
@@ -147,7 +147,7 @@ namespace MionaLibrary.ManagerControls
                     var bookDetailsControl = new BookDetailsControl();
                     bookDetailsControl.SetBookSelected(selectedBook);
 
-                    bookDetailsControl.SetUser(reader);
+                    bookDetailsControl.SetUser(manager);
 
 
                     // Thay thế nội dung hiện tại bằng BookDetailsControl

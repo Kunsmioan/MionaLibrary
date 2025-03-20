@@ -71,13 +71,13 @@ namespace MionaLibrary.BookControls
                 {
                     AvailableTextBlock.Text = "Yes";
                     AvailableTextBlock.Foreground = Brushes.Green; // Màu xanh lá
-                    BorrowBook.IsEnabled = true; // Cho phép nhấn nút BorrowBook
+                    //BorrowBook.IsEnabled = true; // Cho phép nhấn nút BorrowBook
                 }
                 else
                 {
                     AvailableTextBlock.Text = "No";
                     AvailableTextBlock.Foreground = Brushes.Red; // Màu đỏ
-                    BorrowBook.IsEnabled = false; // Vô hiệu hóa nút BorrowBook
+                    //BorrowBook.IsEnabled = false; // Vô hiệu hóa nút BorrowBook
                 }
             }
         }
@@ -144,6 +144,16 @@ namespace MionaLibrary.BookControls
                 // Nếu sách không có sẵn, hiển thị thông báo lỗi
                 MessageBox.Show("This book is not available for borrowing.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
+        }
+
+        private void UpdateBook_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void DeleteBook_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
