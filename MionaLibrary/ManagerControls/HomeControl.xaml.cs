@@ -163,5 +163,10 @@ namespace MionaLibrary.ManagerControls
                 MessageBox.Show("Không thể lấy thông tin sách từ nút.", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+
+        private void AddBookButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

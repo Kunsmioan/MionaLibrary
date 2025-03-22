@@ -11,7 +11,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="80"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="10"/>
+            <RowDefinition Height="50"/>
             <RowDefinition Height="10"/>
 
         </Grid.RowDefinitions>
@@ -76,7 +76,7 @@
             <DataGrid x:Name="SearchResultsDataGrid" 
               AutoGenerateColumns="False" 
               Loaded="LoadData" 
-              Margin="10,0,10,10"
+              Margin="10,0,10,0"
               SelectionMode="Single" 
               SelectionUnit="Cell"
               IsReadOnly="True">
@@ -104,7 +104,12 @@
             </DataGrid>
         </Grid>
 
-        
+        <Grid Margin="10" Grid.Row="2">
+            <Button x:Name="AddBookButton" Content="Add Book" Width="150" Height="30" FontSize="16" Click="AddBookButton_Click" HorizontalAlignment="Right" 
+                    Margin="0,0,10,0" Style="{StaticResource ButtonStyleSingle}" Background="#FF3EDA39"/>
+        </Grid>
+
+
     </Grid>
 
 </UserControl>

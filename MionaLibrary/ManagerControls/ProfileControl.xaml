@@ -14,10 +14,10 @@
             <RowDefinition/>
             <RowDefinition Height="100"/>
         </Grid.RowDefinitions>
-        <Image Source="/Images/user.png" Margin="166,10,0,10" HorizontalAlignment="Left"/>
+        <Image Source="/Images/Manager.png" Margin="0,12,0,12" HorizontalAlignment="Center" Width="64"/>
 
         <!-- Các điều khiển nhập liệu cho profile -->
-        <Grid Grid.Row="1" HorizontalAlignment="Left" Width="617">
+        <Grid Grid.Row="1" HorizontalAlignment="Center" Width="auto" VerticalAlignment="Center">
             <!-- Định nghĩa 2 cột -->
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
@@ -27,7 +27,7 @@
             </Grid.ColumnDefinitions>
 
             <!-- Cột 1: Username, Full Name, Birthday -->
-            <StackPanel Orientation="Vertical" Grid.Column="0" Width="286" HorizontalAlignment="Left" Margin="74,0,0,0">
+            <StackPanel Orientation="Vertical" Grid.Column="0" Width="286" HorizontalAlignment="Center" Margin="10">
                 <StackPanel Orientation="Vertical" Height="61" HorizontalAlignment="Left" Margin="20, 10, 10, 0">
                     <TextBlock Text="Username:" FontWeight="Bold" FontSize="14" 
                        HorizontalAlignment="Left" Margin="5,5,0,0"/>

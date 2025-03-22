@@ -61,11 +61,6 @@ namespace MionaLibrary.BookControls
                 {
                     BookImage.Source = new BitmapImage(new Uri(bookSelected.ImagePath, UriKind.Relative));
                 }
-                else
-                {
-                    // Show a default image if ImagePath is empty
-                    //BookImage.Source = new BitmapImage(new Uri("\BookImage\defaultBook.png", UriKind.Relative));
-                }
 
                 if (bookSelected.IsAvailable)
                 {
