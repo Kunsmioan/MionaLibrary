@@ -127,7 +127,7 @@ namespace MionaLibrary.UserControls
                     //    MessageBox.Show("No user is selected. Please select a user first.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
                     //    return;
                     //}
-                    var bookDetailsControl = new BookDetailsControl();
+                    var bookDetailsControl = new bookDetailsForUserControl();
                     bookDetailsControl.SetBookSelected(selectedBook);
                     
                     bookDetailsControl.SetUser(reader);

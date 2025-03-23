@@ -6,7 +6,7 @@
               xmlns:fa="http://schemas.fontawesome.io/icons/"
              xmlns:local="clr-namespace:MionaLibrary.ManagerControls"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="720">
+             d:DesignHeight="600" d:DesignWidth="720">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="80"/>

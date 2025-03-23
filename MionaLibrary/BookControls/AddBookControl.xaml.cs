@@ -130,9 +130,7 @@ namespace MionaLibrary.ManagerControls
             (!InputValidator.IsNumeric(txtPublishYear.Text), "Publish year must be a valid number!"),
             (!InputValidator.IsNumeric(txtQuantity.Text), "Quantity must be a valid number!"),
             (!InputValidator.IsNumeric(txtPage.Text), "Page count must be a valid number!"),
-            (!InputValidator.textBoxsLength(txtTitle, 5, 100), "Title must be between 5 and 100 characters!"),
-            (!InputValidator.textBoxsLength(txtAuthor, 3, 50), "Author's name must be between 3 and 50 characters!"),
-            (!InputValidator.textBoxsLength(txtIsbn, 10, 20), "ISBN must be between 10 and 20 characters!")
+            (!InputValidator.textBoxsLength(txtAuthor, txtIsbn, txtIsbn), "Word must be between 3 and 50 characters!"),
         };
 
                 foreach (var (condition, message) in messages)

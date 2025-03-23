@@ -4,7 +4,7 @@
              xmlns:local="clr-namespace:MionaLibrary"
              xmlns:converters="clr-namespace:MionaLibrary"
              
-             StartupUri="ManagerWindow.xaml">
+             StartupUri="ReaderWindow.xaml">
     <Application.Resources>
 
         <local:TextToVisibilityConverter x:Key="TextToVisibilityConverter"/>
@@ -95,30 +95,16 @@
         </Style>
 
         <Style x:Key="ButtonStyleSingle" TargetType="Button">
-            <Setter Property="Width" Value="150"/>
-            <Setter Property="Height" Value="40"/>
+            <Setter Property="Width" Value="auto"/>
+            <Setter Property="Height" Value="auto"/>
             <Setter Property="FontSize" Value="14"/>
             <Setter Property="Margin" Value="10"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="Button">
-                        <Border 
-                    Background="{TemplateBinding Background}" 
-                    BorderBrush="{TemplateBinding BorderBrush}" 
-                    BorderThickness="{TemplateBinding BorderThickness}" 
-                    CornerRadius="3">
-                            <ContentPresenter 
-                        HorizontalAlignment="Center" 
-                        VerticalAlignment="Center"/>
-                        </Border>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
+            
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
                     <Setter Property="Background" Value="#FFB3B3B3"/>
                     <Setter Property="Width" Value="auto"/>
-                    <Setter Property="Height" Value="60"/>
+                    <Setter Property="Height" Value="auto"/>
                     <Setter Property="Cursor" Value="Hand"/>
                 </Trigger>
                 <Trigger Property="IsPressed" Value="True">

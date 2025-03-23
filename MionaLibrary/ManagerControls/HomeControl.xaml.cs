@@ -129,7 +129,7 @@ namespace MionaLibrary.ManagerControls
                     //}
                     var bookDetailsControl = new BookDetailsControl();
                     bookDetailsControl.SetBookSelected(selectedBook);
-                    
+
                     bookDetailsControl.SetUser(reader);
 
                     
