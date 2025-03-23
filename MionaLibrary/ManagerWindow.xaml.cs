@@ -70,11 +70,11 @@ namespace MionaLibrary
 
         private void Home_Click(object sender, RoutedEventArgs e)
         {
-            if (manager == null)
-            {
-                MessageBox.Show("No user is selected. Please select a user first.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return;
-            }
+            //if (manager == null)
+            //{
+            //    MessageBox.Show("No user is selected. Please select a user first.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+            //    return;
+            //}
 
             // Tạo HomeControl và gán Manager
             HomeControl homeControl = new();

@@ -59,7 +59,7 @@ namespace MionaLibrary.BookControls
                 // Load image path
                 if (!string.IsNullOrEmpty(bookSelected.ImagePath))
                 {
-                    BookImage.Source = new BitmapImage(new Uri(bookSelected.ImagePath, UriKind.Relative));
+                    BookImage.Source = new BitmapImage(new Uri(bookSelected.ImagePath, UriKind.Absolute));
                 }
 
                 if (bookSelected.IsAvailable)
