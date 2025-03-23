@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualBasic.ApplicationServices;
+﻿using Microsoft.Data.SqlClient;
+using Microsoft.VisualBasic.ApplicationServices;
 using Microsoft.Win32;
 using MionaLibrary_DAL.DataAccess;
 using MionaLibrary_DAL.Entity;
@@ -77,6 +78,9 @@ namespace MionaLibrary.ManagerControls
 
         private void BtnAddBook_Click(object sender, RoutedEventArgs e)
         {
+
+            if (!checkInput()) return;
+
             Book book = new()
             {
                 Title = txtTitle.Text,
@@ -106,6 +110,46 @@ namespace MionaLibrary.ManagerControls
             {
                 // Log and display detailed error
                 MessageBox.Show($"Add book failed: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private bool checkInput()
+        {
+            try
+            {
+                var messages = new List<(bool condition, string message)>
+        {
+            (!InputValidator.TextBoxesIsNotEmpty(txtTitle), "Please enter the book title!"),
+            (!InputValidator.TextBoxesIsNotEmpty(txtAuthor), "Please enter the author's name!"),
+            (!InputValidator.TextBoxesIsNotEmpty(txtPublishYear), "Please enter the publish year!"),
+            (!InputValidator.TextBoxesIsNotEmpty(txtIsbn), "Please enter the ISBN!"),
+            (!InputValidator.TextBoxesIsNotEmpty(txtQuantity), "Please enter the quantity!"),
+            (!InputValidator.TextBoxesIsNotEmpty(txtLanguage), "Please enter the language!"),
+            (!InputValidator.validName(txtAuthor.Text), "Author's name contains invalid characters!"),
+            (!InputValidator.validName(txtGenre.Text), "Genre contains invalid characters!"),
+            (!InputValidator.IsNumeric(txtPublishYear.Text), "Publish year must be a valid number!"),
+            (!InputValidator.IsNumeric(txtQuantity.Text), "Quantity must be a valid number!"),
+            (!InputValidator.IsNumeric(txtPage.Text), "Page count must be a valid number!"),
+            (!InputValidator.textBoxsLength(txtTitle, 5, 100), "Title must be between 5 and 100 characters!"),
+            (!InputValidator.textBoxsLength(txtAuthor, 3, 50), "Author's name must be between 3 and 50 characters!"),
+            (!InputValidator.textBoxsLength(txtIsbn, 10, 20), "ISBN must be between 10 and 20 characters!")
+        };
+
+                foreach (var (condition, message) in messages)
+                {
+                    if (condition)
+                    {
+                        MessageBox.Show(message, "Alert", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        return false;
+                    }
+                }
+
+                return true;
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show($"An error occurred during input validation:\n{ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
             }
         }
     }

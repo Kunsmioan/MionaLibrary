@@ -43,6 +43,7 @@ namespace MionaLibrary.BookControls
             reader = user;
             loadData();
         }
+
         private void loadData()
         {
             if (bookSelected != null)
@@ -81,7 +82,23 @@ namespace MionaLibrary.BookControls
        
         private void UpdateBook_Click(object sender, RoutedEventArgs e)
         {
+            Window parentWindow = Window.GetWindow(this);
+            if (parentWindow is ManagerWindow mw)
+            {
+                User? manager = mw.GetManager();
+                //if (reader == null)
+                //{
+                //    MessageBox.Show("No user is selected. Please select a user first.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                //    return;
+                //}
+                var updateBookControl = new UpdateBookControl();
+                updateBookControl.SetBookSelected(bookSelected);
 
+                //updateBookControl.SetUser(manager);
+
+                // Thay thế nội dung hiện tại bằng BookDetailsControl
+                mw.MainContent.Content = updateBookControl;
+            }
         }
 
         private void DeleteBook_Click(object sender, RoutedEventArgs e)

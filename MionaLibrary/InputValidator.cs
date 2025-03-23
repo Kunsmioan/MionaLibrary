@@ -82,5 +82,12 @@ namespace MionaLibrary
                 .Split(' ', StringSplitOptions.RemoveEmptyEntries) // Handle multiple spaces
                 .Select(word => char.ToUpper(word[0]) + word.Substring(1).ToLower())); // Capitalize each word
         }
+
+        // Kiểm tra xem chuỗi có phải là số không
+        public static bool IsNumeric(string value)
+        {
+            return int.TryParse(value, out _);
+        }
+
     }
 }

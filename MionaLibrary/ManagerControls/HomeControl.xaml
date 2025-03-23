@@ -105,6 +105,7 @@
         </Grid>
 
         <Grid Margin="10" Grid.Row="2">
+            
             <Button x:Name="AddBookButton" Content="Add Book" Width="150" Height="30" FontSize="16" Click="AddBookButton_Click" HorizontalAlignment="Right" 
                     Margin="0,0,10,0" Style="{StaticResource ButtonStyleSingle}" Background="#FF3EDA39"/>
         </Grid>

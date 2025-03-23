@@ -6,10 +6,10 @@
              
              StartupUri="ManagerWindow.xaml">
     <Application.Resources>
-        
+
         <local:TextToVisibilityConverter x:Key="TextToVisibilityConverter"/>
         <converters:TextToVisibilityConverter x:Key="AnotherTextToVisibilityConverter"/>
-        
+
         <Style TargetType="TextBox">
             <Setter Property="BorderBrush" Value="Gray"/>
             <Setter Property="BorderThickness" Value="1"/>
@@ -99,6 +99,21 @@
             <Setter Property="Height" Value="40"/>
             <Setter Property="FontSize" Value="14"/>
             <Setter Property="Margin" Value="10"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border 
+                    Background="{TemplateBinding Background}" 
+                    BorderBrush="{TemplateBinding BorderBrush}" 
+                    BorderThickness="{TemplateBinding BorderThickness}" 
+                    CornerRadius="3">
+                            <ContentPresenter 
+                        HorizontalAlignment="Center" 
+                        VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
                     <Setter Property="Background" Value="#FFB3B3B3"/>
@@ -112,7 +127,7 @@
             </Style.Triggers>
         </Style>
 
-        
+
 
     </Application.Resources>
 </Application>
