@@ -44,7 +44,7 @@ public partial class LibraryManagerContext : DbContext
             entity.Property(e => e.Author).HasMaxLength(100);
             entity.Property(e => e.Description).HasColumnType("text");
             entity.Property(e => e.Genre).HasMaxLength(50);
-            entity.Property(e => e.ImagePath).HasMaxLength(100);
+            entity.Property(e => e.ImagePath).HasMaxLength(300);
             entity.Property(e => e.IsAvailable).HasDefaultValue(true);
             entity.Property(e => e.Isbn)
                 .HasMaxLength(20)

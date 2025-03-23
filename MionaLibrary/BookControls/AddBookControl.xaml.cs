@@ -26,7 +26,7 @@ namespace MionaLibrary.ManagerControls
     /// </summary>
     public partial class AddBookControl : UserControl
     {
-        BookServices _bookServices;
+        BookServices? _bookServices;
         public AddBookControl()
         {
             InitializeComponent();
