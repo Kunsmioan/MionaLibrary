@@ -25,7 +25,7 @@ namespace MionaLibrary.ManagerControls
     /// </summary>
     public partial class HomeControl : UserControl
     {
-        User? reader;
+        User? manager;
         BookServices? _bookServices;
 
         public HomeControl()
@@ -35,7 +35,7 @@ namespace MionaLibrary.ManagerControls
         }
         public void SetUser(User user)
         {
-            reader = user;
+            manager = user;
         }
 
         private void LoadData(object sender, RoutedEventArgs e)
@@ -166,7 +166,21 @@ namespace MionaLibrary.ManagerControls
 
         private void AddBookButton_Click(object sender, RoutedEventArgs e)
         {
+            // Get the parent window hosting this UserControl
+            Window parentWindow = Window.GetWindow(this);
 
+            AddBookControl addBookControl = new AddBookControl();
+
+            // Check if the parent window is of type ReaderWindow
+            if (parentWindow is ManagerWindow managerWindow)
+            {
+                // Replace the current content with the UpdateProfileControl
+                managerWindow.MainContent.Content = addBookControl; // Assuming MainContent is a ContentControl in ReaderWindow
+            }
+            else
+            {
+                MessageBox.Show("Unable to locate the parent window or container.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
     }
 }
