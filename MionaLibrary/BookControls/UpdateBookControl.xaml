@@ -18,7 +18,7 @@
                 <ColumnDefinition Width="3*"/>
             </Grid.ColumnDefinitions>
             <Grid Grid.Row="0">
-                <TextBlock Text="Add New Book" FontSize="20" FontWeight="Bold" Margin="10,20,10,10" HorizontalAlignment="Center" Foreground="#FF37C506"/>
+                <TextBlock Text="Update New Book" FontSize="20" FontWeight="Bold" Margin="10,20,10,10" HorizontalAlignment="Center" Foreground="#FF37C506"/>
             </Grid>
 
             <Grid Grid.Row="1">

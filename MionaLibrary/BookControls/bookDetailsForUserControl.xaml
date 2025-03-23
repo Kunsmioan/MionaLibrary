@@ -5,24 +5,26 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MionaLibrary.BookControls"
              mc:Ignorable="d" 
-             d:DesignHeight="600" d:DesignWidth="720">
+             d:DesignHeight="550" d:DesignWidth="720">
     <Grid Background="White">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="3*"/>
             <ColumnDefinition Width="4*"/>
         </Grid.ColumnDefinitions>
 
-        <Border BorderBrush="Black" BorderThickness="1" Grid.Column="0">
-            <Image x:Name="BookImage" Width="300" Height="300" VerticalAlignment="Top" Margin="0,20,0,0"/>
-        </Border>
+        <StackPanel Grid.Column="0" >
+            <Border BorderBrush="Black" BorderThickness="1" Margin="5,19,5,5">
+                <Image x:Name="BookImage" Width="300" Height="413" VerticalAlignment="Top" Margin="10"/>
+            </Border>
+        </StackPanel>
 
         <Grid Grid.Column="1" Margin="5,0,0,0">
             <Grid.RowDefinitions>
-                <RowDefinition Height="450"/>
+                <RowDefinition Height="500"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <StackPanel Margin="20,15,20,5" Grid.Column="1" Grid.Row="0">
+            <StackPanel Margin="20,15,20,5" Grid.Row="0">
                 <TextBlock Text="Book Details" FontSize="24" FontWeight="Bold" Margin="0,0,0,10" Foreground="#FF43DCCA" />
                 <!-- Title -->
                 <StackPanel Orientation="Horizontal" Margin="0,5,0,0">

@@ -105,6 +105,22 @@ namespace MionaLibrary.ManagerControls
                 _bookServices.AddBook(book);
 
                 MessageBox.Show("Add book successful!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                ManagerWindow parrentWindow = new();
+                if (parrentWindow is ManagerWindow mw)
+                {
+                    //if (reader == null)
+                    //{
+                    //    MessageBox.Show("No user is selected. Please select a user first.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    //    return;
+                    //}
+                    var homeControl = new HomeControl();
+
+                    //updateBookControl.SetUser(manager);
+
+                    // Thay thế nội dung hiện tại bằng BookDetailsControl
+                    mw.MainContent.Content = homeControl;
+                }
             }
             catch (InvalidOperationException ex)
             {

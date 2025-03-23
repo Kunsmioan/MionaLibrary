@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using MionaLibrary.ManagerControls;
 using MionaLibrary_DAL.Entity;
 using MionaLibrary_Services.Services;
 
@@ -79,7 +80,7 @@ namespace MionaLibrary.BookControls
             }
         }
 
-       
+
         private void UpdateBook_Click(object sender, RoutedEventArgs e)
         {
             Window parentWindow = Window.GetWindow(this);
@@ -103,7 +104,46 @@ namespace MionaLibrary.BookControls
 
         private void DeleteBook_Click(object sender, RoutedEventArgs e)
         {
+            MessageBoxResult result = MessageBox.Show(
+        $"Are you sure you want to delete the book '{bookSelected.Title}'?",
+        "Confirm Deletion",
+        MessageBoxButton.YesNo,
+        MessageBoxImage.Question);
 
+            // Nếu người dùng chọn Yes, tiến hành xóa
+            if (result == MessageBoxResult.Yes)
+            {
+                try
+                {
+                    _bookServices = new BookServices();
+                    _bookServices.DeleteBook(bookSelected);
+
+                    // Cập nhật giao diện hoặc thông báo thành công
+                    MessageBox.Show("Book deleted successfully!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                    Window parentWindow = Window.GetWindow(this);
+                    if (parentWindow is ManagerWindow mw)
+                    {
+                        User? manager = mw.GetManager();
+                        //if (reader == null)
+                        //{
+                        //    MessageBox.Show("No user is selected. Please select a user first.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        //    return;
+                        //}
+                        var homeControl = new HomeControl();
+
+                        //updateBookControl.SetUser(manager);
+
+                        // Thay thế nội dung hiện tại bằng BookDetailsControl
+                        mw.MainContent.Content = homeControl;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    // Xử lý lỗi nếu có
+                    MessageBox.Show($"An error occurred while deleting the book:\n{ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
         }
     }
 }

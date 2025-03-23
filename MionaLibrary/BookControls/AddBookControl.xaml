@@ -5,9 +5,9 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MionaLibrary.ManagerControls"
              mc:Ignorable="d" 
-             d:DesignHeight="600" d:DesignWidth="720">
+             d:DesignHeight="550" d:DesignWidth="720">
     <Grid>
-        <Grid Background="#FFE9F9F3" Margin="0,-10,0,10">
+        <Grid Background="#FFE9F9F3">
             <Grid.RowDefinitions>
                 <RowDefinition Height="60"/>
                 <RowDefinition Height="4*"/>

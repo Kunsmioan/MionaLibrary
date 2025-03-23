@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualBasic.ApplicationServices;
 using Microsoft.Win32;
+using MionaLibrary.ManagerControls;
 using MionaLibrary_DAL.DataAccess;
 using MionaLibrary_DAL.Entity;
 using MionaLibrary_Services.Services;
@@ -131,6 +132,21 @@ namespace MionaLibrary.BookControls
                 _bookServices.UpdateBook(bookSelected);
 
                 MessageBox.Show("Update book successful!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                Window parentWindow = Window.GetWindow(this);
+                if (parentWindow is ManagerWindow mw)
+                {
+                    //if (reader == null)
+                    //{
+                    //    MessageBox.Show("No user is selected. Please select a user first.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    //    return;
+                    //}
+                    var homeControl = new HomeControl();
+
+                    //updateBookControl.SetUser(manager);
+
+                    // Thay thế nội dung hiện tại bằng BookDetailsControl
+                    mw.MainContent.Content = homeControl;
+                }
             }
             catch (InvalidOperationException ex)
             {
