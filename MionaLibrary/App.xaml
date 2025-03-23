@@ -4,7 +4,7 @@
              xmlns:local="clr-namespace:MionaLibrary"
              xmlns:converters="clr-namespace:MionaLibrary"
              
-             StartupUri="ReaderWindow.xaml">
+             StartupUri="ManagerWindow.xaml">
     <Application.Resources>
 
         <local:TextToVisibilityConverter x:Key="TextToVisibilityConverter"/>
@@ -113,6 +113,34 @@
             </Style.Triggers>
         </Style>
 
+        <Style x:Key="TransparentButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Foreground" Value="Blue"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}">
+                            <ContentPresenter HorizontalAlignment="Left"
+                                          VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <!-- Remove hover effect -->
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="Transparent"/>
+                </Trigger>
+                <!-- Remove pressed effect -->
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter Property="Background" Value="Transparent"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
 
 
     </Application.Resources>
