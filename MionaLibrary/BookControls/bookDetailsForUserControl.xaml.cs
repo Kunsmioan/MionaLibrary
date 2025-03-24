@@ -25,7 +25,7 @@ namespace MionaLibrary.BookControls
         Book? bookSelected;
         BookServices? _bookServices;
         LoanHistoryServices _loanHistoryServices;
-        LoanHistory loanHistory;
+        LoanHistory? loanHistory;
         User? reader;
 
         public bookDetailsForUserControl()
@@ -58,6 +58,7 @@ namespace MionaLibrary.BookControls
                 PublishYearTextBlock.Text = bookSelected.PublishYear.ToString();
                 ISBNTextBlock.Text = bookSelected.Isbn;
                 PageTextBlock.Text = bookSelected.Page.ToString();
+                StockTextBlock.Text = bookSelected.Quantity.ToString();
 
                 // Load image path
                 if (!string.IsNullOrEmpty(bookSelected.ImagePath))
@@ -69,20 +70,57 @@ namespace MionaLibrary.BookControls
                 {
                     AvailableTextBlock.Text = "Yes";
                     AvailableTextBlock.Foreground = Brushes.Green; // Màu xanh lá
-                    //BorrowBook.IsEnabled = true; // Cho phép nhấn nút BorrowBook
+                    BorrowBook.IsEnabled = true; // Cho phép nhấn nút BorrowBook
                 }
                 else
                 {
                     AvailableTextBlock.Text = "No";
                     AvailableTextBlock.Foreground = Brushes.Red; // Màu đỏ
-                    //BorrowBook.IsEnabled = false; // Vô hiệu hóa nút BorrowBook
+                    BorrowBook.IsEnabled = false; // Vô hiệu hóa nút BorrowBook
                 }
             }
         }
 
         private void BorrowBook_Click(object sender, RoutedEventArgs e)
         {
+            _loanHistoryServices = new();
+            loanHistory = new()
+            {
+                BookId = bookSelected.Id,
+                UserId = reader.Id,
+                LoanDate = DateTime.Now,
+                DueDate = DateTime.Now,
+                ReturnDate = DateTime.Now.AddDays(7),
+            };
+            _loanHistoryServices.AddLoanHistory(loanHistory);
 
+            if (bookSelected.Quantity > 0)
+            {
+                bookSelected.Quantity = bookSelected.Quantity - 1;
+
+
+                if (bookSelected.Quantity == 0)
+                {
+                    bookSelected.IsAvailable = false;
+                }
+                _bookServices = new();
+                _bookServices.UpdateBook(bookSelected);
+            }
+            else
+            {
+                // Handle the case where the quantity is already zero
+                throw new InvalidOperationException("Cannot reduce the quantity of a book that is already at zero.");
+            }
+            // Thực hiện logic mượn sách (ví dụ: cập nhật cơ sở dữ liệu)
+            MessageBox.Show($"You have successfully borrowed the book: {bookSelected.Title}");
+
+            // Cập nhật trạng thái sách thành không có sẵn
+            bookSelected.IsAvailable = false;
+            // Cập nhật trạng thái sách thành không có sẵn (chưa cần)
+            //bookSelected.IsAvailable = false;
+
+            // Cập nhật lại giao diện
+            loadData();
         }
     }
 }

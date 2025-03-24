@@ -4,7 +4,7 @@
              xmlns:local="clr-namespace:MionaLibrary"
              xmlns:converters="clr-namespace:MionaLibrary"
              
-             StartupUri="ManagerWindow.xaml">
+             StartupUri="Login.xaml">
     <Application.Resources>
 
         <local:TextToVisibilityConverter x:Key="TextToVisibilityConverter"/>
