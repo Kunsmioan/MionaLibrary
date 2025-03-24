@@ -18,7 +18,6 @@ public partial class LibraryManagerContext : DbContext
 
     public virtual DbSet<Book> Books { get; set; }
 
-    public virtual DbSet<BookReservation> BookReservations { get; set; }
 
     public virtual DbSet<Loan> Loans { get; set; }
 
@@ -27,7 +26,6 @@ public partial class LibraryManagerContext : DbContext
     public virtual DbSet<User> Users { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
         => optionsBuilder.UseSqlServer("server =ADMIN\\DUNGTT; database = LibraryManager; uid=sa;pwd=123;Trusted_Connection=True;Encrypt=False");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -49,22 +47,6 @@ public partial class LibraryManagerContext : DbContext
             entity.Property(e => e.Language).HasMaxLength(50);
             entity.Property(e => e.Quantity).HasDefaultValue(1);
             entity.Property(e => e.Title).HasMaxLength(255);
-        });
-
-        modelBuilder.Entity<BookReservation>(entity =>
-        {
-            entity.HasKey(e => e.Id).HasName("PK__BookRese__3214EC07E3DEC75E");
-
-            entity.Property(e => e.ReserveDate).HasDefaultValueSql("(getdate())");
-            entity.Property(e => e.Status).HasMaxLength(20);
-
-            entity.HasOne(d => d.Book).WithMany(p => p.BookReservations)
-                .HasForeignKey(d => d.BookId)
-                .HasConstraintName("FK__BookReser__BookI__3F466844");
-
-            entity.HasOne(d => d.User).WithMany(p => p.BookReservations)
-                .HasForeignKey(d => d.UserId)
-                .HasConstraintName("FK__BookReser__UserI__3E52440B");
         });
 
         modelBuilder.Entity<Loan>(entity =>
