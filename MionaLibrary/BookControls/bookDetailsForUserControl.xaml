@@ -96,6 +96,7 @@
                 </StackPanel>
 
             </StackPanel >
+            
             <Grid Grid.Row="1">
                 <Button x:Name="BorrowBook" 
                      Content="Borrow Book" 

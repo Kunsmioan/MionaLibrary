@@ -58,6 +58,7 @@ namespace MionaLibrary.BookControls
                 PublishYearTextBlock.Text = bookSelected.PublishYear.ToString();
                 ISBNTextBlock.Text = bookSelected.Isbn;
                 PageTextBlock.Text = bookSelected.Page.ToString();
+                StockTextBlock.Text = bookSelected.Quantity.ToString();
 
                 // Load image path
                 if (!string.IsNullOrEmpty(bookSelected.ImagePath))

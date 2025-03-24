@@ -18,10 +18,6 @@ public partial class LibraryManagerContext : DbContext
 
     public virtual DbSet<Book> Books { get; set; }
 
-    public virtual DbSet<BookLog> BookLogs { get; set; }
-
-    public virtual DbSet<BookReservation> BookReservations { get; set; }
-
     public virtual DbSet<Loan> Loans { get; set; }
 
     public virtual DbSet<LoanHistory> LoanHistories { get; set; }
@@ -35,16 +31,14 @@ public partial class LibraryManagerContext : DbContext
     {
         modelBuilder.Entity<Book>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Books__3214EC077D216280");
+            entity.HasKey(e => e.Id).HasName("PK__Books__3214EC074D4A55D7");
 
-            entity.ToTable(tb => tb.HasTrigger("trg_UpdateIsAvailable"));
-
-            entity.HasIndex(e => e.Isbn, "UQ__Books__447D36EA386CBB97").IsUnique();
+            entity.HasIndex(e => e.Isbn, "UQ__Books__447D36EA5E3E0268").IsUnique();
 
             entity.Property(e => e.Author).HasMaxLength(100);
             entity.Property(e => e.Description).HasColumnType("text");
             entity.Property(e => e.Genre).HasMaxLength(50);
-            entity.Property(e => e.ImagePath).HasMaxLength(300);
+            entity.Property(e => e.ImagePath).HasMaxLength(100);
             entity.Property(e => e.IsAvailable).HasDefaultValue(true);
             entity.Property(e => e.Isbn)
                 .HasMaxLength(20)
@@ -54,51 +48,30 @@ public partial class LibraryManagerContext : DbContext
             entity.Property(e => e.Title).HasMaxLength(255);
         });
 
-        modelBuilder.Entity<BookLog>(entity =>
-        {
-            entity.HasKey(e => e.Id).HasName("PK__BookLogs__3214EC0711C6E999");
-
-            entity.Property(e => e.Action).HasMaxLength(50);
-            entity.Property(e => e.ActionDate)
-                .HasDefaultValueSql("(getdate())")
-                .HasColumnType("datetime");
-        });
-
-        modelBuilder.Entity<BookReservation>(entity =>
-        {
-            entity.HasKey(e => e.Id).HasName("PK__BookRese__3214EC077F9DCB32");
-
-            entity.Property(e => e.ReserveDate).HasDefaultValueSql("(getdate())");
-            entity.Property(e => e.Status).HasMaxLength(20);
-
-            entity.HasOne(d => d.Book).WithMany(p => p.BookReservations)
-                .HasForeignKey(d => d.BookId)
-                .HasConstraintName("FK__BookReser__BookI__36B12243");
-
-            entity.HasOne(d => d.User).WithMany(p => p.BookReservations)
-                .HasForeignKey(d => d.UserId)
-                .HasConstraintName("FK__BookReser__UserI__35BCFE0A");
-        });
-
         modelBuilder.Entity<Loan>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Loans__3214EC07D114C465");
+            entity.HasKey(e => e.Id).HasName("PK__Loans__3214EC07E08AA0CD");
+
+            entity.ToTable(tb => tb.HasTrigger("trg_UpdateLoanStatus"));
 
             entity.Property(e => e.BorrowDate).HasDefaultValueSql("(getdate())");
-            entity.Property(e => e.Status).HasMaxLength(20);
+            entity.Property(e => e.DueDate).HasDefaultValueSql("(dateadd(day,(7),getdate()))");
+            entity.Property(e => e.Status)
+                .HasMaxLength(20)
+                .HasDefaultValue("Borrowing");
 
             entity.HasOne(d => d.Book).WithMany(p => p.Loans)
                 .HasForeignKey(d => d.BookId)
-                .HasConstraintName("FK__Loans__BookId__30F848ED");
+                .HasConstraintName("FK__Loans__BookId__32E0915F");
 
             entity.HasOne(d => d.User).WithMany(p => p.Loans)
                 .HasForeignKey(d => d.UserId)
-                .HasConstraintName("FK__Loans__UserId__300424B4");
+                .HasConstraintName("FK__Loans__UserId__31EC6D26");
         });
 
         modelBuilder.Entity<LoanHistory>(entity =>
         {
-            entity.HasKey(e => e.HistoryId).HasName("PK__LoanHist__4D7B4ADD12768503");
+            entity.HasKey(e => e.HistoryId).HasName("PK__LoanHist__4D7B4ADD6802AE42");
 
             entity.ToTable("LoanHistory");
 
@@ -113,19 +86,19 @@ public partial class LibraryManagerContext : DbContext
             entity.HasOne(d => d.Book).WithMany(p => p.LoanHistories)
                 .HasForeignKey(d => d.BookId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__LoanHisto__BookI__3F466844");
+                .HasConstraintName("FK__LoanHisto__BookI__38996AB5");
 
             entity.HasOne(d => d.User).WithMany(p => p.LoanHistories)
                 .HasForeignKey(d => d.UserId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__LoanHisto__UserI__3E52440B");
+                .HasConstraintName("FK__LoanHisto__UserI__37A5467C");
         });
 
         modelBuilder.Entity<User>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Users__3214EC07AFBDFDA9");
+            entity.HasKey(e => e.Id).HasName("PK__Users__3214EC07AEB4BA6F");
 
-            entity.HasIndex(e => e.Username, "UQ__Users__536C85E49D5F8E01").IsUnique();
+            entity.HasIndex(e => e.Username, "UQ__Users__536C85E464BF6F9F").IsUnique();
 
             entity.Property(e => e.FirstName).HasMaxLength(100);
             entity.Property(e => e.Gender).HasMaxLength(20);

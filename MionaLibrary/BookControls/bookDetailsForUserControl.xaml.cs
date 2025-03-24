@@ -115,7 +115,9 @@ namespace MionaLibrary.BookControls
             MessageBox.Show($"You have successfully borrowed the book: {bookSelected.Title}");
 
             // Cập nhật trạng thái sách thành không có sẵn
-            bookSelected.IsAvailable = false;
+            //bookSelected.IsAvailable = false;
+
+
             // Cập nhật trạng thái sách thành không có sẵn (chưa cần)
             //bookSelected.IsAvailable = false;
 
