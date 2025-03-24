@@ -92,7 +92,10 @@
                 <!-- Update Button -->
                 <Button Content="Update Book" Click="BtnUpdateBook_Click" Height="45"
                         Width="150"
-                 Background="#FFD0FDB8" Style="{StaticResource ButtonStyleSingle}"/>
+                 Background="#FFD0FDB8" Style="{StaticResource ButtonStyleSingle}" Margin="188,18,362,17"/>
+                <Button Content="Cancel" Click="BtnCancelBook_Click" Height="45"
+                    Width="150"
+                    Background="#FFD8E8CF" Style="{StaticResource ButtonStyleSingle}" Margin="361,18,189,17"/>
             </Grid>
         </Grid>
     </Grid>

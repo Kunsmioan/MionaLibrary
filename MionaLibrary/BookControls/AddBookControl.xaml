@@ -90,8 +90,10 @@
 
             <Grid Grid.Row="2" Grid.ColumnSpan="2" Margin="10">
                 <!-- Add Button -->
-                <Button Content="Add Book" Margin="513,10,0,18" Click="BtnAddBook_Click" HorizontalAlignment="Left" Width="165" Height="45"
+                <Button Content="Add Book" Margin="170,16,0,16" Click="BtnAddBook_Click" HorizontalAlignment="Left" Width="165" Height="45"
                         Background="#FFD0FDB8" Style="{StaticResource ButtonStyleSingle}"/>
+                <Button Content="Cancel" Margin="350,16,0,16" Click="BtnCancelBook_Click" HorizontalAlignment="Left" Width="165" Height="45"
+                    Background="#FFE2EFDB" Style="{StaticResource ButtonStyleSingle}"/>
             </Grid>
         </Grid>
     </Grid>

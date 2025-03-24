@@ -155,5 +155,23 @@ namespace MionaLibrary.BookControls
             }
         }
 
+        private void BtnCancelBook_Click(object sender, RoutedEventArgs e)
+        {
+            Window parrentWindow = Window.GetWindow(this);
+            // Kiểm tra xem cửa sổ cha có phải là ManagerWindow không
+            if (parrentWindow is ManagerWindow mw)
+            {
+                // Tạo HomeControl mới
+                var homeControl = new HomeControl();
+
+                // Thay thế nội dung hiện tại bằng HomeControl
+                mw.MainContent.Content = homeControl;
+            }
+            else
+            {
+                // Hiển thị thông báo lỗi nếu không tìm thấy ManagerWindow
+                MessageBox.Show("Không tìm thấy cửa sổ ManagerWindow.", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
     }
 }
