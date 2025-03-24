@@ -94,7 +94,7 @@ namespace MionaLibrary.BookControls
             };
             _loanHistoryServices.AddLoanHistory(loanHistory);
 
-            if (bookSelected.Quantity > 0)
+            if (bookSelected.Quantity > 0 || !)
             {
                 bookSelected.Quantity = bookSelected.Quantity - 1;
 
