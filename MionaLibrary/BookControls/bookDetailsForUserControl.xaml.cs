@@ -28,7 +28,6 @@ namespace MionaLibrary.BookControls
         LoanHistoryServices? _loanHistoryServices;
         LoanHistory? loanHistory;
         User? reader;
-
         LoanServices? _loanServices;
 
         public bookDetailsForUserControl()

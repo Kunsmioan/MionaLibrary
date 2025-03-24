@@ -6,7 +6,7 @@
               xmlns:fa="http://schemas.fontawesome.io/icons/"
              xmlns:local="clr-namespace:MionaLibrary.UserControls"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="720">
+             d:DesignHeight="550" d:DesignWidth="720">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="80"/>
@@ -86,11 +86,11 @@
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <Image Source="{Binding ImagePath}" 
-                          Stretch="Uniform" 
-                          HorizontalAlignment="Center" 
-                          VerticalAlignment="Center"
-                                        Height="150"
-                          Margin="2"/>
+                                    Stretch="Uniform" 
+                                    HorizontalAlignment="Center" 
+                                    VerticalAlignment="Center"
+                                    Height="120"
+                                    Margin="3"/>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>

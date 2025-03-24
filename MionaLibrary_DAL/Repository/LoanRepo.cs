@@ -41,12 +41,21 @@ namespace MionaLibrary_DAL.Repository
             return loans;
         }
 
+        public Book getBookById(int bookId)
+        {
+            _context = new();
+            Book? bookSelected = _context.Books
+                                .FirstOrDefault(book => book.Id == bookId);
+
+            return bookSelected;
+        }
+
         public List<Loan> GetLoanByUser(int userId)
         {
             _context = new();
             List<Loan> loans = _context.Loans
                                        .Include(loan => loan.Book)
-                                       .Where(loan => loan.UserId == userId)
+                                       .Where(loan => loan.UserId == userId && (loan.Status == "Borrowing" || loan.Status == "Overdue"))
                                        .ToList();
             return loans;
         }

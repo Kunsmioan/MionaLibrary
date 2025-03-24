@@ -88,9 +88,10 @@
                             <DataTemplate>
                                 <Image Source="{Binding ImagePath}" 
                                  Stretch="Uniform" 
+                                 Height="120"
                                  HorizontalAlignment="Center" 
                                  VerticalAlignment="Center"
-                                 Margin="5"/>
+                                 Margin="3"/>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>

@@ -43,6 +43,12 @@ namespace MionaLibrary_Services.Services
             return _repo.GetLoanByUser(id);
         }
 
+        public Book bookSelectedById(int bookId)
+        {
+            _repo = new();
+            return _repo.getBookById(bookId);
+        }
+
         public bool IsBookBorrowedByUser(int bookId, int userId)
         {
             _repo = new();

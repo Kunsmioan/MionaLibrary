@@ -64,7 +64,43 @@ namespace MionaLibrary.BookControls
                 // Show an error message if something goes wrong
                 MessageBox.Show($"Failed to load books on loan: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-
         }
+
+        private void TitleButton_Click(object sender, RoutedEventArgs e)
+        {
+            // Lấy đối tượng sách từ DataContext của nút
+            if ((sender as Button)?.DataContext is Loan selectedLoan && selectedLoan.Book != null)
+            {
+                Book selectedBook = selectedLoan.Book;
+                // Lấy cửa sổ cha
+                Window parentWindow = Window.GetWindow(this);
+                if (parentWindow is ReaderWindow rw)
+                {
+                    User? reader = rw.GetReader();
+                    //if (reader == null)
+                    //{
+                    //    MessageBox.Show("No user is selected. Please select a user first.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    //    return;
+                    //}
+                    var bookReturnForUserControl = new BookReturnForUserControl();
+                    bookReturnForUserControl.SetBookSelected(selectedBook);
+                    bookReturnForUserControl.SetLoanSelected(selectedLoan);
+                    bookReturnForUserControl.SetUser(reader);
+
+
+                    // Thay thế nội dung hiện tại bằng BookDetailsControl
+                    rw.MainContent.Content = bookReturnForUserControl;
+                }
+                else
+                {
+                    MessageBox.Show("Không tìm thấy cửa sổ ReaderWindow.", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Không thể lấy thông tin sách từ nút.", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
     }
 }
