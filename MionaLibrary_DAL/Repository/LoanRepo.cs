@@ -40,5 +40,21 @@ namespace MionaLibrary_DAL.Repository
             return loans;
         }
 
+        public bool IsBookBorrowedByUser(int bookId, int userId)
+        {
+            _context= new();
+             // Kiểm tra xem _context có null hay không
+        if (_context == null)
+        {
+            throw new InvalidOperationException("Database context is not initialized.");
+        }
+
+            // Truy vấn cơ sở dữ liệu để kiểm tra
+            var loan = _context.Loans
+                .FirstOrDefault(l => l.BookId == bookId && l.UserId == userId && l.Status == "Borrowing");
+
+            return loan != null; // Trả về true nếu tìm thấy khoản vay
+        }
+
     }
 }

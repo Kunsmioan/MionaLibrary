@@ -15,7 +15,7 @@ public partial class LoanHistory
 
     public DateTime DueDate { get; set; }
 
-    public DateTime ReturnDate { get; set; }
+    public DateTime? ReturnDate { get; set; }
 
     public int? OverdueDays { get; set; }
 

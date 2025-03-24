@@ -1,4 +1,5 @@
-﻿using MionaLibrary_DAL.Entity;
+﻿using Microsoft.Data.SqlClient;
+using MionaLibrary_DAL.Entity;
 using MionaLibrary_Services.Services;
 using System;
 using System.Collections.Generic;
@@ -24,9 +25,11 @@ namespace MionaLibrary.BookControls
     {
         Book? bookSelected;
         BookServices? _bookServices;
-        LoanHistoryServices _loanHistoryServices;
+        LoanHistoryServices? _loanHistoryServices;
         LoanHistory? loanHistory;
         User? reader;
+
+        LoanServices? _loanServices;
 
         public bookDetailsForUserControl()
         {
@@ -83,45 +86,72 @@ namespace MionaLibrary.BookControls
 
         private void BorrowBook_Click(object sender, RoutedEventArgs e)
         {
-            _loanHistoryServices = new();
-            loanHistory = new()
+            try
             {
-                BookId = bookSelected.Id,
-                UserId = reader.Id,
-                LoanDate = DateTime.Now,
-                DueDate = DateTime.Now,
-                ReturnDate = DateTime.Now.AddDays(7),
-            };
-            _loanHistoryServices.AddLoanHistory(loanHistory);
-
-            if (bookSelected.Quantity > 0 || !)
-            {
-                bookSelected.Quantity = bookSelected.Quantity - 1;
-
-
-                if (bookSelected.Quantity == 0)
+                // Kiểm tra xem sách có sẵn để mượn hay không
+                if (bookSelected.Quantity <= 0 || !bookSelected.IsAvailable)
                 {
-                    bookSelected.IsAvailable = false;
+                    MessageBox.Show($"The book '{bookSelected.Title}' is currently unavailable for borrowing.");
+                    return;
                 }
-                _bookServices = new();
-                _bookServices.UpdateBook(bookSelected);
+
+
+                // Kiểm tra xem sách đã được mượn bởi người dùng hiện tại hay chưa
+                _loanServices = new();
+                bool isAlreadyBorrowed = _loanServices.IsBookBorrowedByUser(bookSelected.Id, reader.Id);
+                if (isAlreadyBorrowed)
+                {
+                    MessageBox.Show($"You have already borrowed the book: {bookSelected.Title}", "Alert", MessageBoxButton.OK, MessageBoxImage.Stop);
+                    // Vô hiệu hóa nút sau khi mượn sách
+                    BorrowBook.IsEnabled = false;
+                    return;
+                }
+                else
+                {
+                    _loanServices = new();
+                    // Lưu lịch sử mượn sách
+                    Loan loan = new()
+                    {
+                        BookId = bookSelected.Id,
+                        UserId = reader.Id,
+                        BorrowDate = DateTime.Now,
+                        DueDate = DateTime.Now.AddDays(7),
+                        ReturnDate = null,
+                        Status = "Borrowing"
+                    };
+                    _loanServices.AddLoan(loan);
+
+                    // Giảm số lượng sách đi 1
+
+                    bookSelected.Quantity -= 1;
+
+                    // Cập nhật trạng thái IsAvailable nếu số lượng sách bằng 0
+                    if (bookSelected.Quantity == 0)
+                    {
+                        bookSelected.IsAvailable = false;
+                    }
+
+                    // Lưu cập nhật sách vào cơ sở dữ liệu
+                    _bookServices = new();
+                    _bookServices.UpdateBook(bookSelected);
+
+                    // Hiển thị thông báo thành công
+                    MessageBox.Show($"You have successfully borrowed the book: {bookSelected.Title}");
+
+                    // Cập nhật lại giao diện
+                    loadData();
+
+                    // Vô hiệu hóa nút sau khi mượn sách
+                    BorrowBook.IsEnabled = false;
+                }
+
+
             }
-            else
+            catch (SqlException ex)
             {
-                // Handle the case where the quantity is already zero
-                throw new InvalidOperationException("Cannot reduce the quantity of a book that is already at zero.");
+                // Xử lý lỗi nếu có vấn đề xảy ra
+                MessageBox.Show($"An error occurred while borrowing the book: {ex.Message}");
             }
-            // Thực hiện logic mượn sách (ví dụ: cập nhật cơ sở dữ liệu)
-            MessageBox.Show($"You have successfully borrowed the book: {bookSelected.Title}");
-
-            // Cập nhật trạng thái sách thành không có sẵn
-            //bookSelected.IsAvailable = false;
-
-
-            // Cập nhật trạng thái sách thành không có sẵn (chưa cần)
-            //bookSelected.IsAvailable = false;
-
-            // Cập nhật lại giao diện
             loadData();
         }
     }

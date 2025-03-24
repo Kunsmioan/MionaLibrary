@@ -23,11 +23,13 @@ public partial class Book
 
     public string? Description { get; set; }
 
-    public string? ImagePath { get; set; }
-
     public bool IsAvailable { get; set; }
 
     public int? Page { get; set; }
+
+    public string? ImagePath { get; set; }
+
+    public virtual ICollection<BookReservation> BookReservations { get; set; } = new List<BookReservation>();
 
     public virtual ICollection<LoanHistory> LoanHistories { get; set; } = new List<LoanHistory>();
 

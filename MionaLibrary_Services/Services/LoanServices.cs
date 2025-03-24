@@ -35,7 +35,13 @@ namespace MionaLibrary_Services.Services
         {
             _repo = new();
             return _repo.GetAllLoans();
-        }   
+        }
+
+        public bool IsBookBorrowedByUser(int bookId, int userId)
+        {
+            _repo = new();
+            return _repo.IsBookBorrowedByUser(bookId, userId);
+        }
 
     }
 }
