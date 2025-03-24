@@ -89,6 +89,7 @@
                           Stretch="Uniform" 
                           HorizontalAlignment="Center" 
                           VerticalAlignment="Center"
+                                        Height="150"
                           Margin="2"/>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>

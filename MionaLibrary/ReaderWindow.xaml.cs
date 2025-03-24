@@ -111,8 +111,15 @@ namespace MionaLibrary
 
         private void BookOnLoan_Click(object sender, RoutedEventArgs e)
         {
-            BookOnLoan placeOrder = new();
-            MainContent.Content = placeOrder;
+            if (reader == null)
+            {
+                MessageBox.Show("No user is selected. Please select a user first.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            BookOnLoan bookOnLoan = new();
+            bookOnLoan.SetUser(reader);
+            MainContent.Content = bookOnLoan;
         }
 
         private void BookBorowingLoan_Click(object sender, RoutedEventArgs e)

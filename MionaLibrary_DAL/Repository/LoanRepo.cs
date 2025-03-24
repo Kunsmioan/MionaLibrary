@@ -1,4 +1,5 @@
-﻿using MionaLibrary_DAL.DataAccess;
+﻿using Microsoft.EntityFrameworkCore;
+using MionaLibrary_DAL.DataAccess;
 using MionaLibrary_DAL.Entity;
 using System;
 using System.Collections.Generic;
@@ -37,6 +38,16 @@ namespace MionaLibrary_DAL.Repository
         {
             _context = new();
             List<Loan> loans = _context.Loans.ToList();
+            return loans;
+        }
+
+        public List<Loan> GetLoanByUser(int userId)
+        {
+            _context = new();
+            List<Loan> loans = _context.Loans
+                                       .Include(loan => loan.Book)
+                                       .Where(loan => loan.UserId == userId)
+                                       .ToList();
             return loans;
         }
 
