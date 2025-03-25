@@ -14,6 +14,8 @@ using System.Windows.Shapes;
 using MionaLibrary_DAL.Entity;
 using MionaLibrary.ManagerControls;
 using MionaLibrary.BookControls;
+using MionaLibrary.GenreControl;
+
 
 namespace MionaLibrary
 {
@@ -145,6 +147,12 @@ namespace MionaLibrary
         private void Notification_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void Genre_Click(object sender, RoutedEventArgs e)
+        {
+            GenreActionControl genreControl = new();
+            MainContent.Content = genreControl;
         }
     }
 }
