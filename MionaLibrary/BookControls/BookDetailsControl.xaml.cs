@@ -53,7 +53,7 @@ namespace MionaLibrary.BookControls
                 TitleTextBlock.Text = bookSelected.Title;
                 AuthorTextBlock.Text = bookSelected.Author;
                 LanguageTextBlock.Text = bookSelected.Language;
-                GenreTextBlock.Text = bookSelected.Genre;
+                GenreTextBlock.Text = bookSelected.Genre.Name;
                 DescriptionTextBlock.Text = bookSelected.Description;
                 PublishYearTextBlock.Text = bookSelected.PublishYear.ToString();
                 ISBNTextBlock.Text = bookSelected.Isbn;

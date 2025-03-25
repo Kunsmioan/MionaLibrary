@@ -28,9 +28,21 @@ namespace MionaLibrary.ManagerControls
     public partial class AddBookControl : UserControl
     {
         BookServices? _bookServices;
+        GenreServices? _genreServices;  
         public AddBookControl()
         {
             InitializeComponent();
+            LoadGenres();
+        }
+
+        private void LoadGenres()
+        {
+                // Lấy danh sách tất cả các thể loại từ bảng Genres
+                _genreServices = new GenreServices();
+                var genres = _genreServices.GetGenreList();
+
+                // Gán danh sách thể loại vào ComboBox
+                cbGenre.ItemsSource = genres;
         }
 
         private void BtnChooseImage_Click(object sender, RoutedEventArgs e)
@@ -78,20 +90,28 @@ namespace MionaLibrary.ManagerControls
 
         private void BtnAddBook_Click(object sender, RoutedEventArgs e)
         {
-
             if (!checkInput()) return;
+
+            // Lấy thể loại được chọn từ ComboBox
+            var selectedGenre = cbGenre.SelectedItem as Genre; // Giả sử bạn có lớp Genre
+            if (selectedGenre == null)
+            {
+                MessageBox.Show("Please select a valid genre.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
 
             Book book = new()
             {
                 Title = txtTitle.Text,
                 Author = InputValidator.legitName(txtAuthor.Text),
-                Genre = InputValidator.legitName(txtGenre.Text),
+                GenreId = selectedGenre.Id, // Sử dụng Id của thể loại được chọn
                 Description = txtDescription.Text,
                 ImagePath = txtImagePath.Text,
                 Quantity = int.Parse(txtQuantity.Text),
                 Language = InputValidator.legitName(txtLanguage.Text),
                 Page = int.Parse(txtPage.Text),
                 PublishYear = int.Parse(txtPublishYear.Text),
+                IsAvailable = true,
                 Isbn = txtIsbn.Text,
             };
 
@@ -142,7 +162,6 @@ namespace MionaLibrary.ManagerControls
             (!InputValidator.TextBoxesIsNotEmpty(txtQuantity), "Please enter the quantity!"),
             (!InputValidator.TextBoxesIsNotEmpty(txtLanguage), "Please enter the language!"),
             (!InputValidator.validName(txtAuthor.Text), "Author's name contains invalid characters!"),
-            (!InputValidator.validName(txtGenre.Text), "Genre contains invalid characters!"),
             (!InputValidator.IsNumeric(txtPublishYear.Text), "Publish year must be a valid number!"),
             (!InputValidator.IsNumeric(txtQuantity.Text), "Quantity must be a valid number!"),
             (!InputValidator.IsNumeric(txtPage.Text), "Page count must be a valid number!"),

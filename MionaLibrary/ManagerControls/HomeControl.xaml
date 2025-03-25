@@ -145,7 +145,7 @@
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 
-                                    <TextBlock Text="{Binding Genre}" 
+                                    <TextBlock Text="{Binding Genre.Name}" 
                            TextWrapping="Wrap" 
                            MaxWidth="150" 
                            VerticalAlignment="Center" Padding="3"/>

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using MionaLibrary_DAL.DataAccess;
 using MionaLibrary_DAL.Entity;
 
@@ -41,7 +42,9 @@ namespace MionaLibrary_DAL.Repository
 
         public List<Book> GetAllBooks() {
             _context = new();
-            List<Book> books = _context.Books.ToList();
+            List<Book> books = _context.Books
+                                       .Include(b => b.Genre)
+                                       .ToList();
             return books;
         }
 
@@ -50,7 +53,7 @@ namespace MionaLibrary_DAL.Repository
             _context = new();
             if (string.IsNullOrEmpty(searchTerm))
             {_context = new();
-                return _context.Books.ToList(); // Trả về tất cả nếu không có từ khóa
+                return GetAllBooks(); // Trả về tất cả nếu không có từ khóa
             }
 
             var lowerSearchTerm = searchTerm.ToLower();
@@ -58,20 +61,21 @@ namespace MionaLibrary_DAL.Repository
             switch (searchType.ToLower())
             {
                 case "title":
-                    return _context.Books
+                    return _context.Books.Include(b => b.Genre)
                         .Where(b => b.Title.ToLower().Contains(lowerSearchTerm))
                         .ToList();
                 case "author":
-                    return _context.Books
+                    return _context.Books.Include(b => b.Genre)
                         .Where(b => b.Author.ToLower().Contains(lowerSearchTerm))
                         .ToList();
                 case "language":
-                    return _context.Books
+                    return _context.Books.Include(b => b.Genre)
                         .Where(b => b.Language.ToLower().Contains(lowerSearchTerm))
                         .ToList();
                 case "genre":
                     return _context.Books
-                        .Where(b => b.Genre.ToLower().Contains(lowerSearchTerm))
+                         .Include(b => b.Genre)
+                         .Where(b => b.Genre != null && b.Genre.Name.ToLower().Contains(lowerSearchTerm))
                         .ToList();
                 default:
                     return _context.Books.ToList(); // Trả về tất cả nếu loại tìm kiếm không hợp lệ

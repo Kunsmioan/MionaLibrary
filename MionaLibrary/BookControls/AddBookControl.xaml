@@ -46,8 +46,8 @@
                     <TextBox x:Name="txtIsbn" Height="35" Margin="0,0,0,5"/>
 
                     <!-- Genre -->
-                    <TextBlock Text="Genre:" FontWeight="Bold" Margin="0,7,0,0"   FontSize="14" />
-                    <TextBox x:Name="txtGenre" Height="35" Margin="0,0,0,5"/>
+                    <TextBlock Text="Genre:" FontWeight="Bold" Margin="0,7,0,0" FontSize="14" />
+                    <ComboBox x:Name="cbGenre" Height="35" Margin="0,0,0,5" DisplayMemberPath="Name" SelectedValuePath="Id" SelectedIndex="0"/>
 
                     <!-- Language -->
                     <TextBlock Text="Language:" FontWeight="Bold" Margin="0,7,0,0"   FontSize="14" />
@@ -93,7 +93,7 @@
                 <Button Content="Add Book" Margin="170,16,0,16" Click="BtnAddBook_Click" HorizontalAlignment="Left" Width="165" Height="45"
                         Background="#FFD0FDB8" Style="{StaticResource ButtonStyleSingle}"/>
                 <Button Content="Cancel" Margin="350,16,0,16" Click="BtnCancelBook_Click" HorizontalAlignment="Left" Width="165" Height="45"
-                    Background="#FFE2EFDB" Style="{StaticResource ButtonStyleSingle}"/>
+                    Background="#FFA0A0A0" Style="{StaticResource ButtonStyleSingle}"/>
             </Grid>
         </Grid>
     </Grid>

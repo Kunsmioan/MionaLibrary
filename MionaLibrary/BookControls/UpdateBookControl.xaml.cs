@@ -29,15 +29,27 @@ namespace MionaLibrary.BookControls
         BookServices? _bookServices;
         Book? bookSelected;
 
+        GenreServices? _genreServices;
+
         public UpdateBookControl()
         {
             InitializeComponent();
+            loadGenres();
         }
 
         public void SetBookSelected(Book book)
         {
             bookSelected = book;
             loadData();
+        }
+
+        public void loadGenres()
+        {
+            _genreServices = new GenreServices();
+            var genres = _genreServices.GetGenreList();
+
+            // Gán danh sách thể loại vào ComboBox
+            cbGenre.ItemsSource = genres;
         }
 
         private void loadData()
@@ -48,7 +60,10 @@ namespace MionaLibrary.BookControls
                 txtTitle.Text = bookSelected.Title;
                 txtAuthor.Text = bookSelected.Author;
                 txtLanguage.Text = bookSelected.Language;
-                txtGenre.Text = bookSelected.Genre;
+                // Gán giá trị cho ComboBox Genre
+                var genreId = bookSelected.GenreId; // Lấy GenreId từ sách đã chọn
+                cbGenre.SelectedValue = genreId;   // Gán giá trị SelectedValue của ComboBox
+
                 txtDescription.Text = bookSelected.Description;
                 txtPublishYear.Text = bookSelected.PublishYear.ToString();
                 txtIsbn.Text = bookSelected.Isbn;
@@ -113,7 +128,8 @@ namespace MionaLibrary.BookControls
 
             bookSelected.Title = txtTitle.Text;
             bookSelected.Author = InputValidator.legitName(txtAuthor.Text);
-            bookSelected.Genre = InputValidator.legitName(txtGenre.Text);
+            var genreId = bookSelected.GenreId; // Lấy GenreId từ sách đã chọn
+            cbGenre.SelectedValue = genreId;   // Gán giá trị SelectedValue của ComboBox
             bookSelected.Description = txtDescription.Text;
             bookSelected.ImagePath = txtImagePath.Text;
             bookSelected.Quantity = int.Parse(txtQuantity.Text);
