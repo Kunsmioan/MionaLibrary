@@ -89,5 +89,16 @@ namespace MionaLibrary
             return int.TryParse(value, out _);
         }
 
+        // positive number
+        public static bool IsPositiveInteger(string input)
+        {
+            if (int.TryParse(input, out int result))
+            {
+                return result > 0;
+            }
+            return false;
+        }
+
+
     }
 }

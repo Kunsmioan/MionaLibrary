@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualBasic.ApplicationServices;
+﻿using Microsoft.Data.SqlClient;
+using Microsoft.VisualBasic.ApplicationServices;
 using Microsoft.Win32;
 using MionaLibrary.ManagerControls;
 using MionaLibrary_DAL.DataAccess;
@@ -125,6 +126,7 @@ namespace MionaLibrary.BookControls
 
         private void BtnUpdateBook_Click(object sender, RoutedEventArgs e)
         {
+            if (!checkInput()) return;
 
             bookSelected.Title = txtTitle.Text;
             bookSelected.Author = InputValidator.legitName(txtAuthor.Text);
@@ -137,6 +139,7 @@ namespace MionaLibrary.BookControls
             bookSelected.Page = int.Parse(txtPage.Text);
             bookSelected.PublishYear = int.Parse(txtPublishYear.Text);
             bookSelected.Isbn = txtIsbn.Text;
+            if(int.Parse(txtQuantity.Text) > 0) bookSelected.IsAvailable = true;
 
             // Try to register the user
             try
@@ -168,6 +171,44 @@ namespace MionaLibrary.BookControls
             {
                 // Log and display detailed error
                 MessageBox.Show($"Update book failed: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private bool checkInput()
+        {
+            try
+            {
+                var messages = new List<(bool condition, string message)>
+        {
+            (!InputValidator.TextBoxesIsNotEmpty(txtTitle), "Please enter the book title!"),
+        (!InputValidator.TextBoxesIsNotEmpty(txtAuthor), "Please enter the author's name!"),
+        (!InputValidator.TextBoxesIsNotEmpty(txtPublishYear), "Please enter the publish year!"),
+        (!InputValidator.TextBoxesIsNotEmpty(txtIsbn), "Please enter the ISBN!"),
+        (!InputValidator.TextBoxesIsNotEmpty(txtQuantity), "Please enter the quantity!"),
+        (!InputValidator.TextBoxesIsNotEmpty(txtLanguage), "Please enter the language!"),
+        (!InputValidator.validName(txtAuthor.Text), "Author's name contains invalid characters!"),
+        (!InputValidator.IsNumeric(txtPublishYear.Text), "Publish year must be a valid number!"),
+        (!InputValidator.IsNumeric(txtQuantity.Text), "Quantity must be a valid number!"),
+        (!InputValidator.IsNumeric(txtPage.Text), "Page count must be a valid number!"),
+        (!InputValidator.textBoxsLength(txtAuthor, txtIsbn, txtIsbn), "Word must be between 3 and 50 characters!"),
+        (!InputValidator.IsPositiveInteger(txtQuantity.Text), "Quantity must be a positive integer!")
+        };
+
+                foreach (var (condition, message) in messages)
+                {
+                    if (condition)
+                    {
+                        MessageBox.Show(message, "Alert", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        return false;
+                    }
+                }
+
+                return true;
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show($"An error occurred during input validation:\n{ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
             }
         }
 

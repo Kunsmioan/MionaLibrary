@@ -156,16 +156,17 @@ namespace MionaLibrary.ManagerControls
                 var messages = new List<(bool condition, string message)>
         {
             (!InputValidator.TextBoxesIsNotEmpty(txtTitle), "Please enter the book title!"),
-            (!InputValidator.TextBoxesIsNotEmpty(txtAuthor), "Please enter the author's name!"),
-            (!InputValidator.TextBoxesIsNotEmpty(txtPublishYear), "Please enter the publish year!"),
-            (!InputValidator.TextBoxesIsNotEmpty(txtIsbn), "Please enter the ISBN!"),
-            (!InputValidator.TextBoxesIsNotEmpty(txtQuantity), "Please enter the quantity!"),
-            (!InputValidator.TextBoxesIsNotEmpty(txtLanguage), "Please enter the language!"),
-            (!InputValidator.validName(txtAuthor.Text), "Author's name contains invalid characters!"),
-            (!InputValidator.IsNumeric(txtPublishYear.Text), "Publish year must be a valid number!"),
-            (!InputValidator.IsNumeric(txtQuantity.Text), "Quantity must be a valid number!"),
-            (!InputValidator.IsNumeric(txtPage.Text), "Page count must be a valid number!"),
-            (!InputValidator.textBoxsLength(txtAuthor, txtIsbn, txtIsbn), "Word must be between 3 and 50 characters!"),
+        (!InputValidator.TextBoxesIsNotEmpty(txtAuthor), "Please enter the author's name!"),
+        (!InputValidator.TextBoxesIsNotEmpty(txtPublishYear), "Please enter the publish year!"),
+        (!InputValidator.TextBoxesIsNotEmpty(txtIsbn), "Please enter the ISBN!"),
+        (!InputValidator.TextBoxesIsNotEmpty(txtQuantity), "Please enter the quantity!"),
+        (!InputValidator.TextBoxesIsNotEmpty(txtLanguage), "Please enter the language!"),
+        (!InputValidator.validName(txtAuthor.Text), "Author's name contains invalid characters!"),
+        (!InputValidator.IsNumeric(txtPublishYear.Text), "Publish year must be a valid number!"),
+        (!InputValidator.IsNumeric(txtQuantity.Text), "Quantity must be a valid number!"),
+        (!InputValidator.IsNumeric(txtPage.Text), "Page count must be a valid number!"),
+        (!InputValidator.textBoxsLength(txtAuthor, txtIsbn, txtIsbn), "Word must be between 3 and 50 characters!"),
+        (!InputValidator.IsPositiveInteger(txtQuantity.Text), "Quantity must be a positive integer!") 
         };
 
                 foreach (var (condition, message) in messages)
