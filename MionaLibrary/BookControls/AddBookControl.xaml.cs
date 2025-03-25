@@ -103,7 +103,7 @@ namespace MionaLibrary.ManagerControls
             Book book = new()
             {
                 Title = txtTitle.Text,
-                Author = InputValidator.legitName(txtAuthor.Text),
+                Author = InputValidator.legitAuthoName(txtAuthor.Text),
                 GenreId = selectedGenre.Id, // Sử dụng Id của thể loại được chọn
                 Description = txtDescription.Text,
                 ImagePath = txtImagePath.Text,

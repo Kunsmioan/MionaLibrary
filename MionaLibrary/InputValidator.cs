@@ -16,6 +16,32 @@ namespace MionaLibrary
             return !names.Any(name => name.Any(c => !char.IsLetter(c) && !char.IsWhiteSpace(c)));
         }
 
+        public static bool validAuthorName(params string[] names)
+        {
+            // Kiểm tra từng tên trong danh sách
+            foreach (var name in names)
+            {
+                // Nếu tên rỗng hoặc null, trả về false
+                if (string.IsNullOrWhiteSpace(name))
+                {
+                    return false;
+                }
+
+                // Kiểm tra từng ký tự trong tên
+                foreach (char c in name)
+                {
+                    // Cho phép: chữ cái, khoảng trắng, dấu chấm, dấu gạch nối
+                    if (!char.IsLetter(c) && !char.IsWhiteSpace(c) && c != '.' && c != '-')
+                    {
+                        return false; // Nếu gặp ký tự không hợp lệ, trả về false
+                    }
+                }
+            }
+
+            // Nếu tất cả tên đều hợp lệ, trả về true
+            return true;
+        }
+
         //check length of textboxes
         public static bool textBoxsLength(params TextBox[] textBoxes)
         {
@@ -81,6 +107,33 @@ namespace MionaLibrary
             return string.Join(" ", name
                 .Split(' ', StringSplitOptions.RemoveEmptyEntries) // Handle multiple spaces
                 .Select(word => char.ToUpper(word[0]) + word.Substring(1).ToLower())); // Capitalize each word
+        }
+
+        public static string legitAuthoName(string name)
+        {
+            if (string.IsNullOrWhiteSpace(name))
+                return string.Empty;
+
+            // Split the name by spaces while preserving special characters like '.' and '-'
+            var words = name.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+
+            // Process each word
+            var processedWords = words.Select(word =>
+            {
+                // Handle special cases like "J.K." or "Dr."
+                if (word.Contains('.') || word.Contains('-'))
+                {
+                    return string.Join("", word.Split('.', '-')
+                        .Where(part => !string.IsNullOrEmpty(part)) // Remove empty parts
+                        .Select(part => char.ToUpper(part[0]) + part.Substring(1).ToLower()));
+                }
+
+                // Capitalize the first letter and lowercase the rest
+                return char.ToUpper(word[0]) + word.Substring(1).ToLower();
+            });
+
+            // Join the processed words with a single space
+            return string.Join(" ", processedWords);
         }
 
         // Kiểm tra xem chuỗi có phải là số không

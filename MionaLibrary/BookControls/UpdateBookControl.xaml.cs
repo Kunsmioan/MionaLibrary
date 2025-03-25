@@ -129,7 +129,7 @@ namespace MionaLibrary.BookControls
             if (!checkInput()) return;
 
             bookSelected.Title = txtTitle.Text;
-            bookSelected.Author = InputValidator.legitName(txtAuthor.Text);
+            bookSelected.Author = InputValidator.legitAuthoName(txtAuthor.Text);
             var genreId = bookSelected.GenreId; // Lấy GenreId từ sách đã chọn
             cbGenre.SelectedValue = genreId;   // Gán giá trị SelectedValue của ComboBox
             bookSelected.Description = txtDescription.Text;
@@ -191,7 +191,7 @@ namespace MionaLibrary.BookControls
         (!InputValidator.IsNumeric(txtQuantity.Text), "Quantity must be a valid number!"),
         (!InputValidator.IsNumeric(txtPage.Text), "Page count must be a valid number!"),
         (!InputValidator.textBoxsLength(txtAuthor, txtIsbn, txtIsbn), "Word must be between 3 and 50 characters!"),
-        (!InputValidator.IsPositiveInteger(txtQuantity.Text), "Quantity must be a positive integer!")
+        (!InputValidator.IsPositiveInteger(txtQuantity.Text), "Quantity must be a positive integer!"),
         };
 
                 foreach (var (condition, message) in messages)
