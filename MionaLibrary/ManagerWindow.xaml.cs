@@ -30,7 +30,9 @@ namespace MionaLibrary
         public ManagerWindow()
         {
             InitializeComponent();
-            MainContent.Content = new HomeControl();
+
+            NotificationManager notificationManager = new NotificationManager();
+            MainContent.Content = notificationManager;
         }
 
         // Phương thức để lấy Manager từ ManagerWindow

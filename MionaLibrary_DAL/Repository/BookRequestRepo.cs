@@ -59,5 +59,14 @@ namespace MionaLibrary_DAL.Repository
                 .Include(br => br.Book) // Lấy thông tin sách
                 .FirstOrDefault(br => br.RequestId == requestId);
         }
+
+        public List<BookRequest> GetUserRequests(int userId)
+        {
+            return _context.BookRequests
+                .Where(br => br.UserId == userId)
+                .Include(br => br.Book) // Lấy thông tin sách
+                .ToList();
+        }
+
     }
 }

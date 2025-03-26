@@ -47,5 +47,10 @@ namespace MionaLibrary_Services.Services
         {
             return _repo.GetRequestById(requestId);
         }
+
+        public List<BookRequest> GetUserRequests(int userId)
+        {
+            return _repo.GetUserRequests(userId);
+        }
     }
 }

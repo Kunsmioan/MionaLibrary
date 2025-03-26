@@ -28,7 +28,7 @@ namespace MionaLibrary
         public ReaderWindow()
         {
             InitializeComponent();
-            MainContent.Content = new HomeControl();
+            //LoadData(); // Tải màn hình mặc định
         }
 
         // Phương thức để lấy reader từ ReaderWindow
@@ -37,14 +37,18 @@ namespace MionaLibrary
             return reader;
         }
 
-        // Method to load data and update UI elements
-        private void loadData()
+        // Phương thức tải dữ liệu và cập nhật giao diện
+        private void LoadData()
         {
             if (reader != null)
             {
-                // Ensure that reader is not null before setting the content
+                // Thiết lập tên người dùng trên ProfileButton
                 ProfileButton.Content = reader.FirstName.ToString();
 
+                // Tạo và thiết lập NotificationUser làm màn hình mặc định
+                NotificationUser notificationUser = new NotificationUser();
+                notificationUser.setReader(reader); // Truyền reader vào NotificationUser
+                MainContent.Content = notificationUser; // Đặt NotificationUser làm nội dung chính
             }
             else
             {
@@ -55,7 +59,7 @@ namespace MionaLibrary
         public void SetReader(User user)
         {
             reader = user;
-            loadData();
+            LoadData();
         }
 
         // Method to handle the Profile button click
@@ -152,7 +156,9 @@ namespace MionaLibrary
 
         private void Notification_Click(object sender, RoutedEventArgs e)
         {
-
+            NotificationUser notificationUser = new NotificationUser();
+            notificationUser.setReader(reader);
+            MainContent.Content = notificationUser;
         }
     }
 }

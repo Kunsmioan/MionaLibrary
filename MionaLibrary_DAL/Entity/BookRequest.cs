@@ -15,6 +15,10 @@ public partial class BookRequest
 
     public string Status { get; set; } = null!;
 
+    public string? Announce { get; set; }
+
+    public string? StatusColor { get; set; }
+
     public virtual Book Book { get; set; } = null!;
 
     public virtual User User { get; set; } = null!;

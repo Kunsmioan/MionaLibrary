@@ -27,6 +27,7 @@ public partial class LibraryManagerContext : DbContext
     public virtual DbSet<User> Users { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
         => optionsBuilder.UseSqlServer("server =ADMIN\\DUNGTT; database = LibraryManager; uid=sa;pwd=123;Trusted_Connection=True;Encrypt=False");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -59,6 +60,7 @@ public partial class LibraryManagerContext : DbContext
             entity.ToTable("BookRequest");
 
             entity.Property(e => e.RequestId).HasColumnName("RequestID");
+            entity.Property(e => e.Announce).HasMaxLength(255);
             entity.Property(e => e.BookId).HasColumnName("BookID");
             entity.Property(e => e.RequestDate)
                 .HasDefaultValueSql("(getdate())")
@@ -66,6 +68,7 @@ public partial class LibraryManagerContext : DbContext
             entity.Property(e => e.Status)
                 .HasMaxLength(50)
                 .HasDefaultValue("Pending");
+            entity.Property(e => e.StatusColor).HasMaxLength(50);
             entity.Property(e => e.UserId).HasColumnName("UserID");
 
             entity.HasOne(d => d.Book).WithMany(p => p.BookRequests)

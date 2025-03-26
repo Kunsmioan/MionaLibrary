@@ -6,7 +6,8 @@
         xmlns:fa="http://schemas.fontawesome.io/icons/"
         xmlns:local="clr-namespace:MionaLibrary"
         mc:Ignorable="d"
-        Title="ReaderWindow" Height="600" Width="900" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+        Title="ReaderWindow" Height="600" Width="900" ResizeMode="NoResize" 
+        WindowStartupLocation="CenterScreen">
     <Grid >
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="180"/>
@@ -39,6 +40,25 @@
                             </ControlTemplate>
                         </Button.Template>
                     </Button>
+                    <!--Notification-->
+                    <Button Content="Notifications" Height="50" Foreground="White" Width="auto"
+BorderThickness="0" Click="Notification_Click" Style="{StaticResource ButtonStyle}">
+                        <Button.Template>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Grid Background="{TemplateBinding Background}">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="35"/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                    <fa:ImageAwesome Icon="Bell" Foreground="White" Width="15" Height="15" 
+                         HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    <TextBlock Text="{TemplateBinding Content}" Foreground="White" Grid.Column="1" 
+                   VerticalAlignment="Center" FontSize="18"/>
+                                </Grid>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+
 
                     <!-- Nút "Book" -->
                     <Button x:Name="BookButton" Content="Book" HorizontalAlignment="Stretch" Height="50" Foreground="White" Width="auto"
@@ -125,25 +145,6 @@
                         </Button.Template>
                     </Button>
                     
-                     <Button Content="Notifications" Height="50" Foreground="White" Width="auto"
-        BorderThickness="0" Click="Notification_Click" Style="{StaticResource ButtonStyle}">
-                        <Button.Template>
-                            <ControlTemplate TargetType="{x:Type Button}">
-                                <Grid Background="{TemplateBinding Background}">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="35"/>
-                                        <ColumnDefinition/>
-                                    </Grid.ColumnDefinitions>
-                                    <fa:ImageAwesome Icon="Bell" Foreground="White" Width="15" Height="15" 
-                                 HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                    <TextBlock Text="{TemplateBinding Content}" Foreground="White" Grid.Column="1" 
-                           VerticalAlignment="Center" FontSize="18"/>
-                                </Grid>
-                            </ControlTemplate>
-                        </Button.Template>
-                    </Button>
-
-
                     <Button x:Name="ProfileButton" Content="Profile" Height="50" Width="180"
                         Foreground="White" BorderThickness="0" Click="Profile_Click" Style="{StaticResource ButtonStyle}">
                         <Button.Template>
