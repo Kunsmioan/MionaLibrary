@@ -20,7 +20,7 @@
                 <RowDefinition Height="50"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <TextBlock Text="Notify book loan" HorizontalAlignment="Center" VerticalAlignment="Center" 
+            <TextBlock Text="Notify reader borrow books" HorizontalAlignment="Center" VerticalAlignment="Center" 
                        FontSize="20" FontWeight="Bold" FontFamily="Book Antiqua" Grid.Row="0"/>
             <DataGrid Name="RequestDataGrid" AutoGenerateColumns="False" Margin="10" Grid.Row="1"
                   CanUserAddRows="False">
@@ -128,7 +128,7 @@
             </Grid.RowDefinitions>
 
             <!-- Tiêu đề -->
-            <TextBlock Text="Notify book return requests" 
+            <TextBlock Text="Notify readers request to return book" 
                HorizontalAlignment="Center" VerticalAlignment="Center" 
                FontSize="20" FontWeight="Bold" FontFamily="Book Antiqua" 
                Grid.Row="0"/>
