@@ -1,4 +1,5 @@
 ﻿using Microsoft.Data.SqlClient;
+using MionaLibrary.UserControls;
 using MionaLibrary_DAL.Entity;
 using MionaLibrary_Services.Services;
 using System;
@@ -152,6 +153,26 @@ namespace MionaLibrary.BookControls
                 MessageBox.Show($"An error occurred while borrowing the book: {ex.Message}");
             }
             loadData();
+        }
+
+        private void BackButton_Click(object sender, RoutedEventArgs e)
+        {
+            Window parentWindow = Window.GetWindow(this);
+            if (parentWindow is ReaderWindow rw)
+            {
+                User? manager = rw.GetReader();
+                //if (reader == null)
+                //{
+                //    MessageBox.Show("No user is selected. Please select a user first.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                //    return;
+                //}
+                var homeControl = new HomeControl();
+
+                //updateBookControl.SetUser(manager);
+
+                // Thay thế nội dung hiện tại bằng BookDetailsControl
+                rw.MainContent.Content = homeControl;
+            }
         }
     }
 }

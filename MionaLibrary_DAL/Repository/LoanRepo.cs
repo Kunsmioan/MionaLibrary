@@ -45,6 +45,7 @@ namespace MionaLibrary_DAL.Repository
         {
             _context = new();
             Book? bookSelected = _context.Books
+                                .Include(b => b.Genre)
                                 .FirstOrDefault(book => book.Id == bookId);
 
             return bookSelected;

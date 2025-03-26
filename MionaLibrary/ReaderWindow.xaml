@@ -78,7 +78,7 @@
                                                 <ColumnDefinition Width="45"/>
                                                 <ColumnDefinition/>
                                             </Grid.ColumnDefinitions>
-                                            <TextBlock Text="Book loan history" Foreground="#FF3D3D3D" Grid.Column="1" 
+                                            <TextBlock Text="Book on loan" Foreground="#FF3D3D3D" Grid.Column="1" 
                                    VerticalAlignment="Center" FontSize="14" HorizontalAlignment="Left"/>
                                         </Grid>
                                     </ControlTemplate>

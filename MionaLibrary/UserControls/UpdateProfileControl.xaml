@@ -22,7 +22,7 @@
     </UserControl.Resources>
 
     <Grid Margin="10" Background="white">
-        <StackPanel VerticalAlignment="Top" Height="403" Margin="43,36,270,0">
+        <StackPanel VerticalAlignment="Top" Height="403" Margin="156,66,156,0">
             <StackPanel Margin="10">
                 <TextBlock Text="Update account" FontSize="18" FontWeight="Bold" HorizontalAlignment="Center"/>
             </StackPanel>

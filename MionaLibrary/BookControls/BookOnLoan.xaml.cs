@@ -34,7 +34,8 @@ namespace MionaLibrary.BookControls
 
         public void SetUser(User user)
         {
-            reader = user;LoadData();
+            reader = user;
+            LoadData();
         }
 
         public void LoadData()
@@ -71,7 +72,7 @@ namespace MionaLibrary.BookControls
             // Lấy đối tượng sách từ DataContext của nút
             if ((sender as Button)?.DataContext is Loan selectedLoan && selectedLoan.Book != null)
             {
-                Book selectedBook = selectedLoan.Book;
+                Book selectedBook = _loanServices.bookSelectedById(selectedLoan.Book.Id);
                 // Lấy cửa sổ cha
                 Window parentWindow = Window.GetWindow(this);
                 if (parentWindow is ReaderWindow rw)

@@ -61,7 +61,14 @@ namespace MionaLibrary.BookControls
                 TitleTextBlock.Text = bookSelected.Title;
                 AuthorTextBlock.Text = bookSelected.Author;
                 LanguageTextBlock.Text = bookSelected.Language;
-                GenreTextBlock.Text = bookSelected.Genre.Name;
+                if (bookSelected.Genre != null)
+                {
+                    GenreTextBlock.Text = bookSelected.Genre.Name;
+                }
+                //else
+                //{
+                //    GenreTextBlock.Text = "Unknown Genre"; // Default value if Genre is null
+                //}
                 DescriptionTextBlock.Text = bookSelected.Description;
                 PublishYearTextBlock.Text = bookSelected.PublishYear.ToString();
                 ISBNTextBlock.Text = bookSelected.Isbn;
@@ -109,7 +116,7 @@ namespace MionaLibrary.BookControls
                 _loanServices.UpdateLoan(loanSelected);
 
                 // Cập nhật số lượng sách
-                bookSelected.Quantity++;
+                bookSelected.Quantity+=1;
                 _bookServices = new();
                 _bookServices.UpdateBook(bookSelected);
 
