@@ -4,6 +4,7 @@ using MionaLibrary_DAL.Entity;
 using MionaLibrary_Services.Services;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,8 +27,6 @@ namespace MionaLibrary.BookControls
     {
         Book? bookSelected;
         BookServices? _bookServices;
-        LoanHistoryServices? _loanHistoryServices;
-        LoanHistory? loanHistory;
         User? reader;
         LoanServices? _loanServices;
 
@@ -109,11 +108,19 @@ namespace MionaLibrary.BookControls
                 else
                 {
                     _loanServices = new();
+                    
+                    //datetime to check
+                    string dateString = "16-3-2025";
+                    string format = "d-M-yyyy";
+                    DateTime borrowDate = DateTime.ParseExact(dateString, format, CultureInfo.InvariantCulture);
+                    
                     // Lưu lịch sử mượn sách
                     Loan loan = new()
                     {
                         BookId = bookSelected.Id,
                         UserId = reader.Id,
+                        //DueDate = borrowDate.AddDays(7),
+                        //BorrowDate = borrowDate,
                         BorrowDate = DateTime.Now,
                         DueDate = DateTime.Now.AddDays(7),
                         ReturnDate = null,
@@ -122,7 +129,6 @@ namespace MionaLibrary.BookControls
                     _loanServices.AddLoan(loan);
 
                     // Giảm số lượng sách đi 1
-
                     bookSelected.Quantity -= 1;
 
                     // Cập nhật trạng thái IsAvailable nếu số lượng sách bằng 0

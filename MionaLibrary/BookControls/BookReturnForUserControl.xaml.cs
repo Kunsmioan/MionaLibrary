@@ -24,9 +24,7 @@ namespace MionaLibrary.BookControls
     {
         Book? bookSelected;
         BookServices? _bookServices;
-        LoanHistoryServices? _loanHistoryServices;
         LoanServices? _loanServices;
-        LoanHistory? loanHistory;
         Loan? loanSelected;
         User? reader;
 

@@ -29,9 +29,9 @@ public partial class Book
 
     public int? Page { get; set; }
 
-    public virtual Genre Genre { get; set; } = null!;
+    public virtual ICollection<BookRequest> BookRequests { get; set; } = new List<BookRequest>();
 
-    public virtual ICollection<LoanHistory> LoanHistories { get; set; } = new List<LoanHistory>();
+    public virtual Genre Genre { get; set; } = null!;
 
     public virtual ICollection<Loan> Loans { get; set; } = new List<Loan>();
 }

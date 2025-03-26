@@ -23,7 +23,7 @@ public partial class User
 
     public string? Phone { get; set; }
 
-    public virtual ICollection<LoanHistory> LoanHistories { get; set; } = new List<LoanHistory>();
+    public virtual ICollection<BookRequest> BookRequests { get; set; } = new List<BookRequest>();
 
     public virtual ICollection<Loan> Loans { get; set; } = new List<Loan>();
 }
