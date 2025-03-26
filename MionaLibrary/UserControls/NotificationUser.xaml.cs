@@ -48,16 +48,16 @@ namespace MionaLibrary.UserControls
                 switch (request.Status)
                 {
                     case "Pending":
-                        request.Announce = "Yêu cầu đang chờ phê duyệt.";
+                        request.Announce = "Your request is pending approval.";
                         break;
                     case "Approved":
-                        request.Announce = "Bạn đã mượn sách thành công. Vui lòng nhận sách tại quầy!";
+                        request.Announce = "You have successfully borrowed the book. Please pick it up at the counter!";
                         break;
                     case "Rejected":
-                        request.Announce = "Yêu cầu không được chấp nhận.";
+                        request.Announce = "Your request has been rejected.";
                         break;
                     default:
-                        request.Announce = "Trạng thái không xác định.";
+                        request.Announce = "Status is undefined.";
                         break;
                 }
             }

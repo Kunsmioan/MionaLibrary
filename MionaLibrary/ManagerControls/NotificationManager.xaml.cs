@@ -45,7 +45,7 @@ namespace MionaLibrary.ManagerControls
         {
             var requestId = (int)((Button)sender).Tag;
             UpdateRequestStatus(requestId, "Approved");
-            MessageBox.Show("Yêu cầu đã được phê duyệt!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+            MessageBox.Show("The request has been approved!", "Notification", MessageBoxButton.OK, MessageBoxImage.Information);
             _loanServices = new();
 
             //book, user
@@ -94,7 +94,7 @@ namespace MionaLibrary.ManagerControls
         {
             var requestId = (int)((Button)sender).Tag;
             UpdateRequestStatus(requestId, "Rejected");
-            MessageBox.Show("Yêu cầu đã bị từ chối!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+            MessageBox.Show("The request has been rejected!", "Notification", MessageBoxButton.OK, MessageBoxImage.Information);
             LoadRequests(); // Cập nhật lại danh sách
         }
 
