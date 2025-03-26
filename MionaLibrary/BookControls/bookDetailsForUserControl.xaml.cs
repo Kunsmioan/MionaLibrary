@@ -1,4 +1,5 @@
 ﻿using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
 using MionaLibrary.UserControls;
 using MionaLibrary_DAL.Entity;
 using MionaLibrary_Services.Services;
@@ -29,6 +30,8 @@ namespace MionaLibrary.BookControls
         BookServices? _bookServices;
         User? reader;
         LoanServices? _loanServices;
+
+        BookRequestServices? _bookRequestServices = new();  
 
         public bookDetailsForUserControl()
         {
@@ -82,6 +85,19 @@ namespace MionaLibrary.BookControls
                 }
             }
         }
+        public void CreateBookRequest(int userId, int bookId)
+        {
+            var request = new BookRequest
+            {
+                UserId = userId,
+                BookId = bookId,
+                RequestDate = DateTime.Now,
+                Status = "Pending" // Trạng thái ban đầu là "Pending"
+            };
+
+            _bookRequestServices.AddBookRequest(request);
+
+        }
 
         private void BorrowBook_Click(object sender, RoutedEventArgs e)
         {
@@ -105,51 +121,66 @@ namespace MionaLibrary.BookControls
                     BorrowBook.IsEnabled = false;
                     return;
                 }
-                else
+                // Tạo yêu cầu mượn sách
+                var bookRequestService = new BookRequestServices();
+                bool hasPendingRequest = bookRequestService.HasPendingRequest(reader.Id, bookSelected.Id);
+                if (hasPendingRequest)
                 {
-                    _loanServices = new();
-                    
-                    //datetime to check
-                    string dateString = "16-3-2025";
-                    string format = "d-M-yyyy";
-                    DateTime borrowDate = DateTime.ParseExact(dateString, format, CultureInfo.InvariantCulture);
-                    
-                    // Lưu lịch sử mượn sách
-                    Loan loan = new()
-                    {
-                        BookId = bookSelected.Id,
-                        UserId = reader.Id,
-                        //DueDate = borrowDate.AddDays(7),
-                        //BorrowDate = borrowDate,
-                        BorrowDate = DateTime.Now,
-                        DueDate = DateTime.Now.AddDays(7),
-                        ReturnDate = null,
-                        Status = "Borrowing"
-                    };
-                    _loanServices.AddLoan(loan);
-
-                    // Giảm số lượng sách đi 1
-                    bookSelected.Quantity -= 1;
-
-                    // Cập nhật trạng thái IsAvailable nếu số lượng sách bằng 0
-                    if (bookSelected.Quantity == 0)
-                    {
-                        bookSelected.IsAvailable = false;
-                    }
-
-                    // Lưu cập nhật sách vào cơ sở dữ liệu
-                    _bookServices = new();
-                    _bookServices.UpdateBook(bookSelected);
-
-                    // Hiển thị thông báo thành công
-                    MessageBox.Show($"You have successfully borrowed the book: {bookSelected.Title}");
-
-                    // Cập nhật lại giao diện
-                    loadData();
-
-                    // Vô hiệu hóa nút sau khi mượn sách
+                    MessageBox.Show($"You have already requested to borrow the book: {bookSelected.Title}. Please wait for manager approval.", "Pending Request", MessageBoxButton.OK, MessageBoxImage.Information);
+                    // Vô hiệu hóa nút sau khi gửi yêu cầu
                     BorrowBook.IsEnabled = false;
+                    return;
                 }
+                CreateBookRequest(reader.Id, bookSelected.Id);
+
+                // Thông báo thành công
+                MessageBox.Show($"Your request to borrow the book '{bookSelected.Title}' has been sent successfully!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                //else
+                //{
+                //    _loanServices = new();
+
+                //    //datetime to check
+                //    string dateString = "16-3-2025";
+                //    string format = "d-M-yyyy";
+                //    DateTime borrowDate = DateTime.ParseExact(dateString, format, CultureInfo.InvariantCulture);
+
+                //    // Lưu lịch sử mượn sách
+                //    Loan loan = new()
+                //    {
+                //        BookId = bookSelected.Id,
+                //        UserId = reader.Id,
+                //        //DueDate = borrowDate.AddDays(7),
+                //        //BorrowDate = borrowDate,
+                //        BorrowDate = DateTime.Now,
+                //        DueDate = DateTime.Now.AddDays(7),
+                //        ReturnDate = null,
+                //        Status = "Borrowing"
+                //    };
+                //    _loanServices.AddLoan(loan);
+
+                //    // Giảm số lượng sách đi 1
+                //    bookSelected.Quantity -= 1;
+
+                //    // Cập nhật trạng thái IsAvailable nếu số lượng sách bằng 0
+                //    if (bookSelected.Quantity == 0)
+                //    {
+                //        bookSelected.IsAvailable = false;
+                //    }
+
+                //    // Lưu cập nhật sách vào cơ sở dữ liệu
+                //    _bookServices = new();
+                //    _bookServices.UpdateBook(bookSelected);
+
+                //    // Hiển thị thông báo thành công
+                //    MessageBox.Show($"You have successfully borrowed the book: {bookSelected.Title}");
+
+                //    // Cập nhật lại giao diện
+                //    loadData();
+
+                //    // Vô hiệu hóa nút sau khi mượn sách
+                BorrowBook.IsEnabled = false;
+                //}
 
 
             }

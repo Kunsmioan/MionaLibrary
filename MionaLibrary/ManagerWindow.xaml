@@ -40,6 +40,26 @@
                         </Button.Template>
                     </Button>
 
+                    <!--Notify-->
+                    <Button Content="Notifications" Height="50" Foreground="White" Width="auto"
+BorderThickness="0" Click="Notification_Click" Style="{StaticResource ButtonStyle}">
+                        <Button.Template>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Grid Background="{TemplateBinding Background}">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="35"/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                    <fa:ImageAwesome Icon="Bell" Foreground="White" Width="15" Height="15" 
+                         HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    <TextBlock Text="{TemplateBinding Content}" Foreground="White" Grid.Column="1" 
+                   VerticalAlignment="Center" FontSize="18"/>
+                                </Grid>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+
+
                     <!-- Nút "Book" -->
                     <Button x:Name="BookButton" Content="Book" HorizontalAlignment="Stretch" Height="50" Foreground="White" Width="auto"
                             BorderThickness="0" Style="{StaticResource ButtonStyle}" Click="Books_Click">
@@ -123,27 +143,6 @@ BorderThickness="0" Click="Genre_Click" Style="{StaticResource ButtonStyle}">
                             </ControlTemplate>
                         </Button.Template>
                     </Button>
-
-
-
-                    <Button Content="Notifications" Height="50" Foreground="White" Width="auto"
-        BorderThickness="0" Click="Notification_Click" Style="{StaticResource ButtonStyle}">
-                        <Button.Template>
-                            <ControlTemplate TargetType="{x:Type Button}">
-                                <Grid Background="{TemplateBinding Background}">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="35"/>
-                                        <ColumnDefinition/>
-                                    </Grid.ColumnDefinitions>
-                                    <fa:ImageAwesome Icon="Bell" Foreground="White" Width="15" Height="15" 
-                                 HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                    <TextBlock Text="{TemplateBinding Content}" Foreground="White" Grid.Column="1" 
-                           VerticalAlignment="Center" FontSize="18"/>
-                                </Grid>
-                            </ControlTemplate>
-                        </Button.Template>
-                    </Button>
-
 
                     <Button x:Name="ProfileButton" Content="Profile" Height="50" Width="180"
                         Foreground="White" BorderThickness="0" Click="Profile_Click" Style="{StaticResource ButtonStyle}">

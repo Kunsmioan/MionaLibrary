@@ -146,7 +146,8 @@ namespace MionaLibrary
 
         private void Notification_Click(object sender, RoutedEventArgs e)
         {
-
+            NotificationManager notificationManager = new NotificationManager();
+            MainContent.Content = notificationManager;
         }
 
         private void Genre_Click(object sender, RoutedEventArgs e)
