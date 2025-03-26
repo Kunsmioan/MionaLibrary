@@ -37,5 +37,15 @@ namespace MionaLibrary_Services.Services
         {
             return _repo.HasPendingRequest(userId, bookId);
         }
+
+        public List<BookRequest> GetPendingRequests()
+        {
+            return _repo.GetPendingRequests();
+        }
+
+        public BookRequest? GetRequestById(int requestId)
+        {
+            return _repo.GetRequestById(requestId);
+        }
     }
 }

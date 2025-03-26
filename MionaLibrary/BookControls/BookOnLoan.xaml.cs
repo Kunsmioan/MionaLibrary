@@ -29,7 +29,6 @@ namespace MionaLibrary.BookControls
         public BookOnLoan()
         {
             InitializeComponent();
-            
         }
 
         public void SetUser(User user)
