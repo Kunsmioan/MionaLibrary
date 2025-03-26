@@ -34,4 +34,6 @@ public partial class Book
     public virtual Genre Genre { get; set; } = null!;
 
     public virtual ICollection<Loan> Loans { get; set; } = new List<Loan>();
+
+    public virtual ICollection<ReturnRequest> ReturnRequests { get; set; } = new List<ReturnRequest>();
 }

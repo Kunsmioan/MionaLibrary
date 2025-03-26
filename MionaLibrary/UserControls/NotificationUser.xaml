@@ -5,125 +5,256 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MionaLibrary.UserControls"
              mc:Ignorable="d" 
-             d:DesignHeight="550" d:DesignWidth="720">
+             d:DesignHeight="600" d:DesignWidth="720">
     <Grid Background="AliceBlue">
         <Grid.RowDefinitions>
-            <RowDefinition Height="50"/>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="20"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="10"/>
         </Grid.RowDefinitions>
 
-        <TextBlock Text="Announcement about book loan" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" FontWeight="Bold" FontFamily="Book Antiqua"/>
-
-        <!-- DataGrid để hiển thị danh sách yêu cầu -->
-        <DataGrid Name="UserRequestDataGrid" 
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <TextBlock Text="Notify book loan" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" 
+                       FontWeight="Bold" FontFamily="Book Antiqua" Grid.Row="0"/>
+            <!-- DataGrid để hiển thị danh sách yêu cầu -->
+            <DataGrid Name="UserRequestDataGrid" 
               Grid.Row="1"
               AutoGenerateColumns="False" 
               Margin="10" 
               CanUserAddRows="False">
-            <DataGrid.Columns>
-                <!-- Cột ID -->
-                <DataGridTextColumn Header="ID" Binding="{Binding RequestId}" Width="40">
-                    <DataGridTextColumn.ElementStyle>
-                        <Style TargetType="TextBlock">
-                            <Setter Property="FontSize" Value="12" />
-                            <Setter Property="HorizontalAlignment" Value="Left" />
-                            <Setter Property="VerticalAlignment" Value="Center" />
-                            <Setter Property="Margin" Value="5" />
-                        </Style>
-                    </DataGridTextColumn.ElementStyle>
-                </DataGridTextColumn>
+                <DataGrid.Columns>
+                    <!-- Cột ID -->
+                    <DataGridTextColumn Header="ID" Binding="{Binding RequestId}" Width="40">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="FontSize" Value="12" />
+                                <Setter Property="HorizontalAlignment" Value="Left" />
+                                <Setter Property="VerticalAlignment" Value="Center" />
+                                <Setter Property="Margin" Value="5" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
 
-                <!-- Cột Book -->
-                <DataGridTextColumn Header="Book" Binding="{Binding Book.Title}" Width="2*">
-                    <DataGridTextColumn.ElementStyle>
-                        <Style TargetType="TextBlock">
-                            <Setter Property="FontSize" Value="12" />
-                            <Setter Property="HorizontalAlignment" Value="Left" />
-                            <Setter Property="VerticalAlignment" Value="Center" />
-                            <Setter Property="Margin" Value="5" />
-                        </Style>
-                    </DataGridTextColumn.ElementStyle>
-                </DataGridTextColumn>
+                    <!-- Cột Book -->
+                    <DataGridTextColumn Header="Book" Binding="{Binding Book.Title}" Width="2*">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="FontSize" Value="12" />
+                                <Setter Property="HorizontalAlignment" Value="Left" />
+                                <Setter Property="VerticalAlignment" Value="Center" />
+                                <Setter Property="Margin" Value="5" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
 
-                <!-- Cột Request Date -->
-                <DataGridTextColumn Header="Request Date" Binding="{Binding RequestDate, StringFormat='{}{0:dd/MM/yyyy HH:mm}'}" Width="*">
-                    <DataGridTextColumn.ElementStyle>
-                        <Style TargetType="TextBlock">
-                            <Setter Property="FontSize" Value="12" />
-                            <Setter Property="HorizontalAlignment" Value="Left" />
-                            <Setter Property="VerticalAlignment" Value="Center" />
-                            <Setter Property="Margin" Value="5" />
-                        </Style>
-                    </DataGridTextColumn.ElementStyle>
-                </DataGridTextColumn>
+                    <!-- Cột Request Date -->
+                    <DataGridTextColumn Header="Request Date" Binding="{Binding RequestDate, StringFormat='{}{0:dd/MM/yyyy HH:mm}'}" Width="*">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="FontSize" Value="12" />
+                                <Setter Property="HorizontalAlignment" Value="Left" />
+                                <Setter Property="VerticalAlignment" Value="Center" />
+                                <Setter Property="Margin" Value="5" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
 
-                <!-- Cột Status -->
-                <DataGridTemplateColumn Header="Status" Width="100">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="{Binding Status}" 
+                    <!-- Cột Status -->
+                    <DataGridTemplateColumn Header="Status" Width="100">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Status}" 
                            FontSize="12" 
                            HorizontalAlignment="Left" 
                            VerticalAlignment="Center" Margin="5">
-                                <TextBlock.Style>
-                                    <Style TargetType="TextBlock">
-                                        <Setter Property="Foreground" Value="Black" />
-                                        <!-- Màu mặc định -->
-                                        <Style.Triggers>
-                                            <!-- Khi Status là "Pending" -->
-                                            <DataTrigger Binding="{Binding Status}" Value="Pending">
-                                                <Setter Property="Foreground" Value="Orange" />
-                                            </DataTrigger>
-                                            <!-- Khi Status là "Approved" -->
-                                            <DataTrigger Binding="{Binding Status}" Value="Approved">
-                                                <Setter Property="Foreground" Value="Green" />
-                                            </DataTrigger>
-                                            <!-- Khi Status là "Rejected" -->
-                                            <DataTrigger Binding="{Binding Status}" Value="Rejected">
-                                                <Setter Property="Foreground" Value="Red" />
-                                            </DataTrigger>
-                                        </Style.Triggers>
-                                    </Style>
-                                </TextBlock.Style>
-                            </TextBlock>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-                <!-- Cột Announce -->
-                <DataGridTemplateColumn Header="Announce" Width="*">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="{Binding Announce}" 
+                                    <TextBlock.Style>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="Foreground" Value="Black" />
+                                            <!-- Màu mặc định -->
+                                            <Style.Triggers>
+                                                <!-- Khi Status là "Pending" -->
+                                                <DataTrigger Binding="{Binding Status}" Value="Pending">
+                                                    <Setter Property="Foreground" Value="Orange" />
+                                                </DataTrigger>
+                                                <!-- Khi Status là "Approved" -->
+                                                <DataTrigger Binding="{Binding Status}" Value="Approved">
+                                                    <Setter Property="Foreground" Value="Green" />
+                                                </DataTrigger>
+                                                <!-- Khi Status là "Rejected" -->
+                                                <DataTrigger Binding="{Binding Status}" Value="Rejected">
+                                                    <Setter Property="Foreground" Value="Red" />
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </TextBlock.Style>
+                                </TextBlock>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    
+                    <!-- Cột Announce -->
+                    <DataGridTemplateColumn Header="Announce" Width="*">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Announce}" 
                            FontSize="12" 
                            HorizontalAlignment="Left" 
                            VerticalAlignment="Center"
                            TextWrapping="Wrap" Margin="5">
-                                <TextBlock.Style>
-                                    <Style TargetType="TextBlock">
-                                        <Setter Property="Foreground" Value="Black" />
-                                        <!-- Màu mặc định -->
-                                        <Style.Triggers>
-                                            <!-- Khi Status là "Pending" -->
-                                            <DataTrigger Binding="{Binding Status}" Value="Pending">
-                                                <Setter Property="Foreground" Value="Orange" />
-                                            </DataTrigger>
-                                            <!-- Khi Status là "Approved" -->
-                                            <DataTrigger Binding="{Binding Status}" Value="Approved">
-                                                <Setter Property="Foreground" Value="Green" />
-                                            </DataTrigger>
-                                            <!-- Khi Status là "Rejected" -->
-                                            <DataTrigger Binding="{Binding Status}" Value="Rejected">
-                                                <Setter Property="Foreground" Value="Red" />
-                                            </DataTrigger>
-                                        </Style.Triggers>
-                                    </Style>
-                                </TextBlock.Style>
-                            </TextBlock>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-            </DataGrid.Columns>
-        </DataGrid>
+                                    <TextBlock.Style>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="Foreground" Value="Black" />
+                                            <!-- Màu mặc định -->
+                                            <Style.Triggers>
+                                                <!-- Khi Status là "Pending" -->
+                                                <DataTrigger Binding="{Binding Status}" Value="Pending">
+                                                    <Setter Property="Foreground" Value="Orange" />
+                                                </DataTrigger>
+                                                <!-- Khi Status là "Approved" -->
+                                                <DataTrigger Binding="{Binding Status}" Value="Approved">
+                                                    <Setter Property="Foreground" Value="Green" />
+                                                </DataTrigger>
+                                                <!-- Khi Status là "Rejected" -->
+                                                <DataTrigger Binding="{Binding Status}" Value="Rejected">
+                                                    <Setter Property="Foreground" Value="Red" />
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </TextBlock.Style>
+                                </TextBlock>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+
+        <Grid Grid.Row="3">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <TextBlock Text="Notify book return request" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" 
+           FontWeight="Bold" FontFamily="Book Antiqua" Grid.Row="0"/>
+            <!-- DataGrid để hiển thị danh sách yêu cầu -->
+            <DataGrid Name="UserReturnBookDataGrid" 
+  Grid.Row="1"
+  AutoGenerateColumns="False" 
+  Margin="10" 
+  CanUserAddRows="False">
+                <DataGrid.Columns>
+                    <!-- Cột ID -->
+                    <DataGridTextColumn Header="ID" Binding="{Binding ReturnRequestId}" Width="40">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="FontSize" Value="12" />
+                                <Setter Property="HorizontalAlignment" Value="Left" />
+                                <Setter Property="VerticalAlignment" Value="Center" />
+                                <Setter Property="Margin" Value="5" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+
+                    <!-- Cột Book Title -->
+                    <DataGridTextColumn Header="Book" Binding="{Binding Book.Title}" Width="2*">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="FontSize" Value="12" />
+                                <Setter Property="HorizontalAlignment" Value="Left" />
+                                <Setter Property="VerticalAlignment" Value="Center" />
+                                <Setter Property="Margin" Value="5" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+
+                    <!-- Cột Request Date -->
+                    <DataGridTextColumn Header="Request Date" Binding="{Binding RequestDate, StringFormat='{}{0:dd/MM/yyyy HH:mm}'}" Width="*">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="FontSize" Value="12" />
+                                <Setter Property="HorizontalAlignment" Value="Left" />
+                                <Setter Property="VerticalAlignment" Value="Center" />
+                                <Setter Property="Margin" Value="5" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+
+                    <!-- Cột Status -->
+                    <DataGridTemplateColumn Header="Status" Width="100">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Status}" 
+                           FontSize="12" 
+                           HorizontalAlignment="Left" 
+                           VerticalAlignment="Center" 
+                           Margin="5">
+                                    <TextBlock.Style>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="Foreground" Value="Black" />
+                                            <!-- Màu mặc định -->
+                                            <Style.Triggers>
+                                                <!-- Khi Status là "Pending" -->
+                                                <DataTrigger Binding="{Binding Status}" Value="Pending">
+                                                    <Setter Property="Foreground" Value="Orange" />
+                                                </DataTrigger>
+                                                <!-- Khi Status là "Approved" -->
+                                                <DataTrigger Binding="{Binding Status}" Value="Approved">
+                                                    <Setter Property="Foreground" Value="Green" />
+                                                </DataTrigger>
+                                                <!-- Khi Status là "Rejected" -->
+                                                <DataTrigger Binding="{Binding Status}" Value="Rejected">
+                                                    <Setter Property="Foreground" Value="Red" />
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </TextBlock.Style>
+                                </TextBlock>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    
+                    <!-- Cột Announce -->
+                    <DataGridTemplateColumn Header="Announce" Width="*">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Announce}" 
+        FontSize="12" 
+        HorizontalAlignment="Left" 
+        VerticalAlignment="Center"
+        TextWrapping="Wrap" Margin="5">
+                                    <TextBlock.Style>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="Foreground" Value="Black" />
+                                            <!-- Màu mặc định -->
+                                            <Style.Triggers>
+                                                <!-- Khi Status là "Pending" -->
+                                                <DataTrigger Binding="{Binding Status}" Value="Pending">
+                                                    <Setter Property="Foreground" Value="Orange" />
+                                                </DataTrigger>
+                                                <!-- Khi Status là "Approved" -->
+                                                <DataTrigger Binding="{Binding Status}" Value="Approved">
+                                                    <Setter Property="Foreground" Value="Green" />
+                                                </DataTrigger>
+                                                <!-- Khi Status là "Rejected" -->
+                                                <DataTrigger Binding="{Binding Status}" Value="Rejected">
+                                                    <Setter Property="Foreground" Value="Red" />
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </TextBlock.Style>
+                                </TextBlock>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
     </Grid>
 </UserControl>

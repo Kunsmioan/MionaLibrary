@@ -28,6 +28,8 @@ namespace MionaLibrary.BookControls
         Loan? loanSelected;
         User? reader;
 
+        BookReturnRequestServices? _bookReturnRequestServices;
+
         public BookReturnForUserControl()
         {
             InitializeComponent();
@@ -105,24 +107,43 @@ namespace MionaLibrary.BookControls
                     return;
                 }
 
-                // Cập nhật thông tin trả sách
-                loanSelected.ReturnDate = DateTime.Now;
-                loanSelected.Status = "Returned";
+                var returnRequest = new ReturnRequest
+                {
+                    LoanId = loanSelected.Id,       // ID của khoản vay
+                    BookId = bookSelected.Id,       // ID của sách
+                    UserId = reader.Id,
+                    RequestDate = DateTime.Now,     // Ngày gửi yêu cầu
+                    Status = "Pending"              // Trạng thái mặc định là "Pending"
+                };
 
-                // Lưu thay đổi vào cơ sở dữ liệu
-                _loanServices = new();
-                _loanServices.UpdateLoan(loanSelected);
-
-                // Cập nhật số lượng sách
-                bookSelected.Quantity+=1;
-                _bookServices = new();
-                _bookServices.UpdateBook(bookSelected);
+                // Lưu yêu cầu trả sách vào cơ sở dữ liệu
+                _bookReturnRequestServices = new();
+                _bookReturnRequestServices.AddBookReturn(returnRequest);
 
                 // Thông báo thành công
-                MessageBox.Show($"Bạn đã trả sách thành công: {bookSelected.Title}", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show($"Request return book '{bookSelected.Title}' has sent successfully. Please wait to approval.", "Notification", MessageBoxButton.OK, MessageBoxImage.Information);
 
                 // Làm mới dữ liệu
                 loadData();
+
+                //// Cập nhật thông tin trả sách
+                //loanSelected.ReturnDate = DateTime.Now;
+                //loanSelected.Status = "Returned";
+
+                //// Lưu thay đổi vào cơ sở dữ liệu
+                //_loanServices = new();
+                //_loanServices.UpdateLoan(loanSelected);
+
+                //// Cập nhật số lượng sách
+                //bookSelected.Quantity+=1;
+                //_bookServices = new();
+                //_bookServices.UpdateBook(bookSelected);
+
+                // Thông báo thành công
+                //MessageBox.Show($"Bạn đã trả sách thành công: {bookSelected.Title}", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                // Làm mới dữ liệu
+                //loadData();
 
                 // Quay về màn hình BookOnLoan
                 Window parentWindow = Window.GetWindow(this);

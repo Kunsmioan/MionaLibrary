@@ -24,6 +24,7 @@ namespace MionaLibrary.ManagerControls
     public partial class NotificationManager : UserControl
     {
         BookRequestServices _bookRequestServices = new();
+        BookReturnRequestServices _bookReturnRequestServices = new();
         LoanServices _loanServices = new();
         BookServices _bookServices = new();
         BookRequest? request = new();
@@ -32,6 +33,7 @@ namespace MionaLibrary.ManagerControls
         {
             InitializeComponent();
             LoadRequests();
+            LoadReturnRequests();
         }
 
         private void LoadRequests()
@@ -107,6 +109,103 @@ namespace MionaLibrary.ManagerControls
                 // Lưu thay đổi vào cơ sở dữ liệu
                 _bookRequestServices.UpdateBookRequest(request);
                 LoadRequests();
+            }
+        }
+
+        private void LoadReturnRequests()
+        {
+            var returnRequests = _bookReturnRequestServices.GetPendingReturnRequests();
+            ReturnRequestDataGrid.ItemsSource = returnRequests;
+        }
+
+        private void ApproveReturn_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                // Lấy ID của yêu cầu trả sách từ nút "Approve"
+                var returnRequestId = (int)((Button)sender).Tag;
+
+                // Cập nhật trạng thái yêu cầu trả sách thành "Approved"
+                UpdateReturnRequestStatus(returnRequestId, "Approved");
+
+                // Lấy thông tin yêu cầu trả sách
+                var returnRequest = _bookReturnRequestServices.GetReturnRequestById(returnRequestId);
+                if (returnRequest == null)
+                {
+                    MessageBox.Show("Không tìm thấy yêu cầu trả sách.", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+
+                // Lấy thông tin mượn và sách liên quan
+                var loan = returnRequest.Loan;
+                var book = returnRequest.Book;
+
+                if (loan == null || book == null)
+                {
+                    MessageBox.Show("Thông tin khoản vay hoặc sách không hợp lệ.", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+
+                // Cập nhật trạng thái khoản vay
+                loan.ReturnDate = DateTime.Now;
+                loan.Status = "Returned";
+                _loanServices.UpdateLoan(loan);
+
+                // Tăng số lượng sách lên 1
+                book.Quantity += 1;
+
+                // Cập nhật trạng thái IsAvailable nếu số lượng sách > 0
+                if (book.Quantity > 0)
+                {
+                    book.IsAvailable = true;
+                }
+
+                // Lưu cập nhật sách vào cơ sở dữ liệu
+                _bookServices.UpdateBook(book);
+
+                // Hiển thị thông báo thành công
+                MessageBox.Show("Yêu cầu trả sách đã được phê duyệt!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                // Làm mới danh sách
+                LoadReturnRequests();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi khi phê duyệt yêu cầu trả sách: {ex.Message}", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void RejectReturn_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                // Lấy ID của yêu cầu trả sách từ nút "Reject"
+                var returnRequestId = (int)((Button)sender).Tag;
+
+                // Cập nhật trạng thái yêu cầu trả sách thành "Rejected"
+                UpdateReturnRequestStatus(returnRequestId, "Rejected");
+
+                // Hiển thị thông báo thành công
+                MessageBox.Show("Yêu cầu trả sách đã bị từ chối!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                // Làm mới danh sách
+                LoadReturnRequests();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi khi từ chối yêu cầu trả sách: {ex.Message}", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void UpdateReturnRequestStatus(int returnRequestId, string status)
+        {
+            var returnRequest = _bookReturnRequestServices.GetReturnRequestById(returnRequestId);
+            if (returnRequest != null)
+            {
+                returnRequest.Status = status;
+
+                // Lưu thay đổi vào cơ sở dữ liệu
+                _bookReturnRequestServices.UpdateBookReturn(returnRequest);
             }
         }
     }

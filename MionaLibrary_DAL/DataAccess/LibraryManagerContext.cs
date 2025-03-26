@@ -24,6 +24,8 @@ public partial class LibraryManagerContext : DbContext
 
     public virtual DbSet<Loan> Loans { get; set; }
 
+    public virtual DbSet<ReturnRequest> ReturnRequests { get; set; }
+
     public virtual DbSet<User> Users { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -34,9 +36,9 @@ public partial class LibraryManagerContext : DbContext
     {
         modelBuilder.Entity<Book>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Books__3214EC0765BAB7AD");
+            entity.HasKey(e => e.Id).HasName("PK__Books__3214EC07E874CDF0");
 
-            entity.HasIndex(e => e.Isbn, "UQ__Books__447D36EA2786D628").IsUnique();
+            entity.HasIndex(e => e.Isbn, "UQ__Books__447D36EAE502C2DD").IsUnique();
 
             entity.Property(e => e.Author).HasMaxLength(100);
             entity.Property(e => e.Description).HasColumnType("text");
@@ -55,7 +57,7 @@ public partial class LibraryManagerContext : DbContext
 
         modelBuilder.Entity<BookRequest>(entity =>
         {
-            entity.HasKey(e => e.RequestId).HasName("PK__BookRequ__33A8519AEC5CBB30");
+            entity.HasKey(e => e.RequestId).HasName("PK__BookRequ__33A8519A23FE7D22");
 
             entity.ToTable("BookRequest");
 
@@ -74,26 +76,26 @@ public partial class LibraryManagerContext : DbContext
             entity.HasOne(d => d.Book).WithMany(p => p.BookRequests)
                 .HasForeignKey(d => d.BookId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_Book");
+                .HasConstraintName("FK_BookRequest_Book");
 
             entity.HasOne(d => d.User).WithMany(p => p.BookRequests)
                 .HasForeignKey(d => d.UserId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_User");
+                .HasConstraintName("FK_BookRequest_User");
         });
 
         modelBuilder.Entity<Genre>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Genres__3214EC071CADFE28");
+            entity.HasKey(e => e.Id).HasName("PK__Genres__3214EC07D1C251AD");
 
-            entity.HasIndex(e => e.Name, "UQ__Genres__737584F60782173D").IsUnique();
+            entity.HasIndex(e => e.Name, "UQ__Genres__737584F660EC0DD6").IsUnique();
 
             entity.Property(e => e.Name).HasMaxLength(50);
         });
 
         modelBuilder.Entity<Loan>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Loans__3214EC07D5C4688B");
+            entity.HasKey(e => e.Id).HasName("PK__Loans__3214EC0739B08213");
 
             entity.ToTable(tb => tb.HasTrigger("trg_UpdateLoanStatus"));
 
@@ -119,11 +121,41 @@ public partial class LibraryManagerContext : DbContext
                 .HasConstraintName("FK__Loans__UserId__3B75D760");
         });
 
+        modelBuilder.Entity<ReturnRequest>(entity =>
+        {
+            entity.HasKey(e => e.ReturnRequestId).HasName("PK__ReturnRe__0CCD25992A28345E");
+
+            entity.ToTable("ReturnRequest");
+
+            entity.Property(e => e.Announce).HasMaxLength(255);
+            entity.Property(e => e.RequestDate)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.Status)
+                .HasMaxLength(50)
+                .HasDefaultValue("Pending");
+
+            entity.HasOne(d => d.Book).WithMany(p => p.ReturnRequests)
+                .HasForeignKey(d => d.BookId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_ReturnRequest_Book");
+
+            entity.HasOne(d => d.Loan).WithMany(p => p.ReturnRequests)
+                .HasForeignKey(d => d.LoanId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_ReturnRequest_Loan");
+
+            entity.HasOne(d => d.User).WithMany(p => p.ReturnRequests)
+                .HasForeignKey(d => d.UserId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_ReturnRequest_User");
+        });
+
         modelBuilder.Entity<User>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Users__3214EC078F949C52");
+            entity.HasKey(e => e.Id).HasName("PK__Users__3214EC07A6229CA7");
 
-            entity.HasIndex(e => e.Username, "UQ__Users__536C85E41ECDDDD1").IsUnique();
+            entity.HasIndex(e => e.Username, "UQ__Users__536C85E412330005").IsUnique();
 
             entity.Property(e => e.Birthday).HasColumnType("datetime");
             entity.Property(e => e.FirstName).HasMaxLength(100);
