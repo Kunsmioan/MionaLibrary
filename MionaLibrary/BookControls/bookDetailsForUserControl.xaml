@@ -7,7 +7,7 @@
               xmlns:fa="http://schemas.fontawesome.io/icons/"
              mc:Ignorable="d" 
              d:DesignHeight="550" d:DesignWidth="720">
-    <Grid Background="#FFF3FAF5">
+    <Grid Background="AliceBlue">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="3*"/>
             <ColumnDefinition Width="4*"/>

@@ -124,8 +124,9 @@ namespace MionaLibrary
 
         private void BookBorowingLoan_Click(object sender, RoutedEventArgs e)
         {
-            BookBorrowingLoan borrowBook = new();
-            MainContent.Content = borrowBook;
+            BookBorrowingLoan bookBorrowingLoan = new();
+            bookBorrowingLoan.SetUser(reader);
+            MainContent.Content = bookBorrowingLoan;
         }
 
         //private void HistoryLoan_Click(object sender, RoutedEventArgs e)

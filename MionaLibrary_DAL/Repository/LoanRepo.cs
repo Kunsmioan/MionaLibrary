@@ -61,6 +61,16 @@ namespace MionaLibrary_DAL.Repository
             return loans;
         }
 
+        public List<Loan> GetLoanReturnByUser(int userId)
+        {
+            _context = new();
+            List<Loan> loans = _context.Loans
+                                       .Include(loan => loan.Book)
+                                       .Where(loan => loan.UserId == userId && (loan.Status == "Returned"))
+                                       .ToList();
+            return loans;
+        }
+
         public bool IsBookBorrowedByUser(int bookId, int userId)
         {
             _context= new();
