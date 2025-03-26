@@ -6,29 +6,105 @@
              xmlns:local="clr-namespace:MionaLibrary.ManagerControls"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="720">
-    <Grid>
+    <Grid Background="AliceBlue">
         <Grid.RowDefinitions>
-            <RowDefinition Height="20"/>
+            <RowDefinition Height="50"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="20"/>
+            <RowDefinition Height="10"/>
         </Grid.RowDefinitions>
 
+        <TextBlock Text="Announcement about book loan" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" FontWeight="Bold" FontFamily="Book Antiqua"/>
         <DataGrid Name="RequestDataGrid" AutoGenerateColumns="False" Margin="10" Grid.Row="1"
                   CanUserAddRows="False">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="ID" Binding="{Binding RequestId}" Width="40"/>
-                <DataGridTextColumn Header="User" Binding="{Binding User.Username}" Width="*" />
-                <DataGridTextColumn Header="Book" Binding="{Binding Book.Title}" Width="2*" />
-                <DataGridTextColumn Header="Request Date" Binding="{Binding RequestDate, StringFormat='{}{0:dd/MM/yyyy HH:mm}'}" Width="*" />
-                <DataGridTextColumn Header="Status" Binding="{Binding Status}" Width="100" />
-                <DataGridTemplateColumn Header="Actions" Width="*">
+                <DataGridTextColumn Header="ID" Binding="{Binding RequestId}" Width="40">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="FontSize" Value="12" />
+                            <Setter Property="HorizontalAlignment" Value="Center" />
+                            <Setter Property="VerticalAlignment" Value="Center" />
+                            <Setter Property="Margin" Value="5" />
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+
+                <!-- Cột User -->
+                <DataGridTextColumn Header="User" Binding="{Binding User.Username}" Width="*">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="FontSize" Value="12" />
+                            <Setter Property="HorizontalAlignment" Value="Left" />
+                            <Setter Property="VerticalAlignment" Value="Center" />
+                            <Setter Property="Margin" Value="5" />
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+
+                <!-- Cột Book -->
+                <DataGridTextColumn Header="Book" Binding="{Binding Book.Title}" Width="2*">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="FontSize" Value="12" />
+                            <Setter Property="HorizontalAlignment" Value="Left" />
+                            <Setter Property="VerticalAlignment" Value="Center" />
+                            <Setter Property="Margin" Value="5" />
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+
+                <!-- Cột Request Date -->
+                <DataGridTextColumn Header="Request Date" Binding="{Binding RequestDate, StringFormat='{}{0:dd/MM/yyyy HH:mm}'}" Width="*">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="FontSize" Value="12" />
+                            <Setter Property="HorizontalAlignment" Value="Left" />
+                            <Setter Property="VerticalAlignment" Value="Center" />
+                            <Setter Property="Margin" Value="5" />
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+
+                <!-- Cột Status 
+                <DataGridTemplateColumn Header="Status" Width="100">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Status}" 
+                           FontSize="12" 
+                           HorizontalAlignment="Left" 
+                           VerticalAlignment="Center" 
+                           Margin="5">
+                                <TextBlock.Style>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="Foreground" Value="Black" />
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Status}" Value="Pending">
+                                                <Setter Property="Foreground" Value="Orange" />
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding Status}" Value="Approved">
+                                                <Setter Property="Foreground" Value="Green" />
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding Status}" Value="Rejected">
+                                                <Setter Property="Foreground" Value="Red" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                -->
+                
+                <DataGridTemplateColumn Header="Actions" Width="200">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
                                 <Button Content="Approve" Tag="{Binding RequestId}" Click="Approve_Click" 
-                                        Background="#FF15C137" Margin="5"/>
+                                        Background="#FF15C137" Margin="10,5,5,5" Padding="5" Width="80"
+                                        Style="{StaticResource ButtonStyleSingle}"/>
                                 <Button Content="Reject" Tag="{Binding RequestId}" Click="Reject_Click" 
-                                        Margin="5" Background="#FFF72525" />
+                                        Margin="5" Background="#FFF72525" Padding="5" Width="80"
+                                        Style="{StaticResource ButtonStyleSingle}"/>
                             </StackPanel>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>

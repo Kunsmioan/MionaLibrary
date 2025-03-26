@@ -49,19 +49,15 @@ namespace MionaLibrary.UserControls
                 {
                     case "Pending":
                         request.Announce = "Yêu cầu đang chờ phê duyệt.";
-                        request.StatusColor = "Orange"; // Gán giá trị chuỗi
                         break;
                     case "Approved":
-                        request.Announce = "Bạn đã mượn sách thành công!";
-                        request.StatusColor = "Green"; // Gán giá trị chuỗi
+                        request.Announce = "Bạn đã mượn sách thành công. Vui lòng nhận sách tại quầy!";
                         break;
                     case "Rejected":
                         request.Announce = "Yêu cầu không được chấp nhận.";
-                        request.StatusColor = "Red"; // Gán giá trị chuỗi
                         break;
                     default:
                         request.Announce = "Trạng thái không xác định.";
-                        request.StatusColor = "Black"; // Gán giá trị chuỗi
                         break;
                 }
             }
@@ -69,5 +65,6 @@ namespace MionaLibrary.UserControls
             // Gán dữ liệu vào DataGrid
             UserRequestDataGrid.ItemsSource = userRequests;
         }
+
     }
 }
