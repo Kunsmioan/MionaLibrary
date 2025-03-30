@@ -121,9 +121,10 @@ BorderThickness="0" Click="Notification_Click" Style="{StaticResource ButtonStyl
 
                     <!-- Danh sách tùy chọn (ẩn ban đầu) -->
                     <Grid x:Name="BookOptions" Visibility="Collapsed" Background="White">
-                        <StackPanel HorizontalAlignment="Left">
+                        <StackPanel>
                             <!-- Nút "Add a book" -->
-                            <Button Height="35" Click="AddBook_Click" Margin="0,1,0,0" Style="{StaticResource ButtonStyleList}" Width="180">
+                            <Button Height="40" Click="AddBook_Click" Margin="0,2,0,2" Style="{StaticResource ButtonStyleList}"
+                                    Width="auto">
                                 <Button.Template>
                                     <ControlTemplate TargetType="Button">
                                         <Grid Background="{TemplateBinding Background}">
@@ -132,14 +133,15 @@ BorderThickness="0" Click="Notification_Click" Style="{StaticResource ButtonStyl
                                                 <ColumnDefinition/>
                                             </Grid.ColumnDefinitions>
                                             <TextBlock Text="Add Book" Foreground="#FF3D3D3D" Grid.Column="1" 
-        VerticalAlignment="Center" FontSize="14" HorizontalAlignment="Left"/>
+        VerticalAlignment="Center" FontSize="16" />
                                         </Grid>
                                     </ControlTemplate>
                                 </Button.Template>
                             </Button>
                             
                             <!-- Nút "Book on loan" -->
-                            <Button Height="35" Click="BookOnLoan_Click" Margin="0,1,0,0" Style="{StaticResource ButtonStyleList}" Width="180">
+                            <Button Height="40" Click="BookOnLoan_Click" Margin="0,2,0,2" Style="{StaticResource ButtonStyleList}"
+                                    Width="auto">
                                 <Button.Template>
                                     <ControlTemplate TargetType="Button">
                                         <Grid Background="{TemplateBinding Background}">
@@ -148,15 +150,15 @@ BorderThickness="0" Click="Notification_Click" Style="{StaticResource ButtonStyl
                                                 <ColumnDefinition/>
                                             </Grid.ColumnDefinitions>
                                             <TextBlock Text="Book loan history" Foreground="#FF3D3D3D" Grid.Column="1" 
-                                   VerticalAlignment="Center" FontSize="14" HorizontalAlignment="Left"/>
+                                   VerticalAlignment="Center" FontSize="16" />
                                         </Grid>
                                     </ControlTemplate>
                                 </Button.Template>
                             </Button>
 
                             <!-- Nút "Book borrowing history" -->
-                            <Button Height="35" Click="BookBorowingLoan_Click" Margin="0,1,0,5" Style="{StaticResource ButtonStyleList}"
-                                    Width="180"  >
+                            <Button Height="40" Click="BookBorowingLoan_Click" Margin="0,2,0,2"  Style="{StaticResource ButtonStyleList}"
+                                    Width="auto"  >
                                 <Button.Template>
                                     <ControlTemplate TargetType="Button">
                                         <Grid Background="{TemplateBinding Background}">
@@ -166,7 +168,7 @@ BorderThickness="0" Click="Notification_Click" Style="{StaticResource ButtonStyl
                                             </Grid.ColumnDefinitions>
                                             <!-- Text -->
                                             <TextBlock Text="Book borrowing history" Foreground="#FF3D3D3D" Grid.Column="1" 
-                                   VerticalAlignment="Center" FontSize="14" HorizontalAlignment="Left" TextWrapping="Wrap" />
+                                   VerticalAlignment="Center" FontSize="14" TextWrapping="Wrap" />
                                         </Grid>
                                     </ControlTemplate>
                                 </Button.Template>

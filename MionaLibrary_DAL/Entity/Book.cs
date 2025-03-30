@@ -29,9 +29,13 @@ public partial class Book
 
     public int? Page { get; set; }
 
+    public int? LanguageId { get; set; }
+
     public virtual ICollection<BookRequest> BookRequests { get; set; } = new List<BookRequest>();
 
     public virtual Genre Genre { get; set; } = null!;
+
+    public virtual Language? LanguageNavigation { get; set; }
 
     public virtual ICollection<Loan> Loans { get; set; } = new List<Loan>();
 

@@ -23,7 +23,7 @@ namespace MionaLibrary.BookControls
     /// </summary>
     public partial class BookOnLoan : UserControl
     {
-        LoanServices? _loanServices;
+        LoanServices? _loanServices = new LoanServices();
         User? reader;
 
         public BookOnLoan()
@@ -34,6 +34,7 @@ namespace MionaLibrary.BookControls
         public void SetUser(User user)
         {
             reader = user;
+_loanServices.UpdateOverdueLoans();
             LoadData();
         }
 
@@ -41,8 +42,6 @@ namespace MionaLibrary.BookControls
         {
             try
             {
-                _loanServices = new LoanServices();
-
                 //if (_loanServices == null)
                 //{
                 //    MessageBox.Show("BookServices is not initialized.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -53,6 +52,8 @@ namespace MionaLibrary.BookControls
                     List<Loan> loanList = _loanServices.GetLoansByUserId(reader.Id);
                     BookOnLoanData.ItemsSource = loanList;
                 }
+
+                
                 //else
                 //{
                 //    MessageBox.Show("User data is missing!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);

@@ -6,13 +6,13 @@
              xmlns:local="clr-namespace:MionaLibrary.BookControls"
              xmlns:fa="http://schemas.fontawesome.io/icons/"
              mc:Ignorable="d" 
-             d:DesignHeight="550" d:DesignWidth="1200">
+             d:DesignHeight="900" d:DesignWidth="1200">
     <Grid Background="AliceBlue">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="3*"/>
             <ColumnDefinition Width="4*"/>
         </Grid.ColumnDefinitions>
-        
+
         <StackPanel Grid.Column="0" >
             <Button Width="80" Height="40" Click="BackButton_Click" HorizontalAlignment="Left" Margin="9,10,0,0" Style="{StaticResource ButtonStyleSingle}">
                 <StackPanel Orientation="Horizontal">
@@ -22,65 +22,65 @@
                 </StackPanel>
             </Button>
             <Border BorderBrush="Black" BorderThickness="1" Margin="20,40,20,10" Background="White">
-                <Image x:Name="BookImage" Width="auto" Height="300" VerticalAlignment="Top" Margin="10"/>
+                <Image x:Name="BookImage" Width="auto" Height="510" VerticalAlignment="Top"/>
             </Border>
-            
+
         </StackPanel>
 
         <Grid Grid.Column="1" Margin="5,0,0,0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
-                <RowDefinition Height="100"/>
+                <RowDefinition Height="300"/>
             </Grid.RowDefinitions>
-            
+
             <StackPanel Margin="20,40,20,5" Grid.Column="1" Grid.Row="0">
                 <TextBlock Text="Book Details" FontSize="24" FontWeight="Bold" Margin="0,0,0,10" Foreground="#FF43DCCA" />
                 <!-- Title -->
                 <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
                     <TextBlock Text="Book title:" FontSize="16" FontWeight="Bold" Width="100" />
-                    <TextBlock x:Name="TitleTextBlock" FontSize="16" Width="200" Margin="10,0,0,0" TextWrapping="Wrap" />
+                    <TextBlock x:Name="TitleTextBlock" FontSize="16" Width="300" Margin="10,0,0,0" TextWrapping="Wrap" />
                 </StackPanel>
 
                 <!-- Author -->
                 <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
                     <TextBlock Text="Author:" FontSize="16" FontWeight="Bold" Width="100" />
-                    <TextBlock x:Name="AuthorTextBlock" FontSize="16" Width="200" Margin="10,0,0,0" TextWrapping="Wrap" />
+                    <TextBlock x:Name="AuthorTextBlock" FontSize="16" Width="300" Margin="10,0,0,0" TextWrapping="Wrap" />
                 </StackPanel>
 
                 <!-- Language -->
                 <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
                     <TextBlock Text="Language:" FontSize="16" FontWeight="Bold" Width="100" />
-                    <TextBlock x:Name="LanguageTextBlock" FontSize="16" Width="200" Margin="10,0,0,0" TextWrapping="Wrap" />
+                    <TextBlock x:Name="LanguageTextBlock" FontSize="16" Width="300" Margin="10,0,0,0" TextWrapping="Wrap" />
                 </StackPanel>
 
                 <!-- Genre -->
                 <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
                     <TextBlock Text="Genre:" FontSize="16" FontWeight="Bold" Width="100" />
-                    <TextBlock x:Name="GenreTextBlock" FontSize="16" Width="200" Margin="10,0,0,0" TextWrapping="Wrap" />
+                    <TextBlock x:Name="GenreTextBlock" FontSize="16" Width="300" Margin="10,0,0,0" TextWrapping="Wrap" />
                 </StackPanel>
 
                 <!-- Publish Year -->
                 <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
                     <TextBlock Text="Publish Year:" FontSize="16" FontWeight="Bold" Width="100" />
-                    <TextBlock x:Name="PublishYearTextBlock" FontSize="16" Width="200" Margin="10,0,0,0" TextWrapping="Wrap" />
+                    <TextBlock x:Name="PublishYearTextBlock" FontSize="16" Width="300" Margin="10,0,0,0" TextWrapping="Wrap" />
                 </StackPanel>
 
                 <!-- ISBN -->
                 <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
                     <TextBlock Text="ISBN:" FontSize="16" FontWeight="Bold" Width="100" />
-                    <TextBlock x:Name="ISBNTextBlock" FontSize="16" Width="200" Margin="10,0,0,0" TextWrapping="Wrap" />
+                    <TextBlock x:Name="ISBNTextBlock" FontSize="16" Width="300" Margin="10,0,0,0" TextWrapping="Wrap" />
                 </StackPanel>
 
                 <!-- Page -->
                 <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
                     <TextBlock Text="Pages:" FontSize="16" FontWeight="Bold" Width="100" />
-                    <TextBlock x:Name="PageTextBlock" FontSize="16" Width="200" Margin="10,0,0,0" TextWrapping="Wrap" />
+                    <TextBlock x:Name="PageTextBlock" FontSize="16" Width="300" Margin="10,0,0,0" TextWrapping="Wrap" />
                 </StackPanel>
 
                 <!-- Stock -->
                 <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
                     <TextBlock Text="Stock:" FontSize="16" FontWeight="Bold" Width="100" />
-                    <TextBlock x:Name="StockTextBlock" FontSize="16" Width="200" Margin="10,0,0,0" TextWrapping="Wrap" />
+                    <TextBlock x:Name="StockTextBlock" FontSize="16" Width="300" Margin="10,0,0,0" TextWrapping="Wrap" />
                 </StackPanel>
 
                 <!-- Description -->
@@ -90,7 +90,7 @@
                         <TextBlock 
             x:Name="DescriptionTextBlock" 
             FontSize="16" 
-            MaxWidth="250" 
+            MaxWidth="300" 
             TextWrapping="Wrap" 
             VerticalAlignment="Top" />
                     </ScrollViewer>
@@ -99,7 +99,7 @@
                 <!-- IsAvailable -->
                 <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
                     <TextBlock Text="Available:" FontSize="16" FontWeight="Bold" Width="100" />
-                    <TextBlock x:Name="AvailableTextBlock" FontSize="16" Width="250" Margin="10,0,0,0" TextWrapping="Wrap"/>
+                    <TextBlock x:Name="AvailableTextBlock" FontSize="16" Width="300" Margin="10,0,0,0" TextWrapping="Wrap"/>
                 </StackPanel>
 
                 <!-- Các hành động khác, ví dụ: nút "Mượn sách" -->
@@ -114,7 +114,7 @@
                 -->
             </StackPanel>
 
-            <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top" Orientation="Horizontal" Height="60" Margin="0,15,0,0">
+            <StackPanel Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Top" Orientation="Horizontal" Height="60" Margin="20,10,0,0">
                 <Button x:Name="Update" Content="Update" FontSize="16" Width="150" Height="40" 
                         Click="UpdateBook_Click" Margin="10" FontWeight="Bold" Style="{StaticResource ButtonStyleSingle}"/>
                 <Button x:Name="Delete" Content="Delete" FontSize="16" Width="150" Height="40" 

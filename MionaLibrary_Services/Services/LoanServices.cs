@@ -1,4 +1,5 @@
-﻿using MionaLibrary_DAL.Entity;
+﻿using Microsoft.EntityFrameworkCore;
+using MionaLibrary_DAL.Entity;
 using MionaLibrary_DAL.Repository;
 using System;
 using System.Collections.Generic;
@@ -59,6 +60,12 @@ namespace MionaLibrary_Services.Services
         {
             _repo = new();
             return _repo.IsBookBorrowedByUser(bookId, userId);
+        }
+
+        public void UpdateOverdueLoans()
+        {
+            _repo = new();
+            _repo.UpdateOverdueLoans(); 
         }
 
     }

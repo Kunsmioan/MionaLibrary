@@ -11,39 +11,34 @@ namespace MionaLibrary_DAL.Repository
 {
     public class LoanRepo
     {
-        LibraryManagerContext? _context;
+        LibraryManagerContext? _context = new();
 
         public void AddLoan(Loan loan)
         {
-            _context = new();
             _context.Loans.Add(loan);
             _context.SaveChanges();
         }
 
         public void UpdateLoan(Loan loan)
         {
-            _context = new();
             _context.Loans.Update(loan);
             _context.SaveChanges();
         }
 
         public void DeleteLoan(Loan loan)
         {
-            _context = new();
             _context.Loans.Remove(loan);
             _context.SaveChanges();
-        }   
+        }
 
         public List<Loan> GetAllLoans()
         {
-            _context = new();
             List<Loan> loans = _context.Loans.ToList();
             return loans;
         }
 
         public Book getBookById(int bookId)
         {
-            _context = new();
             Book? bookSelected = _context.Books
                                 .Include(b => b.Genre)
                                 .FirstOrDefault(book => book.Id == bookId);
@@ -53,7 +48,6 @@ namespace MionaLibrary_DAL.Repository
 
         public List<Loan> GetLoanByUser(int userId)
         {
-            _context = new();
             List<Loan> loans = _context.Loans
                                        .Include(loan => loan.Book)
                                        .Where(loan => loan.UserId == userId && (loan.Status == "Borrowing" || loan.Status == "Overdue"))
@@ -63,7 +57,6 @@ namespace MionaLibrary_DAL.Repository
 
         public List<Loan> GetLoanReturnByUser(int userId)
         {
-            _context = new();
             List<Loan> loans = _context.Loans
                                        .Include(loan => loan.Book)
                                        .Where(loan => loan.UserId == userId && (loan.Status == "Returned"))
@@ -73,18 +66,37 @@ namespace MionaLibrary_DAL.Repository
 
         public bool IsBookBorrowedByUser(int bookId, int userId)
         {
-            _context= new();
-             // Kiểm tra xem _context có null hay không
-        if (_context == null)
-        {
-            throw new InvalidOperationException("Database context is not initialized.");
-        }
+            // Kiểm tra xem _context có null hay không
+            if (_context == null)
+            {
+                throw new InvalidOperationException("Database context is not initialized.");
+            }
 
             // Truy vấn cơ sở dữ liệu để kiểm tra
             var loan = _context.Loans
                 .FirstOrDefault(l => l.BookId == bookId && l.UserId == userId && l.Status == "Borrowing");
 
             return loan != null; // Trả về true nếu tìm thấy khoản vay
+        }
+
+        public void UpdateOverdueLoans()
+        {
+            // Lấy ngày hiện tại (chỉ lấy phần ngày, không tính thời gian)
+            DateTime today = DateTime.Today;
+
+            // Tìm các khoản vay đang ở trạng thái "Borrowing" và đã quá hạn
+            var overdueLoans = _context.Loans
+                .Where(l => l.Status == "Borrowing" && l.DueDate < today)
+                .ToList();
+
+            // Cập nhật trạng thái thành "Overdue"
+            foreach (var loan in overdueLoans)
+            {
+                loan.Status = "Overdue";
+            }
+
+            // Lưu thay đổi vào cơ sở dữ liệu
+            _context.SaveChanges();
         }
 
     }

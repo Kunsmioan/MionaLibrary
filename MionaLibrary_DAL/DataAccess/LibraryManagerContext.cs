@@ -22,6 +22,8 @@ public partial class LibraryManagerContext : DbContext
 
     public virtual DbSet<Genre> Genres { get; set; }
 
+    public virtual DbSet<Language> Languages { get; set; }
+
     public virtual DbSet<Loan> Loans { get; set; }
 
     public virtual DbSet<ReturnRequest> ReturnRequests { get; set; }
@@ -36,9 +38,9 @@ public partial class LibraryManagerContext : DbContext
     {
         modelBuilder.Entity<Book>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Books__3214EC07E874CDF0");
+            entity.HasKey(e => e.Id).HasName("PK__Books__3214EC0719DD2160");
 
-            entity.HasIndex(e => e.Isbn, "UQ__Books__447D36EAE502C2DD").IsUnique();
+            entity.HasIndex(e => e.Isbn, "UQ__Books__447D36EAC5D28C2C").IsUnique();
 
             entity.Property(e => e.Author).HasMaxLength(100);
             entity.Property(e => e.Description).HasColumnType("text");
@@ -53,11 +55,16 @@ public partial class LibraryManagerContext : DbContext
             entity.HasOne(d => d.Genre).WithMany(p => p.Books)
                 .HasForeignKey(d => d.GenreId)
                 .HasConstraintName("FK_Books_Genres");
+
+            entity.HasOne(d => d.LanguageNavigation).WithMany(p => p.Books)
+                .HasForeignKey(d => d.LanguageId)
+                .OnDelete(DeleteBehavior.SetNull)
+                .HasConstraintName("FK_Books_Languages");
         });
 
         modelBuilder.Entity<BookRequest>(entity =>
         {
-            entity.HasKey(e => e.RequestId).HasName("PK__BookRequ__33A8519A23FE7D22");
+            entity.HasKey(e => e.RequestId).HasName("PK__BookRequ__33A8519A257BE523");
 
             entity.ToTable("BookRequest");
 
@@ -86,18 +93,25 @@ public partial class LibraryManagerContext : DbContext
 
         modelBuilder.Entity<Genre>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Genres__3214EC07D1C251AD");
+            entity.HasKey(e => e.Id).HasName("PK__Genres__3214EC0781FAB212");
 
-            entity.HasIndex(e => e.Name, "UQ__Genres__737584F660EC0DD6").IsUnique();
+            entity.HasIndex(e => e.Name, "UQ__Genres__737584F618FFDBD3").IsUnique();
+
+            entity.Property(e => e.Name).HasMaxLength(50);
+        });
+
+        modelBuilder.Entity<Language>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__Language__3214EC078B1452FD");
+
+            entity.HasIndex(e => e.Name, "UQ__Language__737584F63602EDE6").IsUnique();
 
             entity.Property(e => e.Name).HasMaxLength(50);
         });
 
         modelBuilder.Entity<Loan>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Loans__3214EC0739B08213");
-
-            entity.ToTable(tb => tb.HasTrigger("trg_UpdateLoanStatus"));
+            entity.HasKey(e => e.Id).HasName("PK__Loans__3214EC0779744CFE");
 
             entity.Property(e => e.BorrowDate)
                 .HasDefaultValueSql("(getdate())")
@@ -123,7 +137,7 @@ public partial class LibraryManagerContext : DbContext
 
         modelBuilder.Entity<ReturnRequest>(entity =>
         {
-            entity.HasKey(e => e.ReturnRequestId).HasName("PK__ReturnRe__0CCD25992A28345E");
+            entity.HasKey(e => e.ReturnRequestId).HasName("PK__ReturnRe__0CCD25992ACCD63D");
 
             entity.ToTable("ReturnRequest");
 
@@ -153,9 +167,9 @@ public partial class LibraryManagerContext : DbContext
 
         modelBuilder.Entity<User>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Users__3214EC07A6229CA7");
+            entity.HasKey(e => e.Id).HasName("PK__Users__3214EC07584CE635");
 
-            entity.HasIndex(e => e.Username, "UQ__Users__536C85E412330005").IsUnique();
+            entity.HasIndex(e => e.Username, "UQ__Users__536C85E42350B7C5").IsUnique();
 
             entity.Property(e => e.Birthday).HasColumnType("datetime");
             entity.Property(e => e.FirstName).HasMaxLength(100);

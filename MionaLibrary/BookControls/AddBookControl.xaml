@@ -18,7 +18,8 @@
                 <ColumnDefinition Width="3*"/>
             </Grid.ColumnDefinitions>
             <Grid Grid.Row="0">
-                <TextBlock Text="Add New Book" FontSize="30" FontWeight="Bold" Margin="10,20,10,10" HorizontalAlignment="Center" Foreground="#FF37C506"/>
+                <TextBlock Text="Add New Book" FontSize="30" FontWeight="Bold" Margin="10,20,10,10" HorizontalAlignment="Center" 
+                           Foreground="#FF37C506"/>
             </Grid>
 
             <Grid Grid.Row="1" VerticalAlignment="Top" Height="auto">
@@ -46,7 +47,7 @@
                     <TextBox x:Name="txtIsbn" Height="35" Margin="0,0,0,5" FontSize="16"/>
 
                     <!-- Genre -->
-                    <TextBlock Text="Genre:" FontWeight="Bold" Margin="0,7,0,0" FontSize="14" />
+                    <TextBlock Text="Genre:" FontWeight="Bold" Margin="0,7,0,5" FontSize="18" />
                     <ComboBox x:Name="cbGenre" Height="35" Margin="0,0,0,5" FontSize="16" DisplayMemberPath="Name" SelectedValuePath="Id" SelectedIndex="0"/>
 
                     <!-- Language -->
@@ -75,7 +76,7 @@
 
                 </StackPanel>
 
-                <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Height="525" Width="280">
+                <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Height="auto" Width="280">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="80"/>
