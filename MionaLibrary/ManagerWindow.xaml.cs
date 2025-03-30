@@ -157,5 +157,10 @@ namespace MionaLibrary
             GenreActionControl genreControl = new();
             MainContent.Content = genreControl;
         }
+
+        private void Language_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

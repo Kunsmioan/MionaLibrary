@@ -14,6 +14,8 @@ using System.Windows.Shapes;
 using MionaLibrary_DAL.Entity;
 using MionaLibrary.UserControls;
 using MionaLibrary.BookControls;
+using System.Windows.Threading;
+using Microsoft.VisualBasic;
 
 namespace MionaLibrary
 {
@@ -28,7 +30,22 @@ namespace MionaLibrary
         public ReaderWindow()
         {
             InitializeComponent();
+
+            // Khởi tạo Timer để cập nhật thời gian
+            DispatcherTimer timer = new DispatcherTimer();
+            timer.Interval = TimeSpan.FromSeconds(1); // Cập nhật mỗi giây
+            timer.Tick += Timer_Tick;
+            timer.Start();
             //LoadData(); // Tải màn hình mặc định
+        }
+
+        private void Timer_Tick(object sender, EventArgs e)
+        {
+            // Cập nhật thời gian hiện tại vào TextBlock
+            //TimeTextBlock.Text = DateTime.Now.ToString("HH:mm:ss");
+
+            // Cập nhật ngày tháng hiện tại
+            DateTextBlock.Text = DateTime.Now.ToString("dd MMMM yyyy");
         }
 
         // Phương thức để lấy reader từ ReaderWindow
@@ -50,10 +67,10 @@ namespace MionaLibrary
                 notificationUser.setReader(reader); // Truyền reader vào NotificationUser
                 MainContent.Content = notificationUser; // Đặt NotificationUser làm nội dung chính
             }
-            else
-            {
-                MessageBox.Show("User data is missing!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
+            //else
+            //{
+            //    MessageBox.Show("User data is missing!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            //}
         }
 
         public void SetReader(User user)
@@ -74,11 +91,11 @@ namespace MionaLibrary
 
         private void Home_Click(object sender, RoutedEventArgs e)
         {
-            if (reader == null)
-            {
-                MessageBox.Show("No user is selected. Please select a user first.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return;
-            }
+            //if (reader == null)
+            //{
+            //    MessageBox.Show("No user is selected. Please select a user first.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+            //    return;
+            //}
 
             // Tạo HomeControl và gán reader
             HomeControl homeControl = new();
@@ -115,11 +132,11 @@ namespace MionaLibrary
 
         private void BookOnLoan_Click(object sender, RoutedEventArgs e)
         {
-            if (reader == null)
-            {
-                MessageBox.Show("No user is selected. Please select a user first.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return;
-            }
+            //if (reader == null)
+            //{
+            //    MessageBox.Show("No user is selected. Please select a user first.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+            //    return;
+            //}
 
             BookOnLoan bookOnLoan = new();
             bookOnLoan.SetUser(reader);

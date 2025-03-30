@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MionaLibrary.ManagerControls"
              mc:Ignorable="d" 
-             d:DesignHeight="550" d:DesignWidth="720">
+             d:DesignHeight="600" d:DesignWidth="1200">
     <Grid>
         <Grid Background="#FFE9F9F3">
             <Grid.RowDefinitions>
@@ -24,11 +24,11 @@
             <Grid Grid.Row="1">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="300"/>
-                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="2*"/>
                 </Grid.ColumnDefinitions>
 
-                <StackPanel  Margin="5,0,10,0" Grid.Column="1" Height="389">
+                <StackPanel  Margin="10" Grid.Column="1" Height="389">
                     <!-- Title -->
                     <TextBlock Text="Title:" FontWeight="Bold" Margin="0,7,0,0"   FontSize="14" />
                     <TextBox x:Name="txtTitle" Height="35" Margin="0,0,0,5" />
@@ -56,7 +56,7 @@
 
                 </StackPanel>
 
-                <StackPanel Grid.Column="2" Margin="5,0,10,0" VerticalAlignment="Center" Height="389">
+                <StackPanel Grid.Column="2" Margin="10,10,15,10" VerticalAlignment="Center" Height="389">
                     <!-- Quantity -->
                     <TextBlock Text="Quantity:" FontWeight="Bold" Margin="0,7,0,0"   FontSize="14" />
                     <TextBox x:Name="txtQuantity" Height="35" Margin="0,0,0,5"/>
@@ -90,9 +90,9 @@
 
             <Grid Grid.Row="2" Grid.ColumnSpan="2" Margin="10">
                 <!-- Add Button -->
-                <Button Content="Add Book" Margin="170,16,0,16" Click="BtnAddBook_Click" HorizontalAlignment="Left" Width="165" Height="45"
+                <Button Content="Add Book" Margin="449,16,0,16" Click="BtnAddBook_Click" HorizontalAlignment="Left" Width="165" Height="45"
                         Background="#FFD0FDB8" Style="{StaticResource ButtonStyleSingle}"/>
-                <Button Content="Cancel" Margin="350,16,0,16" Click="BtnCancelBook_Click" HorizontalAlignment="Left" Width="165" Height="45"
+                <Button Content="Cancel" Margin="642,16,0,16" Click="BtnCancelBook_Click" HorizontalAlignment="Left" Width="166" Height="45"
                     Background="#FFA0A0A0" Style="{StaticResource ButtonStyleSingle}"/>
             </Grid>
         </Grid>

@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MionaLibrary.BookControls"
              mc:Ignorable="d" 
-             d:DesignHeight="550" d:DesignWidth="720">
+             d:DesignHeight="600" d:DesignWidth="1200">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
@@ -14,7 +14,7 @@
         </Grid.RowDefinitions>
 
         <TextBlock Text="Book On Loan" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="24" FontWeight="Bold" 
-               x:Name="Username" Margin="0,10,0,0" Grid.Row="0"/>
+               x:Name="Username" Margin="0,10,0,0" Grid.Row="0" Background="White"/>
 
         <DataGrid x:Name="BookOnLoanData"  AutoGenerateColumns="False" 
  Margin="10,0,10,0"
@@ -50,7 +50,7 @@
      BorderThickness="0" 
      Foreground="Blue" 
      Cursor="Hand" 
-     Click="TitleButton_Click" HorizontalAlignment="Left"
+     Click="TitleButton_Click" Margin="10"
          Style="{StaticResource TransparentButtonStyle}">
                                 <TextBlock Text="{Binding Book.Title}" 
            TextWrapping="Wrap" 
@@ -69,6 +69,8 @@
                             <Setter Property="TextWrapping" Value="Wrap" />
                             <Setter Property="MaxWidth" Value="150" />
                             <Setter Property="VerticalAlignment" Value="Center" />
+                            <Setter Property="HorizontalAlignment" Value="Left" />
+                            <Setter Property="Margin" Value="5" />
                             <Setter Property="Padding" Value="3" />
                         </Style>
                     </DataGridTextColumn.ElementStyle>
@@ -82,6 +84,8 @@
                             <Setter Property="TextWrapping" Value="Wrap" />
                             <Setter Property="MaxWidth" Value="150" />
                             <Setter Property="VerticalAlignment" Value="Center" />
+                            <Setter Property="HorizontalAlignment" Value="Left" />
+                            <Setter Property="Margin" Value="5" />
                             <Setter Property="Padding" Value="3" />
                         </Style>
                     </DataGridTextColumn.ElementStyle>
@@ -95,6 +99,8 @@
                             <Setter Property="TextWrapping" Value="Wrap" />
                             <Setter Property="MaxWidth" Value="150" />
                             <Setter Property="VerticalAlignment" Value="Center" />
+                            <Setter Property="HorizontalAlignment" Value="Left" />
+                            <Setter Property="Margin" Value="5" />
                             <Setter Property="Padding" Value="3" />
                             <Style.Triggers>
                                 <!-- Nếu Status = "borrowing", màu xanh lá -->

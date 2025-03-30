@@ -7,8 +7,8 @@
 
              xmlns:local="clr-namespace:MionaLibrary.UserControls"
              mc:Ignorable="d" 
-             d:DesignHeight="600" d:DesignWidth="800">
-    <Grid Background="white" Margin="40,30,30,30">
+             d:DesignHeight="600" d:DesignWidth="1200">
+    <Grid Background="white" Margin="30">
         <!-- Title Label -->
 
         <Grid.RowDefinitions>

@@ -6,10 +6,10 @@
               xmlns:fa="http://schemas.fontawesome.io/icons/"
              xmlns:local="clr-namespace:MionaLibrary.UserControls"
              mc:Ignorable="d" 
-             d:DesignHeight="550" d:DesignWidth="720">
+             d:DesignHeight="900" d:DesignWidth="1200">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="80"/>
+            <RowDefinition Height="100"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="10"/>
 
@@ -22,25 +22,23 @@
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
 
-                <ComboBox x:Name="SearchTypeComboBox" Grid.Column="0" Width="120" Height="35" VerticalAlignment="Center" HorizontalAlignment="Center" 
-          FontSize="14" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="5" KeyDown="SearchTextBox_KeyDown">
+                <ComboBox x:Name="SearchTypeComboBox" Grid.Column="0" Width="150" Height="60" VerticalAlignment="Center" HorizontalAlignment="Center" 
+          FontSize="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="5" KeyDown="SearchTextBox_KeyDown" Margin="10,15,5,10">
                     <ComboBoxItem Content="Title" IsSelected="True"/>
                     <ComboBoxItem Content="Author"/>
                     <ComboBoxItem Content="Genre"/>
                     <ComboBoxItem Content="Language"/>
                 </ComboBox>
 
-                <Grid Width="480" Height="50" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,20,5,20"
+                <Grid Width="auto" Margin="20,10,10,10"
                Grid.Column="1">
                     <!-- TextBox for User Input -->
-                    <TextBox x:Name="SearchTextBox" 
-      Background="Transparent" BorderBrush="Gray" BorderThickness="1"
-      TextChanged="SearchTextBox_TextChanged" Margin="0,5,5,5" KeyDown="SearchTextBox_KeyDown"/>
+                    <TextBox x:Name="SearchTextBox" Background="Transparent" BorderBrush="Gray" BorderThickness="1"
+      TextChanged="SearchTextBox_TextChanged" Margin="5,10,10,5" KeyDown="SearchTextBox_KeyDown" Width="850" Height="60"/>
 
                     <!-- Placeholder Text -->
-                    <TextBlock x:Name="PlaceholderText" Text="Enter search term..." 
-        Foreground="Gray" VerticalAlignment="Center" HorizontalAlignment="Left" 
-        Margin="10,0,0,0" IsHitTestVisible="False" Height="20" Width="138" FontSize="14">
+                    <TextBlock x:Name="PlaceholderText" Text="Enter search term..." Foreground="Gray" VerticalAlignment="Center" HorizontalAlignment="Left" 
+        Margin="20,0,0,0" IsHitTestVisible="False" Height="30" Width="auto" FontSize="20">
                         <TextBlock.Style>
                             <Style TargetType="TextBlock">
                                 <Setter Property="Visibility" Value="Visible"/>
@@ -58,11 +56,11 @@
                 </Grid>
 
                 <!-- Search Button -->
-                <Border Background="#FFD2CFCF" Width="40" Height="40" CornerRadius="5" Grid.Column="2">
+                <Border Background="#FFD2CFCF" Width="80" Height="60" CornerRadius="5" Grid.Column="2" Margin="0,5,0,0">
                     <Button Width="40" Height="40" HorizontalAlignment="Center" VerticalAlignment="Center" 
      Background="Transparent" BorderThickness="0" Click="SearchButton_Click" >
                         <!-- Search Icon -->
-                        <fa:ImageAwesome Icon="Search" Width="30" Foreground="Gray" Height="30"/>
+                        <fa:ImageAwesome Icon="Search" Width="30" Foreground="Gray" Height="60"/>
                     </Button>
                 </Border>
             </Grid>
@@ -78,18 +76,18 @@
        Margin="10,0,10,0"
        SelectionMode="Single" 
        SelectionUnit="Cell"
-       IsReadOnly="True" HorizontalAlignment="Center">
+       IsReadOnly="True">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="40" IsReadOnly="True"/>
 
-                    <DataGridTemplateColumn Header="Image" Width="2*">
+                    <DataGridTemplateColumn Header="Image" Width="150">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <Image Source="{Binding ImagePath}" 
                                     Stretch="Uniform" 
                                     HorizontalAlignment="Center" 
                                     VerticalAlignment="Center"
-                                    Height="120"
+                                    Height="100"
                                     Margin="3"/>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
@@ -109,7 +107,7 @@
                                     <TextBlock Text="{Binding Title}" 
                                TextWrapping="Wrap" 
                                MaxWidth="150" 
-                               VerticalAlignment="Center"  Padding="3"/>
+                               VerticalAlignment="Center"  Padding="3" FontSize="13"/>
                                 </Button>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
@@ -122,7 +120,7 @@
                                 <TextBlock Text="{Binding Author}" 
                                TextWrapping="Wrap" 
                                MaxWidth="150" 
-                               VerticalAlignment="Center" Padding="3" />
+                               VerticalAlignment="Center" Padding="3" FontSize="13" />
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
@@ -134,7 +132,7 @@
                                 <TextBlock Text="{Binding Language}" 
                                TextWrapping="Wrap" 
                                MaxWidth="150" 
-                               VerticalAlignment="Center" Padding="3"/>
+                               VerticalAlignment="Center" Padding="3" FontSize="13"/>
 
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
@@ -147,17 +145,25 @@
                                 <TextBlock Text="{Binding Genre.Name}" 
                     TextWrapping="Wrap" 
                     MaxWidth="150" 
-                    VerticalAlignment="Center" Padding="3"/>
+                    VerticalAlignment="Center" Padding="3" FontSize="13"/>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
 
-                    <!--
-             <DataGridTextColumn Header="Author" Binding="{Binding Author}" Width="*" IsReadOnly="True"/>
-             
-             <DataGridTextColumn Header="Language" Binding="{Binding Language}" Width="100" IsReadOnly="True"/>
-             <DataGridTextColumn Header="Genre" Binding="{Binding Genre}" Width="100" IsReadOnly="True"/>
-             -->
+                    <DataGridTemplateColumn Header="Description" Width="*" IsReadOnly="True">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+
+                                <TextBlock Text="{Binding Description}" 
+           TextWrapping="Wrap" 
+           MaxWidth="150" 
+           VerticalAlignment="Center" Padding="3" FontSize="13" HorizontalAlignment="Left" Margin="10,0,0,0"/>
+
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                  
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>

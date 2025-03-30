@@ -7,7 +7,7 @@
              xmlns:local="clr-namespace:MionaLibrary.UserControls"
              xmlns:converters="clr-namespace:MionaLibrary"
              mc:Ignorable="d" 
-             d:DesignHeight="600" d:DesignWidth="720">
+             d:DesignHeight="600" d:DesignWidth="1200">
 
     <UserControl.Resources>
         <converters:TextToVisibilityConverter x:Key="AnotherTextToVisibilityConverter"/>
@@ -22,8 +22,8 @@
     </UserControl.Resources>
 
     <Grid Margin="10" Background="white">
-        <StackPanel VerticalAlignment="Top" Height="403" Margin="156,66,156,0">
-            <StackPanel Margin="10">
+        <StackPanel VerticalAlignment="Top" Height="467" HorizontalAlignment="Center" Margin="0,20,0,0" >
+            <StackPanel Margin="10" VerticalAlignment="Top">
                 <TextBlock Text="Update account" FontSize="18" FontWeight="Bold" HorizontalAlignment="Center"/>
             </StackPanel>
 
@@ -35,14 +35,14 @@
                         <ColumnDefinition Width="37*"/>
                         <ColumnDefinition Width="58*"/>
                     </Grid.ColumnDefinitions>
-                    <TextBox Name="txtFirstName" Height="35"  Margin="5,5,10,5" KeyDown="PasswordBox_KeyDown" Grid.ColumnSpan="2"/>
+                    <TextBox Name="txtFirstName" Height="35"  Margin="5,5,0,5" KeyDown="PasswordBox_KeyDown" Grid.ColumnSpan="2"/>
                     <TextBlock Text="First name" Foreground="Gray" IsHitTestVisible="False" 
                            VerticalAlignment="Center" HorizontalAlignment="Left" Margin="15,0,0,0"
                            Visibility="{Binding Text, ElementName=txtFirstName, Converter={StaticResource TextToVisibilityConverter}}" />
                     <TextBlock Name="lblFirstNameError" Style="{StaticResource ErrorTextStyle}" Grid.ColumnSpan="2" Margin="5,0,0,0" />
                 </Grid>
-                <Grid Width="190">
-                    <TextBox Name="txtLastName"  Height="35" Margin="5,5,10,5" KeyDown="PasswordBox_KeyDown"/>
+                <Grid Width="190" Margin="5,0,0,0">
+                    <TextBox Name="txtLastName"  Height="35" Margin="5,5,0,5" KeyDown="PasswordBox_KeyDown"/>
                     <TextBlock Text="Last Name" Foreground="Gray" IsHitTestVisible="False" 
                            VerticalAlignment="Center" HorizontalAlignment="Left" Margin="15,0,0,0"
                            Visibility="{Binding Text, ElementName=txtLastName, Converter={StaticResource TextToVisibilityConverter}}"/>
@@ -51,14 +51,13 @@
 
             <!-- Date of Birth -->
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Date of birth" Margin="5, 5, 5 ,5" FontSize="13"/>
+                <TextBlock Text="Date of birth" Margin="5,5,0,5" FontSize="13"/>
                 <fa:ImageAwesome Icon="Calendar" Width="12" Foreground="Gray" Margin="1,5,0,0"/>
             </StackPanel>
 
-            <StackPanel Orientation="Horizontal" Margin="5, 0,10,10">
-                <DatePicker Name="dpDOB" Margin="5,5,5,5" Width="350"/>
+            <StackPanel Orientation="Horizontal" Margin="5, 0,0,10">
+                <DatePicker Name="dpDOB" Margin="5,5,5,5" Width="370"/>
             </StackPanel>
-
 
             <!-- Gender -->
             <TextBlock Text="Gender" Margin="5,0,0,5" FontSize="13"/>
@@ -98,30 +97,11 @@
 
             <!-- Register Button -->
             <Button Content="Submit" Margin="5,10,2,5" Width="auto" Height="40" FontSize="14" FontWeight="Bold"
-            Background="#28D22A" Foreground="White" Cursor="Hand" Click="Submit_Click">
-                <Button.Style>
-                    <Style TargetType="Button">
-                        <Setter Property="Background" Value="#28D22A"/>
-                        <Setter Property="Foreground" Value="White"/>
-                        <Setter Property="BorderThickness" Value="0"/>
-                        <Setter Property="Padding" Value="5"/>
-                        <Setter Property="Template">
-                            <Setter.Value>
-                                <ControlTemplate TargetType="Button">
-                                    <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" 
-                                 BorderThickness="1" CornerRadius="5">
-                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                    </Border>
-                                </ControlTemplate>
-                            </Setter.Value>
-                        </Setter>
-                        <Style.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Background" Value="#22B527"/>
-                            </Trigger>
-                        </Style.Triggers>
-                    </Style>
-                </Button.Style>
+            Background="#28D22A" Foreground="White" Cursor="Hand" Click="Submit_Click" Style="{StaticResource ButtonStyleSingle}">
+            </Button>
+
+            <Button Content="Cancel" Margin="5,5,2,5" Width="auto" Height="40" FontSize="14" FontWeight="Bold"
+                Background="#FF737973" Foreground="White" Cursor="Hand" Click="Cancel_Click" Style="{StaticResource ButtonStyleSingle}">
             </Button>
 
 

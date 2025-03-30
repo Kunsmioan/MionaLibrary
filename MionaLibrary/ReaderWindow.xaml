@@ -6,15 +6,52 @@
         xmlns:fa="http://schemas.fontawesome.io/icons/"
         xmlns:local="clr-namespace:MionaLibrary"
         mc:Ignorable="d"
-        Title="ReaderWindow" Height="600" Width="900" ResizeMode="NoResize" 
+        Title="ReaderWindow" Height="1000" Width="1400" ResizeMode="NoResize" 
         WindowStartupLocation="CenterScreen">
     <Grid >
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="180"/>
+            <ColumnDefinition Width="200"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <Border Background="#FF3D3D3D" Grid.Column="0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Background="#FFC6EFCE">
+            <Grid>
+                <StackPanel Orientation="Horizontal">
+                     <!-- Nội dung bên trái -->
+                <TextBlock Text="Miona Library" Foreground="#FF49A557" 
+                   FontFamily="Bahnschrift SemiBold" FontSize="30" 
+                   VerticalAlignment="Center" Margin="10,0,0,0"/> 
+                </StackPanel>
+
+                <!-- Thời gian ở góc phải -->
+                <StackPanel HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,20,0" Orientation="Horizontal">
+                    <!-- Thời gian
+                    <TextBlock x:Name="TimeTextBlock" 
+                       Text="00:00:00" 
+                       Foreground="#FF49A557" 
+                       FontFamily="Bahnschrift SemiBold" FontSize="30" HorizontalAlignment="Center" 
+                               VerticalAlignment="Center" Margin="20,0,20,0" 
+                       /> 
+                    -->
+                    
+                    <!-- Ngày tháng -->
+                    <TextBlock x:Name="DateTextBlock" 
+                       Text="01/01/2023" 
+                       Foreground="#FF49A557" 
+                       FontFamily="Bahnschrift SemiBold" FontSize="30" HorizontalAlignment="Center" 
+                              VerticalAlignment="Center" Margin="20,0,5,0"/>
+                </StackPanel>
+
+            </Grid>
+        </Border>
+
+        <Border Background="#FFC6EFCE" Grid.Column="0" Grid.Row="1">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
@@ -22,11 +59,11 @@
                     <RowDefinition Height="Auto"/>
                     <!-- Logout ở dưới cùng -->
                 </Grid.RowDefinitions>
-
                 <!-- Các nút chính -->
-                <StackPanel Grid.Row="0">
+                <StackPanel Grid.Row="0" Grid.Column="0">
+
                     <!--Notification-->
-                    <Button Content="Notifications" Height="50" Foreground="White" Width="auto"
+                    <Button Content="Notifications" Height="60" Foreground="White" Width="auto"
 BorderThickness="0" Click="Notification_Click" Style="{StaticResource ButtonStyle}">
                         <Button.Template>
                             <ControlTemplate TargetType="{x:Type Button}">
@@ -38,12 +75,13 @@ BorderThickness="0" Click="Notification_Click" Style="{StaticResource ButtonStyl
                                     <fa:ImageAwesome Icon="Bell" Foreground="White" Width="15" Height="15" 
                          HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                     <TextBlock Text="{TemplateBinding Content}" Foreground="White" Grid.Column="1" 
-                   VerticalAlignment="Center" FontSize="18"/>
+                   VerticalAlignment="Center" FontSize="20"/>
                                 </Grid>
                             </ControlTemplate>
                         </Button.Template>
                     </Button>
-                    <Button Content="Search" HorizontalAlignment="Stretch" Height="50" Foreground="White" Width="auto"
+                    
+                    <Button Content="Search" HorizontalAlignment="Stretch" Height="60" Foreground="White" Width="auto"
                             BorderThickness="0" Click="Home_Click" Style="{StaticResource ButtonStyle}">
                         <Button.Template>
                             <ControlTemplate TargetType="Button">
@@ -53,16 +91,16 @@ BorderThickness="0" Click="Notification_Click" Style="{StaticResource ButtonStyl
                                         <ColumnDefinition/>
                                     </Grid.ColumnDefinitions>
                                     <fa:ImageAwesome Icon="Search" Foreground="White" Width="15" Height="15" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                    <TextBlock Text="{TemplateBinding Content}" Foreground="White" Grid.Column="1" VerticalAlignment="Center" FontSize="18"/>
+                                    <TextBlock Text="{TemplateBinding Content}" Foreground="White" Grid.Column="1" VerticalAlignment="Center" FontSize="20"/>
                                 </Grid>
                             </ControlTemplate>
                         </Button.Template>
                     </Button>
-                    
+
 
 
                     <!-- Nút "Book" -->
-                    <Button x:Name="BookButton" Content="Book" HorizontalAlignment="Stretch" Height="50" Foreground="White" Width="auto"
+                    <Button x:Name="BookButton" Content="Book" HorizontalAlignment="Stretch" Height="60" Foreground="White" Width="auto"
                             BorderThickness="0" Style="{StaticResource ButtonStyle}" Click="Books_Click">
                         <Button.Template>
                             <ControlTemplate TargetType="Button">
@@ -79,7 +117,7 @@ BorderThickness="0" Click="Notification_Click" Style="{StaticResource ButtonStyl
                                         <fa:ImageAwesome x:Name="AngleDownIcon" Icon="AngleDown" Foreground="White" Width="10" Height="10" 
                                                          HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Collapsed"/>
                                     </Grid>
-                                    <TextBlock Text="Book" Foreground="White" Grid.Column="1" VerticalAlignment="Center" FontSize="18"/>
+                                    <TextBlock Text="Book" Foreground="White" Grid.Column="1" VerticalAlignment="Center" FontSize="20"/>
                                 </Grid>
                             </ControlTemplate>
                         </Button.Template>
@@ -87,11 +125,10 @@ BorderThickness="0" Click="Notification_Click" Style="{StaticResource ButtonStyl
 
                     <!-- Danh sách tùy chọn (ẩn ban đầu) -->
                     <Grid x:Name="BookOptions" Visibility="Collapsed" Background="White">
-                        <StackPanel HorizontalAlignment="Left">
-                            <!-- Nút "Request to borrow a book" -->
-
+                        <StackPanel>
                             <!-- Nút "Book on loan" -->
-                            <Button Height="35" Click="BookOnLoan_Click" Margin="0,1,0,0" Style="{StaticResource ButtonStyleList}" Width="180">
+                            <Button Height="40" Click="BookOnLoan_Click" Margin="0,2,0,2" Style="{StaticResource ButtonStyleList}" Width="auto" 
+                                    >
                                 <Button.Template>
                                     <ControlTemplate TargetType="Button">
                                         <Grid Background="{TemplateBinding Background}">
@@ -100,15 +137,15 @@ BorderThickness="0" Click="Notification_Click" Style="{StaticResource ButtonStyl
                                                 <ColumnDefinition/>
                                             </Grid.ColumnDefinitions>
                                             <TextBlock Text="Book on loan" Foreground="#FF3D3D3D" Grid.Column="1" 
-                                   VerticalAlignment="Center" FontSize="14" HorizontalAlignment="Left"/>
+                                   VerticalAlignment="Center" FontSize="16" Padding="5"/>
                                         </Grid>
                                     </ControlTemplate>
                                 </Button.Template>
                             </Button>
 
                             <!-- Nút "Book borrowing history" -->
-                            <Button Height="35" Click="BookBorowingLoan_Click" Margin="0,1,0,5" Style="{StaticResource ButtonStyleList}"
-                                    Width="180"  >
+                            <Button Height="40" Click="BookBorowingLoan_Click" Margin="0,2,0,5" Style="{StaticResource ButtonStyleList}"
+                                    Width="auto">
                                 <Button.Template>
                                     <ControlTemplate TargetType="Button">
                                         <Grid Background="{TemplateBinding Background}">
@@ -118,7 +155,7 @@ BorderThickness="0" Click="Notification_Click" Style="{StaticResource ButtonStyl
                                             </Grid.ColumnDefinitions>
                                             <!-- Text -->
                                             <TextBlock Text="Book borrowing history" Foreground="#FF3D3D3D" Grid.Column="1" 
-                                   VerticalAlignment="Center" FontSize="14" HorizontalAlignment="Left" TextWrapping="Wrap" />
+                                   VerticalAlignment="Center" FontSize="16"  Padding="5" TextWrapping="Wrap" />
                                         </Grid>
                                     </ControlTemplate>
                                 </Button.Template>
@@ -127,8 +164,8 @@ BorderThickness="0" Click="Notification_Click" Style="{StaticResource ButtonStyl
                     </Grid>
 
                     <!-- Nút "Profile" -->
-                    
-                    <Button Content="Help" HorizontalAlignment="Stretch" Height="50" Foreground="White" Width="auto"
+
+                    <Button Content="Help" HorizontalAlignment="Stretch" Height="60" Foreground="White" Width="auto"
         BorderThickness="0" Click="Help_Click" Style="{StaticResource ButtonStyle}">
                         <Button.Template>
                             <ControlTemplate TargetType="Button">
@@ -140,13 +177,13 @@ BorderThickness="0" Click="Notification_Click" Style="{StaticResource ButtonStyl
                                     <fa:ImageAwesome Icon="QuestionCircle" Foreground="White" Width="15" Height="15" 
                                  HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                     <TextBlock Text="{TemplateBinding Content}" Foreground="White" Grid.Column="1" 
-                           VerticalAlignment="Center" FontSize="18"/>
+                           VerticalAlignment="Center" FontSize="20"/>
                                 </Grid>
                             </ControlTemplate>
                         </Button.Template>
                     </Button>
-                    
-                    <Button x:Name="ProfileButton" Content="Profile" Height="50" Width="180"
+
+                    <Button x:Name="ProfileButton" Content="Profile" Height="60" Width="auto"
                         Foreground="White" BorderThickness="0" Click="Profile_Click" Style="{StaticResource ButtonStyle}">
                         <Button.Template>
                             <ControlTemplate TargetType="{x:Type Button}">
@@ -156,7 +193,7 @@ BorderThickness="0" Click="Notification_Click" Style="{StaticResource ButtonStyl
                                         <ColumnDefinition/>
                                     </Grid.ColumnDefinitions>
                                     <fa:ImageAwesome Icon="User" Foreground="White" Width="15" Height="15" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                    <TextBlock Text="{TemplateBinding Content}" Foreground="White" Grid.Column="1" VerticalAlignment="Center" FontSize="18"/>
+                                    <TextBlock Text="{TemplateBinding Content}" Foreground="White" Grid.Column="1" VerticalAlignment="Center" FontSize="20"/>
                                 </Grid>
                             </ControlTemplate>
                         </Button.Template>
@@ -164,8 +201,8 @@ BorderThickness="0" Click="Notification_Click" Style="{StaticResource ButtonStyl
                 </StackPanel>
 
                 <!-- Logout button ở dưới cùng -->
-                <Button Content="Log out" Click="Logout_Click" HorizontalAlignment="Center" Height="50" Foreground="White" 
-                        BorderThickness="0" Grid.Row="1" Margin="0,10,0,10" FontSize="14" Style="{StaticResource ButtonStyle}" Width="180">
+                <Button Content="Log out" Click="Logout_Click" Height="60" Width="auto" Foreground="White" 
+                        BorderThickness="0" Grid.Row="2" Margin="0,10,0,0" FontSize="14" Style="{StaticResource ButtonStyle}">
                     <Button.Template>
                         <ControlTemplate TargetType="Button">
                             <Grid  Background="{TemplateBinding Background}">
@@ -174,16 +211,15 @@ BorderThickness="0" Click="Notification_Click" Style="{StaticResource ButtonStyl
                                     <ColumnDefinition/>
                                 </Grid.ColumnDefinitions>
                                 <fa:ImageAwesome Icon="SignOut" Foreground="White" Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                <TextBlock Text="{TemplateBinding Content}" Foreground="White" Grid.Column="1" VerticalAlignment="Center" FontSize="16"/>
+                                <TextBlock Text="{TemplateBinding Content}" Foreground="White" Grid.Column="1" VerticalAlignment="Center" FontSize="20"/>
                             </Grid>
                         </ControlTemplate>
                     </Button.Template>
                 </Button>
-                
+
             </Grid>
         </Border>
-        
-       
-        <ContentControl x:Name="MainContent" Grid.Column="1"/>
+
+        <ContentControl x:Name="MainContent" Grid.Column="1" Grid.Row="1"/>
     </Grid>
 </Window>

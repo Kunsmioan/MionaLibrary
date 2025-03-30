@@ -8,11 +8,11 @@
              d:DesignHeight="550" d:DesignWidth="720">
     <Grid Background="AliceBlue">
         <Grid.RowDefinitions>
-            <RowDefinition Height="10"/>
+            <RowDefinition Height="0"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="20"/>
+            <RowDefinition Height="0"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="10"/>
+            <RowDefinition Height="0"/>
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="1">
@@ -186,11 +186,11 @@
                         </DataGridTextColumn.ElementStyle>
                     </DataGridTextColumn>
 
-                    <!-- Cột Status
+                    <!-- Cột Status-->
                     <DataGridTemplateColumn Header="Status" Width="100">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding Status}" 
+                                <TextBlock Text="{Binding Loan.Status}" 
                                    FontSize="12" 
                                    HorizontalAlignment="Left" 
                                    VerticalAlignment="Center" 
@@ -215,7 +215,6 @@
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
-                    -->
 
                     <!-- Cột Actions -->
                     <DataGridTemplateColumn Header="Actions" Width="200">

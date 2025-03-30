@@ -43,20 +43,20 @@ namespace MionaLibrary.BookControls
             {
                 _loanServices = new LoanServices();
 
-                if (_loanServices == null)
-                {
-                    MessageBox.Show("BookServices is not initialized.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                    return;
-                }
+                //if (_loanServices == null)
+                //{
+                //    MessageBox.Show("BookServices is not initialized.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                //    return;
+                //}
                 if (reader != null)
                 {
                     List<Loan> loanList = _loanServices.GetLoansByUserId(reader.Id);
                     BookOnLoanData.ItemsSource = loanList;
                 }
-                else
-                {
-                    MessageBox.Show("User data is missing!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
+                //else
+                //{
+                //    MessageBox.Show("User data is missing!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                //}
 
             }
             catch (SqlException ex)

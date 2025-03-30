@@ -155,5 +155,29 @@ namespace MionaLibrary.UserControls
                 MessageBox.Show($"Update failed: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+
+        private void Cancel_Click(object sender, RoutedEventArgs e)
+        {
+            Window parentWindow = Window.GetWindow(this);
+            if (parentWindow is ReaderWindow rw)
+            {
+                User? reader = rw.GetReader();
+                //if (reader == null)
+                //{
+                //    MessageBox.Show("No user is selected. Please select a user first.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                //    return;
+                //}
+                var profileControl = new ProfileControl();
+                profileControl.SetUser(reader);
+
+
+                // Thay thế nội dung hiện tại bằng BookDetailsControl
+                rw.MainContent.Content = profileControl;
+            }
+            else
+            {
+                MessageBox.Show("Không tìm thấy cửa sổ ReaderWindow.", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
     }
 }

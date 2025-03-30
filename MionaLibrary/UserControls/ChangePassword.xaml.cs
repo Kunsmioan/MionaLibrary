@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using MionaLibrary.BookControls;
 using MionaLibrary_DAL.Entity;
 using MionaLibrary_Services.Services;
 
@@ -33,6 +34,61 @@ namespace MionaLibrary.UserControls
         {
             reader = user;
             // You can refresh the UI or bind data here
+        }
+
+        private void SubmitButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (!CheckPasswordsMatch()) return;
+
+            if (txtNewPasswordVisible.Text == txtOldPasswordVisible.Text)
+            {
+                MessageBox.Show("New password must be different from the old one!", "Alert", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            if (reader != null)
+            {
+                // Check if old password is correct
+                if (reader.Password != txtOldPasswordVisible.Text)
+                {
+                    MessageBox.Show("Old password is incorrect!", "Alert", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    return;
+                }
+                // Update password
+                reader.Password = txtNewPasswordVisible.Text;
+                // Update the user in the database
+                userServices = new();
+                userServices.Update(reader);
+                MessageBox.Show("Password changed successfully!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            else
+            {
+                MessageBox.Show("User data is missing!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void CancelButton_Click(object sender, RoutedEventArgs e)
+        {
+            Window parentWindow = Window.GetWindow(this);
+            if (parentWindow is ReaderWindow rw)
+            {
+                User? reader = rw.GetReader();
+                //if (reader == null)
+                //{
+                //    MessageBox.Show("No user is selected. Please select a user first.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                //    return;
+                //}
+                var profileControl = new ProfileControl();
+                profileControl.SetUser(reader);
+
+
+                // Thay thế nội dung hiện tại bằng BookDetailsControl
+                rw.MainContent.Content = profileControl;
+            }
+            else
+            {
+                MessageBox.Show("Không tìm thấy cửa sổ ReaderWindow.", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void pbOldPassword_PasswordChanged(object sender, RoutedEventArgs e)
@@ -117,7 +173,6 @@ namespace MionaLibrary.UserControls
             return true;
         }
 
-
         private void PasswordBox_KeyDown(object sender, KeyEventArgs e)
         {
             // Check if Enter key is pressed
@@ -127,35 +182,6 @@ namespace MionaLibrary.UserControls
             }
         }
 
-        private void SubmitButton_Click(object sender, RoutedEventArgs e)
-        {
-            if (!CheckPasswordsMatch()) return;
 
-            if(txtNewPasswordVisible.Text == txtOldPasswordVisible.Text)
-            {
-                MessageBox.Show("New password must be different from the old one!", "Alert", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return;
-            }
-
-            if (reader != null)
-            {
-                // Check if old password is correct
-                if (reader.Password != txtOldPasswordVisible.Text)
-                {
-                    MessageBox.Show("Old password is incorrect!", "Alert", MessageBoxButton.OK, MessageBoxImage.Warning);
-                    return;
-                }
-                // Update password
-                reader.Password = txtNewPasswordVisible.Text;
-                // Update the user in the database
-                userServices = new();
-                userServices.Update(reader);
-                MessageBox.Show("Password changed successfully!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
-            }
-            else
-            {
-                MessageBox.Show("User data is missing!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-        }
     }
 }
