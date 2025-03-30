@@ -11,78 +11,84 @@ namespace MionaLibrary_DAL.Repository
 {
     public class BookRepo
     {
-       LibraryManagerContext? _context;
+        private readonly LibraryManagerContext _context;
 
-       public void AddBook(Book book)
+        public BookRepo()
         {
-            _context = new();
+            _context = new LibraryManagerContext();
+        }
+
+        public void AddBook(Book book)
+        {
+            if (book == null) throw new ArgumentNullException(nameof(book));
             _context.Books.Add(book);
             _context.SaveChanges();
         }
 
         public void UpdateBook(Book book)
         {
-            _context = new();
-            _context.Books.Update(book);
-            _context.SaveChanges();
+            if (book == null) throw new ArgumentNullException(nameof(book));
+            
+            var existingBook = _context.Books
+                                     .Include(b => b.Genre)
+                                     .Include(b => b.Language)
+                                     .FirstOrDefault(b => b.Id == book.Id);
+
+            if (existingBook != null)
+            {
+                //Lệnh này sao chép tất cả các giá trị từ đối tượng book (được truyền vào) sang đối tượng
+                //existingBook (đã lấy từ cơ sở dữ liệu).
+                _context.Entry(existingBook).CurrentValues.SetValues(book);
+
+                existingBook.GenreId = book.GenreId;
+                existingBook.LanguageId = book.LanguageId;
+                _context.SaveChanges();
+            }
         }
 
         public void DeleteBook(Book book)
         {
-            _context = new();
+            if (book == null) throw new ArgumentNullException(nameof(book));
             _context.Books.Remove(book);
             _context.SaveChanges();
         }
 
         public Book? GetBookById(int id)
         {
-            _context = new();
-            return _context.Books.FirstOrDefault(b => b.Id == id);
+            return _context.Books
+                          .Include(b => b.Genre)
+                          .Include(b => b.Language)
+                          .FirstOrDefault(b => b.Id == id);
         }   
 
-        public List<Book> GetAllBooks() {
-            _context = new();
-            List<Book> books = _context.Books
-                                       .Include(b => b.Genre)
-                                       .Include(b => b.Language)
-                                       .ToList();
-            return books;
+        public List<Book> GetAllBooks() 
+        {
+            return _context.Books
+                          .Include(b => b.Genre)
+                          .Include(b => b.Language)
+                          .ToList();
         }
 
         public List<Book> GetAllBooksByFilter(string searchType, string searchTerm)
         {
-            _context = new();
-            if (string.IsNullOrEmpty(searchTerm))
-            {_context = new();
-                return GetAllBooks(); // Trả về tất cả nếu không có từ khóa
+            if (string.IsNullOrEmpty(searchTerm) || searchType == "--- All ---")
+            {
+                return GetAllBooks();
             }
 
             var lowerSearchTerm = searchTerm.ToLower();
+            var query = _context.Books
+                               .Include(b => b.Genre)
+                               .Include(b => b.Language);
 
-            switch (searchType.ToLower())
+            return searchType.ToLower() switch
             {
-                case "title":
-                    return 
-                        _context.Books.Include(b => b.Genre)
-                        .Include(b => b.Language)
-                        .Where(b => b.Title.ToLower().Contains(lowerSearchTerm))
-                        .ToList();
-                case "author":
-                    return _context.Books.Include(b => b.Genre).Include(b => b.Language)
-                        .Where(b => b.Author.ToLower().Contains(lowerSearchTerm))
-                        .ToList();
-                case "language":
-                    return _context.Books.Include(b => b.Genre).Include(b => b.Language)
-                         .Where(b => b.Language != null && b.Language.Name.ToLower().Contains(lowerSearchTerm))
-                        .ToList();
-                case "genre":
-                    return _context.Books
-                         .Include(b => b.Genre).Include(b => b.Language)
-                         .Where(b => b.Genre != null && b.Genre.Name.ToLower().Contains(lowerSearchTerm))
-                        .ToList();
-                default:
-                    return _context.Books.ToList(); // Trả về tất cả nếu loại tìm kiếm không hợp lệ
-            }
+                "title" => query.Where(b => b.Title.ToLower().Contains(lowerSearchTerm)).ToList(),
+                "author" => query.Where(b => b.Author.ToLower().Contains(lowerSearchTerm)).ToList(),
+                "language" => query.Where(b => b.Language != null && b.Language.Name.ToLower().Contains(lowerSearchTerm)).ToList(),
+                "genre" => query.Where(b => b.Genre != null && b.Genre.Name.ToLower().Contains(lowerSearchTerm)).ToList(),
+                _ => GetAllBooks()
+            };
         }
     }
 }

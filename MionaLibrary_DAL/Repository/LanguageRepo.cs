@@ -41,7 +41,7 @@ namespace MionaLibrary_DAL.Repository
         public List<Language> GetAllLanguages()
         {
             _context = new LibraryManagerContext();
-            List<Language> languages = _context.Languages.ToList();
+            List<Language> languages = _context.Languages.OrderBy(l => l.Id).ToList();
             return languages;
         }
     }

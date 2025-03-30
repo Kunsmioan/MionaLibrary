@@ -16,6 +16,7 @@ using MionaLibrary.ManagerControls;
 using MionaLibrary.BookControls;
 using MionaLibrary.GenreControl;
 using System.Windows.Threading;
+using MionaLibrary.BookEntityControl;
 
 
 namespace MionaLibrary
@@ -182,7 +183,8 @@ namespace MionaLibrary
 
         private void Language_Click(object sender, RoutedEventArgs e)
         {
-
+            LanguageActionControl languageControl = new LanguageActionControl();
+            MainContent.Content = languageControl;
         }
     }
 }

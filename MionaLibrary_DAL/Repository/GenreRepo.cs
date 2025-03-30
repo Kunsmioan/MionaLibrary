@@ -35,7 +35,7 @@ namespace MionaLibrary_DAL.Repository
 
         public List<Genre> GetAllGenre() {
             _context = new();
-            List<Genre> genres = _context.Genres.ToList();
+            List<Genre> genres = _context.Genres.OrderBy(g => g.Id).ToList();
             return genres;
         }
     }

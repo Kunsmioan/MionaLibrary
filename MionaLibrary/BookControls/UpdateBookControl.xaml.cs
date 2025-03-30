@@ -1,4 +1,4 @@
-﻿using Microsoft.Data.SqlClient;
+using Microsoft.Data.SqlClient;
 using Microsoft.VisualBasic.ApplicationServices;
 using Microsoft.Win32;
 using MionaLibrary.ManagerControls;
@@ -27,17 +27,21 @@ namespace MionaLibrary.BookControls
     /// </summary>
     public partial class UpdateBookControl : UserControl
     {
-        BookServices? _bookServices;
-        Book? bookSelected;
-        LanguageServices? _languageServices;
+        BookServices? _bookServices = new();
+        Book? bookSelected = new();
+        LanguageServices? _languageServices = new();
 
-        GenreServices? _genreServices;
+        GenreServices? _genreServices = new();
 
         public UpdateBookControl()
         {
             InitializeComponent();
             loadGenres();
             LoadLanguage();
+            
+            // Add selection change handlers
+            cbGenre.SelectionChanged += CbGenre_SelectionChanged;
+            cbLanguage.SelectionChanged += CbLanguage_SelectionChanged;
         }
 
         public void SetBookSelected(Book book)
@@ -48,7 +52,10 @@ namespace MionaLibrary.BookControls
 
         public void loadGenres()
         {
-            _genreServices = new GenreServices();
+            if (_genreServices == null) return;
+            
+            cbGenre.DisplayMemberPath = "Name"; // Hiển thị tên (ví dụ: "Action")
+            cbGenre.SelectedValuePath = "Id";  // Lưu Id (ví dụ: 1)
             var genres = _genreServices.GetGenreList();
 
             // Gán danh sách thể loại vào ComboBox
@@ -57,8 +64,12 @@ namespace MionaLibrary.BookControls
 
         private void LoadLanguage()
         {
+            if (_languageServices == null) return;
+            
+            // Trong phương thức LoadLanguage
+            cbLanguage.DisplayMemberPath = "Name";
+            cbLanguage.SelectedValuePath = "Id";
             // Lấy danh sách tất cả các thể loại từ bảng Genres
-            _languageServices = new LanguageServices();
             var languages = _languageServices.GetLanguageList();
 
             // Gán danh sách thể loại vào ComboBox
@@ -72,11 +83,9 @@ namespace MionaLibrary.BookControls
                 // Gán dữ liệu từ cơ sở dữ liệu vào các TextBlock
                 txtTitle.Text = bookSelected.Title;
                 txtAuthor.Text = bookSelected.Author;
-                var languageId = bookSelected.LanguageId;
-                cbLanguage.SelectedValue = languageId;
+                cbLanguage.SelectedValue = bookSelected.LanguageId;
                 // Gán giá trị cho ComboBox Genre
-                var genreId = bookSelected.GenreId; // Lấy GenreId từ sách đã chọn
-                cbGenre.SelectedValue = genreId;   // Gán giá trị SelectedValue của ComboBox
+                cbGenre.SelectedValue =  bookSelected.GenreId;   // Gán giá trị SelectedValue của ComboBox
 
                 txtDescription.Text = bookSelected.Description;
                 txtPublishYear.Text = bookSelected.PublishYear.ToString();
@@ -139,34 +148,50 @@ namespace MionaLibrary.BookControls
 
         private void BtnUpdateBook_Click(object sender, RoutedEventArgs e)
         {
+            if (bookSelected == null || _bookServices == null) return;
+
+            // Update genre and language IDs from ComboBoxes
+            if (cbGenre.SelectedItem is Genre selectedGenre)
+            {
+                bookSelected.GenreId = selectedGenre.Id;
+            }
+            else
+            {
+                MessageBox.Show("Please select a genre!", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            if (cbLanguage.SelectedItem is Language selectedLanguage)
+            {
+                bookSelected.LanguageId = selectedLanguage.Id;
+            }
+            else
+            {
+                MessageBox.Show("Please select a language!", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
             if (!checkInput()) return;
 
             bookSelected.Title = txtTitle.Text;
             bookSelected.Author = InputValidator.legitAuthoName(txtAuthor.Text);
-            var genreId = bookSelected.GenreId; // Lấy GenreId từ sách đã chọn
-            cbGenre.SelectedValue = genreId;   // Gán giá trị SelectedValue của ComboBox
             bookSelected.Description = txtDescription.Text;
             bookSelected.ImagePath = txtImagePath.Text;
             bookSelected.Quantity = int.Parse(txtQuantity.Text);
-            var languageId = bookSelected.LanguageId;
-            cbLanguage.SelectedValue = languageId;
             bookSelected.Page = int.Parse(txtPage.Text);
             bookSelected.PublishYear = int.Parse(txtPublishYear.Text);
             bookSelected.Isbn = txtIsbn.Text;
-            if(int.Parse(txtQuantity.Text) > 0) bookSelected.IsAvailable = true;
+            if (int.Parse(txtQuantity.Text) > 0) bookSelected.IsAvailable = true;
 
             // Try to register the user
             try
             {
-                // Ensure _userServices is initialized before use
-                _bookServices = new();
-
                 // Call the register service to register the user
                 _bookServices.UpdateBook(bookSelected);
 
                 MessageBox.Show("Update book successful!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
-                Window parentWindow = Window.GetWindow(this);
-                if (parentWindow is ManagerWindow mw)
+                Window parrentWindow = Window.GetWindow(this);
+                if (parrentWindow is ManagerWindow mw)
                 {
                     //if (reader == null)
                     //{
@@ -185,6 +210,22 @@ namespace MionaLibrary.BookControls
             {
                 // Log and display detailed error
                 MessageBox.Show($"Update book failed: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void CbGenre_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (bookSelected != null && cbGenre.SelectedItem is Genre selectedGenre)
+            {
+                bookSelected.GenreId = selectedGenre.Id;
+            }
+        }
+
+        private void CbLanguage_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (bookSelected != null && cbLanguage.SelectedItem is Language selectedLanguage)
+            {
+                bookSelected.LanguageId = selectedLanguage.Id;
             }
         }
 

@@ -32,27 +32,28 @@
                 <StackPanel  Margin="10" Grid.Column="1" Height="auto">
                     <!-- Title -->
                     <TextBlock Text="Title:" FontWeight="Bold" Margin="0,7,0,5" FontSize="18" />
-                    <TextBox x:Name="txtTitle" Height="35" Margin="0,0,0,5" FontSize="16" />
+                    <TextBox x:Name="txtTitle" Height="40" Margin="0,0,0,5" FontSize="16" />
 
                     <!-- Author -->
                     <TextBlock Text="Author:" FontWeight="Bold" Margin="0,7,0,5" FontSize="18" />
-                    <TextBox x:Name="txtAuthor" Height="35" Margin="0,0,0,5" FontSize="16"/>
+                    <TextBox x:Name="txtAuthor" Height="40" Margin="0,0,0,5" FontSize="16"/>
 
                     <!-- Publish Year -->
                     <TextBlock Text="Publish Year:" FontWeight="Bold" Margin="0,7,0,5" FontSize="18" />
-                    <TextBox x:Name="txtPublishYear" Height="35" Margin="0,0,0,5" FontSize="16"/>
+                    <TextBox x:Name="txtPublishYear" Height="40" Margin="0,0,0,5" FontSize="16"/>
 
                     <!-- ISBN -->
                     <TextBlock Text="ISBN:" FontWeight="Bold" Margin="0,7,0,5" FontSize="18" />
-                    <TextBox x:Name="txtIsbn" Height="35" Margin="0,0,0,5" FontSize="16"/>
+                    <TextBox x:Name="txtIsbn" Height="40" Margin="0,0,0,5" FontSize="16"/>
 
                     <!-- Genre -->
                     <TextBlock Text="Genre:" FontWeight="Bold" Margin="0,7,0,5" FontSize="18" />
-                    <ComboBox x:Name="cbGenre" Height="35" Margin="0,0,0,5" FontSize="16" DisplayMemberPath="Name" SelectedValuePath="Id" SelectedIndex="0"/>
+                    <ComboBox x:Name="cbGenre" Height="40" Margin="0,0,0,5" FontSize="16" DisplayMemberPath="Name" 
+                              SelectedValuePath="Id" />
 
                     <!-- Language -->
                     <TextBlock Text="Language:" FontWeight="Bold" Margin="0,7,0,5" FontSize="18" />
-                    <ComboBox x:Name="cbLanguage" Height="35" Margin="0,0,0,5" FontSize="16" DisplayMemberPath="Name" SelectedValuePath="Id" SelectedIndex="0"/>
+                    <ComboBox x:Name="cbLanguage" Height="40" Margin="0,0,0,5" FontSize="16" DisplayMemberPath="Name" SelectedValuePath="Id"/>
 
                     <!-- Quantity -->
                     <TextBlock Text="Quantity:" FontWeight="Bold" Margin="0,7,0,5" FontSize="18" />
@@ -60,19 +61,19 @@
 
                 </StackPanel>
 
-                <StackPanel Grid.Column="2" Margin="10,0,15,0" VerticalAlignment="Center" Height="595">
+                <StackPanel Grid.Column="2" Margin="10,0,15,0" VerticalAlignment="Center" Height="570">
 
                     <!-- Image Path -->
                     <TextBlock Text="Image Path:" FontWeight="Bold" Margin="0,7,0,5" FontSize="18" />
-                    <TextBox x:Name="txtImagePath" Height="35" Margin="0,0,0,5" FontSize="16"/>
+                    <TextBox x:Name="txtImagePath" Height="40" Margin="0,0,0,5" FontSize="16"/>
 
                     <!-- Page -->
                     <TextBlock Text="Page:" FontWeight="Bold" Margin="0,7,0,5" FontSize="18" />
-                    <TextBox x:Name="txtPage" Height="35" Margin="0,0,0,5" FontSize="16"/>
+                    <TextBox x:Name="txtPage" Height="40" Margin="0,0,0,5" FontSize="16"/>
 
                     <!-- Description -->
                     <TextBlock Text="Description:" FontWeight="Bold" Margin="0,7,0,5" FontSize="18" />
-                    <TextBox x:Name="txtDescription" Height="344" TextWrapping="Wrap" AcceptsReturn="True" Margin="0,0,0,5"/>
+                    <TextBox x:Name="txtDescription" Height="365" TextWrapping="Wrap" AcceptsReturn="True" Margin="0,0,0,5"/>
 
                 </StackPanel>
 

@@ -84,7 +84,7 @@ namespace MionaLibrary.UserControls
             var searchTerm = SearchTextBox.Text.Trim();
 
             // Kiểm tra đầu vào
-            if (string.IsNullOrEmpty(selectedSearchType) || string.IsNullOrWhiteSpace(searchTerm))
+            if (selectedSearchType == "--- All ---" || string.IsNullOrEmpty(selectedSearchType) || string.IsNullOrWhiteSpace(searchTerm))
             {
                 SearchResultsDataGrid.ItemsSource = _bookServices.GetAllBooks();
             }

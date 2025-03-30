@@ -113,7 +113,7 @@ namespace MionaLibrary.ManagerControls
             }
 
             // Lấy ngôn ngữ được chọn từ ComboBox
-            var selectedLanguage = cbGenre.SelectedItem as Language; // Giả sử bạn có lớp Genre
+            var selectedLanguage = cbLanguage.SelectedItem as Language; // Giả sử bạn có lớp Genre
             if (selectedLanguage == null)
             {
                 MessageBox.Show("Please select a valid language.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);

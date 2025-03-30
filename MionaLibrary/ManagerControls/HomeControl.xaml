@@ -25,7 +25,8 @@
 
                 <ComboBox x:Name="SearchTypeComboBox" Grid.Column="0" Width="150" Height="auto" VerticalAlignment="Center" HorizontalAlignment="Center" 
      FontSize="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="5" KeyDown="SearchTextBox_KeyDown" Margin="10,15,5,10">
-                    <ComboBoxItem Content="Title" IsSelected="True"/>
+                    <ComboBoxItem Content="--- All ---" IsSelected="True"/>
+                    <ComboBoxItem Content="Title" />
                     <ComboBoxItem Content="Author"/>
                     <ComboBoxItem Content="Genre"/>
                     <ComboBoxItem Content="Language"/>
@@ -39,7 +40,7 @@
 
                     <!-- Placeholder Text -->
                     <TextBlock x:Name="PlaceholderText" Text="Enter search term..." Foreground="Gray" VerticalAlignment="Center" HorizontalAlignment="Left" 
-   Margin="20,0,0,0" IsHitTestVisible="False" Height="30" Width="auto" FontSize="16">
+   Margin="20,10,0,0" IsHitTestVisible="False" Height="30" Width="auto" FontSize="16">
                         <TextBlock.Style>
                             <Style TargetType="TextBlock">
                                 <Setter Property="Visibility" Value="Visible"/>

@@ -24,7 +24,9 @@
 
                 <ComboBox x:Name="SearchTypeComboBox" Grid.Column="0" Width="150" Height="auto" VerticalAlignment="Center" HorizontalAlignment="Center" 
           FontSize="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="5" KeyDown="SearchTextBox_KeyDown" Margin="10,15,5,10">
-                    <ComboBoxItem Content="Title" IsSelected="True"/>
+
+                    <ComboBoxItem Content="--- All ---" IsSelected="True"/>
+                    <ComboBoxItem Content="Title"/>
                     <ComboBoxItem Content="Author"/>
                     <ComboBoxItem Content="Genre"/>
                     <ComboBoxItem Content="Language"/>
@@ -32,13 +34,17 @@
 
                 <Grid Width="auto" Margin="20,10,10,10"
                Grid.Column="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="241*"/>
+                        <ColumnDefinition Width="624*"/>
+                    </Grid.ColumnDefinitions>
                     <!-- TextBox for User Input -->
                     <TextBox x:Name="SearchTextBox" Background="Transparent" BorderBrush="Gray" BorderThickness="1"
-      TextChanged="SearchTextBox_TextChanged" Margin="5,10,10,5" KeyDown="SearchTextBox_KeyDown" Width="850" Height="auto" FontSize="16"/>
+      TextChanged="SearchTextBox_TextChanged" Margin="5,10,10,5" KeyDown="SearchTextBox_KeyDown" Width="850" Height="auto" FontSize="16" Grid.ColumnSpan="2"/>
 
                     <!-- Placeholder Text -->
-                    <TextBlock x:Name="PlaceholderText" Text="Enter search term..." Foreground="Gray" VerticalAlignment="Center" HorizontalAlignment="Left" 
-        Margin="20,0,0,0" IsHitTestVisible="False" Height="30" Width="auto" FontSize="16">
+                    <TextBlock x:Name="PlaceholderText" Text="Enter search term..." Foreground="Gray" VerticalAlignment="Top" HorizontalAlignment="Left" 
+        Margin="19,20,0,0" IsHitTestVisible="False" Height="36" Width="auto" FontSize="16">
                         <TextBlock.Style>
                             <Style TargetType="TextBlock">
                                 <Setter Property="Visibility" Value="Visible"/>
@@ -162,8 +168,8 @@
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
-                    
-                    
+
+
                     <DataGridTemplateColumn Header="Quantity" Width="60" IsReadOnly="True">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
@@ -175,7 +181,7 @@ VerticalAlignment="Center" Padding="3" FontSize="13" HorizontalAlignment="Left" 
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
-                  
+
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>
