@@ -38,9 +38,9 @@ public partial class LibraryManagerContext : DbContext
     {
         modelBuilder.Entity<Book>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Books__3214EC0719DD2160");
+            entity.HasKey(e => e.Id).HasName("PK__Books__3214EC078845C975");
 
-            entity.HasIndex(e => e.Isbn, "UQ__Books__447D36EAC5D28C2C").IsUnique();
+            entity.HasIndex(e => e.Isbn, "UQ__Books__447D36EA9A9CB3CB").IsUnique();
 
             entity.Property(e => e.Author).HasMaxLength(100);
             entity.Property(e => e.Description).HasColumnType("text");
@@ -48,7 +48,6 @@ public partial class LibraryManagerContext : DbContext
             entity.Property(e => e.Isbn)
                 .HasMaxLength(20)
                 .HasColumnName("ISBN");
-            entity.Property(e => e.Language).HasMaxLength(50);
             entity.Property(e => e.Quantity).HasDefaultValue(1);
             entity.Property(e => e.Title).HasMaxLength(255);
 
@@ -56,15 +55,14 @@ public partial class LibraryManagerContext : DbContext
                 .HasForeignKey(d => d.GenreId)
                 .HasConstraintName("FK_Books_Genres");
 
-            entity.HasOne(d => d.LanguageNavigation).WithMany(p => p.Books)
+            entity.HasOne(d => d.Language).WithMany(p => p.Books)
                 .HasForeignKey(d => d.LanguageId)
-                .OnDelete(DeleteBehavior.SetNull)
                 .HasConstraintName("FK_Books_Languages");
         });
 
         modelBuilder.Entity<BookRequest>(entity =>
         {
-            entity.HasKey(e => e.RequestId).HasName("PK__BookRequ__33A8519A257BE523");
+            entity.HasKey(e => e.RequestId).HasName("PK__BookRequ__33A8519A8BF215B1");
 
             entity.ToTable("BookRequest");
 
@@ -93,25 +91,25 @@ public partial class LibraryManagerContext : DbContext
 
         modelBuilder.Entity<Genre>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Genres__3214EC0781FAB212");
+            entity.HasKey(e => e.Id).HasName("PK__Genres__3214EC07CEDF68F6");
 
-            entity.HasIndex(e => e.Name, "UQ__Genres__737584F618FFDBD3").IsUnique();
+            entity.HasIndex(e => e.Name, "UQ__Genres__737584F60A2A7ADE").IsUnique();
 
             entity.Property(e => e.Name).HasMaxLength(50);
         });
 
         modelBuilder.Entity<Language>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Language__3214EC078B1452FD");
+            entity.HasKey(e => e.Id).HasName("PK__Language__3214EC07191B0A54");
 
-            entity.HasIndex(e => e.Name, "UQ__Language__737584F63602EDE6").IsUnique();
+            entity.HasIndex(e => e.Name, "UQ__Language__737584F63121A15A").IsUnique();
 
             entity.Property(e => e.Name).HasMaxLength(50);
         });
 
         modelBuilder.Entity<Loan>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Loans__3214EC0779744CFE");
+            entity.HasKey(e => e.Id).HasName("PK__Loans__3214EC0716B242A5");
 
             entity.Property(e => e.BorrowDate)
                 .HasDefaultValueSql("(getdate())")
@@ -127,17 +125,17 @@ public partial class LibraryManagerContext : DbContext
             entity.HasOne(d => d.Book).WithMany(p => p.Loans)
                 .HasForeignKey(d => d.BookId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Loans__BookId__3C69FB99");
+                .HasConstraintName("FK__Loans__BookId__403A8C7D");
 
             entity.HasOne(d => d.User).WithMany(p => p.Loans)
                 .HasForeignKey(d => d.UserId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Loans__UserId__3B75D760");
+                .HasConstraintName("FK__Loans__UserId__3F466844");
         });
 
         modelBuilder.Entity<ReturnRequest>(entity =>
         {
-            entity.HasKey(e => e.ReturnRequestId).HasName("PK__ReturnRe__0CCD25992ACCD63D");
+            entity.HasKey(e => e.ReturnRequestId).HasName("PK__ReturnRe__0CCD2599E7E9613E");
 
             entity.ToTable("ReturnRequest");
 
@@ -167,9 +165,9 @@ public partial class LibraryManagerContext : DbContext
 
         modelBuilder.Entity<User>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Users__3214EC07584CE635");
+            entity.HasKey(e => e.Id).HasName("PK__Users__3214EC079071D723");
 
-            entity.HasIndex(e => e.Username, "UQ__Users__536C85E42350B7C5").IsUnique();
+            entity.HasIndex(e => e.Username, "UQ__Users__536C85E415D3B1D0").IsUnique();
 
             entity.Property(e => e.Birthday).HasColumnType("datetime");
             entity.Property(e => e.FirstName).HasMaxLength(100);

@@ -29,6 +29,7 @@ namespace MionaLibrary.BookControls
     {
         BookServices? _bookServices;
         Book? bookSelected;
+        LanguageServices? _languageServices;
 
         GenreServices? _genreServices;
 
@@ -36,6 +37,7 @@ namespace MionaLibrary.BookControls
         {
             InitializeComponent();
             loadGenres();
+            LoadLanguage();
         }
 
         public void SetBookSelected(Book book)
@@ -53,6 +55,16 @@ namespace MionaLibrary.BookControls
             cbGenre.ItemsSource = genres;
         }
 
+        private void LoadLanguage()
+        {
+            // Lấy danh sách tất cả các thể loại từ bảng Genres
+            _languageServices = new LanguageServices();
+            var languages = _languageServices.GetLanguageList();
+
+            // Gán danh sách thể loại vào ComboBox
+            cbLanguage.ItemsSource = languages;
+        }
+
         private void loadData()
         {
             if (bookSelected != null)
@@ -60,7 +72,8 @@ namespace MionaLibrary.BookControls
                 // Gán dữ liệu từ cơ sở dữ liệu vào các TextBlock
                 txtTitle.Text = bookSelected.Title;
                 txtAuthor.Text = bookSelected.Author;
-                txtLanguage.Text = bookSelected.Language;
+                var languageId = bookSelected.LanguageId;
+                cbLanguage.SelectedValue = languageId;
                 // Gán giá trị cho ComboBox Genre
                 var genreId = bookSelected.GenreId; // Lấy GenreId từ sách đã chọn
                 cbGenre.SelectedValue = genreId;   // Gán giá trị SelectedValue của ComboBox
@@ -135,7 +148,8 @@ namespace MionaLibrary.BookControls
             bookSelected.Description = txtDescription.Text;
             bookSelected.ImagePath = txtImagePath.Text;
             bookSelected.Quantity = int.Parse(txtQuantity.Text);
-            bookSelected.Language = InputValidator.legitName(txtLanguage.Text);
+            var languageId = bookSelected.LanguageId;
+            cbLanguage.SelectedValue = languageId;
             bookSelected.Page = int.Parse(txtPage.Text);
             bookSelected.PublishYear = int.Parse(txtPublishYear.Text);
             bookSelected.Isbn = txtIsbn.Text;
@@ -185,7 +199,6 @@ namespace MionaLibrary.BookControls
         (!InputValidator.TextBoxesIsNotEmpty(txtPublishYear), "Please enter the publish year!"),
         (!InputValidator.TextBoxesIsNotEmpty(txtIsbn), "Please enter the ISBN!"),
         (!InputValidator.TextBoxesIsNotEmpty(txtQuantity), "Please enter the quantity!"),
-        (!InputValidator.TextBoxesIsNotEmpty(txtLanguage), "Please enter the language!"),
         (!InputValidator.validName(txtAuthor.Text), "Author's name contains invalid characters!"),
         (!InputValidator.IsNumeric(txtPublishYear.Text), "Publish year must be a valid number!"),
         (!InputValidator.IsNumeric(txtQuantity.Text), "Quantity must be a valid number!"),

@@ -129,7 +129,7 @@ Background="Transparent" BorderThickness="0" Click="SearchButton_Click" >
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 
-                                    <TextBlock Text="{Binding Language}" 
+                                    <TextBlock Text="{Binding Language.Name}" 
                                       TextWrapping="Wrap" 
                                       MaxWidth="150" 
                                       VerticalAlignment="Center" Padding="3"/>

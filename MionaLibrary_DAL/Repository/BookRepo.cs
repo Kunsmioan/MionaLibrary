@@ -44,6 +44,7 @@ namespace MionaLibrary_DAL.Repository
             _context = new();
             List<Book> books = _context.Books
                                        .Include(b => b.Genre)
+                                       .Include(b => b.Language)
                                        .ToList();
             return books;
         }
@@ -61,20 +62,22 @@ namespace MionaLibrary_DAL.Repository
             switch (searchType.ToLower())
             {
                 case "title":
-                    return _context.Books.Include(b => b.Genre)
+                    return 
+                        _context.Books.Include(b => b.Genre)
+                        .Include(b => b.Language)
                         .Where(b => b.Title.ToLower().Contains(lowerSearchTerm))
                         .ToList();
                 case "author":
-                    return _context.Books.Include(b => b.Genre)
+                    return _context.Books.Include(b => b.Genre).Include(b => b.Language)
                         .Where(b => b.Author.ToLower().Contains(lowerSearchTerm))
                         .ToList();
                 case "language":
-                    return _context.Books.Include(b => b.Genre)
-                        .Where(b => b.Language.ToLower().Contains(lowerSearchTerm))
+                    return _context.Books.Include(b => b.Genre).Include(b => b.Language)
+                         .Where(b => b.Language != null && b.Language.Name.ToLower().Contains(lowerSearchTerm))
                         .ToList();
                 case "genre":
                     return _context.Books
-                         .Include(b => b.Genre)
+                         .Include(b => b.Genre).Include(b => b.Language)
                          .Where(b => b.Genre != null && b.Genre.Name.ToLower().Contains(lowerSearchTerm))
                         .ToList();
                 default:

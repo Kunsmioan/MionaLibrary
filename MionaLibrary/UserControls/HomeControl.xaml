@@ -129,7 +129,7 @@
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
 
-                                <TextBlock Text="{Binding Language}" 
+                                <TextBlock Text="{Binding Language.Name}" 
                                TextWrapping="Wrap" 
                                MaxWidth="150" 
                                VerticalAlignment="Center" Padding="3" FontSize="13"/>
@@ -157,7 +157,7 @@
                                 <TextBlock Text="{Binding Description}" 
            TextWrapping="Wrap" 
            MaxHeight="100"
-           VerticalAlignment="Stretch" Padding="3" FontSize="13" HorizontalAlignment="Left" Margin="5,5,0,5"/>
+           VerticalAlignment="Center" Padding="3" FontSize="13" HorizontalAlignment="Left" Margin="5,5,0,5"/>
 
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>

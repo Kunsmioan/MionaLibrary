@@ -60,7 +60,7 @@ namespace MionaLibrary.BookControls
                 // Gán dữ liệu từ cơ sở dữ liệu vào các TextBlock
                 TitleTextBlock.Text = bookSelected.Title;
                 AuthorTextBlock.Text = bookSelected.Author;
-                LanguageTextBlock.Text = bookSelected.Language;
+                LanguageTextBlock.Text = bookSelected.Language.Name;
                 if (bookSelected.Genre != null)
                 {
                     GenreTextBlock.Text = bookSelected.Genre.Name;
