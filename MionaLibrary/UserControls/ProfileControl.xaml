@@ -6,7 +6,7 @@
              xmlns:fa="http://schemas.fontawesome.io/icons/"
              xmlns:local="clr-namespace:MionaLibrary.UserControls"
              mc:Ignorable="d" 
-             d:DesignHeight="600" d:DesignWidth="720">
+             d:DesignHeight="600" d:DesignWidth="1200">
 
     <Grid Background="AliceBlue">
         <Grid.RowDefinitions>

@@ -126,6 +126,23 @@ BorderThickness="0" Click="Notification_Click" Style="{StaticResource ButtonStyl
                     <!-- Danh sách tùy chọn (ẩn ban đầu) -->
                     <Grid x:Name="BookOptions" Visibility="Collapsed" Background="White">
                         <StackPanel>
+                            <!-- Nút "Book" -->
+                            <Button Height="40" Click="BookOnLoan_Click" Margin="0,2,0,2" Style="{StaticResource ButtonStyleList}" Width="auto" 
+          >
+                                <Button.Template>
+                                    <ControlTemplate TargetType="Button">
+                                        <Grid Background="{TemplateBinding Background}">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="45"/>
+                                                <ColumnDefinition/>
+                                            </Grid.ColumnDefinitions>
+                                            <TextBlock Text="Book on loan" Foreground="#FF3D3D3D" Grid.Column="1" 
+         VerticalAlignment="Center" FontSize="16" Padding="5"/>
+                                        </Grid>
+                                    </ControlTemplate>
+                                </Button.Template>
+                            </Button>
+
                             <!-- Nút "Book on loan" -->
                             <Button Height="40" Click="BookOnLoan_Click" Margin="0,2,0,2" Style="{StaticResource ButtonStyleList}" Width="auto" 
                                     >

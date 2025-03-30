@@ -15,6 +15,7 @@ using MionaLibrary_DAL.Entity;
 using MionaLibrary.ManagerControls;
 using MionaLibrary.BookControls;
 using MionaLibrary.GenreControl;
+using System.Windows.Threading;
 
 
 namespace MionaLibrary
@@ -33,6 +34,21 @@ namespace MionaLibrary
 
             NotificationManager notificationManager = new NotificationManager();
             MainContent.Content = notificationManager;
+
+            DispatcherTimer timer = new DispatcherTimer();
+            timer.Interval = TimeSpan.FromSeconds(1); // Cập nhật mỗi giây
+            timer.Tick += Timer_Tick;
+            timer.Start();
+            //LoadData(); // Tải màn hình mặc định
+        }
+
+        private void Timer_Tick(object sender, EventArgs e)
+        {
+            // Cập nhật thời gian hiện tại vào TextBlock
+            //TimeTextBlock.Text = DateTime.Now.ToString("HH:mm:ss");
+
+            // Cập nhật ngày tháng hiện tại
+            DateTextBlock.Text = DateTime.Now.ToString("dd MMMM yyyy");
         }
 
         // Phương thức để lấy Manager từ ManagerWindow
@@ -123,6 +139,12 @@ namespace MionaLibrary
         {
             BookBorrowingLoan borrowBook = new();
             MainContent.Content = borrowBook;
+        }
+
+        private void AddBook_Click(object sender, RoutedEventArgs e)
+        {
+            AddBookControl addBookControl = new AddBookControl();
+            MainContent.Content = addBookControl;
         }
 
         //private void HistoryLoan_Click(object sender, RoutedEventArgs e)

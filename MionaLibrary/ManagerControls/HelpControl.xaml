@@ -6,7 +6,7 @@
              xmlns:fa="http://schemas.fontawesome.io/icons/"
              xmlns:local="clr-namespace:MionaLibrary.ManagerControls"
              mc:Ignorable="d" 
-             d:DesignHeight="600" d:DesignWidth="800">
+             d:DesignHeight="900" d:DesignWidth="1200">
     <Grid Background="white" Margin="40,30,30,30">
         <!-- Title Label -->
 

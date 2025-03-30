@@ -5,95 +5,95 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MionaLibrary.ManagerControls"
              mc:Ignorable="d" 
-             d:DesignHeight="600" d:DesignWidth="1200">
+             d:DesignHeight="900" d:DesignWidth="1200">
     <Grid>
         <Grid Background="#FFE9F9F3">
             <Grid.RowDefinitions>
-                <RowDefinition Height="60"/>
-                <RowDefinition Height="4*"/>
+                <RowDefinition Height="90"/>
                 <RowDefinition Height="*"/>
+                <RowDefinition Height="150"/>
             </Grid.RowDefinitions>
 
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="3*"/>
             </Grid.ColumnDefinitions>
             <Grid Grid.Row="0">
-                <TextBlock Text="Add New Book" FontSize="20" FontWeight="Bold" Margin="10,20,10,10" HorizontalAlignment="Center" Foreground="#FF37C506"/>
+                <TextBlock Text="Add New Book" FontSize="30" FontWeight="Bold" Margin="10,20,10,10" HorizontalAlignment="Center" Foreground="#FF37C506"/>
             </Grid>
 
-            <Grid Grid.Row="1">
+            <Grid Grid.Row="1" VerticalAlignment="Top" Height="auto">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="300"/>
                     <ColumnDefinition Width="2*"/>
                     <ColumnDefinition Width="2*"/>
                 </Grid.ColumnDefinitions>
 
-                <StackPanel  Margin="10" Grid.Column="1" Height="389">
+                <StackPanel  Margin="10" Grid.Column="1" Height="auto">
                     <!-- Title -->
-                    <TextBlock Text="Title:" FontWeight="Bold" Margin="0,7,0,0"   FontSize="14" />
-                    <TextBox x:Name="txtTitle" Height="35" Margin="0,0,0,5" />
+                    <TextBlock Text="Title:" FontWeight="Bold" Margin="0,7,0,5" FontSize="18" />
+                    <TextBox x:Name="txtTitle" Height="35" Margin="0,0,0,5" FontSize="16" />
 
                     <!-- Author -->
-                    <TextBlock Text="Author:" FontWeight="Bold" Margin="0,7,0,0"   FontSize="14" />
-                    <TextBox x:Name="txtAuthor" Height="35" Margin="0,0,0,5"/>
+                    <TextBlock Text="Author:" FontWeight="Bold" Margin="0,7,0,5" FontSize="18" />
+                    <TextBox x:Name="txtAuthor" Height="35" Margin="0,0,0,5" FontSize="16"/>
 
                     <!-- Publish Year -->
-                    <TextBlock Text="Publish Year:" FontWeight="Bold" Margin="0,7,0,0"   FontSize="14" />
-                    <TextBox x:Name="txtPublishYear" Height="35" Margin="0,0,0,5"/>
+                    <TextBlock Text="Publish Year:" FontWeight="Bold" Margin="0,7,0,5" FontSize="18" />
+                    <TextBox x:Name="txtPublishYear" Height="35" Margin="0,0,0,5" FontSize="16"/>
 
                     <!-- ISBN -->
-                    <TextBlock Text="ISBN:" FontWeight="Bold" Margin="0,7,0,0"   FontSize="14" />
-                    <TextBox x:Name="txtIsbn" Height="35" Margin="0,0,0,5"/>
+                    <TextBlock Text="ISBN:" FontWeight="Bold" Margin="0,7,0,5" FontSize="18" />
+                    <TextBox x:Name="txtIsbn" Height="35" Margin="0,0,0,5" FontSize="16"/>
 
                     <!-- Genre -->
                     <TextBlock Text="Genre:" FontWeight="Bold" Margin="0,7,0,0" FontSize="14" />
-                    <ComboBox x:Name="cbGenre" Height="35" Margin="0,0,0,5" DisplayMemberPath="Name" SelectedValuePath="Id" SelectedIndex="0"/>
+                    <ComboBox x:Name="cbGenre" Height="35" Margin="0,0,0,5" FontSize="16" DisplayMemberPath="Name" SelectedValuePath="Id" SelectedIndex="0"/>
 
                     <!-- Language -->
-                    <TextBlock Text="Language:" FontWeight="Bold" Margin="0,7,0,0"   FontSize="14" />
-                    <TextBox x:Name="txtLanguage" Height="35" Margin="0,0,0,5"/>
+                    <TextBlock Text="Language:" FontWeight="Bold" Margin="0,7,0,5" FontSize="18" />
+                    <TextBox x:Name="txtLanguage" Height="35" Margin="0,0,0,5" FontSize="16"/>
 
+                    <!-- Quantity -->
+                    <TextBlock Text="Quantity:" FontWeight="Bold" Margin="0,7,0,5" FontSize="18" />
+                    <TextBox x:Name="txtQuantity" Height="40" Margin="0,0,0,5" FontSize="16"/>
 
                 </StackPanel>
 
-                <StackPanel Grid.Column="2" Margin="10,10,15,10" VerticalAlignment="Center" Height="389">
-                    <!-- Quantity -->
-                    <TextBlock Text="Quantity:" FontWeight="Bold" Margin="0,7,0,0"   FontSize="14" />
-                    <TextBox x:Name="txtQuantity" Height="35" Margin="0,0,0,5"/>
+                <StackPanel Grid.Column="2" Margin="10,0,15,0" VerticalAlignment="Center" Height="595">
 
                     <!-- Image Path -->
-                    <TextBlock Text="Image Path:" FontWeight="Bold" Margin="0,7,0,0"   FontSize="14" />
-                    <TextBox x:Name="txtImagePath" Height="35" Margin="0,0,0,5"/>
+                    <TextBlock Text="Image Path:" FontWeight="Bold" Margin="0,7,0,5" FontSize="18" />
+                    <TextBox x:Name="txtImagePath" Height="35" Margin="0,0,0,5" FontSize="16"/>
 
                     <!-- Page -->
-                    <TextBlock Text="Page:" FontWeight="Bold" Margin="0,7,0,0"   FontSize="14" />
-                    <TextBox x:Name="txtPage" Height="35" Margin="0,0,0,5"/>
+                    <TextBlock Text="Page:" FontWeight="Bold" Margin="0,7,0,5" FontSize="18" />
+                    <TextBox x:Name="txtPage" Height="35" Margin="0,0,0,5" FontSize="16"/>
 
                     <!-- Description -->
-                    <TextBlock Text="Description:" FontWeight="Bold" Margin="0,7,0,0"   FontSize="14" />
-                    <TextBox x:Name="txtDescription" Height="166" TextWrapping="Wrap" AcceptsReturn="True" Margin="0,0,0,5"/>
+                    <TextBlock Text="Description:" FontWeight="Bold" Margin="0,7,0,5" FontSize="18" />
+                    <TextBox x:Name="txtDescription" Height="329" TextWrapping="Wrap" AcceptsReturn="True" Margin="0,0,0,5"/>
 
                 </StackPanel>
 
-                <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="0" Height="400">
+                <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Height="525" Width="280">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="80"/>
                     </Grid.RowDefinitions>
                     <!-- Image -->
-                    <Image x:Name="imgBook" Width="183" Source="/BookImage/defaultBook.png" Height="300" Margin="0,30,0,10"
+                    <Image x:Name="imgBook" Width="auto" Source="/BookImage/defaultBook.png" Height="auto" Margin="0,50,0,50"
                            Grid.Row="0"/>
-                    <Button Content="Import image" Height="39" Click="BtnChooseImage_Click" Background="#FFD0FDB8"
-                            Grid.Row="1" Margin="0,10,0,31" RenderTransformOrigin="0.51,-0.36"/>
+                    <Button Content="Import image" Click="BtnChooseImage_Click" Background="#FFD0FDB8"
+                            Grid.Row="1" Margin="10,10,10,26" FontSize="15"/>
                 </Grid>
             </Grid>
 
             <Grid Grid.Row="2" Grid.ColumnSpan="2" Margin="10">
                 <!-- Add Button -->
                 <Button Content="Add Book" Margin="449,16,0,16" Click="BtnAddBook_Click" HorizontalAlignment="Left" Width="165" Height="45"
-                        Background="#FFD0FDB8" Style="{StaticResource ButtonStyleSingle}"/>
+                        Background="#FFD0FDB8" Style="{StaticResource ButtonStyleSingle}" FontSize="15"/>
                 <Button Content="Cancel" Margin="642,16,0,16" Click="BtnCancelBook_Click" HorizontalAlignment="Left" Width="166" Height="45"
-                    Background="#FFA0A0A0" Style="{StaticResource ButtonStyleSingle}"/>
+                    Background="#FFA0A0A0" Style="{StaticResource ButtonStyleSingle}" FontSize="15"/>
             </Grid>
         </Grid>
     </Grid>
