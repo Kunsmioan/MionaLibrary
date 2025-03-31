@@ -17,6 +17,7 @@ using MionaLibrary.BookControls;
 using MionaLibrary.GenreControl;
 using System.Windows.Threading;
 using MionaLibrary.BookEntityControl;
+using MionaLibrary.BookManagerControls;
 
 
 namespace MionaLibrary
@@ -130,11 +131,11 @@ namespace MionaLibrary
             }
         }
 
-        private void BookOnLoan_Click(object sender, RoutedEventArgs e)
-        {
-            BookOnLoan placeOrder = new();
-            MainContent.Content = placeOrder;
-        }
+        //private void BookOnLoan_Click(object sender, RoutedEventArgs e)
+        //{
+        //    BookOnLoan placeOrder = new();
+        //    MainContent.Content = placeOrder;
+        //}
 
         private void BookBorowingLoan_Click(object sender, RoutedEventArgs e)
         {
@@ -185,6 +186,17 @@ namespace MionaLibrary
         {
             LanguageActionControl languageControl = new LanguageActionControl();
             MainContent.Content = languageControl;
+        }
+
+        private void ViewBooksOnLoan_Click(object sender, RoutedEventArgs e)
+        {
+            ViewBooksOnLoan viewBooks = new ViewBooksOnLoan();
+            MainContent.Content = viewBooks;    
+        }
+
+        private void ViewUsersWithLoans_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

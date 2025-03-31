@@ -99,5 +99,14 @@ namespace MionaLibrary_DAL.Repository
             _context.SaveChanges();
         }
 
+        public List<Loan> GetBooksOnLoanOrOverdue()
+        {
+            return _context.Loans
+                .Include(loan => loan.Book) // Bao gồm thông tin sách
+                .Include(loan => loan.User) // Bao gồm thông tin người dùng
+                .Where(loan => loan.Status == "Borrowing" || loan.Status == "Overdue") // Chỉ lấy sách đang mượn hoặc quá hạn
+                .ToList();
+        }
+
     }
 }

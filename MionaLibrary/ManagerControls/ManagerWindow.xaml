@@ -138,10 +138,10 @@ BorderThickness="0" Click="Notification_Click" Style="{StaticResource ButtonStyl
                                     </ControlTemplate>
                                 </Button.Template>
                             </Button>
-                            
-                            <!-- Nút "Book on loan" -->
-                            <Button Height="40" Click="BookOnLoan_Click" Margin="0,2,0,2" Style="{StaticResource ButtonStyleList}"
-                                    Width="auto">
+
+                            <!-- Nút 1: Hiển thị sách đang mượn hoặc quá hạn -->
+                            <Button Height="40" Click="ViewBooksOnLoan_Click" Margin="0,2,0,2" Style="{StaticResource ButtonStyleList}"
+            Width="auto">
                                 <Button.Template>
                                     <ControlTemplate TargetType="Button">
                                         <Grid Background="{TemplateBinding Background}">
@@ -149,16 +149,16 @@ BorderThickness="0" Click="Notification_Click" Style="{StaticResource ButtonStyl
                                                 <ColumnDefinition Width="45"/>
                                                 <ColumnDefinition/>
                                             </Grid.ColumnDefinitions>
-                                            <TextBlock Text="Book loan history" Foreground="#FF3D3D3D" Grid.Column="1" 
-                                   VerticalAlignment="Center" FontSize="16" />
+                                            <TextBlock Text="View Books on Loan" Foreground="#FF3D3D3D" Grid.Column="1" 
+                               VerticalAlignment="Center" FontSize="16" TextWrapping="Wrap" />
                                         </Grid>
                                     </ControlTemplate>
                                 </Button.Template>
                             </Button>
 
-                            <!-- Nút "Book borrowing history" -->
-                            <Button Height="40" Click="BookBorowingLoan_Click" Margin="0,2,0,2"  Style="{StaticResource ButtonStyleList}"
-                                    Width="auto"  >
+                            <!-- Nút 2: Hiển thị người dùng đang mượn sách -->
+                            <Button Height="40" Click="ViewUsersWithLoans_Click" Margin="0,2,0,2" Style="{StaticResource ButtonStyleList}"
+            Width="auto">
                                 <Button.Template>
                                     <ControlTemplate TargetType="Button">
                                         <Grid Background="{TemplateBinding Background}">
@@ -166,13 +166,13 @@ BorderThickness="0" Click="Notification_Click" Style="{StaticResource ButtonStyl
                                                 <ColumnDefinition Width="45"/>
                                                 <ColumnDefinition/>
                                             </Grid.ColumnDefinitions>
-                                            <!-- Text -->
-                                            <TextBlock Text="Book borrowing history" Foreground="#FF3D3D3D" Grid.Column="1" 
-                                   VerticalAlignment="Center" FontSize="14" TextWrapping="Wrap" />
+                                            <TextBlock Text="View Users with Loans" Foreground="#FF3D3D3D" Grid.Column="1" 
+                               VerticalAlignment="Center" FontSize="16" TextWrapping="Wrap"/>
                                         </Grid>
                                     </ControlTemplate>
                                 </Button.Template>
                             </Button>
+                            
                         </StackPanel>
                     </Grid>
 
