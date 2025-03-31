@@ -108,6 +108,12 @@ namespace MionaLibrary.BookManagerControls
         }
 
 
+        
+        private void ReaderDetailsAndBooksOnloan_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+        
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
             Window parentWindow = Window.GetWindow(this);
@@ -128,9 +134,5 @@ namespace MionaLibrary.BookManagerControls
             }
         }
 
-        private void ReaderDetailsAndBooksOnloan_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
     }
 }

@@ -7,7 +7,7 @@
              xmlns:local="clr-namespace:MionaLibrary.BookManagerControls"
              mc:Ignorable="d" 
                          d:DesignHeight="900" d:DesignWidth="1200">
-    <Grid Background="AliceBlue" Margin="10">
+    <Grid Background="Honeydew" Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="3*"/>
             <RowDefinition Height="4*"/>
@@ -26,10 +26,19 @@
                     <TextBlock Text="Back" VerticalAlignment="Center" Margin="5,0,0,0" />
                 </StackPanel>
             </Button>
-            <Border BorderBrush="Black" BorderThickness="1" Margin="20,40,20,10" Background="White" Width="306">
-                <Image x:Name="BookImage" Width="auto" Height="272" VerticalAlignment="Top"/>
+            <Border BorderBrush="Black" 
+        BorderThickness="1" 
+        Margin="20,40,20,10" 
+        Background="White" 
+        Width="280" 
+        Height="262">
+                <Image x:Name="BookImage" 
+           Stretch="Uniform" 
+           HorizontalAlignment="Center" 
+           VerticalAlignment="Center" 
+           Width="278" 
+           Height="260" />
             </Border>
-
         </StackPanel>
 
         <Grid Grid.Row="1" Margin="5,0,0,0">
@@ -150,7 +159,7 @@
                         <Setter Property="Background" Value="#FFEEEEEE" />
                         <Setter Property="Foreground" Value="#FF333333" />
                         <Setter Property="FontWeight" Value="Bold" />
-                        <Setter Property="FontSize" Value="14" />
+                        <Setter Property="FontSize" Value="16" />
                         <Setter Property="Padding" Value="10,5,10,5" />
                         <Setter Property="HorizontalContentAlignment" Value="Left" />
                     </Style>

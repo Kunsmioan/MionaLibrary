@@ -69,5 +69,10 @@ namespace MionaLibrary_Services.Services
             return _repo.GetBooksOnLoanOrOverdueByBookId(bookId);
         }
 
+        public List<Loan> GetBooksOnLoanOrOverdueByUserId(int userId)
+        {
+            return _repo.GetBooksOnLoanOrOverdueByUserId(userId);
+        }
+
     }
 }

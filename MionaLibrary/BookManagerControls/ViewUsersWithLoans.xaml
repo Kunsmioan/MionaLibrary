@@ -1,0 +1,187 @@
+﻿<UserControl x:Class="MionaLibrary.BookManagerControls.ViewUsersWithLoans"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:fa="http://schemas.fontawesome.io/icons/"
+             xmlns:local="clr-namespace:MionaLibrary.BookManagerControls"
+             mc:Ignorable="d" 
+                          d:DesignHeight="900" d:DesignWidth="1200">
+
+    <Grid Background="AliceBlue">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="10"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.Row="0" >
+            <Button Width="80" Height="40" Click="BackButton_Click" HorizontalAlignment="Left" Margin="9,10,0,0" Style="{StaticResource ButtonStyleSingle}">
+                <StackPanel Orientation="Horizontal">
+                    <!-- Biểu tượng Back từ FontAwesome -->
+                    <fa:ImageAwesome Icon="ArrowLeft" Width="20" Height="20" Foreground="Black" />
+                    <TextBlock Text="Back" VerticalAlignment="Center" Margin="5,0,0,0" />
+                </StackPanel>
+            </Button>
+        </StackPanel>
+
+        <!-- Các điều khiển nhập liệu cho profile -->
+        <Grid Grid.Row="1" Grid.Column="0" HorizontalAlignment="Left" Width="357">
+            <!-- Định nghĩa 2 cột -->
+            <Image Source="/Images/user.png" Margin="129,10,0,710" HorizontalAlignment="Left" Width="82" RenderTransformOrigin="0.055,0.567"/>
+            <!-- Cột 1: Username, Full Name, Birthday -->
+            <StackPanel Orientation="Vertical" Width="294" HorizontalAlignment="Center" Margin="0,110,0,0" 
+                        Height="680" VerticalAlignment="Top">
+                <StackPanel Orientation="Vertical" Height="80" HorizontalAlignment="Left" Margin="20,10,10,0">
+                    <TextBlock Text="Username:" FontWeight="Bold" FontSize="16" 
+                       HorizontalAlignment="Left" Margin="5,5,0,0"/>
+                    <TextBox x:Name="tbUsername" Width="250" Height="35" IsReadOnly="True" Padding="2" HorizontalAlignment="Left" />
+                </StackPanel>
+
+                <StackPanel Orientation="Vertical" Height="80" HorizontalAlignment="Left"  Margin="20,10,10,0">
+                    <TextBlock Text="Full Name:" FontWeight="Bold" FontSize="16" Margin="5,5,0,0" HorizontalAlignment="Left"/>
+                    <TextBox x:Name="tbfullName" Width="250" Height="35" IsReadOnly="True" Padding="2" HorizontalAlignment="Left"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Vertical" Height="80" HorizontalAlignment="Left"  Margin="20,10,10,0">
+                    <TextBlock Text="Birthday:" FontWeight="Bold" FontSize="16" Margin="5,5,0,0" HorizontalAlignment="Left"/>
+                    <TextBox x:Name="tbBirthday" Width="250" Height="35" IsReadOnly="True" Padding="2" HorizontalAlignment="Left"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Vertical" Height="80" HorizontalAlignment="Left"  Margin="20,10,10,0">
+                    <TextBlock Text="Gender:" FontWeight="Bold" FontSize="16" Margin="5,5,0,0" HorizontalAlignment="Left"/>
+                    <TextBox x:Name="tbGender" Width="250" Height="35" IsReadOnly="True" Padding="2" HorizontalAlignment="Left"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Vertical" Height="80" HorizontalAlignment="Left"  Margin="20,10,10,0">
+                    <TextBlock Text="Phone:" FontWeight="Bold" FontSize="16" Margin="5,5,0,0" HorizontalAlignment="Left"/>
+                    <TextBox x:Name="tbPhone" Width="250" Height="35" IsReadOnly="True" Padding="2" HorizontalAlignment="Left"/>
+                </StackPanel>
+            </StackPanel>
+
+                <!--
+                <Button x:Name="btnChangePassword" Content="Change password" Width="150" Height="40" FontSize="16"  Margin="5"  Style="{StaticResource ButtonStyleSingle}"
+                Click="btnChangePassword_Click"/>
+                <Button x:Name="btnEditProfile" Content="Edit Profile" Width="150" Height="40" FontSize="16"  Margin="5"  Style="{StaticResource ButtonStyleSingle}"
+                Click="btnEditProfile_Click"/>
+                <Button x:Name="btnDeleteAccount" Content="Delete Account" Height="52" Style="{StaticResource ButtonStyleSingle}"
+                Click="btnDeleteAccount_Click" Background="#FFE41717" FontSize="16" RenderTransformOrigin="0.46,3.2" Margin="70,651,99,87"/>
+                -->
+
+        </Grid>
+
+
+        <Grid Grid.Column="1" Grid.RowSpan="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="80"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock FontSize="24" 
+       FontWeight="Bold" 
+       Foreground="#FF3D3D3D" 
+       HorizontalAlignment="Center" 
+       Margin="0,20,0,10" Grid.Row="0"
+Text="Books On Loan"
+        />
+            <!-- DataGrid để hiển thị thông tin sách đang mượn hoặc quá hạn -->
+            <DataGrid Name="BooksOnLoanDataGrid" AutoGenerateColumns="False" Margin="10" 
+       AlternatingRowBackground="#FFF5F5F5" RowBackground="White" Grid.Row="1"
+       BorderBrush="#FFDDDDDD" BorderThickness="1" GridLinesVisibility="None">
+                <DataGrid.ColumnHeaderStyle>
+                    <Style TargetType="DataGridColumnHeader">
+                        <Setter Property="Background" Value="#FFEEEEEE" />
+                        <Setter Property="Foreground" Value="#FF333333" />
+                        <Setter Property="FontWeight" Value="Bold" />
+                        <Setter Property="FontSize" Value="16" />
+                        <Setter Property="Padding" Value="10,5,10,5" />
+                        <Setter Property="HorizontalContentAlignment" Value="Left" />
+                    </Style>
+                </DataGrid.ColumnHeaderStyle>
+
+                <DataGrid.CellStyle>
+                    <Style TargetType="DataGridCell">
+                        <Setter Property="Margin" Value="10,15,10,10" />
+                        <Setter Property="FontSize" Value="12" />
+                        <Setter Property="Foreground" Value="#FF444444" />
+                        <Setter Property="BorderThickness" Value="0" />
+                        <Style.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter Property="Background" Value="#FFE0E0FF" />
+                                <Setter Property="Foreground" Value="#FF000000" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </DataGrid.CellStyle>
+
+                <DataGrid.Columns>
+
+                    <DataGridTemplateColumn Header="Book Title" Width="*" IsReadOnly="True">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button 
+Background="Transparent" 
+BorderThickness="0" 
+Foreground="Blue" 
+Cursor="Hand" 
+Click="BookDetailsAndReaderBorrowing_Click" 
+HorizontalAlignment="Left"
+Style="{StaticResource TransparentButtonStyle}">
+                                    <TextBlock Text="{Binding Book.Title}" 
+           TextWrapping="Wrap" 
+           MaxWidth="200" 
+           VerticalAlignment="Center" 
+           Padding="3"/>
+                                </Button>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+
+                    <!-- Cột ngày mượn -->
+                    <DataGridTextColumn Header="Borrow Date" Binding="{Binding BorrowDate, StringFormat=\{0:dd/MM/yyyy\}}" 
+                 Width="150" />
+
+                    <!-- Cột ngày hết hạn -->
+                    <DataGridTextColumn Header="Due Date" Binding="{Binding DueDate, StringFormat=\{0:dd/MM/yyyy\}}" 
+                 Width="150" />
+
+                    <!-- Cột trạng thái (tùy chỉnh màu sắc) -->
+                    <DataGridTemplateColumn Header="Status" Width="150">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Status}" HorizontalAlignment="Center">
+                                    <TextBlock.Style>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="Foreground" Value="Black" />
+                                            <!-- Màu mặc định -->
+                                            <Style.Triggers>
+                                                <!-- Trigger cho trạng thái "Borrowing" -->
+                                                <DataTrigger Binding="{Binding Status}" Value="Borrowing">
+                                                    <Setter Property="Foreground" Value="Green" />
+                                                </DataTrigger>
+                                                <!-- Trigger cho trạng thái "Overdue" -->
+                                                <DataTrigger Binding="{Binding Status}" Value="Overdue">
+                                                    <Setter Property="Foreground" Value="Red" />
+                                                </DataTrigger>
+                                                <!-- Trigger cho trạng thái "Returned" (nếu cần) -->
+                                                <DataTrigger Binding="{Binding Status}" Value="Returned">
+                                                    <Setter Property="Foreground" Value="Gray" />
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </TextBlock.Style>
+                                </TextBlock>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+    </Grid>
+</UserControl>

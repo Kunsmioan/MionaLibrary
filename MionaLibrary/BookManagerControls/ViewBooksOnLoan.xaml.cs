@@ -71,7 +71,29 @@ namespace MionaLibrary.BookManagerControls
 
         private void ReaderDetailsAndBooksOnloan_Click(object sender, RoutedEventArgs e)
         {
+            if ((sender as Button)?.DataContext is Loan loan)
+            {
+                // Lấy cửa sổ cha
+                Window parentWindow = Window.GetWindow(this);
+                if (parentWindow is ManagerWindow mw)
+                {
+                    User? manager = mw.GetManager();
+                    var viewUsersWithLoans = new ViewUsersWithLoans();
+                    viewUsersWithLoans.SetBookSelected(loan.Book);
+                    viewUsersWithLoans.SetUser(loan.User);
 
+                    // Thay thế nội dung hiện tại bằng BookDetailsControl
+                    mw.MainContent.Content = viewUsersWithLoans;
+                }
+                else
+                {
+                    MessageBox.Show("Không tìm thấy cửa sổ ReaderWindow.", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Không thể lấy thông tin sách từ nút.", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
     }
 }

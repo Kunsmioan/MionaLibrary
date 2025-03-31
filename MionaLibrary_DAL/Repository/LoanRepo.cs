@@ -118,5 +118,15 @@ namespace MionaLibrary_DAL.Repository
                 .ToList();
         }
 
+        public List<Loan> GetBooksOnLoanOrOverdueByUserId(int userId)
+        {
+            return _context.Loans
+                .Include(loan => loan.Book) // Bao gồm thông tin sách
+                .Include(loan => loan.User) // Bao gồm thông tin người dùng
+                .Where(loan => (loan.Status == "Borrowing" || loan.Status == "Overdue")
+                    && loan.UserId == userId) // Lọc theo trạng thái và BookId
+                .ToList();
+        }
+
     }
 }
