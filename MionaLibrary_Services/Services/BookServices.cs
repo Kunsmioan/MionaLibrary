@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,35 +12,35 @@ namespace MionaLibrary_Services.Services
     
     public class BookServices
     {
-       BookRepo? _repo;
+       private readonly BookRepo _repo;
+
+        public BookServices()
+        {
+            _repo = new BookRepo();
+        }
 
         public void AddBook(Book book)
         {
-            _repo = new();
             _repo.AddBook(book);
         }
 
         public void UpdateBook(Book book)
         {
-            _repo = new();
             _repo.UpdateBook(book);
         }
 
         public void DeleteBook(Book book)
         {
-            _repo = new();
             _repo.DeleteBook(book);
         }   
 
-        public Book GetBookById(int id)
+        public Book? GetBookById(int id)
         {
-            _repo = new();
             return _repo.GetBookById(id);
         }
 
         public List<Book> GetAllBooks()
         {
-            _repo = new();
             List<Book> books = _repo.GetAllBooks();
             return books;
         }
@@ -48,7 +48,6 @@ namespace MionaLibrary_Services.Services
         public List<Book> GetAllBooksByFilter(string searchType, string searchTerm)
         {
             return _repo.GetAllBooksByFilter(searchType, searchTerm);
-
         }
     }
 }

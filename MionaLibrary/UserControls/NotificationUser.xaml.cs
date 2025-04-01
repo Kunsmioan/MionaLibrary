@@ -24,7 +24,6 @@ namespace MionaLibrary.UserControls
     public partial class NotificationUser : UserControl
     {
         BookRequestServices? _bookRequestServices =new();
-        BookReturnRequestServices? _bookReturnRequestServices = new();
         User? reader;
 
         public NotificationUser()
@@ -36,7 +35,6 @@ namespace MionaLibrary.UserControls
         {
             reader = user;
             LoadUserRequests(reader.Id);
-            LoadReturnRequests(reader.Id);
         }
 
         private void LoadUserRequests(int userId)
@@ -68,42 +66,7 @@ namespace MionaLibrary.UserControls
             UserRequestDataGrid.ItemsSource = userRequests;
         }
 
-        private void LoadReturnRequests(int userId)
-        {
-            try
-            {
-                // Lấy danh sách yêu cầu trả sách của người dùng hiện tại
-                var returnRequests = _bookReturnRequestServices.GetReturnRequestsByUserId(userId);
-
-                // Cập nhật thông báo và màu sắc cho từng yêu cầu
-                foreach (var request in returnRequests)
-                {
-                    switch (request.Status)
-                    {
-                        case "Pending":
-                            request.Announce = "Your return request is pending approval.";
-                            break;
-                        case "Approved":
-                            request.Announce = "Your return request has been approved. Thank you!";
-                            break;
-                        case "Rejected":
-                            request.Announce = "Your return request has been rejected. Please contact the librarian.";
-                            break;
-                        default:
-                            request.Announce = "Status is undefined.";
-                            break;
-                    }
-                }
-
-                // Gán dữ liệu vào DataGrid
-                UserReturnBookDataGrid.ItemsSource = returnRequests;
-            }
-            catch (Exception ex)
-            {
-                // Xử lý lỗi nếu có
-                MessageBox.Show($"Error loading return requests: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-        }
+        
 
     }
 }

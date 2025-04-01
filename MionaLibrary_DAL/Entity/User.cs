@@ -21,11 +21,11 @@ public partial class User
 
     public string Gender { get; set; } = null!;
 
-    public string? Phone { get; set; } = null!;
+    public string? Phone { get; set; }
 
     public virtual ICollection<BookRequest> BookRequests { get; set; } = new List<BookRequest>();
 
     public virtual ICollection<Loan> Loans { get; set; } = new List<Loan>();
 
-    public virtual ICollection<ReturnRequest> ReturnRequests { get; set; } = new List<ReturnRequest>();
+    public virtual ICollection<Renewal> Renewals { get; set; } = new List<Renewal>();
 }

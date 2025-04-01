@@ -223,7 +223,6 @@
                                 <StackPanel Orientation="Horizontal">
                                     <Button Content="Approve" 
                                     Tag="{Binding ReturnRequestId}" 
-                                    Click="ApproveReturn_Click" 
                                     Background="#FF15C137" 
                                     Margin="10,5,5,5" 
                                     Padding="5" 
@@ -231,7 +230,6 @@
                                     Style="{StaticResource ButtonStyleSingle}" />
                                     <Button Content="Reject" 
                                     Tag="{Binding ReturnRequestId}" 
-                                    Click="RejectReturn_Click" 
                                     Background="#FFF72525" 
                                     Margin="5" 
                                     Padding="5" 

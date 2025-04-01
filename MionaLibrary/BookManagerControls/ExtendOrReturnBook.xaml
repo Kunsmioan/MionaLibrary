@@ -192,7 +192,7 @@ Background="Transparent" BorderThickness="0" Click="SearchButton_Click" >
                      Background="gray" Margin="10,0,5,0" Padding="5" Width="80"
                      Style="{StaticResource ButtonStyleSingle}"/>
                                     <Button Content="Return" Tag="{Binding RequestId}" Click="Return_Click" 
-                     Margin="5,0,5,0" Background="#FF0ABBAF" Padding="5" Width="80"
+                     Margin="5,0,5,0" Background="#FF1BEC28" Padding="5" Width="80"
                      Style="{StaticResource ButtonStyleSingle}"/>
                                 </StackPanel>
                             </DataTemplate>
