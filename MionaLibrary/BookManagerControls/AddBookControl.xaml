@@ -49,11 +49,12 @@
                     <!-- Genre -->
                     <TextBlock Text="Genre:" FontWeight="Bold" Margin="0,7,0,5" FontSize="18" />
                     <ComboBox x:Name="cbGenre" Height="40" Margin="0,0,0,5" FontSize="16" DisplayMemberPath="Name" 
-                              SelectedValuePath="Id" />
+                              SelectedValuePath="Id" SelectedIndex="0"/>
 
                     <!-- Language -->
                     <TextBlock Text="Language:" FontWeight="Bold" Margin="0,7,0,5" FontSize="18" />
-                    <ComboBox x:Name="cbLanguage" Height="40" Margin="0,0,0,5" FontSize="16" DisplayMemberPath="Name" SelectedValuePath="Id"/>
+                    <ComboBox x:Name="cbLanguage" Height="40" Margin="0,0,0,5" FontSize="16" SelectedIndex="0"
+                              DisplayMemberPath="Name" SelectedValuePath="Id"/>
 
                     <!-- Quantity -->
                     <TextBlock Text="Quantity:" FontWeight="Bold" Margin="0,7,0,5" FontSize="18" />

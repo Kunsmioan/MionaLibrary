@@ -47,7 +47,7 @@ namespace MionaLibrary
         private void Timer_Tick(object sender, EventArgs e)
         {
             // Cập nhật thời gian hiện tại vào TextBlock
-            //TimeTextBlock.Text = DateTime.Now.ToString("HH:mm:ss");
+            TimeTextBlock.Text = DateTime.Now.ToString("HH:mm:ss");
 
             // Cập nhật ngày tháng hiện tại
             DateTextBlock.Text = DateTime.Now.ToString("dd MMMM yyyy");
@@ -194,9 +194,16 @@ namespace MionaLibrary
             MainContent.Content = viewBooks;    
         }
 
-        private void ViewUsersWithLoans_Click(object sender, RoutedEventArgs e)
+        private void Readers_Click(object sender, RoutedEventArgs e)
         {
+            ReadersControl readersControl = new ReadersControl();
+            MainContent.Content = readersControl;   
+        }
 
+        private void ExtendOrReturnBook_Click(object sender, RoutedEventArgs e)
+        {
+            ExtendOrReturnBook extendOrReturnBook = new ExtendOrReturnBook();
+            MainContent.Content = extendOrReturnBook;
         }
     }
 }

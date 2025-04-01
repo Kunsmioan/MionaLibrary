@@ -21,7 +21,7 @@ public partial class User
 
     public string Gender { get; set; } = null!;
 
-    public string? Phone { get; set; }
+    public string? Phone { get; set; } = null!;
 
     public virtual ICollection<BookRequest> BookRequests { get; set; } = new List<BookRequest>();
 

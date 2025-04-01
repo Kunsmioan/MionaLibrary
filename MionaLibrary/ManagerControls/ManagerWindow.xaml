@@ -15,7 +15,7 @@
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="60"/>
+            <RowDefinition Height="100"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
@@ -30,22 +30,36 @@
 
                 <!-- Thời gian ở góc phải -->
                 <StackPanel HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,20,0" Orientation="Horizontal">
-                    <!-- Thời gian
-             <TextBlock x:Name="TimeTextBlock" 
-                Text="00:00:00" 
-                Foreground="#FF49A557" 
-                FontFamily="Bahnschrift SemiBold" FontSize="30" HorizontalAlignment="Center" 
-                        VerticalAlignment="Center" Margin="20,0,20,0" 
-                /> 
-             -->
+                    <!-- Thời gian -->
+                    <TextBlock x:Name="TimeTextBlock" 
+               Text="00:00:00" 
+               Foreground="#FF49A557" 
+               FontFamily="Bahnschrift SemiBold" 
+               FontSize="30" 
+               HorizontalAlignment="Center" 
+               VerticalAlignment="Center" 
+               Margin="20,0,10,0" 
+               />
 
-                    <!-- Ngày tháng -->
-                    <TextBlock x:Name="DateTextBlock" 
-                Text="01/01/2023" 
-                Foreground="#FF49A557" 
-                FontFamily="Bahnschrift SemiBold" FontSize="30" HorizontalAlignment="Center" 
-                       VerticalAlignment="Center" Margin="20,0,5,0"/>
-                </StackPanel>
+    <!-- Đường dọc -->
+    <Rectangle Fill="#FF49A557" 
+               Width="2" 
+               Height="30" 
+               VerticalAlignment="Center" 
+               Margin="10,0,10,0" 
+               />
+
+    <!-- Ngày -->
+    <TextBlock x:Name="DateTextBlock" 
+               Text="01/01/2023" 
+               Foreground="#FF49A557" 
+               FontFamily="Bahnschrift SemiBold" 
+               FontSize="30" 
+               HorizontalAlignment="Center" 
+               VerticalAlignment="Center" 
+               Margin="10,0,20,0" 
+               />
+</StackPanel>
 
             </Grid>
         </Border>
@@ -63,7 +77,7 @@
                 <StackPanel Grid.Row="0">  
                     <!--Notify-->
                     <Button Content="Notifications" Height="60" Foreground="White" Width="auto"
-BorderThickness="0" Click="Notification_Click" Style="{StaticResource ButtonStyle}">
+BorderThickness="0" Click="Notification_Click" Style="{StaticResource ButtonStyle}" >
                         <Button.Template>
                             <ControlTemplate TargetType="{x:Type Button}">
                                 <Grid Background="{TemplateBinding Background}">
@@ -80,7 +94,7 @@ BorderThickness="0" Click="Notification_Click" Style="{StaticResource ButtonStyl
                         </Button.Template>
                     </Button>
                     <Button Content="Search" HorizontalAlignment="Stretch" Height="60" Foreground="White" Width="auto"
-                            BorderThickness="0" Click="Home_Click" Style="{StaticResource ButtonStyle}">
+                            BorderThickness="0" Click="Home_Click" Style="{StaticResource ButtonStyle}" >
                         <Button.Template>
                             <ControlTemplate TargetType="Button">
                                 <Grid Background="{TemplateBinding Background}">
@@ -97,7 +111,7 @@ BorderThickness="0" Click="Notification_Click" Style="{StaticResource ButtonStyl
 
                     <!-- Nút "Book" -->
                     <Button x:Name="BookButton" Content="Book" HorizontalAlignment="Stretch" Height="60" Foreground="White" Width="auto"
-                            BorderThickness="0" Style="{StaticResource ButtonStyle}" Click="Books_Click">
+                            BorderThickness="0" Style="{StaticResource ButtonStyle}"  Click="Books_Click">
                         <Button.Template>
                             <ControlTemplate TargetType="Button">
                                 <Grid Background="{TemplateBinding Background}">
@@ -139,6 +153,7 @@ BorderThickness="0" Click="Notification_Click" Style="{StaticResource ButtonStyl
                                 </Button.Template>
                             </Button>
 
+
                             <!-- Nút 1: Hiển thị sách đang mượn hoặc quá hạn -->
                             <Button Height="40" Click="ViewBooksOnLoan_Click" Margin="0,2,0,2" Style="{StaticResource ButtonStyleList}"
             Width="auto">
@@ -156,8 +171,8 @@ BorderThickness="0" Click="Notification_Click" Style="{StaticResource ButtonStyl
                                 </Button.Template>
                             </Button>
 
-                            <!-- Nút 2: Hiển thị người dùng đang mượn sách -->
-                            <Button Height="40" Click="ViewUsersWithLoans_Click" Margin="0,2,0,2" Style="{StaticResource ButtonStyleList}"
+                            <!-- Nút 2: Hiển thị gia hạn và trả sách -->
+                            <Button Height="40" Click="ExtendOrReturnBook_Click" Margin="0,2,0,2" Style="{StaticResource ButtonStyleList}"
             Width="auto">
                                 <Button.Template>
                                     <ControlTemplate TargetType="Button">
@@ -166,19 +181,18 @@ BorderThickness="0" Click="Notification_Click" Style="{StaticResource ButtonStyl
                                                 <ColumnDefinition Width="45"/>
                                                 <ColumnDefinition/>
                                             </Grid.ColumnDefinitions>
-                                            <TextBlock Text="View Users with Loans" Foreground="#FF3D3D3D" Grid.Column="1" 
+                                            <TextBlock Text="Extend Or Return Book" Foreground="#FF3D3D3D" Grid.Column="1" 
                                VerticalAlignment="Center" FontSize="16" TextWrapping="Wrap"/>
                                         </Grid>
                                     </ControlTemplate>
                                 </Button.Template>
                             </Button>
-                            
                         </StackPanel>
                     </Grid>
 
                     <!--Genre-->
                     <Button Content="Genre" HorizontalAlignment="Stretch" Height="60" Foreground="White" Width="auto"
-BorderThickness="0" Click="Genre_Click" Style="{StaticResource ButtonStyle}">
+BorderThickness="0" Click="Genre_Click" Style="{StaticResource ButtonStyle}" >
                         <Button.Template>
                             <ControlTemplate TargetType="Button">
                                 <Grid Background="{TemplateBinding Background}">
@@ -197,7 +211,7 @@ BorderThickness="0" Click="Genre_Click" Style="{StaticResource ButtonStyle}">
 
                     <!--Language-->
                     <Button Content="Language" HorizontalAlignment="Stretch" Height="60" Foreground="White" Width="auto"
-BorderThickness="0" Click="Language_Click" Style="{StaticResource ButtonStyle}">
+BorderThickness="0" Click="Language_Click" Style="{StaticResource ButtonStyle}" >
                         <Button.Template>
                             <ControlTemplate TargetType="Button">
                                 <Grid Background="{TemplateBinding Background}">
@@ -214,10 +228,42 @@ BorderThickness="0" Click="Language_Click" Style="{StaticResource ButtonStyle}">
                         </Button.Template>
                     </Button>
 
+                    <Button x:Name="ReadersButton" Content="Readers" Height="60" Width="auto"
+    Foreground="White" BorderThickness="0" Click="Readers_Click" Style="{StaticResource ButtonStyle}" >
+                        <Button.Template>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Grid Background="{TemplateBinding Background}">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="35"/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                    <fa:ImageAwesome Icon="Group" Foreground="White" Width="25" Height="15" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    <TextBlock Text="{TemplateBinding Content}" Foreground="White" Grid.Column="1" VerticalAlignment="Center" FontSize="20"/>
+                                </Grid>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+
+                    <Button x:Name="ProfileButton" Content="Profile" Height="60" Width="auto"
+                        BorderThickness="0" Click="Profile_Click" Style="{StaticResource ButtonStyle}" >
+                        <Button.Template>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Grid Background="{TemplateBinding Background}">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="35"/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                    <fa:ImageAwesome Icon="User" Foreground="#FFD3D415" Width="15" Height="15" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    <TextBlock Text="{TemplateBinding Content}" Foreground="#FFD3D415" Grid.Column="1" VerticalAlignment="Center" FontSize="20" FontWeight="Bold"/>
+                                </Grid>
+                            </ControlTemplate>
+                            
+                        </Button.Template>
+                    </Button>
 
                     <!-- Nút "Help" -->
                     <Button Content="Help" HorizontalAlignment="Stretch" Height="60" Foreground="White" Width="auto"
-BorderThickness="0" Click="Help_Click" Style="{StaticResource ButtonStyle}">
+BorderThickness="0" Click="Help_Click" Style="{StaticResource ButtonStyle}" >
                         <Button.Template>
                             <ControlTemplate TargetType="Button">
                                 <Grid Background="{TemplateBinding Background}">
@@ -233,33 +279,14 @@ BorderThickness="0" Click="Help_Click" Style="{StaticResource ButtonStyle}">
                             </ControlTemplate>
                         </Button.Template>
                     </Button>
-                    
-                    
-                    <Button x:Name="ProfileButton" Content="Profile" Height="60" Width="auto"
-                        Foreground="White" BorderThickness="0" Click="Profile_Click" Style="{StaticResource ButtonStyle}">
-                        <Button.Template>
-                            <ControlTemplate TargetType="{x:Type Button}">
-                                <Grid Background="{TemplateBinding Background}">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="35"/>
-                                        <ColumnDefinition/>
-                                    </Grid.ColumnDefinitions>
-                                    <fa:ImageAwesome Icon="User" Foreground="White" Width="15" Height="15" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                    <TextBlock Text="{TemplateBinding Content}" Foreground="White" Grid.Column="1" VerticalAlignment="Center" FontSize="20"/>
-                                </Grid>
-                            </ControlTemplate>
-                        </Button.Template>
-                    </Button>
-
-
                 </StackPanel>
 
                 <!-- Logout button ở dưới cùng -->
                 <Button Content="Log out" Click="Logout_Click" Height="60" Foreground="White" Width="auto"
-                        BorderThickness="0" Grid.Row="2" Margin="0,10,0,0" FontSize="14" Style="{StaticResource ButtonStyle}">
+                        BorderThickness="0" Grid.Row="2" Margin="0,10,0,0" FontSize="14" Style="{StaticResource ButtonStyle}" >
                     <Button.Template>
                         <ControlTemplate TargetType="Button">
-                            <Grid  Background="{TemplateBinding Background}">
+                            <Grid  Background="{TemplateBinding Background}" >
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="40"/>
                                     <ColumnDefinition/>

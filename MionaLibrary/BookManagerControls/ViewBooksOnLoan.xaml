@@ -108,7 +108,7 @@
                 <DataGridTemplateColumn Header="Status" Width="150">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding Status}" HorizontalAlignment="Center">
+                            <TextBlock Text="{Binding Status}" HorizontalAlignment="Left">
                                 <TextBlock.Style>
                                     <Style TargetType="TextBlock">
                                         <Setter Property="Foreground" Value="Black" />
