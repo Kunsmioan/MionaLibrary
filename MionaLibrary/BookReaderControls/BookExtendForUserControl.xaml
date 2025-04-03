@@ -1,12 +1,12 @@
-﻿<UserControl x:Class="MionaLibrary.BookControls.BookReturnForUserControl"
+<UserControl x:Class="MionaLibrary.BookControls.BookExtendForUserControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MionaLibrary.BookControls"
              mc:Ignorable="d" 
-             d:DesignHeight="600" d:DesignWidth="1200">
-    <Grid Background="White">
+             d:DesignHeight="900" d:DesignWidth="1200">
+    <Grid Background="AliceBlue">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="3*"/>
             <ColumnDefinition Width="4*"/>
@@ -24,7 +24,7 @@
                 <RowDefinition Height="20"/>
             </Grid.RowDefinitions>
 
-            <StackPanel Margin="20,15,20,54" Grid.Row="0">
+            <StackPanel Margin="20,15,20,337" Grid.Row="0">
                 <TextBlock Text="Book Details" FontSize="24" FontWeight="Bold" Margin="0,0,0,10" Foreground="#FF43DCCA" />
                 <!-- Title -->
                 <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
@@ -81,15 +81,25 @@
         VerticalAlignment="Top"/>
                     </ScrollViewer>
                 </StackPanel>
-<!--
-                <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
-                    <TextBlock Text="Stock:" FontSize="20" FontWeight="Bold" Width="200" />
-                    <TextBlock x:Name="StockTextBlock" FontSize="20" Width="300" Margin="10,0,0,0" TextWrapping="Wrap" />
+                
+                <StackPanel Orientation="Horizontal" Margin="0,20,0,0">
+                    <TextBlock Text="Extend times:" FontSize="20" FontWeight="Bold" Width="200" />
+                    <TextBlock x:Name="Extend" Text="3" FontSize="20" Width="300" Margin="10,0,0,0" 
+                               TextWrapping="Wrap" Foreground="YellowGreen" />
                 </StackPanel>
-                -->
             </StackPanel >
 
-           
+            <Grid Grid.Row="1">
+                <Button 
+         Content="Extend" 
+         FontSize="20" 
+         Width="161" 
+         Height="50" 
+         Click="ExtendButton_Click" Style="{StaticResource ButtonStyleSingle}" 
+         HorizontalAlignment="Left" VerticalAlignment="Top" Margin="135,-323,0,0" Background="#FF23D6DA"/>
+            </Grid>
+
+
             <!--
         <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal">
             <Button x:Name="Update" Content="Update" FontSize="20" Width="150" Height="40" 

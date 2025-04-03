@@ -55,6 +55,18 @@ namespace MionaLibrary_DAL.Repository
             return loans;
         }
 
+        public Loan GetLoanByUserIdAndBookId(int userId, int bookId)
+        {
+            // Tìm khoản vay dựa trên UserId và BookId
+            Loan loan = _context.Loans
+                .Include(loan => loan.Book) // Bao gồm thông tin sách
+                .Include(loan => loan.User) // Bao gồm thông tin người dùng
+                                .FirstOrDefault(loan => loan.UserId == userId && loan.BookId == bookId);
+
+            // Nếu không tìm thấy, trả về null
+            return loan;
+        }
+
         public List<Loan> GetLoanReturnByUser(int userId)
         {
             List<Loan> loans = _context.Loans

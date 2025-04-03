@@ -83,14 +83,14 @@ _loanServices.UpdateOverdueLoans();
                     //    MessageBox.Show("No user is selected. Please select a user first.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
                     //    return;
                     //}
-                    var bookReturnForUserControl = new BookReturnForUserControl();
-                    bookReturnForUserControl.SetBookSelected(selectedBook);
-                    bookReturnForUserControl.SetLoanSelected(selectedLoan);
-                    bookReturnForUserControl.SetUser(reader);
+                    var bookExtendForUserControl = new BookExtendForUserControl();
+                    bookExtendForUserControl.SetBookSelected(selectedBook);
+                    bookExtendForUserControl.SetLoanSelected(selectedLoan);
+                    bookExtendForUserControl.SetUser(reader);
 
 
                     // Thay thế nội dung hiện tại bằng BookDetailsControl
-                    rw.MainContent.Content = bookReturnForUserControl;
+                    rw.MainContent.Content = bookExtendForUserControl;
                 }
                 else
                 {

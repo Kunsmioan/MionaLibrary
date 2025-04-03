@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using MionaLibrary_DAL.Entity;
 using MionaLibrary_DAL.Repository;
 using System;
@@ -27,6 +27,11 @@ namespace MionaLibrary_Services.Services
         public void DeleteLoan(Loan loan)
         {
             _repo.DeleteLoan(loan);
+        }
+
+        public Loan GetLoanByUserIdAndBookId(int userId, int bookId)
+        {
+            return _repo.GetLoanByUserIdAndBookId(userId,bookId);
         }
 
         public List<Loan> GetAllLoans()

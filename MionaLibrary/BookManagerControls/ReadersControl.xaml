@@ -6,7 +6,6 @@
              xmlns:local="clr-namespace:MionaLibrary.BookManagerControls"
              mc:Ignorable="d" 
              d:DesignHeight="900" d:DesignWidth="1200">
-
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="80"/>
@@ -17,10 +16,9 @@
             HorizontalAlignment="Center" Margin="0,20,0,10" Grid.Row="0"/>
 
         <!-- DataGrid để hiển thị thông tin sách đang mượn hoặc quá hạn -->
-        <DataGrid Name="UserDataGrid" AutoGenerateColumns="False" Margin="10,0,10,30" 
+        <DataGrid Name="UserDataGrid" AutoGenerateColumns="False" Margin="10,10,10,30" 
    AlternatingRowBackground="#FFF5F5F5" RowBackground="White" Grid.Row="1"
-   BorderBrush="#FFDDDDDD" BorderThickness="1" GridLinesVisibility="None"
-                  CanUserAddRows="False">
+   BorderBrush="#FFDDDDDD" BorderThickness="1" GridLinesVisibility="None">
             <DataGrid.ColumnHeaderStyle>
                 <Style TargetType="DataGridColumnHeader">
                     <Setter Property="Background" Value="#FFEEEEEE" />
@@ -49,21 +47,24 @@
 
             <DataGrid.Columns>
                 <!-- ID Column -->
-                <DataGridTextColumn Header="ID" Binding="{Binding Id}" IsReadOnly="True" Width="100" />
+                <DataGridTextColumn Header="ID" Binding="{Binding Id}" IsReadOnly="True" Width="100"/>
 
-                <!-- Full Name Column (with Button for Link) -->
+                <!-- Full Name Column -->
                 <DataGridTemplateColumn Header="Full Name" Width="*" IsReadOnly="True">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Button 
-                        Background="Transparent" 
-                        BorderThickness="0" 
-                        Foreground="Blue" 
-                        Cursor="Hand" 
-                        Click="ReaderDetailsAndBooksOnloan_Click" 
-                        HorizontalAlignment="Left"
-                        Style="{StaticResource TransparentButtonStyle}">
-                                <TextBlock TextWrapping="Wrap" MaxWidth="200">
+     Background="Transparent" 
+     BorderThickness="0" 
+     Foreground="Blue" 
+     Cursor="Hand" 
+     Click="ReaderDetailsAndBooksOnloan_Click" 
+     HorizontalAlignment="Left"
+     Style="{StaticResource TransparentButtonStyle}">
+                                <TextBlock TextWrapping="Wrap" 
+MaxWidth="200" 
+VerticalAlignment="Center" 
+Padding="3">
                                     <TextBlock.Text>
                                         <MultiBinding StringFormat="{}{0} {1}">
                                             <Binding Path="FirstName" />
@@ -77,53 +78,24 @@
                 </DataGridTemplateColumn>
 
                 <!-- Username Column -->
-                <DataGridTemplateColumn Header="Username" Width="*" IsReadOnly="True">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="{Binding Username}" TextWrapping="Wrap" MaxWidth="200" />
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
+                <DataGridTextColumn Header="Username" Binding="{Binding Username}" IsReadOnly="True" Width="*" />
 
                 <!-- Birthday Column -->
-                <DataGridTemplateColumn Header="Birthday" Width="*" IsReadOnly="True">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="{Binding Birthday, StringFormat=\{0:dd/MM/yyyy\}}" TextWrapping="Wrap" MaxWidth="200" />
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
+                <DataGridTextColumn Header="Birthday" Binding="{Binding Birthday, StringFormat=\{0:dd/MM/yyyy\}}" IsReadOnly="True" Width="*" />
 
                 <!-- Gender Column -->
-                <DataGridTemplateColumn Header="Gender" Width="150" IsReadOnly="True">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="{Binding Gender}" TextWrapping="Wrap" MaxWidth="200" />
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
+                <DataGridTextColumn Header="Gender" Binding="{Binding Gender}" IsReadOnly="True" Width="150" />
 
                 <!-- Phone Column -->
-                <DataGridTemplateColumn Header="Phone" Width="*" IsReadOnly="True">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="{Binding Phone}" TextWrapping="Wrap" MaxWidth="200" />
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
+                <DataGridTextColumn Header="Phone" Binding="{Binding Phone}" IsReadOnly="True" Width="*" />
 
                 <DataGridTemplateColumn Header="Actions" Width="200">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button 
-                Content="Delete" 
-                Tag="{Binding Id}" 
-                Click="Delete_Click" 
-                Background="#FFF72525" 
-                Foreground="White" 
-               
-                Style="{StaticResource ButtonStyleSingle}" 
-                Cursor="Hand" Margin="1,0,0,0" />
+                               
+                                <Button Content="Delete" Tag="{Binding RequestId}" Click="Delete_Click" 
+                     Margin="5" Background="#FFF72525" Padding="5" Width="80"
+                     Style="{StaticResource ButtonStyleSingle}"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>

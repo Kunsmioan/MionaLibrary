@@ -23,7 +23,6 @@ namespace MionaLibrary.BookManagerControls
     public partial class ReadersControl : UserControl
     {
         UserServices _userServices = new UserServices();
-        LoanServices _loanServices = new LoanServices();
 
         public ReadersControl()
         {
@@ -34,6 +33,11 @@ namespace MionaLibrary.BookManagerControls
         public void LoadData()
         {
             UserDataGrid.ItemsSource = _userServices.GetAll();
+        }
+
+        private void ReaderDetailsAndBooksOnloan_Click(object sender, RoutedEventArgs e)
+        {
+
         }
 
         private void Delete_Click(object sender, RoutedEventArgs e)
@@ -56,18 +60,6 @@ namespace MionaLibrary.BookManagerControls
                     return;
                 }
 
-                // Check if user has any active loans
-                var userLoans = _loanServices.GetLoansByUserId(userId);
-                if (userLoans != null && userLoans.Any())
-                {
-                    MessageBox.Show(
-                        "Cannot delete this user because they have active loans. Please ensure all books are returned before deleting the user.",
-                        "Delete Failed",
-                        MessageBoxButton.OK,
-                        MessageBoxImage.Warning);
-                    return;
-                }
-
                 var result = MessageBox.Show(
                     $"Are you sure you want to delete the user: {userToDelete.Username}?",
                     "Confirm Deletion",
@@ -76,35 +68,15 @@ namespace MionaLibrary.BookManagerControls
 
                 if (result == MessageBoxResult.Yes)
                 {
-                    try
-                    {
-                        _userServices.Remove(userToDelete);
-                        LoadData();
-                        MessageBox.Show($"User {userToDelete.Username} has been deleted.", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(
-                            "Unable to delete user. This may be because they have associated records in the system.\n\n" +
-                            "Please ensure the user has no:\n" +
-                            "- Active loans\n" +
-                            "- Loan history\n" +
-                            "- Other related records",
-                            "Delete Failed",
-                            MessageBoxButton.OK,
-                            MessageBoxImage.Error);
-                    }
+                    _userServices.Remove(userToDelete);
+                    LoadData();
+                    MessageBox.Show($"User {userToDelete.Username} has been deleted.", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
             }
             else
             {
                 MessageBox.Show("Invalid user ID.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-        }
-
-        private void ReaderDetailsAndBooksOnloan_Click(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }
