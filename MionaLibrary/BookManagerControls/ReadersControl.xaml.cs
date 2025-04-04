@@ -78,5 +78,6 @@ namespace MionaLibrary.BookManagerControls
                 MessageBox.Show("Invalid user ID.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+
     }
 }

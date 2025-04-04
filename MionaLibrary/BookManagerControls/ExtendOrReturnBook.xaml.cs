@@ -245,6 +245,7 @@ namespace MionaLibrary.BookManagerControls
                 //Cập nhật trạng thái khoản vay
                 loan.ReturnDate = DateTime.Now;
                 loan.Status = "Returned";
+                loan.RenewalCount = 3;
                 _loanServices.UpdateLoan(loan);
 
                 // Tăng số lượng sách lên 1

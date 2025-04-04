@@ -109,7 +109,7 @@ namespace MionaLibrary.BookManagerControls
             }
 
             // Nếu có từ khóa tìm kiếm, thực hiện tìm kiếm
-            var filteredBooks = _loanServices.FilterReadesBorrowingOrOvedue(searchTerm);
+            var filteredBooks = _loanServices.FilterBooksBorrowingOrOvedue(searchTerm);
 
             // Kiểm tra nếu không có kết quả tìm kiếm
             if (filteredBooks == null || !filteredBooks.Any())

@@ -65,6 +65,7 @@ namespace MionaLibrary_DAL.Repository
             return _context.BookRequests
                 .Where(br => br.UserId == userId)
                 .Include(br => br.Book) // Lấy thông tin sách
+                .OrderByDescending(br => br.RequestDate) // Sắp xếp theo ngày yêu cầu giảm dần
                 .ToList();
         }
 

@@ -44,7 +44,6 @@
                     </Style.Triggers>
                 </Style>
             </DataGrid.CellStyle>
-
             <DataGrid.Columns>
                 <!-- ID Column -->
                 <DataGridTextColumn Header="ID" Binding="{Binding Id}" IsReadOnly="True" Width="100"/>
@@ -94,8 +93,8 @@ Padding="3">
                         <DataTemplate>
                                
                                 <Button Content="Delete" Tag="{Binding RequestId}" Click="Delete_Click" 
-                     Margin="5" Background="#FFF72525" Padding="5" Width="80"
-                     Style="{StaticResource ButtonStyleSingle}"/>
+                     Margin="5,0,5,0" Background="#FFF72525" Padding="5" Width="80"
+                     Style="{StaticResource ButtonStyleSingle}" HorizontalAlignment="Left" VerticalAlignment="Top"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>

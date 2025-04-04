@@ -87,10 +87,11 @@ namespace MionaLibrary.BookControls
             if(bookSelected != null && reader != null)
             {
                 // Get the loan for the selected book and reader
-                loanSelected = _loanServices.GetLoanByUserIdAndBookId(reader.Id, bookSelected.Id);
                 if (loanSelected != null)
                 {
                     Extend.Text = loanSelected.RenewalCount.ToString();
+                    BorrowDate.Text = loanSelected.BorrowDate.ToString("d");
+                    DueDate.Text = loanSelected.DueDate.ToString("d");  
                 }
                 
             }   
@@ -116,9 +117,9 @@ namespace MionaLibrary.BookControls
                 }
 
                 // Kiểm tra trạng thái khoản vay
-                if (loanSelected.Status != "Borrowing")
+                if (loanSelected.Status == "Overdue")
                 {
-                    MessageBox.Show("This loan cannot be renewed. It may be overdue or already returned.", "Cannot Renew", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    MessageBox.Show("This loan cannot be renewed. It was being overdue", "Cannot Renew", MessageBoxButton.OK, MessageBoxImage.Warning);
                     return;
                 }
 
