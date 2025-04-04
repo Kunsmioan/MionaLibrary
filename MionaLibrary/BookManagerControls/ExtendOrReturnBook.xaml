@@ -172,7 +172,7 @@ Padding="3">
                     Width="150" />
 
                     <!-- Cột trạng thái (tùy chỉnh màu sắc) -->
-                    <DataGridTemplateColumn Header="Status" Width="150">
+                    <DataGridTemplateColumn Header="Status" Width="120">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding Status}" HorizontalAlignment="Left">
@@ -202,7 +202,7 @@ Padding="3">
                     </DataGridTemplateColumn>
 
                     <!-- Cột ngày hết hạn -->
-                    <DataGridTextColumn Header="Extend times" Binding="{Binding RenewalCount}" 
+                    <DataGridTextColumn Header="Renewal" Binding="{Binding RenewalCount}" 
                                         Width="100" />
 
                     <DataGridTemplateColumn Header="Actions" Width="200">

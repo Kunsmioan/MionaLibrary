@@ -234,6 +234,35 @@ namespace MionaLibrary.BookManagerControls
 
         private void Return_Click(object sender, RoutedEventArgs e)
         {
+            if ((sender as Button)?.DataContext is Loan loan)
+            {
+                // Lấy thông tin khoản vay từ DataContext của nút
+                loanSelected = loan;
+                // Lấy thông tin người đọc từ DataContext của nút
+                reader = loan.User;
+                // Lấy thông tin sách từ DataContext của nút
+                bookSelected = loan.Book;
+                //Cập nhật trạng thái khoản vay
+                loan.ReturnDate = DateTime.Now;
+                loan.Status = "Returned";
+                _loanServices.UpdateLoan(loan);
+
+                // Tăng số lượng sách lên 1
+                bookSelected.Quantity += 1;
+
+                // Cập nhật trạng thái IsAvailable nếu số lượng sách > 0
+                if (bookSelected.Quantity > 0)
+                {
+                    bookSelected.IsAvailable = true;
+                }
+
+                // Lưu cập nhật sách vào cơ sở dữ liệu
+                _bookServices.UpdateBook(bookSelected);
+
+                // Hiển thị thông báo thành công
+                MessageBox.Show("Yêu cầu trả sách đã được phê duyệt!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                SearchButton_Click(null, null);
+            }
 
         }
     }
