@@ -58,10 +58,10 @@ namespace MionaLibrary_DAL.Repository
         public Loan GetLoanByUserIdAndBookId(int userId, int bookId)
         {
             // Tìm khoản vay dựa trên UserId và BookId
-            Loan loan = _context.Loans
+            Loan? loan = _context.Loans
                 .Include(loan => loan.Book) // Bao gồm thông tin sách
                 .Include(loan => loan.User) // Bao gồm thông tin người dùng
-                                .FirstOrDefault(loan => loan.UserId == userId && loan.BookId == bookId);
+                .FirstOrDefault(loan => loan.UserId == userId && loan.BookId == bookId);
 
             // Nếu không tìm thấy, trả về null
             return loan;
@@ -138,6 +138,58 @@ namespace MionaLibrary_DAL.Repository
                 .Where(loan => (loan.Status == "Borrowing" || loan.Status == "Overdue")
                     && loan.UserId == userId) // Lọc theo trạng thái và BookId
                 .ToList();
+        }
+
+        public List<Loan> FilterReadesBorrowingOrOvedue(string searchTerm)
+        {
+            // Ensure the search term is not null or empty
+            if (string.IsNullOrWhiteSpace(searchTerm))
+            {
+                return new List<Loan>(); // Return an empty list if no search term is provided
+            }
+
+            // Normalize the search term for case-insensitive comparison
+            string normalizedSearchTerm = searchTerm.Trim().ToLower();
+
+            // Query the database to find loans where the associated user matches the search term
+            var filteredLoans = _context.Loans
+                .Include(loan => loan.Book) // Include book details
+                .Include(loan => loan.User) // Include user details
+                .Where(loan => (loan.Status == "Borrowing" || loan.Status == "Overdue") &&
+                    loan.User != null && // Ensure the user is not null
+                    (
+                        loan.User.Username != null && loan.User.Username.ToLower().Contains(normalizedSearchTerm)
+                    )
+                )
+                .ToList();
+
+            return filteredLoans;
+        }
+
+        public List<Loan> FilterBooksBorrowingOrOvedue(string searchTerm)
+        {
+            // Ensure the search term is not null or empty
+            if (string.IsNullOrWhiteSpace(searchTerm))
+            {
+                return new List<Loan>(); // Return an empty list if no search term is provided
+            }
+
+            // Normalize the search term for case-insensitive comparison
+            string normalizedSearchTerm = searchTerm.Trim().ToLower();
+
+            // Query the database to find loans where the associated user matches the search term
+            var filteredLoans = _context.Loans
+                .Include(loan => loan.Book) // Include book details
+                .Include(loan => loan.User) // Include user details
+                .Where(loan => (loan.Status == "Borrowing" || loan.Status == "Overdue") &&
+                    loan.Book != null && // Ensure the user is not null
+                    (
+                        loan.Book.Title != null && loan.Book.Title.ToLower().Contains(normalizedSearchTerm)
+                    )
+                )
+                .ToList();
+
+            return filteredLoans;
         }
 
     }

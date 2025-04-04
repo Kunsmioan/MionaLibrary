@@ -12,7 +12,12 @@ namespace MionaLibrary_Services.Services
     
     public class LoanServices
     {
-        LoanRepo? _repo = new();
+        LoanRepo? _repo;
+
+        public LoanServices()
+        {
+            _repo = new();
+        }
 
         public void AddLoan( Loan loan)
         {
@@ -78,6 +83,17 @@ namespace MionaLibrary_Services.Services
         {
             return _repo.GetBooksOnLoanOrOverdueByUserId(userId);
         }
+
+        public List<Loan> FilterReadesBorrowingOrOvedue(string searchTerm)
+        {
+            return _repo.FilterReadesBorrowingOrOvedue(searchTerm);
+        }
+
+        public List<Loan> FilterBooksBorrowingOrOvedue(string searchTerm)
+        {
+            return _repo.FilterBooksBorrowingOrOvedue(searchTerm);
+        }
+
 
     }
 }

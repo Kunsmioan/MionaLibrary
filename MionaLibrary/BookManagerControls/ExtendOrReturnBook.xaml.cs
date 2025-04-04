@@ -95,17 +95,64 @@ namespace MionaLibrary.BookManagerControls
 
         private void SearchTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-
+            // Update the visibility of the placeholder text
+            if (string.IsNullOrWhiteSpace(SearchTextBox.Text))
+            {
+                PlaceholderText.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                PlaceholderText.Visibility = Visibility.Collapsed;
+            }
         }
 
         private void SearchTextBox_KeyDown(object sender, KeyEventArgs e)
         {
-
+            if (e.Key == Key.Enter)
+            {
+                // Thực hiện tìm kiếm
+                SearchButton_Click(sender, e);
+            }
         }
 
         private void SearchButton_Click(object sender, RoutedEventArgs e)
         {
+            // Lấy từ khóa tìm kiếm từ TextBox
+            var searchTerm = SearchTextBox.Text.Trim();
 
+            // Kiểm tra xem có từ khóa tìm kiếm không
+            if (string.IsNullOrWhiteSpace(searchTerm))
+            {
+                // Nếu không có từ khóa tìm kiếm, hiển thị thông báo trong TextBlock
+                MessageTextBlock.Text = "Please enter a search term.";
+                MessageTextBlock.Visibility = Visibility.Visible;
+
+                // Clear the DataGrid
+                BooksOnLoanDataGrid.ItemsSource = null;
+                return;
+            }
+
+            // Nếu có từ khóa tìm kiếm, thực hiện tìm kiếm
+            var filteredBooks = _loanServices.FilterReadesBorrowingOrOvedue(searchTerm);
+
+            // Kiểm tra nếu không có kết quả tìm kiếm
+            if (filteredBooks == null || !filteredBooks.Any())
+            {
+                // Hiển thị thông báo "Reader not found" trong TextBlock
+                MessageTextBlock.Text = "Reader not found.";
+                MessageTextBlock.Visibility = Visibility.Visible;
+
+                // Clear the DataGrid
+                BooksOnLoanDataGrid.ItemsSource = null;
+            }
+            else
+            {
+                // Hide the message TextBlock
+                MessageTextBlock.Visibility = Visibility.Collapsed;
+
+                // Hiển thị kết quả trong DataGrid
+                BooksOnLoanDataGrid.ItemsSource = filteredBooks;
+            }
         }
 
         private void Extend_Click(object sender, RoutedEventArgs e)

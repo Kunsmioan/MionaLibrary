@@ -69,31 +69,71 @@ namespace MionaLibrary.BookManagerControls
             }
         }
 
-        private void ReaderDetailsAndBooksOnloan_Click(object sender, RoutedEventArgs e)
+        private void SearchTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if ((sender as Button)?.DataContext is Loan loan)
+            // Update the visibility of the placeholder text
+            if (string.IsNullOrWhiteSpace(SearchTextBox.Text))
             {
-                // Lấy cửa sổ cha
-                Window parentWindow = Window.GetWindow(this);
-                if (parentWindow is ManagerWindow mw)
-                {
-                    User? manager = mw.GetManager();
-                    var viewUsersWithLoans = new ViewUsersWithLoans();
-                    viewUsersWithLoans.SetBookSelected(loan.Book);
-                    viewUsersWithLoans.SetUser(loan.User);
-
-                    // Thay thế nội dung hiện tại bằng BookDetailsControl
-                    mw.MainContent.Content = viewUsersWithLoans;
-                }
-                else
-                {
-                    MessageBox.Show("Không tìm thấy cửa sổ ReaderWindow.", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
+                PlaceholderText.Visibility = Visibility.Visible;
             }
             else
             {
-                MessageBox.Show("Không thể lấy thông tin sách từ nút.", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                PlaceholderText.Visibility = Visibility.Collapsed;
             }
+        }
+
+        private void SearchTextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                // Thực hiện tìm kiếm
+                SearchButton_Click(sender, e);
+            }
+        }
+
+        private void SearchButton_Click(object sender, RoutedEventArgs e)
+        {
+            // Lấy từ khóa tìm kiếm từ TextBox
+            var searchTerm = SearchTextBox.Text.Trim();
+
+            // Kiểm tra xem có từ khóa tìm kiếm không
+            if (string.IsNullOrWhiteSpace(searchTerm))
+            {
+                // Nếu không có từ khóa tìm kiếm, hiển thị thông báo trong TextBlock
+                MessageTextBlock.Text = "Please enter a search term.";
+                MessageTextBlock.Visibility = Visibility.Visible;
+
+                // Clear the DataGrid
+                BooksOnLoanDataGrid.ItemsSource = null;
+                return;
+            }
+
+            // Nếu có từ khóa tìm kiếm, thực hiện tìm kiếm
+            var filteredBooks = _loanServices.FilterReadesBorrowingOrOvedue(searchTerm);
+
+            // Kiểm tra nếu không có kết quả tìm kiếm
+            if (filteredBooks == null || !filteredBooks.Any())
+            {
+                // Hiển thị thông báo "Reader not found" trong TextBlock
+                MessageTextBlock.Text = "Book not found.";
+                MessageTextBlock.Visibility = Visibility.Visible;
+
+                // Clear the DataGrid
+                BooksOnLoanDataGrid.ItemsSource = null;
+            }
+            else
+            {
+                // Hide the message TextBlock
+                MessageTextBlock.Visibility = Visibility.Collapsed;
+
+                // Hiển thị kết quả trong DataGrid
+                BooksOnLoanDataGrid.ItemsSource = filteredBooks;
+            }
+        }
+
+        private void ReaderDetailsAndBooksOnloan_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
