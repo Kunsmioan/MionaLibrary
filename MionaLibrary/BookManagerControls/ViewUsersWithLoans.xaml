@@ -33,7 +33,7 @@
         <!-- Các điều khiển nhập liệu cho profile -->
         <Grid Grid.Row="1" Grid.Column="0" HorizontalAlignment="Left" Width="357">
             <!-- Định nghĩa 2 cột -->
-            <Image Source="/Images/user.png" Margin="129,10,0,710" HorizontalAlignment="Left" Width="82" RenderTransformOrigin="0.055,0.567"/>
+            <Image Source="/Images/user.png" Margin="129,10,0,680" HorizontalAlignment="Left" Width="103" RenderTransformOrigin="0.055,0.567"/>
             <!-- Cột 1: Username, Full Name, Birthday -->
             <StackPanel Orientation="Vertical" Width="294" HorizontalAlignment="Center" Margin="0,110,0,0" 
                         Height="680" VerticalAlignment="Top">
@@ -64,7 +64,7 @@
                 </StackPanel>
             </StackPanel>
 
-                <!--
+            <!--
                 <Button x:Name="btnChangePassword" Content="Change password" Width="150" Height="40" FontSize="16"  Margin="5"  Style="{StaticResource ButtonStyleSingle}"
                 Click="btnChangePassword_Click"/>
                 <Button x:Name="btnEditProfile" Content="Edit Profile" Width="150" Height="40" FontSize="16"  Margin="5"  Style="{StaticResource ButtonStyleSingle}"

@@ -201,6 +201,10 @@ Padding="3">
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
 
+                    <!-- Cột ngày hết hạn -->
+                    <DataGridTextColumn Header="Extend times" Binding="{Binding RenewalCount}" 
+                                        Width="100" />
+
                     <DataGridTemplateColumn Header="Actions" Width="200">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>

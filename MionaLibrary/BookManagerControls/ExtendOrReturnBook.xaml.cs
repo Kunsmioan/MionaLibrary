@@ -22,7 +22,12 @@ namespace MionaLibrary.BookManagerControls
     /// </summary>
     public partial class ExtendOrReturnBook : UserControl
     {
-        LoanServices _loanServices = new();
+        Book? bookSelected = new();
+        private readonly BookServices _bookServices = new();
+        private readonly RenewalServices _renewalServices = new();
+        private readonly LoanServices _loanServices = new();
+        User? reader = new();
+        Loan? loanSelected = new();
 
         public ExtendOrReturnBook()
         {
@@ -158,6 +163,73 @@ namespace MionaLibrary.BookManagerControls
         private void Extend_Click(object sender, RoutedEventArgs e)
         {
 
+            try
+            {
+                if ((sender as Button)?.DataContext is Loan loan)
+                {
+                    // Lấy thông tin khoản vay từ DataContext của nút
+                    loanSelected = loan;
+                    // Lấy thông tin người đọc từ DataContext của nút
+                    reader = loan.User;
+                    // Lấy thông tin sách từ DataContext của nút
+                    bookSelected = loan.Book;
+                    // Kiểm tra xem các đối tượng cần thiết đã được tải chưa
+                    if (loanSelected == null || reader == null || bookSelected == null)
+                    {
+                        MessageBox.Show("Missing required information. Please ensure all details are loaded.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        return;
+                    }
+
+                    // Kiểm tra số lần gia hạn còn lại
+                    int remainingRenewals = loanSelected.RenewalCount; // Số lần gia hạn còn lại
+                    if (remainingRenewals <= 0)
+                    {
+                        MessageBox.Show("This loan has reached its maximum number of renewals.", "Cannot Renew", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        return;
+                    }
+
+                    // Kiểm tra trạng thái khoản vay
+                    if (loanSelected.Status != "Borrowing")
+                    {
+                        MessageBox.Show("This loan cannot be renewed. It may be overdue or already returned.", "Cannot Renew", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        return;
+                    }
+
+                    // Kiểm tra xem có còn đủ 3 ngày trước ngày hạn không
+                    DateTime currentDate = DateTime.Now.Date; // Ngày hiện tại (không tính giờ/phút/giây)
+                    DateTime dueDate = loanSelected.DueDate.Date; // Ngày hạn (không tính giờ/phút/giây)
+                    int daysUntilDue = (dueDate - currentDate).Days;
+
+                    if (daysUntilDue > 3)
+                    {
+                        MessageBox.Show("You can only extend the loan within 3 days before the due date.", "Cannot Renew", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        return;
+                    }
+
+                    // Thực hiện gia hạn
+                    var renewal = _renewalServices.RenewLoan(loanSelected, reader); // Gọi dịch vụ gia hạn
+                    if (renewal == null)
+                    {
+                        MessageBox.Show("Failed to renew the loan. Please try again.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
+                    }
+
+                    // Cập nhật thông tin khoản vay
+                    loanSelected.DueDate = renewal.NewDueDate;
+                    loanSelected.RenewalCount -= 1; // Giảm số lần gia hạn còn lại
+                    _loanServices.UpdateLoan(loanSelected); // Lưu thay đổi vào cơ sở dữ liệu
+
+                    // Thông báo thành công
+                    MessageBox.Show($"The loan has been extended. New due date: {renewal.NewDueDate:d}", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                    SearchButton_Click(null, null);
+                }
+            }
+            catch (Exception ex)
+            {
+                // Xử lý lỗi chung
+                MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void Return_Click(object sender, RoutedEventArgs e)
