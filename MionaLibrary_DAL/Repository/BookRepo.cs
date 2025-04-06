@@ -78,6 +78,16 @@ namespace MionaLibrary_DAL.Repository
                           .Sum(b => b.Quantity); // Sum up the 'Quantity' field for all books
         }
 
+        public int GetTotalTitleBooks()
+        {
+            // Calculate the total number of books by summing up the 'quantity' field for each book
+            return _context.Books
+                          .Include(b => b.Genre) // Include related Genre data if needed
+                          .Include(b => b.Language) // Include related Language data if needed
+                          .Count(b => b.Quantity > 0); // Count the number of books with quantity greater than 0
+
+        }
+
         public List<Book> GetAllBooksByFilter(string searchType, string searchTerm)
         {
             if (string.IsNullOrEmpty(searchTerm) || searchType == "--- All ---")
@@ -105,7 +115,7 @@ namespace MionaLibrary_DAL.Repository
             return _context.Books
                .Include(b => b.Genre)
                .Include(b => b.Language)
-               .OrderBy(b => b.CreateDate).Take(5)
+               .OrderByDescending(b => b.CreateDate).Take(5)
                .ToList();
         }
     }

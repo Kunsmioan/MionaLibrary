@@ -59,5 +59,11 @@ namespace MionaLibrary_Services.Services
         {
             return _repo.GetTotalBooks();
         }
+
+        public int GetTotalTitleBooks()
+        {
+            // Calculate the total number of books by summing up the 'quantity' field for each book
+            return _repo.GetTotalTitleBooks();
+        }
     }
 }

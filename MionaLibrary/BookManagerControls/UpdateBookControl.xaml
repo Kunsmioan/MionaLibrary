@@ -74,7 +74,11 @@
 
                     <!-- Description -->
                     <TextBlock Text="Description:" FontWeight="Bold" Margin="0,7,0,5" FontSize="18" />
-                    <TextBox x:Name="txtDescription" Height="359" TextWrapping="Wrap" AcceptsReturn="True" Margin="0,0,0,5"/>
+                    <TextBox x:Name="txtDescription" Height="283" TextWrapping="Wrap" AcceptsReturn="True" Margin="0,0,0,5"/>
+
+                    <!-- Create date -->
+                    <TextBlock Text="Create date:" FontWeight="Bold" Margin="0,7,0,5" FontSize="18" />
+                    <TextBox x:Name="txtCreateDate" Height="40" Margin="0,0,0,5" FontSize="16"/>
 
                 </StackPanel>
 

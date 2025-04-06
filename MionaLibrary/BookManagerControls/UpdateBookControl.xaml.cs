@@ -99,7 +99,7 @@ namespace MionaLibrary.BookControls
                 {
                     imgBook.Source = new BitmapImage(new Uri(bookSelected.ImagePath, UriKind.Absolute));
                 }
-
+                txtCreateDate.Text = bookSelected.CreateDate?.ToString("yyyy-MM-dd") ?? string.Empty;
             }
         }
 
@@ -181,6 +181,7 @@ namespace MionaLibrary.BookControls
             bookSelected.Page = int.Parse(txtPage.Text);
             bookSelected.PublishYear = int.Parse(txtPublishYear.Text);
             bookSelected.Isbn = txtIsbn.Text;
+            bookSelected.CreateDate = DateTime.ParseExact(txtCreateDate.Text, "yyyy-MM-dd", null);
             if (int.Parse(txtQuantity.Text) > 0) bookSelected.IsAvailable = true;
 
             // Try to register the user

@@ -45,6 +45,12 @@ namespace MionaLibrary.ManagerControls
             // Hiển thị số lượng sách lên TextBlock
             txtTotalBooks.Text = totalBooks.ToString();
 
+            var booksTitleCount = bookServices.GetTotalTitleBooks();
+            // Đếm số lượng đầu sách
+            int totalTitleBooks = booksTitleCount;
+            // Hiển thị số lượng đầu sách lên TextBlock
+            txtTotalTitleBooks.Text = totalTitleBooks.ToString();
+
             var readers = userServices.GetAll();
             // Đếm số lượng độc giả
             int totalReaders = readers.Count;
@@ -59,6 +65,11 @@ namespace MionaLibrary.ManagerControls
             // Lấy danh sách các sách mới nhất
             // Hiển thị số lượng sách mới lên TextBlock
             dgBooks.ItemsSource = books;
+        }
+
+        private void ReaderDetailsAndBooksOnloan_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
