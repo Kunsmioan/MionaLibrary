@@ -44,6 +44,8 @@
                     </Style.Triggers>
                 </Style>
             </DataGrid.CellStyle>
+            
+            
             <DataGrid.Columns>
                 <!-- ID Column -->
                 <DataGridTextColumn Header="ID" Binding="{Binding Id}" IsReadOnly="True" Width="100"/>
@@ -57,7 +59,7 @@
      BorderThickness="0" 
      Foreground="Blue" 
      Cursor="Hand" 
-     Click="ReaderDetailsAndBooksOnloan_Click" 
+     Click="ReaderStatistic_Click" 
      HorizontalAlignment="Left"
      Style="{StaticResource TransparentButtonStyle}">
                                 <TextBlock TextWrapping="Wrap" 
@@ -93,8 +95,8 @@ Padding="3">
                         <DataTemplate>
                                
                                 <Button Content="Delete" Tag="{Binding RequestId}" Click="Delete_Click" 
-                     Margin="5,0,5,0" Background="#FFF72525" Padding="5" Width="80"
-                     Style="{StaticResource ButtonStyleSingle}" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                     Margin="5,-5,5,0" Background="#FFF72525" Padding="5" Width="80"
+                     Style="{StaticResource ButtonStyleSingle}" HorizontalAlignment="Left" VerticalAlignment="Stretch" Height="27"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>

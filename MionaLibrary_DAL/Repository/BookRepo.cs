@@ -69,6 +69,15 @@ namespace MionaLibrary_DAL.Repository
                           .ToList();
         }
 
+        public int GetTotalBooks()
+        {
+            // Calculate the total number of books by summing up the 'quantity' field for each book
+            return _context.Books
+                          .Include(b => b.Genre) // Include related Genre data if needed
+                          .Include(b => b.Language) // Include related Language data if needed
+                          .Sum(b => b.Quantity); // Sum up the 'Quantity' field for all books
+        }
+
         public List<Book> GetAllBooksByFilter(string searchType, string searchTerm)
         {
             if (string.IsNullOrEmpty(searchTerm) || searchType == "--- All ---")
@@ -89,6 +98,15 @@ namespace MionaLibrary_DAL.Repository
                 "genre" => query.Where(b => b.Genre != null && b.Genre.Name.ToLower().Contains(lowerSearchTerm)).ToList(),
                 _ => GetAllBooks()
             };
+        }
+
+        public List<Book> GetBookWithEarliestCreateDate()
+        {
+            return _context.Books
+               .Include(b => b.Genre)
+               .Include(b => b.Language)
+               .OrderBy(b => b.CreateDate).Take(5)
+               .ToList();
         }
     }
 }

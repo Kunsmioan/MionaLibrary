@@ -6,7 +6,7 @@
         xmlns:fa="http://schemas.fontawesome.io/icons/"
         xmlns:local="clr-namespace:MionaLibrary"
         mc:Ignorable="d"
-        Title="ReaderWindow" Height="1000" Width="1400" ResizeMode="NoResize" 
+        Title="ReaderWindow" Height="1000" Width="1400" ResizeMode="CanResizeWithGrip" 
         WindowStartupLocation="CenterScreen">
     <Grid >
         <Grid.ColumnDefinitions>

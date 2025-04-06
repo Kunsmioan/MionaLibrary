@@ -6,7 +6,7 @@
         xmlns:fa="http://schemas.fontawesome.io/icons/"
         xmlns:local="clr-namespace:MionaLibrary"
         mc:Ignorable="d"
-        Title="Manager Window" Height="1000" Width="1400" ResizeMode="NoResize" 
+        Title="Manager Window" Height="1000" Width="1400" ResizeMode="CanResize" 
         WindowStartupLocation="CenterScreen">
     <Grid >
         <Grid.ColumnDefinitions>
@@ -15,7 +15,7 @@
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="100"/>
+            <RowDefinition Height="80"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
@@ -74,8 +74,27 @@
                 </Grid.RowDefinitions>
 
                 <!-- Các nút chính -->
-                <StackPanel Grid.Row="0">  
-                    <!--Notify-->
+                <StackPanel Grid.Row="0">
+                        <!--Notify-->
+                        <Button Content="Home" Height="60" Foreground="White" Width="auto"
+BorderThickness="0" Click="Statistic_Click" Style="{StaticResource ButtonStyle}" >
+                            <Button.Template>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Grid Background="{TemplateBinding Background}">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="35"/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+                                        <fa:ImageAwesome Icon="Home" Foreground="White" Width="15" Height="15" 
+                         HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        <TextBlock Text="{TemplateBinding Content}" Foreground="White" Grid.Column="1" 
+                   VerticalAlignment="Center" FontSize="20"/>
+                                    </Grid>
+                                </ControlTemplate>
+                            </Button.Template>
+                        </Button>
+                        
+                        <!--Notify-->
                     <Button Content="Notifications" Height="60" Foreground="White" Width="auto"
 BorderThickness="0" Click="Notification_Click" Style="{StaticResource ButtonStyle}" >
                         <Button.Template>
@@ -93,6 +112,7 @@ BorderThickness="0" Click="Notification_Click" Style="{StaticResource ButtonStyl
                             </ControlTemplate>
                         </Button.Template>
                     </Button>
+                    
                     <Button Content="Search" HorizontalAlignment="Stretch" Height="60" Foreground="White" Width="auto"
                             BorderThickness="0" Click="Home_Click" Style="{StaticResource ButtonStyle}" >
                         <Button.Template>
@@ -244,23 +264,7 @@ BorderThickness="0" Click="Language_Click" Style="{StaticResource ButtonStyle}" 
                         </Button.Template>
                     </Button>
 
-                    <Button x:Name="ProfileButton" Content="Profile" Height="60" Width="auto"
-                        BorderThickness="0" Click="Profile_Click" Style="{StaticResource ButtonStyle}" >
-                        <Button.Template>
-                            <ControlTemplate TargetType="{x:Type Button}">
-                                <Grid Background="{TemplateBinding Background}">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="35"/>
-                                        <ColumnDefinition/>
-                                    </Grid.ColumnDefinitions>
-                                    <fa:ImageAwesome Icon="User" Foreground="#FFD3D415" Width="15" Height="15" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                    <TextBlock Text="{TemplateBinding Content}" Foreground="#FFD3D415" Grid.Column="1" VerticalAlignment="Center" FontSize="20" FontWeight="Bold"/>
-                                </Grid>
-                            </ControlTemplate>
-                            
-                        </Button.Template>
-                    </Button>
-
+                   
                     <!-- Nút "Help" -->
                     <Button Content="Help" HorizontalAlignment="Stretch" Height="60" Foreground="White" Width="auto"
 BorderThickness="0" Click="Help_Click" Style="{StaticResource ButtonStyle}" >
@@ -279,6 +283,24 @@ BorderThickness="0" Click="Help_Click" Style="{StaticResource ButtonStyle}" >
                             </ControlTemplate>
                         </Button.Template>
                     </Button>
+                    
+                    <Button x:Name="ProfileButton" Content="Profile" Height="60" Width="auto"
+                        BorderThickness="0" Click="Profile_Click" Style="{StaticResource ButtonStyle}" >
+                        <Button.Template>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Grid Background="{TemplateBinding Background}">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="35"/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                    <fa:ImageAwesome Icon="User" Foreground="#FFD3D415" Width="15" Height="15" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    <TextBlock Text="{TemplateBinding Content}" Foreground="#FFD3D415" Grid.Column="1" VerticalAlignment="Center" FontSize="20" FontWeight="Bold"/>
+                                </Grid>
+                            </ControlTemplate>
+                            
+                        </Button.Template>
+                    </Button>
+
                 </StackPanel>
 
                 <!-- Logout button ở dưới cùng -->
@@ -305,3 +327,6 @@ BorderThickness="0" Click="Help_Click" Style="{StaticResource ButtonStyle}" >
         <ContentControl x:Name="MainContent" Grid.Column="1" Grid.Row="1"/>
     </Grid>
 </Window>
+
+    
+    

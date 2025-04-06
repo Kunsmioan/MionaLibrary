@@ -38,11 +38,14 @@ public partial class LibraryManagerContext : DbContext
     {
         modelBuilder.Entity<Book>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Books__3214EC07C89C8C4B");
+            entity.HasKey(e => e.Id).HasName("PK__Books__3214EC077DF02141");
 
-            entity.HasIndex(e => e.Isbn, "UQ__Books__447D36EABBDE7110").IsUnique();
+            entity.HasIndex(e => e.Isbn, "UQ__Books__447D36EAA46188C8").IsUnique();
 
             entity.Property(e => e.Author).HasMaxLength(100);
+            entity.Property(e => e.CreateDate)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
             entity.Property(e => e.Description).HasColumnType("text");
             entity.Property(e => e.IsAvailable).HasDefaultValue(true);
             entity.Property(e => e.Isbn)
@@ -62,7 +65,7 @@ public partial class LibraryManagerContext : DbContext
 
         modelBuilder.Entity<BookRequest>(entity =>
         {
-            entity.HasKey(e => e.RequestId).HasName("PK__BookRequ__33A8519A17654224");
+            entity.HasKey(e => e.RequestId).HasName("PK__BookRequ__33A8519AE94050A4");
 
             entity.ToTable("BookRequest");
 
@@ -91,25 +94,25 @@ public partial class LibraryManagerContext : DbContext
 
         modelBuilder.Entity<Genre>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Genres__3214EC078C4320C4");
+            entity.HasKey(e => e.Id).HasName("PK__Genres__3214EC075294EAB2");
 
-            entity.HasIndex(e => e.Name, "UQ__Genres__737584F69295A1D1").IsUnique();
+            entity.HasIndex(e => e.Name, "UQ__Genres__737584F67BFB7915").IsUnique();
 
             entity.Property(e => e.Name).HasMaxLength(50);
         });
 
         modelBuilder.Entity<Language>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Language__3214EC078FDAD1C8");
+            entity.HasKey(e => e.Id).HasName("PK__Language__3214EC079089D13B");
 
-            entity.HasIndex(e => e.Name, "UQ__Language__737584F6596F65E6").IsUnique();
+            entity.HasIndex(e => e.Name, "UQ__Language__737584F628237DE4").IsUnique();
 
             entity.Property(e => e.Name).HasMaxLength(50);
         });
 
         modelBuilder.Entity<Loan>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Loans__3214EC0767148174");
+            entity.HasKey(e => e.Id).HasName("PK__Loans__3214EC0798F5DF31");
 
             entity.Property(e => e.BorrowDate)
                 .HasDefaultValueSql("(getdate())")
@@ -126,17 +129,17 @@ public partial class LibraryManagerContext : DbContext
             entity.HasOne(d => d.Book).WithMany(p => p.Loans)
                 .HasForeignKey(d => d.BookId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Loans__BookId__4222D4EF");
+                .HasConstraintName("FK__Loans__BookId__4316F928");
 
             entity.HasOne(d => d.User).WithMany(p => p.Loans)
                 .HasForeignKey(d => d.UserId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Loans__UserId__412EB0B6");
+                .HasConstraintName("FK__Loans__UserId__4222D4EF");
         });
 
         modelBuilder.Entity<Renewal>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Renewals__3214EC071AA03730");
+            entity.HasKey(e => e.Id).HasName("PK__Renewals__3214EC07D94C7A1E");
 
             entity.Property(e => e.NewDueDate).HasColumnType("datetime");
             entity.Property(e => e.RenewalDate)
@@ -145,19 +148,19 @@ public partial class LibraryManagerContext : DbContext
 
             entity.HasOne(d => d.Loan).WithMany(p => p.Renewals)
                 .HasForeignKey(d => d.LoanId)
-                .HasConstraintName("FK__Renewals__LoanId__45F365D3");
+                .HasConstraintName("FK__Renewals__LoanId__46E78A0C");
 
             entity.HasOne(d => d.User).WithMany(p => p.Renewals)
                 .HasForeignKey(d => d.UserId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Renewals__UserId__46E78A0C");
+                .HasConstraintName("FK__Renewals__UserId__47DBAE45");
         });
 
         modelBuilder.Entity<User>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Users__3214EC075ADB49F2");
+            entity.HasKey(e => e.Id).HasName("PK__Users__3214EC0708DEFCAA");
 
-            entity.HasIndex(e => e.Username, "UQ__Users__536C85E4E5BDB322").IsUnique();
+            entity.HasIndex(e => e.Username, "UQ__Users__536C85E4D8D76E6C").IsUnique();
 
             entity.Property(e => e.Birthday).HasColumnType("datetime");
             entity.Property(e => e.FirstName).HasMaxLength(100);

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,38 +10,46 @@ namespace MionaLibrary_DAL.Repository
 {
     public class UserRepo
     {
-        LibraryManagerContext? _context;
+        private readonly LibraryManagerContext _context;
+
+        public UserRepo()
+        {
+            _context = new LibraryManagerContext();
+        }
+
         public void Add(User user)
         {
-            _context = new();
             _context.Users.Add(user);
             _context.SaveChanges();
         }
         public void Remove(User user)
         {
-            _context = new();
             _context.Users.Remove(user);
             _context.SaveChanges();
         }
         public void Update(User user)
         {
-            _context = new();
             _context.Users.Update(user);
             _context.SaveChanges();
         }
 
         public User? GetById(int id)
         {
-            _context = new();
             return _context.Users.FirstOrDefault(b => b.Id == id);
         }
+
         public List<User> GetAll()
         {
+            try
             {
-                _context = new();
-                List<User> users = _context.Users.ToList();
-                return users;
+                return _context.Users.ToList();
+            }
+            catch (Exception ex)
+            {
+                // Log the error if you have logging configured
+                throw new InvalidOperationException("Error retrieving users from database", ex);
             }
         }
+
     }
 }

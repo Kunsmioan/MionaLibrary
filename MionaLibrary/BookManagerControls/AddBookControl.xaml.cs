@@ -1,4 +1,4 @@
-﻿using Microsoft.Data.SqlClient;
+using Microsoft.Data.SqlClient;
 using Microsoft.VisualBasic.ApplicationServices;
 using Microsoft.Win32;
 using MionaLibrary_DAL.DataAccess;
@@ -35,6 +35,7 @@ namespace MionaLibrary.ManagerControls
             InitializeComponent();
             LoadGenres();
             LoadLanguage();
+            txtCreateDate.Text = DateTime.Now.ToString("yyyy-MM-dd"); // Đặt giá trị mặc định cho TextBox
         }
 
         private void LoadGenres()
@@ -133,6 +134,7 @@ namespace MionaLibrary.ManagerControls
                 PublishYear = int.Parse(txtPublishYear.Text),
                 IsAvailable = true,
                 Isbn = txtIsbn.Text,
+                CreateDate = DateTime.ParseExact(txtCreateDate.Text, "yyyy-MM-dd", null),
             };
 
             // Try to register the user

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -45,7 +45,22 @@ namespace MionaLibrary.UserControls
                     tbBirthday.Text = string.Empty; // Or any other default value if birthday is null
                 }
                 tbGender.Text = reader.Gender.ToString();
-                tbPhone.Text = reader.Phone.ToString();
+                tbPhone.Text = reader.Phone?.ToString() ?? string.Empty;
+                if (!string.IsNullOrWhiteSpace(tbPhone.Text))
+                {
+                    if (!tbPhone.Text.All(char.IsDigit))
+                    {
+                        MessageBox.Show("Phone number must contain only digits.", "Validation Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        tbPhone.Text = string.Empty;
+                        return;
+                    }
+                    if (tbPhone.Text.Length < 10 || tbPhone.Text.Length > 11)
+                    {
+                        MessageBox.Show("Phone number must be 10-11 digits long.", "Validation Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        tbPhone.Text = string.Empty;
+                        return;
+                    }
+                }
             }
             else
             {

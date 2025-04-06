@@ -14,33 +14,33 @@ namespace MionaLibrary_Services.Services
     {
        BookRepo? _repo;
 
-        public void AddBook(Book book)
+        public BookServices()
         {
             _repo = new();
+        }
+
+        public void AddBook(Book book)
+        {
             _repo.AddBook(book);
         }
 
         public void UpdateBook(Book book)
         {
-            _repo = new();
             _repo.UpdateBook(book);
         }
 
         public void DeleteBook(Book book)
         {
-            _repo = new();
             _repo.DeleteBook(book);
         }   
 
         public Book GetBookById(int id)
         {
-            _repo = new();
             return _repo.GetBookById(id);
         }
 
         public List<Book> GetAllBooks()
         {
-            _repo = new();
             List<Book> books = _repo.GetAllBooks();
             return books;
         }
@@ -48,7 +48,16 @@ namespace MionaLibrary_Services.Services
         public List<Book> GetAllBooksByFilter(string searchType, string searchTerm)
         {
             return _repo.GetAllBooksByFilter(searchType, searchTerm);
+        }
 
+        public List<Book> GetBookWithEarliestCreateDate()
+        {
+            return _repo.GetBookWithEarliestCreateDate();
+        }
+
+        public int GetTotalBooks()
+        {
+            return _repo.GetTotalBooks();
         }
     }
 }

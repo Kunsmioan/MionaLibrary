@@ -83,8 +83,8 @@ Background="Transparent" BorderThickness="0" Click="SearchButton_Click">
 
             <!-- DataGrid để hiển thị thông tin sách đang mượn hoặc quá hạn -->
             <DataGrid Name="BooksOnLoanDataGrid" AutoGenerateColumns="False" Margin="10" 
-  AlternatingRowBackground="#FFF5F5F5" RowBackground="White" Grid.Row="2"
-  BorderBrush="#FFDDDDDD" BorderThickness="1" GridLinesVisibility="None" CanUserAddRows="False">
+  AlternatingRowBackground="#FFF5F5F5" RowBackground="White"
+  BorderBrush="#FFDDDDDD" BorderThickness="1" GridLinesVisibility="None" CanUserAddRows="False" Grid.Row="2">
                 <DataGrid.ColumnHeaderStyle>
                     <Style TargetType="DataGridColumnHeader">
                         <Setter Property="Background" Value="#FFEEEEEE" />

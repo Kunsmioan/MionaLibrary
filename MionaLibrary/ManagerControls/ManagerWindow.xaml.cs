@@ -34,8 +34,8 @@ namespace MionaLibrary
         {
             InitializeComponent();
 
-            NotificationManager notificationManager = new NotificationManager();
-            MainContent.Content = notificationManager;
+            HomeStatistic homeStatistic = new HomeStatistic();
+            MainContent.Content = homeStatistic;
 
             DispatcherTimer timer = new DispatcherTimer();
             timer.Interval = TimeSpan.FromSeconds(1); // Cập nhật mỗi giây
@@ -204,6 +204,12 @@ namespace MionaLibrary
         {
             ExtendOrReturnBook extendOrReturnBook = new ExtendOrReturnBook();
             MainContent.Content = extendOrReturnBook;
+        }
+
+        private void Statistic_Click(object sender, RoutedEventArgs e)
+        {
+            HomeStatistic homeStatistic = new HomeStatistic();
+            MainContent.Content = homeStatistic;
         }
     }
 }

@@ -140,6 +140,16 @@ namespace MionaLibrary_DAL.Repository
                 .ToList();
         }
 
+        public List<Loan> GetBooksOverdueByUserId(int userId)
+        {
+            return _context.Loans
+                .Include(loan => loan.Book) // Bao gồm thông tin sách
+                .Include(loan => loan.User) // Bao gồm thông tin người dùng
+                .Where(loan => loan.Status == "Overdue"
+                    && loan.UserId == userId) // Lọc theo trạng thái và BookId
+                .ToList();
+        }
+
         public List<Loan> FilterReadesBorrowingOrOvedue(string searchTerm)
         {
             // Ensure the search term is not null or empty
@@ -191,6 +201,25 @@ namespace MionaLibrary_DAL.Repository
 
             return filteredLoans;
         }
+
+        public int GetBooksCurrentlyBorrowed(int userId)
+        {
+            return _context.Loans
+                .Count(l => l.UserId == userId && l.Status == "Borrowing");
+        }
+
+        public int GetBookBorrowed(int userId)
+        {
+            return _context.Loans
+                .Count(l => l.UserId == userId && l.Status == "Returned");
+        }
+
+        public int GetBooksCurrentlyOverdue(int userId)
+        {
+            return _context.Loans
+                .Count(l => l.UserId == userId && l.Status == "Overdue");
+        }
+
 
     }
 }

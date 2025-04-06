@@ -84,6 +84,11 @@ namespace MionaLibrary_Services.Services
             return _repo.GetBooksOnLoanOrOverdueByUserId(userId);
         }
 
+        public List<Loan> GetBooksOverdueByUserId(int userId)
+        {
+            return _repo.GetBooksOverdueByUserId(userId);
+        }
+
         public List<Loan> FilterReadesBorrowingOrOvedue(string searchTerm)
         {
             return _repo.FilterReadesBorrowingOrOvedue(searchTerm);
@@ -94,6 +99,19 @@ namespace MionaLibrary_Services.Services
             return _repo.FilterBooksBorrowingOrOvedue(searchTerm);
         }
 
+        public int GetBooksCurrentlyBorrowed(int userId)
+        {
+            return _repo.GetBooksCurrentlyBorrowed(userId);
+        }
 
+        public int GetBookBorrowed(int userId)
+        {
+            return _repo.GetBookBorrowed(userId);
+        }
+
+        public int GetBooksCurrentlyOverdue(int userId)
+        {
+            return _repo.GetBooksCurrentlyOverdue(userId);
+        }
     }
 }

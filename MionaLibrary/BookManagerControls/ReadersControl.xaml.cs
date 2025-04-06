@@ -1,4 +1,4 @@
-using MionaLibrary_DAL.Entity;
+﻿using MionaLibrary_DAL.Entity;
 using MionaLibrary_Services.Services;
 using System;
 using System.Collections.Generic;
@@ -35,9 +35,31 @@ namespace MionaLibrary.BookManagerControls
             UserDataGrid.ItemsSource = _userServices.GetAll();
         }
 
-        private void ReaderDetailsAndBooksOnloan_Click(object sender, RoutedEventArgs e)
+        private void ReaderStatistic_Click(object sender, RoutedEventArgs e)
         {
+            if ((sender as Button)?.DataContext is User user)
+            {
+                // Lấy cửa sổ cha
+                Window parentWindow = Window.GetWindow(this);
+                if (parentWindow is ManagerWindow mw)
+                {
+                    User? manager = mw.GetManager();
+                    var viewReaderStatistic = new ViewReaderStatistic();
+                    //viewReaderStatistic.SetBookSelected(loan.Book);
+                    viewReaderStatistic.SetUser(user);
 
+                    // Thay thế nội dung hiện tại bằng BookDetailsControl
+                    mw.MainContent.Content = viewReaderStatistic;
+                }
+                else
+                {
+                    MessageBox.Show("Không tìm thấy cửa sổ ReaderWindow.", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Không thể lấy thông tin sách từ nút.", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void Delete_Click(object sender, RoutedEventArgs e)
