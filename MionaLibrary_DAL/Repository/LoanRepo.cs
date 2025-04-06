@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using MionaLibrary_DAL.DataAccess;
 using MionaLibrary_DAL.Entity;
 using System;
@@ -18,25 +18,21 @@ namespace MionaLibrary_DAL.Repository
             _context.Loans.Add(loan);
             _context.SaveChanges();
         }
-
         public void UpdateLoan(Loan loan)
         {
             _context.Loans.Update(loan);
             _context.SaveChanges();
         }
-
         public void DeleteLoan(Loan loan)
         {
             _context.Loans.Remove(loan);
             _context.SaveChanges();
         }
-
         public List<Loan> GetAllLoans()
         {
             List<Loan> loans = _context.Loans.ToList();
             return loans;
         }
-
         public Book getBookById(int bookId)
         {
             Book? bookSelected = _context.Books
@@ -125,7 +121,7 @@ namespace MionaLibrary_DAL.Repository
             return _context.Loans
                 .Include(loan => loan.Book) // Bao gồm thông tin sách
                 .Include(loan => loan.User) // Bao gồm thông tin người dùng
-                .Where(loan => (loan.Status == "Borrowing" || loan.Status == "Overdue") 
+                .Where(loan => (loan.Status == "Borrowing" || loan.Status == "Overdue")
                     && loan.BookId == bookId) // Lọc theo trạng thái và BookId
                 .ToList();
         }
@@ -220,6 +216,27 @@ namespace MionaLibrary_DAL.Repository
                 .Count(l => l.UserId == userId && l.Status == "Overdue");
         }
 
+        public List<TopReaderResult> GetTopReaders()
+        {
+            return _context.Users
+                .Where(user => user.Loans.Any(loan => loan.Status == "Returned")) // Lọc người dùng có sách đã trả
+                .Select(user => new TopReaderResult
+                {
+                    UserId = user.Id,
+                    FullName = user.FirstName + " " + user.LastName, // Hoặc sửa thành $"{user.FirstName} {user.LastName}" nếu muốn tên đầy đủ
+                    ReturnedBookCount = user.Loans.Count(loan => loan.Status == "Returned") // Đếm số sách đã trả
+                })
+                .OrderByDescending(reader => reader.ReturnedBookCount) // Sắp xếp giảm dần theo số sách đã trả
+                .Take(5) // Giới hạn 5 người dùng hàng đầu
+                .ToList();
+        }
+
+        public class TopReaderResult
+        {
+            public int UserId { get; set; }
+            public string FullName { get; set; }
+            public int ReturnedBookCount { get; set; }
+        }
 
     }
 }

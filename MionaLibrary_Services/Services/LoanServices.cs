@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static MionaLibrary_DAL.Repository.LoanRepo;
 
 namespace MionaLibrary_Services.Services
 {
@@ -112,6 +113,11 @@ namespace MionaLibrary_Services.Services
         public int GetBooksCurrentlyOverdue(int userId)
         {
             return _repo.GetBooksCurrentlyOverdue(userId);
+        }
+
+        public List<TopReaderResult> GetTopReaders()
+        {
+            return _repo.GetTopReaders();
         }
     }
 }

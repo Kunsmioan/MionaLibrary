@@ -209,9 +209,6 @@ HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,122,0,0" Width="2
                                    Width="Auto"
                                    MinWidth="100"/>
 
-                                <!-- Cột Số kỳ (Issue Number) -->
-
-
                                 <!-- Cột Ngày tạo (Create) -->
                                 <DataGridTextColumn Header="Create date" 
                                    Binding="{Binding CreateDate, StringFormat='yyyy-MM-dd'}"
@@ -261,7 +258,7 @@ BorderBrush="#FFDDDDDD" BorderThickness="1" GridLinesVisibility="None" CanUserAd
                             <DataGrid.Columns>
                                 <!-- Cột Số thứ tự (#) -->
                                 <DataGridTextColumn Header="#" 
-                                 Binding="{Binding Id}"
+                                 Binding="{Binding UserId}"
                                  Width="Auto"
                                  MinWidth="50"/>
 
@@ -269,24 +266,18 @@ BorderBrush="#FFDDDDDD" BorderThickness="1" GridLinesVisibility="None" CanUserAd
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <Button 
-     Background="Transparent" 
-     BorderThickness="0" 
-     Foreground="Blue" 
-     Cursor="Hand" 
-     Click="ReaderDetailsAndBooksOnloan_Click" 
-     HorizontalAlignment="Left"
-     Style="{StaticResource TransparentButtonStyle}">
+                        Background="Transparent" 
+                        BorderThickness="0" 
+                        Foreground="Blue" 
+                        Cursor="Hand" 
+                        Click="ReaderDetailsAndBooksOnloan_Click" 
+                        HorizontalAlignment="Left"
+                        Style="{StaticResource TransparentButtonStyle}">
                                                 <TextBlock TextWrapping="Wrap" 
-MaxWidth="200" 
-VerticalAlignment="Center" 
-Padding="3">
-                                                    <TextBlock.Text>
-                                                        <MultiBinding StringFormat="{}{0} {1}">
-                                                            <Binding Path="User.FirstName" />
-                                                            <Binding Path="User.LastName" />
-                                                        </MultiBinding>
-                                                    </TextBlock.Text>
-                                                </TextBlock>
+                                   MaxWidth="200" 
+                                   VerticalAlignment="Center" 
+                                   Padding="3"
+                                   Text="{Binding FullName}" />
                                             </Button>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
@@ -294,7 +285,7 @@ Padding="3">
 
                                 <!-- Cột Số lượng (Amount) -->
                                 <DataGridTextColumn Header="Book Borrowing" 
-                                 Binding="{Binding Quantity}"
+                                 Binding="{Binding ReturnedBookCount}"
                                  Width="*"
                                  MinWidth="200"/>
 

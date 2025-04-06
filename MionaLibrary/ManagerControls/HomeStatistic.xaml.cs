@@ -34,6 +34,7 @@ namespace MionaLibrary.ManagerControls
         {
            loadDataReadersBooksAndBorrowing();
             loadDataNewBooks();
+            loadDataTopReaders();
         }
 
         public void loadDataReadersBooksAndBorrowing()
@@ -56,6 +57,14 @@ namespace MionaLibrary.ManagerControls
             int totalReaders = readers.Count;
             // Hiển thị số lượng độc giả lên TextBlock
             txtTotalReaders.Text = totalReaders.ToString();
+        }
+
+        public void loadDataTopReaders()
+        {
+            // Lấy danh sách tất cả các sách từ dịch vụ
+            var readers = loanServices.GetTopReaders();
+            // Đếm số lượng sách đang được mượn
+           dgTopReaders.ItemsSource = readers;
         }
 
         public void loadDataNewBooks()
