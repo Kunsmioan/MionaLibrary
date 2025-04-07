@@ -31,6 +31,8 @@ namespace MionaLibrary
         {
             InitializeComponent();
 
+            HomeStatisticForReader homeStatisticForReader = new HomeStatisticForReader();
+            MainContent.Content = homeStatisticForReader; // Đặt NotificationUser làm nội dung chính
             // Khởi tạo Timer để cập nhật thời gian
             DispatcherTimer timer = new DispatcherTimer();
             timer.Interval = TimeSpan.FromSeconds(1); // Cập nhật mỗi giây
@@ -63,9 +65,7 @@ namespace MionaLibrary
                 ProfileButton.Content = reader.FirstName.ToString();
 
                 // Tạo và thiết lập NotificationUser làm màn hình mặc định
-                NotificationUser notificationUser = new NotificationUser();
-                notificationUser.setReader(reader); // Truyền reader vào NotificationUser
-                MainContent.Content = notificationUser; // Đặt NotificationUser làm nội dung chính
+               
             }
             //else
             //{
@@ -176,6 +176,12 @@ namespace MionaLibrary
             NotificationUser notificationUser = new NotificationUser();
             notificationUser.setReader(reader);
             MainContent.Content = notificationUser;
+        }
+
+        private void Statistic_Click(object sender, RoutedEventArgs e)
+        {
+            HomeStatisticForReader homeStatisticForReader = new HomeStatisticForReader();
+            MainContent.Content = homeStatisticForReader;
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using MionaLibrary_DAL.Entity;
+﻿using Microsoft.EntityFrameworkCore.Query.Internal;
+using MionaLibrary_DAL.Entity;
 using MionaLibrary_Services.Services;
 using System;
 using System.Collections.Generic;
@@ -56,7 +57,7 @@ namespace MionaLibrary.BookManagerControls
                     bookDetailsAndReaderBorrowing.SetBookSelected(loan.Book);
                     //bookDetailsAndReaderBorrowing.SetLoanSelected(loan);
                     bookDetailsAndReaderBorrowing.SetUser(manager);
-
+                    
                     // Thay thế nội dung hiện tại bằng BookDetailsControl
                     mw.MainContent.Content = bookDetailsAndReaderBorrowing;
                 }

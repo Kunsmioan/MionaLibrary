@@ -6,7 +6,7 @@
         xmlns:fa="http://schemas.fontawesome.io/icons/"
         xmlns:local="clr-namespace:MionaLibrary"
         mc:Ignorable="d"
-        Title="ReaderWindow" Height="1000" Width="1400" ResizeMode="CanResizeWithGrip" 
+        Title="ReaderWindow" Height="1000" Width="1400" ResizeMode="CanResize" 
         WindowStartupLocation="CenterScreen">
     <Grid >
         <Grid.ColumnDefinitions>
@@ -62,6 +62,24 @@
                 <!-- Các nút chính -->
                 <StackPanel Grid.Row="0" Grid.Column="0">
 
+                    <Button Content="Home" Height="60" Foreground="White" Width="auto"
+BorderThickness="0" Click="Statistic_Click" Style="{StaticResource ButtonStyle}" >
+                        <Button.Template>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Grid Background="{TemplateBinding Background}">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="35"/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                    <fa:ImageAwesome Icon="Home" Foreground="White" Width="15" Height="15" 
+                         HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    <TextBlock Text="{TemplateBinding Content}" Foreground="White" Grid.Column="1" 
+                   VerticalAlignment="Center" FontSize="20"/>
+                                </Grid>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                    
                     <!--Notification-->
                     <Button Content="Notifications" Height="60" Foreground="White" Width="auto"
 BorderThickness="0" Click="Notification_Click" Style="{StaticResource ButtonStyle}">
@@ -182,7 +200,7 @@ BorderThickness="0" Click="Notification_Click" Style="{StaticResource ButtonStyl
                     </Button>
 
                     <Button x:Name="ProfileButton" Content="Profile" Height="60" Width="auto"
-                        Foreground="White" BorderThickness="0" Click="Profile_Click" Style="{StaticResource ButtonStyle}">
+     BorderThickness="0" Click="Profile_Click" Style="{StaticResource ButtonStyle}" >
                         <Button.Template>
                             <ControlTemplate TargetType="{x:Type Button}">
                                 <Grid Background="{TemplateBinding Background}">
@@ -190,12 +208,14 @@ BorderThickness="0" Click="Notification_Click" Style="{StaticResource ButtonStyl
                                         <ColumnDefinition Width="35"/>
                                         <ColumnDefinition/>
                                     </Grid.ColumnDefinitions>
-                                    <fa:ImageAwesome Icon="User" Foreground="White" Width="15" Height="15" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                    <TextBlock Text="{TemplateBinding Content}" Foreground="White" Grid.Column="1" VerticalAlignment="Center" FontSize="20"/>
+                                    <fa:ImageAwesome Icon="User" Foreground="#FFD3D415" Width="15" Height="15" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    <TextBlock Text="{TemplateBinding Content}" Foreground="#FFD3D415" Grid.Column="1" VerticalAlignment="Center" FontSize="20" FontWeight="Bold"/>
                                 </Grid>
                             </ControlTemplate>
+
                         </Button.Template>
                     </Button>
+                    
                 </StackPanel>
 
                 <!-- Logout button ở dưới cùng -->

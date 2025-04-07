@@ -1,5 +1,4 @@
 ﻿using MionaLibrary.BookControls;
-using MionaLibrary.BookManagerControls;
 using MionaLibrary_DAL.Entity;
 using MionaLibrary_Services.Services;
 using System;
@@ -17,17 +16,17 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace MionaLibrary.ManagerControls
+namespace MionaLibrary.UserControls
 {
     /// <summary>
-    /// Interaction logic for HomeStatistic.xaml
+    /// Interaction logic for HomeStatisticForReader.xaml
     /// </summary>
-    public partial class HomeStatistic : UserControl
+    public partial class HomeStatisticForReader : UserControl
     {
         LoanServices loanServices = new LoanServices();
         BookServices bookServices = new BookServices();
         UserServices userServices = new UserServices();
-        public HomeStatistic()
+        public HomeStatisticForReader()
         {
             InitializeComponent();
             loadData();
@@ -35,7 +34,7 @@ namespace MionaLibrary.ManagerControls
 
         public void loadData()
         {
-           loadDataReadersBooksAndBorrowing();
+            loadDataReadersBooksAndBorrowing();
             loadDataNewBooks();
             loadDataTopReaders();
         }
@@ -67,7 +66,7 @@ namespace MionaLibrary.ManagerControls
             // Lấy danh sách tất cả các sách từ dịch vụ
             var readers = loanServices.GetTopReaders();
             // Đếm số lượng sách đang được mượn
-           dgTopReaders.ItemsSource = readers;
+            dgTopReaders.ItemsSource = readers;
         }
 
         public void loadDataNewBooks()
@@ -78,9 +77,6 @@ namespace MionaLibrary.ManagerControls
             // Hiển thị số lượng sách mới lên TextBlock
             dgBooks.ItemsSource = books;
         }
-
-       
-
         private void BookDetailsAndReaderBorrowing_Click(object sender, RoutedEventArgs e)
         {
             // Lấy đối tượng sách từ DataContext của nút
@@ -96,7 +92,7 @@ namespace MionaLibrary.ManagerControls
                     //    MessageBox.Show("No user is selected. Please select a user first.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
                     //    return;
                     //}
-                    var bookDetailsControl = new BookDetailsControl();
+                    var bookDetailsControl = new bookDetailsForUserControl();
                     bookDetailsControl.SetBookSelected(selectedBook);
 
                     bookDetailsControl.SetUser(reader);
@@ -105,23 +101,7 @@ namespace MionaLibrary.ManagerControls
                     // Thay thế nội dung hiện tại bằng BookDetailsControl
                     rw.MainContent.Content = bookDetailsControl;
                 }
-                else if (parentWindow is ManagerWindow mw)
-                {
-                    User? manager = mw.GetManager();
-                    //if (reader == null)
-                    //{
-                    //    MessageBox.Show("No user is selected. Please select a user first.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
-                    //    return;
-                    //}
-                    var bookDetailsControl = new BookDetailsControl();
-                    bookDetailsControl.SetBookSelected(selectedBook);
-
-                    bookDetailsControl.SetUser(manager);
-
-
-                    // Thay thế nội dung hiện tại bằng BookDetailsControl
-                    mw.MainContent.Content = bookDetailsControl;
-                }
+                
                 else
                 {
                     MessageBox.Show("Không tìm thấy cửa sổ ReaderWindow.", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -131,8 +111,8 @@ namespace MionaLibrary.ManagerControls
             {
                 MessageBox.Show("Không thể lấy thông tin sách từ nút.", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-        } 
-        
+        }
+
         private void ReaderDetailsAndBooksOnloan_Click(object sender, RoutedEventArgs e)
         {
 
