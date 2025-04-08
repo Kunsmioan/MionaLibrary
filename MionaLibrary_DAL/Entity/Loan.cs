@@ -21,6 +21,8 @@ public partial class Loan
 
     public int RenewalCount { get; set; }
 
+    public string? Announce { get; set; }
+
     public virtual Book Book { get; set; } = null!;
 
     public virtual ICollection<Renewal> Renewals { get; set; } = new List<Renewal>();

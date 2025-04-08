@@ -136,6 +136,26 @@ namespace MionaLibrary_DAL.Repository
                 .ToList();
         }
 
+        public List<Loan> GetBooksOverdueOrGonnaBeOverdueByUserId(int userId)
+        {
+            if (userId <= 0)
+                return new List<Loan>();
+
+            var today = DateTime.Today;
+            var twoDaysFromNow = today.AddDays(2);
+
+            return _context.Loans
+                .Include(loan => loan.Book)
+                .Include(loan => loan.User)
+                .Where(loan => 
+                    loan.UserId == userId &&
+                    (loan.Status == "Borrowing" || loan.Status == "Overdue") &&
+                    loan.DueDate <= twoDaysFromNow
+                )
+                .OrderBy(loan => loan.DueDate)
+                .ToList();
+        }
+
         public List<Loan> GetBooksOverdueByUserId(int userId)
         {
             return _context.Loans

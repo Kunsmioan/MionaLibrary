@@ -104,6 +104,7 @@ Background="Transparent" BorderThickness="0" Click="SearchButton_Click" >
                         </Style.Triggers>
                     </Style>
                 </DataGrid.CellStyle>
+                
                 <DataGrid.Columns>
 
                     <DataGridTemplateColumn Header="ID" Width="50" IsReadOnly="True">
@@ -145,7 +146,7 @@ Background="Transparent" BorderThickness="0" Click="SearchButton_Click" >
                                 <Image Source="{Binding ImagePath}" 
                                  Stretch="Uniform" 
                                  Height="120"
-                                 HorizontalAlignment="Center" 
+                                 HorizontalAlignment="Left" 
                                  VerticalAlignment="Center"
                                  Margin="3"/>
                             </DataTemplate>

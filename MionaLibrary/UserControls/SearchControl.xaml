@@ -80,9 +80,35 @@
        AutoGenerateColumns="False" 
        Loaded="LoadData" 
        Margin="10,0,10,0"
-       SelectionMode="Single" 
-       SelectionUnit="Cell"
-       IsReadOnly="True">
+ SelectionMode="Single" BorderBrush="#FFDDDDDD" BorderThickness="1" GridLinesVisibility="None" CanUserAddRows="False"
+ SelectionUnit="Cell" AlternatingRowBackground="#FFF5F5F5" RowBackground="White"
+ IsReadOnly="True" HorizontalAlignment="Center">
+                <DataGrid.ColumnHeaderStyle>
+                    <Style TargetType="DataGridColumnHeader">
+                        <Setter Property="Background" Value="#FFEEEEEE" />
+                        <Setter Property="Foreground" Value="#FF333333" />
+                        <Setter Property="FontWeight" Value="Bold" />
+                        <Setter Property="FontSize" Value="14" />
+                        <Setter Property="Padding" Value="10,5,10,5" />
+                        <Setter Property="HorizontalContentAlignment" Value="Left" />
+                    </Style>
+                </DataGrid.ColumnHeaderStyle>
+
+                <DataGrid.CellStyle>
+                    <Style TargetType="DataGridCell">
+                        <Setter Property="Margin" Value="10,15,10,10" />
+                        <Setter Property="FontSize" Value="12" />
+                        <Setter Property="Foreground" Value="#FF444444" />
+                        <Setter Property="BorderThickness" Value="0" />
+                        <Style.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter Property="Background" Value="#FFE0E0FF" />
+                                <Setter Property="Foreground" Value="#FF000000" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </DataGrid.CellStyle>
+                
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="40" IsReadOnly="True"/>
 
