@@ -33,7 +33,7 @@ namespace MionaLibrary.GenreControl
 
         public void LoadData()
         {
-            dataGridGenres.ItemsSource = _services.GetGenreList();
+            dataGridGenres.ItemsSource = _services.GetAll();
         }
 
         private void BtnAdd_Click(object sender, RoutedEventArgs e)

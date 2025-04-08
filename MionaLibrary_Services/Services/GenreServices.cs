@@ -29,7 +29,7 @@ namespace MionaLibrary_Services.Services
             _repo.UpdateGenre(genre);
         }
 
-        public List<Genre> GetGenreList()
+        public List<Genre> GetAll()
         {
             _repo = new();
             return _repo.GetAllGenre();

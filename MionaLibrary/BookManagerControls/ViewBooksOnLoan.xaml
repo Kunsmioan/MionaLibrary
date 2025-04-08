@@ -172,7 +172,7 @@ Background="Transparent" BorderThickness="0" Click="SearchButton_Click" RenderTr
                             Width="150" />
 
                     <!-- Cột trạng thái (tùy chỉnh màu sắc) -->
-                    <DataGridTemplateColumn Header="Status" Width="150">
+                    <DataGridTemplateColumn Header="Status" Width="120">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding Status}" HorizontalAlignment="Left">
@@ -192,6 +192,39 @@ Background="Transparent" BorderThickness="0" Click="SearchButton_Click" RenderTr
                                                 <!-- Trigger cho trạng thái "Returned" (nếu cần) -->
                                                 <DataTrigger Binding="{Binding Status}" Value="Returned">
                                                     <Setter Property="Foreground" Value="Gray" />
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </TextBlock.Style>
+                                </TextBlock>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                    <!-- Cột Announce -->
+                    <DataGridTemplateColumn Header="Announce" Width="150">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Announce}" 
+FontSize="12" 
+HorizontalAlignment="Left" 
+TextWrapping="Wrap">
+                                    <TextBlock.Style>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="Foreground" Value="Black" />
+                                            <!-- Màu mặc định -->
+                                            <Style.Triggers>
+                                                <!-- Khi Status là "Pending" -->
+                                                <DataTrigger Binding="{Binding Status}" Value="Borrowing">
+                                                    <Setter Property="Foreground" Value="Orange" />
+                                                </DataTrigger>
+                                                <!-- Khi Status là "Approved" -->
+                                                <DataTrigger Binding="{Binding Status}" Value="Approved">
+                                                    <Setter Property="Foreground" Value="Green" />
+                                                </DataTrigger>
+                                                <!-- Khi Status là "Rejected" -->
+                                                <DataTrigger Binding="{Binding Status}" Value="Overdue">
+                                                    <Setter Property="Foreground" Value="Red" />
                                                 </DataTrigger>
                                             </Style.Triggers>
                                         </Style>

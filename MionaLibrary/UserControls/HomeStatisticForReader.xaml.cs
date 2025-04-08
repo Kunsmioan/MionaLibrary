@@ -37,6 +37,7 @@ namespace MionaLibrary.UserControls
             loadDataReadersBooksAndBorrowing();
             loadDataNewBooks();
             loadDataTopReaders();
+            loadDataTopBooks();
         }
 
         public void loadDataReadersBooksAndBorrowing()
@@ -77,6 +78,15 @@ namespace MionaLibrary.UserControls
             // Hiển thị số lượng sách mới lên TextBlock
             dgBooks.ItemsSource = books;
         }
+
+        public void loadDataTopBooks()
+        {
+            // Lấy danh sách tất cả các sách từ dịch vụ
+            var books = bookServices.GetTopBooks();
+            // Đếm số lượng sách đang được mượn
+            dgTopBooks.ItemsSource = books;
+        }
+
         private void BookDetailsAndReaderBorrowing_Click(object sender, RoutedEventArgs e)
         {
             // Lấy đối tượng sách từ DataContext của nút

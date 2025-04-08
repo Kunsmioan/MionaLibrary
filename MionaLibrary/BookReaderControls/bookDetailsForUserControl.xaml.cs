@@ -121,6 +121,18 @@ namespace MionaLibrary.BookControls
                     BorrowBook.IsEnabled = false;
                     return;
                 }
+
+                // Kiểm tra xem người dùng có đang mượn quá số lượng sách tối đa hay không
+                int maxBooksAllowed = 3; // Số lượng sách tối đa mà người dùng có thể mượn
+                int currentBorrowedBooksCount = _loanServices.GetCurrentBorrowedBooksCount(reader.Id);
+                if (currentBorrowedBooksCount >= maxBooksAllowed)
+                {
+                    MessageBox.Show($"You have reached the maximum limit of {maxBooksAllowed} borrowed books. Please return some books before borrowing more.", "Limit Reached", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    // Vô hiệu hóa nút sau khi mượn sách
+                    BorrowBook.IsEnabled = false;
+                    return;
+                }
+
                 // Tạo yêu cầu mượn sách
                 var bookRequestService = new BookRequestServices();
                 bool hasPendingRequest = bookRequestService.HasPendingRequest(reader.Id, bookSelected.Id);

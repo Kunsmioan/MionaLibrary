@@ -118,5 +118,30 @@ namespace MionaLibrary_DAL.Repository
                .OrderByDescending(b => b.CreateDate).Take(5)
                .ToList();
         }
+
+        public List<TopBookDto> GetTopBooks()
+        {
+            return _context.Loans
+                .Where(loan => loan.Status == "Returned" || loan.Status == "Borrowing") // Lọc theo trạng thái
+                .GroupBy(loan => new { loan.BookId, loan.Book.Title, loan.Book.Author }) // Nhóm theo sách
+                .Select(group => new TopBookDto
+                {
+                    Id = group.Key.BookId,
+                    Title = group.Key.Title,
+                    Author = group.Key.Author,
+                    TotalLoans = group.Count() // Số lần mượn
+                })
+                .OrderByDescending(book => book.TotalLoans) // Sắp xếp giảm dần theo số lần mượn
+                .Take(10) // Lấy 10 bản ghi đầu tiên
+                .ToList(); // Chuyển thành danh sách
+        }
+
+        public class TopBookDto
+        {
+            public int Id { get; set; } // ID của sách
+            public string Title { get; set; } // Tên sách
+            public string Author { get; set; } // Tác giả
+            public int TotalLoans { get; set; } // Tổng số lần mượn
+        }
     }
 }

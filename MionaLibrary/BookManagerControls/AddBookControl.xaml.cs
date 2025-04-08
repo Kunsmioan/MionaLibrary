@@ -42,7 +42,7 @@ namespace MionaLibrary.ManagerControls
         {
                 // Lấy danh sách tất cả các thể loại từ bảng Genres
                 _genreServices = new GenreServices();
-                var genres = _genreServices.GetGenreList();
+                var genres = _genreServices.GetAll();
 
                 // Gán danh sách thể loại vào ComboBox
                 cbGenre.ItemsSource = genres;

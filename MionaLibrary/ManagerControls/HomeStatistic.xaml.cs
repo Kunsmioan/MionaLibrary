@@ -1,5 +1,8 @@
-﻿using MionaLibrary.BookControls;
+﻿using LiveCharts.Wpf;
+using LiveCharts;
+using MionaLibrary.BookControls;
 using MionaLibrary.BookManagerControls;
+using MionaLibrary.GenreControl;
 using MionaLibrary_DAL.Entity;
 using MionaLibrary_Services.Services;
 using System;
@@ -27,6 +30,7 @@ namespace MionaLibrary.ManagerControls
         LoanServices loanServices = new LoanServices();
         BookServices bookServices = new BookServices();
         UserServices userServices = new UserServices();
+        GenreServices genreServices = new GenreServices();
         public HomeStatistic()
         {
             InitializeComponent();
@@ -38,6 +42,8 @@ namespace MionaLibrary.ManagerControls
            loadDataReadersBooksAndBorrowing();
             loadDataNewBooks();
             loadDataTopReaders();
+            loadDataTopBooks();
+            loadDataBooksGenreOnLoan();
         }
 
         public void loadDataReadersBooksAndBorrowing()
@@ -60,6 +66,35 @@ namespace MionaLibrary.ManagerControls
             int totalReaders = readers.Count;
             // Hiển thị số lượng độc giả lên TextBlock
             txtTotalReaders.Text = totalReaders.ToString();
+
+            var genres = genreServices.GetAll();
+            int totalGenres = genres.Count;
+            txtGenre.Text = totalGenres.ToString();
+            // Đếm số lượng thể loại
+        }
+
+        public void loadDataBooksGenreOnLoan()
+        {
+            // Lấy danh sách tất cả các sách từ dịch vụ
+            var genreBorrowCounts = loanServices.GetGenreBorrowCounts();
+
+            SeriesCollection pieData = new SeriesCollection();
+
+            foreach (var item in genreBorrowCounts)
+            {
+                pieData.Add(new PieSeries
+                {
+                    Title = item.GenreName,
+                    Values = new ChartValues<int> { item.BorrowCount },
+                    DataLabels = true // Hiển thị nhãn dữ liệu
+                });
+            }
+
+            // Gán dữ liệu vào biểu đồ
+            MyPieChart.Series = pieData;
+
+            // Đặt chú thích (legend)
+            MyPieChart.LegendLocation = LegendLocation.Right;
         }
 
         public void loadDataTopReaders()
@@ -79,7 +114,13 @@ namespace MionaLibrary.ManagerControls
             dgBooks.ItemsSource = books;
         }
 
-       
+        public void loadDataTopBooks()
+        {
+            // Lấy danh sách tất cả các sách từ dịch vụ
+            var books = bookServices.GetTopBooks();
+            // Đếm số lượng sách đang được mượn
+            dgTopBooks.ItemsSource = books;
+        }
 
         private void BookDetailsAndReaderBorrowing_Click(object sender, RoutedEventArgs e)
         {
@@ -124,7 +165,7 @@ namespace MionaLibrary.ManagerControls
                 }
                 else
                 {
-                    MessageBox.Show("Không tìm thấy cửa sổ ReaderWindow.", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("Không tìm thấy cửa sổ Window.", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
             else
@@ -136,6 +177,53 @@ namespace MionaLibrary.ManagerControls
         private void ReaderDetailsAndBooksOnloan_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void ReadersMoreInfo_Click(object sender, RoutedEventArgs e)
+        {
+                Window parentWindow = Window.GetWindow(this);
+                if (parentWindow is ManagerWindow mw)
+                {
+                    
+                   ReadersControl readersControl = new ReadersControl();
+                   mw.MainContent.Content = readersControl;
+
+                }
+                else
+                {
+                    MessageBox.Show("Không tìm thấy cửa sổ Window.", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                
+        }
+
+        private void BooksMoreInfo_Click(object sender, RoutedEventArgs e)
+        {
+            Window parentWindow = Window.GetWindow(this);
+            if (parentWindow is ManagerWindow mw)
+            {
+
+                HomeControl homeControl = new HomeControl();
+                mw.MainContent.Content = homeControl;
+
+            }
+            else
+            {
+                MessageBox.Show("Không tìm thấy cửa sổ Window.", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void GenresMoreInfo_Click(object sender, RoutedEventArgs e)
+        {
+            Window parentWindow = Window.GetWindow(this);
+            if (parentWindow is ManagerWindow mw)
+            {
+                GenreActionControl genreControl = new GenreActionControl();
+                mw.MainContent.Content = genreControl;
+            }
+            else
+            {
+                MessageBox.Show("Không tìm thấy cửa sổ Window.", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
     }
 }

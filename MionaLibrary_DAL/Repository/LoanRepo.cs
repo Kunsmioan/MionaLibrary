@@ -236,6 +236,13 @@ namespace MionaLibrary_DAL.Repository
                 .Count(l => l.UserId == userId && l.Status == "Overdue");
         }
 
+        public int GetCurrentBorrowedBooksCount(int userId)
+        {
+            var count = _context.Loans
+                 .Count(l => l.UserId == userId && l.Status == "Borrowing");
+            return count;
+        }
+
         public List<TopReaderResult> GetTopReaders()
         {
             return _context.Users
@@ -251,7 +258,29 @@ namespace MionaLibrary_DAL.Repository
                 .ToList();
         }
 
-        public class TopReaderResult
+        public List<GenreBorrowCount> GetGenreBorrowCounts()
+        {
+            var genreBorrowCounts = _context.Genres
+                .Select(g => new GenreBorrowCount
+                {
+                    GenreName = g.Name,
+                    BorrowCount = g.Books
+                        .SelectMany(b => b.Loans) // Lấy tất cả các lần mượn của sách trong thể loại này
+                        .Count() // Đếm số lần mượn
+                })
+                .OrderByDescending(g => g.BorrowCount) // Sắp xếp giảm dần theo số lần mượn
+                .ToList();
+
+            return genreBorrowCounts;
+        }
+
+    public class GenreBorrowCount
+    {
+        public string GenreName { get; set; }
+        public int BorrowCount { get; set; }
+    }
+
+    public class TopReaderResult
         {
             public int UserId { get; set; }
             public string FullName { get; set; }

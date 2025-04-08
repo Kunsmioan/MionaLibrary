@@ -56,7 +56,7 @@ namespace MionaLibrary.BookControls
             
             cbGenre.DisplayMemberPath = "Name"; // Hiển thị tên (ví dụ: "Action")
             cbGenre.SelectedValuePath = "Id";  // Lưu Id (ví dụ: 1)
-            var genres = _genreServices.GetGenreList();
+            var genres = _genreServices.GetAll();
 
             // Gán danh sách thể loại vào ComboBox
             cbGenre.ItemsSource = genres;

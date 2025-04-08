@@ -2,6 +2,7 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
             
              xmlns:local="clr-namespace:MionaLibrary.ManagerControls"
@@ -40,11 +41,12 @@
                         <!-- Hàng 2: Nhãn "Readers" -->
                         <TextBlock Text="Readers" FontSize="20" Foreground="White" 
                HorizontalAlignment="Left" VerticalAlignment="Top" 
-               Margin="25,80,0,0" Width="76" />
+               Margin="25,80,0,0" Width="110" />
 
                         <!-- Nút "More info" -->
                         <Button Height="54" Background="#FF237382" Content="More info"
-            HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,122,0,0" Width="270">
+            HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,122,0,0" Width="270" Style="{StaticResource ButtonStyleSingle}"
+                                Click="ReadersMoreInfo_Click">
                             <Button.Template>
                                 <ControlTemplate TargetType="{x:Type Button}">
                                     <StackPanel Background="{TemplateBinding Background}" Orientation="Horizontal">
@@ -67,13 +69,13 @@
                         <!-- Hình ảnh ở góc phải -->
                         <fa:ImageAwesome Icon="List" Foreground="#FFACB383" RenderTransformOrigin="2.17,-0.275" Margin="180,9,15,59" Opacity="0.6"/>
                         <!-- Hàng 2: Nhãn "Books" -->
-                        <TextBlock Text="Books" FontSize="20" Foreground="White" 
+                        <TextBlock Text="Title Books" FontSize="20" Foreground="White" 
    HorizontalAlignment="Left" VerticalAlignment="Top" 
-   Margin="25,80,0,0" Width="76" />
+   Margin="25,80,0,0" Width="114" />
 
                         <!-- Nút "More info" -->
                         <Button Height="54" Background="#FF9FA021" Content="More info"
-HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,122,0,0" Width="270" Foreground="White" >
+HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,122,0,0" Width="270" Foreground="White" Click="BooksMoreInfo_Click" Style="{StaticResource ButtonStyleSingle}">
                             <Button.Template>
                                 <ControlTemplate TargetType="{x:Type Button}">
                                     <StackPanel Background="{TemplateBinding Background}" Orientation="Horizontal">
@@ -99,7 +101,7 @@ HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,122,0,0" Width="2
                         <!-- Hàng 2: Nhãn "Books" -->
                         <TextBlock Text="Books" FontSize="20" Foreground="White" 
    HorizontalAlignment="Left" VerticalAlignment="Top" 
-   Margin="25,80,0,0" Width="76" />
+   Margin="25,80,0,0" Width="90" />
 
                         <!-- Nút "More info" -->
                         <Button Height="54" Background="#FF23822D" Content="More info"
@@ -119,7 +121,7 @@ HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,122,0,0" Width="2
                     </Grid>
 
                     <Grid Grid.Column="3" Margin="20,0,10,4" Background="#FFE43D35" Width="270">
-                        <TextBlock Text="100" FontSize="50" x:Name="txtTotalBooksTitle" FontWeight="Bold"
+                        <TextBlock Text="100" FontSize="50" x:Name="txtGenre" FontWeight="Bold"
    Foreground="#FFFDFDFD" HorizontalAlignment="Left" VerticalAlignment="Top" 
    Margin="20,5,0,0" Width="122" Height="75" />
 
@@ -127,13 +129,13 @@ HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,122,0,0" Width="2
                         <fa:ImageAwesome Icon="Book" Foreground="#FFD6D1D1" RenderTransformOrigin="2.17,-0.275" Margin="180,8,15,60" Opacity="0.6"/>
 
                         <!-- Hàng 2: Nhãn "Books" -->
-                        <TextBlock Text="Books borrowing" FontSize="18" Foreground="White" 
+                        <TextBlock Text="Genres" FontSize="18" Foreground="White" 
    HorizontalAlignment="Left" VerticalAlignment="Top" 
    Margin="25,80,0,0" Width="136" TextWrapping="Wrap" Height="25"/>
 
                         <!-- Nút "More info" -->
                         <Button Height="54" Background="#FF823423" Content="More info"
-HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,122,0,0" Width="270">
+HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,122,0,0" Width="270" Click="GenresMoreInfo_Click" Style="{StaticResource ButtonStyleSingle}">
                             <Button.Template>
                                 <ControlTemplate TargetType="{x:Type Button}">
                                     <StackPanel Background="{TemplateBinding Background}" Orientation="Horizontal">
@@ -236,6 +238,109 @@ HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,122,0,0" Width="2
                     </Grid>
 
                     <Grid Grid.Column="1">
+                        <StackPanel>
+                             <TextBlock Text="Book Borrowing Statistics by Genre"
+                   FontSize="18"
+                   FontWeight="Bold"
+                   HorizontalAlignment="Left" 
+                   Margin="0,10,0,0" />
+                        <lvc:PieChart x:Name="MyPieChart" LegendLocation="Right" Width="500" Height="300" FontSize="16">
+                            <!-- Series sẽ được thêm từ code-behind -->
+                        </lvc:PieChart>
+                        </StackPanel>
+                       
+                        
+                    </Grid>
+
+                </Grid>
+
+                <Grid Grid.Row="3" Margin="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid Grid.Column="0">
+
+                        <!-- Tiêu đề -->
+                        <TextBlock Text="Top books reading" FontSize="24" FontWeight="Bold" Margin="10,10,4,270"/>
+
+                        <!-- DataGrid để hiển thị bảng -->
+                        <DataGrid x:Name="dgTopBooks" 
+                AutoGenerateColumns="False" Margin="10,50,10,10" 
+AlternatingRowBackground="#FFF5F5F5" RowBackground="White"
+BorderBrush="#FFDDDDDD" BorderThickness="1" GridLinesVisibility="None" CanUserAddRows="False">
+                            <DataGrid.ColumnHeaderStyle>
+                                <Style TargetType="DataGridColumnHeader">
+                                    <Setter Property="Background" Value="#FFEEEEEE" />
+                                    <Setter Property="Foreground" Value="#FF333333" />
+                                    <Setter Property="FontWeight" Value="Bold" />
+                                    <Setter Property="FontSize" Value="14" />
+                                    <Setter Property="Padding" Value="10,5,10,5" />
+                                    <Setter Property="HorizontalContentAlignment" Value="Left" />
+                                </Style>
+                            </DataGrid.ColumnHeaderStyle>
+
+                            <DataGrid.CellStyle>
+                                <Style TargetType="DataGridCell">
+                                    <Setter Property="Margin" Value="10,15,10,10" />
+                                    <Setter Property="FontSize" Value="12" />
+                                    <Setter Property="Foreground" Value="#FF444444" />
+                                    <Setter Property="BorderThickness" Value="0" />
+                                    <Style.Triggers>
+                                        <Trigger Property="IsSelected" Value="True">
+                                            <Setter Property="Background" Value="#FFE0E0FF" />
+                                            <Setter Property="Foreground" Value="#FF000000" />
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </DataGrid.CellStyle>
+
+                            <DataGrid.Columns>
+                                <!-- Cột Số thứ tự (#) -->
+                                <DataGridTextColumn Header="#" 
+                                 Binding="{Binding Id}"
+                                 Width="Auto"
+                                 MinWidth="50"/>
+
+                                <!-- Cột tên sách -->
+                                <DataGridTemplateColumn Header="Book Title" Width="*" IsReadOnly="True">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Button 
+              Background="Transparent" 
+              BorderThickness="0" 
+              Foreground="Blue" 
+              Cursor="Hand" 
+              Click="BookDetailsAndReaderBorrowing_Click" 
+              HorizontalAlignment="Left"
+              Style="{StaticResource TransparentButtonStyle}">
+                                                <TextBlock Text="{Binding Title}" 
+                         TextWrapping="Wrap" 
+                         MaxWidth="200" 
+                         VerticalAlignment="Center" 
+                         />
+                                            </Button>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+
+                                <!-- Cột Số lượng (Amount) -->
+                                <DataGridTextColumn Header="Author" 
+                                 Binding="{Binding Author}"
+                                 Width="Auto"
+                                 MinWidth="100"/>
+
+                                <!-- Cột Total Loans -->
+                                <DataGridTextColumn Header="Total Loans" 
+                                 Binding="{Binding TotalLoans}"
+                                 Width="Auto"
+                                 MinWidth="150"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Grid>
+
+                    <Grid Grid.Column="1">
                         <!-- Tiêu đề -->
                         <StackPanel Orientation="Horizontal" Margin="10,10,4,270">
                             <TextBlock Text="Top Readers" FontSize="24" FontWeight="Bold" Margin="10,0,4,0" Width="142"/>
@@ -308,9 +413,7 @@ BorderBrush="#FFDDDDDD" BorderThickness="1" GridLinesVisibility="None" CanUserAd
                             </DataGrid.Columns>
                         </DataGrid>
                     </Grid>
-
                 </Grid>
-
             </Grid>
         </ScrollViewer>
 

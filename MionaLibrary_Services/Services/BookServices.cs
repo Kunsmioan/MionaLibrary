@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using MionaLibrary_DAL.Entity;
 using MionaLibrary_DAL.Repository;
+using static MionaLibrary_DAL.Repository.BookRepo;
 
 namespace MionaLibrary_Services.Services
 {
@@ -64,6 +65,11 @@ namespace MionaLibrary_Services.Services
         {
             // Calculate the total number of books by summing up the 'quantity' field for each book
             return _repo.GetTotalTitleBooks();
+        }
+
+        public List<TopBookDto> GetTopBooks()
+        {
+            return _repo.GetTopBooks();
         }
     }
 }

@@ -95,6 +95,11 @@ namespace MionaLibrary_Services.Services
             return _repo.GetBooksOverdueByUserId(userId);
         }
 
+        public int GetCurrentBorrowedBooksCount(int userId)
+        {
+            return _repo.GetCurrentBorrowedBooksCount(userId);
+        }
+
         public List<Loan> FilterReadesBorrowingOrOvedue(string searchTerm)
         {
             return _repo.FilterReadesBorrowingOrOvedue(searchTerm);
@@ -123,6 +128,11 @@ namespace MionaLibrary_Services.Services
         public List<TopReaderResult> GetTopReaders()
         {
             return _repo.GetTopReaders();
+        }
+
+        public List<GenreBorrowCount> GetGenreBorrowCounts()
+        {
+            return _repo.GetGenreBorrowCounts();
         }
     }
 }

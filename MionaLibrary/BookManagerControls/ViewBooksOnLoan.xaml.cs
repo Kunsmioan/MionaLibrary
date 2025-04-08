@@ -37,6 +37,20 @@ namespace MionaLibrary.BookManagerControls
         {
             var bookOnLoan_List = _loanServices.GetBooksOnLoanOrOverdue();
 
+            // Cập nhật thông báo và màu sắc cho từng yêu cầu
+            foreach (var loan in bookOnLoan_List)
+            {
+                if (loan.Status == "Overdue")
+                {
+                    // Calculate the number of overdue days
+                    TimeSpan overdueTimeSpan = DateTime.Now - loan.DueDate; // Difference between today and due date
+                    int overdueDays = (int)overdueTimeSpan.TotalDays; // Convert to integer days
+
+                    // Update the announcement with the number of overdue days
+                    loan.Announce = $"Overdue by {overdueDays} day(s)";
+                }
+            }
+
             // Gán dữ liệu vào DataGrid
             BooksOnLoanDataGrid.ItemsSource = bookOnLoan_List;
         }
